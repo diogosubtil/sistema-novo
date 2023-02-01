@@ -122,7 +122,7 @@
                             <div class="input-group input-group-default">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
-                                        <i class="icofont icofont-shield"></i>
+                                        <i class="icofont icofont-lock"></i>
                                     </span>
                                 </div>
                                 <input id="current_password" name="current_password" type="password" class="form-control" required>
@@ -143,7 +143,7 @@
                             <div class="input-group input-group-default">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
-                                        <i class="icofont icofont-shield"></i>
+                                        <i class="icofont icofont-lock"></i>
                                     </span>
                                 </div>
                                 <input id="password" name="password" type="password" class="form-control" required>
@@ -164,7 +164,7 @@
                             <div class="input-group input-group-default">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
-                                        <i class="icofont icofont-shield"></i>
+                                        <i class="icofont icofont-lock"></i>
                                     </span>
                                 </div>
                                 <input id="password_confirmation" name="password_confirmation" type="password" class="form-control" required>

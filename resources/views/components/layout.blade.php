@@ -186,11 +186,13 @@
                                 </div>
                                 <ul class="m-0 p-0  show-notification profile-notification dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
                                     <div class="m-0 p-0  user-widget-card bg-c-blue">
-                                        <div class="card-block">
-                                            <i id="statusUser" class="feather icon-user bg-success card1-icon"></i>
-                                            <h4>{{ Auth::user()->name }}</h4>
-                                            <p>Master</p>
-                                        </div>
+                                        <a class="bg-c-blue m-0 p-0 text-white" href="{{ route('profile.edit') }}">
+                                            <div class="card-block">
+                                                <i id="statusUser" class="feather icon-user bg-success card1-icon"></i>
+                                                <h4>{{ Auth::user()->name }}</h4>
+                                                <p>Master</p>
+                                            </div>
+                                        </a>
                                     </div>
                                     <a class="bg-c-blue m-0 p-0 text-white" id="profileButton" href="{{ route('profile.edit') }}">
                                         <li class="bg-c-blue">
