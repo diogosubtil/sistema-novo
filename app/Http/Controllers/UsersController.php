@@ -28,16 +28,14 @@ class UsersController extends Controller
         $ativos = User::query()->where('ativo', '=', 's')->get()->count();
         $desativados = User::query()->where('ativo', '=', 'n')->get()->count();
 
-        $online = User::query()
-            ->whereNotNull('last_seen')
-            ->orderBy('last_seen', 'DESC')->get();
+        //$online = User::query()->whereNotNull('last_seen')->orderBy('last_seen', 'DESC')->get();
 
         //RETORNA PARA A PAGINA
         return view('users.index')
             ->with('usuarios', $usuarios)
             ->with('total', $total)
             ->with('ativos', $ativos)
-            ->with('online', $online)
+//            ->with('online', $online)
             ->with('desativados', $desativados);
     }
 
@@ -100,18 +98,32 @@ class UsersController extends Controller
             ]);
         }
 
+        //VALIDAÇÕES
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'funcao' => ['required', 'integer', 'max:255'],
+            'telefone' => ['required', 'string'],
+            'unidade' => ['required'],
+            'treinamento' => ['required', 'string', 'max:255'],
+        ]);
+
+        //INICIA A TRANSAÇÃO
+        DB::beginTransaction();
+
         //VALIDAÇÃO E-MAIL
         if ($request->email != $user->email){
             $user->email_verified_at = null;
         }
-
-
         //OBTEM OS DADOS DO REQUEST E FAZ O UPDATE
         $data = $request->except('_token');
         $data['unidade'] = implode(',', $data['unidade']);
         $data['password'] = Hash::make($request->password);
         $user->fill($data);
         $user->save();
+
+        //ENVIA A TRASAÇÃO (COMMIT)
+        DB::commit();
 
         Alert::success('Concluido', 'Usuario editado com sucesso!');
 
@@ -121,8 +133,14 @@ class UsersController extends Controller
     //FUNÇÃO PARA DESATIVAR USUARIO
     public function deactivate(User $user)
     {
+        //INICIA A TRANSAÇÃO
+        DB::beginTransaction();
+
         $user->ativo = 'n';
         $user->save();
+
+        //ENVIA A TRASAÇÃO (COMMIT)
+        DB::commit();
 
         Alert::success('Concluido', 'Usuario desativado com sucesso!');
 
@@ -132,8 +150,14 @@ class UsersController extends Controller
     //FUNÇÃO PARA ATIVAR USUARIO
     public function activate(User $user)
     {
+        //INICIA A TRANSAÇÃO
+        DB::beginTransaction();
+
         $user->ativo = 's';
         $user->save();
+
+        //ENVIA A TRASAÇÃO (COMMIT)
+        DB::commit();
 
         Alert::success('Concluido', 'Usuario ativado com sucesso!');
 
