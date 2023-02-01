@@ -23,20 +23,37 @@ class UsersController extends Controller
     //FUNÇÃO PARA EXIBIR A VIEW (PAINEL)
     public function index()
     {
-        $usuarios = User::query()->paginate(10);
-        $total = User::all()->count();
-        $ativos = User::query()->where('ativo', '=', 's')->get()->count();
-        $desativados = User::query()->where('ativo', '=', 'n')->get()->count();
+        $usuarios = User::query()->paginate(15);
+        $total = User::all();
 
-        //$online = User::query()->whereNotNull('last_seen')->orderBy('last_seen', 'DESC')->get();
+        $ativos = 0;
+        foreach ($total as $ativo){
+            if ($ativo->ativo == 's'){
+                $ativos++;
+            }
+        }
+
+        $desativados = 0;
+        foreach ($total as $desativado){
+            if ($desativado->ativo == 'n'){
+                $desativados++;
+            }
+        }
+
+        $online = [];
+        foreach ($total as $on){
+            if ($on->last_seen != null){
+                $online[] = $on;
+            }
+        }
 
         //RETORNA PARA A PAGINA
         return view('users.index')
             ->with('usuarios', $usuarios)
             ->with('total', $total)
             ->with('ativos', $ativos)
-//            ->with('online', $online)
-            ->with('desativados', $desativados);
+            ->with('desativados', $desativados)
+            ->with('online', $online);
     }
 
     //FUNÇÃO PARA EXIBIR A VIEW (CADASTRAR)
@@ -98,10 +115,15 @@ class UsersController extends Controller
             ]);
         }
 
+        if ($request->email != $user->email){
+            $request->validate([
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            ]);
+        }
+
         //VALIDAÇÕES
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'funcao' => ['required', 'integer', 'max:255'],
             'telefone' => ['required', 'string'],
             'unidade' => ['required'],

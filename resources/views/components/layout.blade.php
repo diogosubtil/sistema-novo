@@ -193,6 +193,7 @@
                                                 <p>Master</p>
                                             </div>
                                         </a>
+
                                     </div>
                                     <a class="bg-c-blue m-0 p-0 text-white" id="profileButton" href="{{ route('profile.edit') }}">
                                         <li class="bg-c-blue">

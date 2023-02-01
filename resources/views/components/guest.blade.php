@@ -22,6 +22,7 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('/css/jquery.mCustomScrollbar.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('/css/switchery.min.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('/css/bootstrap-tagsinput.css') }}">
+
     </head>
     <body class="fix-menu bg-primary" _c_t_common="1" cz-shortcut-listen="true">
         {{ $slot }}

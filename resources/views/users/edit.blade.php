@@ -195,61 +195,53 @@
                                     @endif
                                 </span>
                                 <div class="row col-12 mt-4">
-                                    <div class="col-lg-4 col-12">
-                                        <div class="mt-2">
-                                            <label class="col-6 form-check-label">Campina Grande</label>
-                                            <input type="checkbox" {{ (in_array(1, $unidades) ? "checked" : null) }} name="unidade[]" value="1" class="col-6 js-single" data-switchery="true" style="display: none;">
-                                        </div>
-
-                                        <div class="mt-2">
-                                            <label class="col-6 form-check-label">João Pessoa</label>
-                                            <input type="checkbox" {{ (in_array(2, $unidades) ? "checked" : null) }} name="unidade[]" value="2" class="col-6 js-switch" data-switchery="true" style="display: none;">
-                                        </div>
-                                        <div class="mt-2">
-                                            <label class="col-6 form-check-label">Belém</label>
-                                            <input type="checkbox" {{ (in_array(3, $unidades) ? "checked" : null) }} name="unidade[]" value="3" class="col-6 js-switch" data-switchery="true" style="display: none;">
-                                        </div>
-                                        <div class="mt-2">
-                                            <label class="col-6 form-check-label">Brasília</label>
-                                            <input type="checkbox" {{ (in_array(4, $unidades) ? "checked" : null) }} name="unidade[]" value="4" class="col-6 js-switch" data-switchery="true" style="display: none;">
-                                        </div>
-
+                                    <div class="col-4 mt-2">
+                                        <label class="col-6 form-check-label">Campina Grande</label>
+                                        <input type="checkbox" {{ (in_array(1, $unidades) ? "checked" : null) }} name="unidade[]" value="1" class="col-6 js-single" data-switchery="true" style="display: none;">
                                     </div>
-                                    <div class="col-lg-4 col-12">
-                                        <div class="mt-2">
-                                            <label class="col-6 form-check-label">Lauro de Freitas</label>
-                                            <input type="checkbox" {{ (in_array(5, $unidades) ? "checked" : null) }} name="unidade[]" value="5" class="col-6 js-switch" data-switchery="true" style="display: none;">
-                                        </div>
-                                        <div class="mt-2">
-                                            <label class="col-6 form-check-label">Campo Grande</label>
-                                            <input type="checkbox" {{ (in_array(6, $unidades) ? "checked" : null) }} name="unidade[]" value="6" class="col-6 js-switch" data-switchery="true" style="display: none;">
-                                        </div>
-                                        <div class="mt-2">
-                                            <label class="col-6 form-check-label">Maceió</label>
-                                            <input type="checkbox" {{ (in_array(7, $unidades) ? "checked" : null) }} name="unidade[]" value="7" class="col-6 js-switch" data-switchery="true" style="display: none;">
-                                        </div>
-                                        <div class="mt-2">
-                                            <label class="col-6 form-check-label">Salvador</label>
-                                            <input type="checkbox" {{ (in_array(8, $unidades) ? "checked" : null) }} name="unidade[]" value="8" class="col-6 js-switch" data-switchery="true" style="display: none;">
-                                        </div>
+                                    <div class="col-4 mt-2">
+                                        <label class="col-6 form-check-label">João Pessoa</label>
+                                        <input type="checkbox" {{ (in_array(2, $unidades) ? "checked" : null) }} name="unidade[]" value="2" class="col-6 js-switch" data-switchery="true" style="display: none;">
                                     </div>
-                                    <div class="col-lg-4 col-12">
-                                        <div class="mt-2">
-                                            <label class="col-6 form-check-label">Curitiba</label>
-                                            <input type="checkbox" {{ (in_array(9, $unidades) ? "checked" : null) }} name="unidade[]" value="9" class="col-6 js-switch" data-switchery="true" style="display: none;">
-                                        </div>
-                                        <div class="mt-2">
-                                            <label class="col-6 form-check-label">Londrina</label>
-                                            <input type="checkbox" {{ (in_array(10, $unidades) ? "checked" : null) }} name="unidade[]" value="10" class="col-6 js-switch" data-switchery="true" style="display: none;">
-                                        </div>
-                                        <div class="mt-2">
-                                            <label class="col-6 form-check-label">Santa Catarina</label>
-                                            <input type="checkbox" {{ (in_array(11, $unidades) ? "checked" : null) }} name="unidade[]" value="11" class="col-6 js-switch" data-switchery="true" style="display: none;">
-                                        </div>
-                                        <div class="mt-2">
-                                            <label class="col-6 form-check-label">Cascavel</label>
-                                            <input type="checkbox" {{ (in_array(12, $unidades) ? "checked" : null) }} name="unidade[]" value="12" class="col-6 js-switch" data-switchery="true" style="display: none;">
-                                        </div>
+                                    <div class="col-4 mt-2">
+                                        <label class="col-6 form-check-label">Belém</label>
+                                        <input type="checkbox" {{ (in_array(3, $unidades) ? "checked" : null) }} name="unidade[]" value="3" class="col-6 js-switch" data-switchery="true" style="display: none;">
+                                    </div>
+                                    <div class="col-4 mt-2">
+                                        <label class="col-6 form-check-label">Brasília</label>
+                                        <input disabled type="checkbox" {{ (in_array(4, $unidades) ? "checked" : null) }} name="unidade[]" value="4" class="col-6 js-switch" data-switchery="true" style="display: none;">
+                                    </div>
+                                    <div class="col-4 mt-2">
+                                        <label class="col-6 form-check-label">Lauro de Freitas</label>
+                                        <input disabled type="checkbox" {{ (in_array(5, $unidades) ? "checked" : null) }} name="unidade[]" value="5" class="col-6 js-switch" data-switchery="true" style="display: none;">
+                                    </div>
+                                    <div class="col-4 mt-2">
+                                        <label class="col-6 form-check-label">Campo Grande</label>
+                                        <input disabled type="checkbox" {{ (in_array(6, $unidades) ? "checked" : null) }} name="unidade[]" value="6" class="col-6 js-switch" data-switchery="true" style="display: none;">
+                                    </div>
+                                    <div class="col-4 mt-2">
+                                        <label class="col-6 form-check-label">Maceió</label>
+                                        <input disabled type="checkbox" {{ (in_array(7, $unidades) ? "checked" : null) }} name="unidade[]" value="7" class="col-6 js-switch" data-switchery="true" style="display: none;">
+                                    </div>
+                                    <div class="col-4 mt-2">
+                                        <label class="col-6 form-check-label">Salvador</label>
+                                        <input disabled type="checkbox" {{ (in_array(8, $unidades) ? "checked" : null) }} name="unidade[]" value="8" class="col-6 js-switch" data-switchery="true" style="display: none;">
+                                    </div>
+                                    <div class="col-4 mt-2">
+                                        <label class="col-6 form-check-label">Curitiba</label>
+                                        <input disabled type="checkbox" {{ (in_array(9, $unidades) ? "checked" : null) }} name="unidade[]" value="9" class="col-6 js-switch" data-switchery="true" style="display: none;">
+                                    </div>
+                                    <div class="col-4 mt-2">
+                                        <label  class="col-6 form-check-label">Londrina</label>
+                                        <input disabled type="checkbox" {{ (in_array(10, $unidades) ? "checked" : null) }} name="unidade[]" value="10" class="col-6 js-switch" data-switchery="true" style="display: none;">
+                                    </div>
+                                    <div class="col-4 mt-2">
+                                        <label class="col-6 form-check-label">Santa Catarina</label>
+                                        <input disabled type="checkbox" {{ (in_array(11, $unidades) ? "checked" : null) }} name="unidade[]" value="11" class="col-6 js-switch" data-switchery="true" style="display: none;">
+                                    </div>
+                                    <div class="col-4 mt-2">
+                                        <label class="col-6 form-check-label">Cascavel</label>
+                                        <input disabled type="checkbox" {{ (in_array(12, $unidades) ? "checked" : null) }} name="unidade[]" value="12" class="col-6 js-switch" data-switchery="true" style="display: none;">
                                     </div>
                                 </div>
                             </div>

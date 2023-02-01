@@ -6,7 +6,7 @@
                     <div class="row align-items-center">
                         <div class="col">
                             <p class="m-b-5">Usuarios</p>
-                            <h4 class="m-b-0">{{ $total }}</h4>
+                            <h4 class="m-b-0">{{ $total->count() }}</h4>
                         </div>
                         <div class="col col-auto text-right">
                             <i class="feather icon-user f-50 text-c-yellow"></i>
@@ -45,137 +45,94 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-12 col-12">
-            <div class="small-box table-responsive bg-light">
-                <table id="list" class="table table-hover table-styling table-light">
-                    <thead>
-                    <tr>
-                        <th class="text-center" >Status</th>
-                        <th>Nome</th>
-                        <th>Informações</th>
-                        <th>Ações</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach ($usuarios as $usuario)
-                        <tr>
-                            <td>
-                                @if(Cache::has('user-is-online-' . $usuario->id))
-                                    <div class="card user-widget-card mt-4">
-                                        <i class="bg-success feather icon-user card1-icon"></i>
-                                    </div>
-                                @elseif(Cache::has('user-is-absent-' . $usuario->id))
-                                    <div class="card user-widget-card mt-4">
-                                        <i class="bg-yellow feather icon-user card1-icon"></i>
-                                    </div>
-                                @else
-                                    <div class="card user-widget-card mt-4">
-                                        <i class="bg-danger feather icon-user card1-icon"></i>
-                                    </div>
-                                @endif
-                            </td>
-                            <td>{{ $usuario->name }}</td>
-                            <td>{!!
-                                    'Email: ' . $usuario->email . '<br>' .
-                                    'Função: ' . $usuario->funcao . '<br>' .
-                                    'Unidades: ' . $usuario->unidade . '<br>'
-                                !!}
-                            </td>
-
-                            <td>
-                                <div class="d-flex">
-                                    <a class="ml-2" href="{{ route('users.edit', $usuario->id) }}">
-                                        <button type="button" class="btn btn-primary b-radius-5">Editar</button>
-                                    </a>
-                                    @if($usuario->ativo == 's')
-                                        <form id="deactivateUser{{$usuario->id}}" class="ml-2" action="{{ route('users.deactivate', $usuario->id) }}" method="post">
-                                            @csrf
-                                            @method('put')
-                                            <button onclick="deactivateUser({{$usuario->id}})" class="btn btn-danger b-radius-5">
-                                                Desativar
-                                            </button>
-                                        </form>
+        <div class="col-2">
+            <div class="card feed-card">
+                <div class="card-header d-flex justify-content-between">
+                    <div class="col-8">
+                        <h6>Usuarios </h6>
+                    </div>
+                    <div class="col-4">
+                        <label class="pl-3 pr-3 label label-success">Online</label>
+                    </div>
+                </div>
+                <div class="card-block">
+                    @foreach ($online as $on)
+                        @if(Cache::has('user-is-online-' . $on->id))
+                            <div class="row m-b-30 d-flex align-items-center">
+                                <div class="col-3">
+                                    @if(Cache::has('user-is-online-' . $on->id))
+                                        <div class="col-auto p-r-0">
+                                            <i class="feather icon-user bg-success feed-icon"></i>
+                                        </div>
+                                    @elseif(Cache::has('user-is-absent-' . $on->id))
+                                        <div class="col-auto p-r-0">
+                                            <i class="feather icon-user bg-yellow feed-icon"></i>
+                                        </div>
                                     @else
-                                        <form id="activateUser{{$usuario->id}}" class="ml-2" action="{{ route('users.activate', $usuario->id) }}" method="post">
-                                            @csrf
-                                            @method('put')
-                                            <button onclick="activateUser({{$usuario->id}})" class="btn btn-success b-radius-5">
-                                                Ativar
-                                            </button>
-                                        </form>
+                                        <div class="col-auto p-r-0">
+                                            <i class="feather icon-user bg-danger feed-icon"></i>
+                                        </div>
                                     @endif
                                 </div>
-                            </td>
-                        </tr>
+                                <div class="col-6">
+                                    <h6 class="m-b-5">{{ $on->name }}</h6>
+                                </div>
+                            </div>
+                        @endif
                     @endforeach
-                    @if (empty($usuarios))
-                        <tr>
-                            <td colspan="5" class="text-center">
-                                Nenhum usuário encontrado
-                            </td>
-                        </tr>
-                    @endif
-                    </tbody>
-                </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-10">
+            <div class="card feed-card">
+                <div class="card-header">
+                    <h5>Usuarios</h5>
+                </div>
+                <div class="card-block">
+                    @foreach ($usuarios as $usuario)
+                        <div class="row m-b-30 d-flex align-items-center">
+                            <div class="col-auto p-r-0">
+                                @if(Cache::has('user-is-online-' . $usuario->id))
+                                    <div class="col-auto p-r-0">
+                                        <i class="feather icon-user bg-success feed-icon"></i>
+                                    </div>
+                                @elseif(Cache::has('user-is-absent-' . $usuario->id))
+                                    <div class="col-auto p-r-0">
+                                        <i class="feather icon-user bg-yellow feed-icon"></i>
+                                    </div>
+                                @else
+                                    <div class="col-auto p-r-0">
+                                        <i class="feather icon-user bg-danger feed-icon"></i>
+                                    </div>
+                                @endif
+                            </div>
+                            <div class="col">
+                                <h6 class="m-b-5">{{ $usuario->name }}
+                                    <span class="text-muted f-right f-13">
+                                        <a href="{{ route('users.edit', $usuario->id) }}"><i class="icofont icofont-edit"></i></a>
+                                    </span>
 
-                @if ($usuarios->hasPages())
-                    <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-                        <div>
-                            <p class="text-sm text-gray-700 text-white leading-5">
-                                Mostrando
-                                <span class="font-medium">{{ $usuarios->firstItem() }}</span>
-                                até
-                                <span class="font-medium">{{ $usuarios->lastItem() }}</span>
-                                de
-                                <span class="font-medium">{{ $usuarios->total() }}</span>
-                                resultados
-                            </p>
+                                </h6>
+                            </div>
                         </div>
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination justify-content-center">
-                                @if ($usuarios->onFirstPage())
-                                    <li class="page-item disabled">
-                                        <a class="page-link" href="#" tabindex="-1">
-                                            Anterior
-                                        </a>
-                                    </li>
-                                @else
-                                    <li class="page-item">
-                                        <a class="page-link" href="{{ $usuarios->previousPageUrl() }}">
-                                            Anterior
-                                        </a>
-                                    </li>
-                                @endif
-
-                                @foreach ($usuarios->links()->elements[0] as $key => $usuario)
-                                    @if ($key == $usuarios->currentPage())
-
-                                        <li class="page-item active">
-                                            <a class="page-link">{{ $key }}</a>
-                                        </li>
-                                    @else
-                                        <li class="page-item">
-                                            <a class="page-link"
-                                               href="{{ $usuario }}">{{ $key }}</a>
-                                        </li>
-                                    @endif
-                                @endforeach
-
-                                @if ($usuarios->hasMorePages())
-                                    <li class="page-item">
-                                        <a class="page-link"
-                                           href="{{ $usuarios->nextPageUrl() }}"
-                                           rel="next"> Proxima </a>
-                                    </li>
-                                @else
-                                    <li class="page-item disabled">
-                                        <a class="page-link" href="#"> Proxima </a>
-                                    </li>
-                                @endif
-                            </ul>
-                        </nav>
-                    </div>
-                @endif
+                    @endforeach
+                    @if ($usuarios->hasPages())
+                        <div class="hidden d-flex justify-content-between">
+                            <div>
+                                <p class="text-sm text-gray leading-5">
+                                    Mostrando
+                                    <span class="font-medium">{{ $usuarios->firstItem() }}</span>
+                                    até
+                                    <span class="font-medium">{{ $usuarios->lastItem() }}</span>
+                                    de
+                                    <span class="font-medium">{{ $usuarios->total() }}</span>
+                                    resultados
+                                </p>
+                            </div>
+                            {!! $usuarios->links() !!}
+                        </div>
+                    @endif
+                </div>
             </div>
         </div>
     </div>
