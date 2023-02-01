@@ -94,7 +94,7 @@
                         </div>
 
                         <div class="flex items-center gap-4">
-                            <button type="submit" class="text-sm pl-4 pr-4 btn bg-primary b-radius-5">SALVAR</button>
+                            <button type="submit" class="text-sm pl-4 pr-4 btn bg-primary b-radius-5">Salvar</button>
                         </div>
                     </form>
                 </section>
@@ -181,7 +181,7 @@
                         </div>
 
                         <div class="flex items-center gap-4">
-                            <button type="submit" class="text-sm pl-4 pr-4 btn bg-primary b-radius-5">SALVAR</button>
+                            <button type="submit" class="text-sm pl-4 pr-4 btn bg-primary b-radius-5">Salvar</button>
                         </div>
                     </form>
                 </section>
