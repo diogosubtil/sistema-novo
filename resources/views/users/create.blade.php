@@ -208,39 +208,39 @@
                                     </div>
                                     <div class="col-4 mt-2">
                                         <label class="col-6 form-check-label">Brasília</label>
-                                        <input disabled type="checkbox" {{ (in_array(4, old('unidade') ?? [null]) ? "checked":"") }} name="unidade[]" value="4" class="col-6 js-switch" data-switchery="true" style="display: none;">
+                                        <input type="checkbox" {{ (in_array(4, old('unidade') ?? [null]) ? "checked":"") }} name="unidade[]" value="4" class="col-6 js-switch" data-switchery="true" style="display: none;">
                                     </div>
                                     <div class="col-4 mt-2">
                                         <label class="col-6 form-check-label">Lauro de Freitas</label>
-                                        <input disabled type="checkbox" {{ (in_array(5, old('unidade') ?? [null]) ? "checked":"") }} name="unidade[]" value="5" class="col-6 js-switch" data-switchery="true" style="display: none;">
+                                        <input type="checkbox" {{ (in_array(5, old('unidade') ?? [null]) ? "checked":"") }} name="unidade[]" value="5" class="col-6 js-switch" data-switchery="true" style="display: none;">
                                     </div>
                                     <div class="col-4 mt-2">
                                         <label class="col-6 form-check-label">Campo Grande</label>
-                                        <input disabled type="checkbox" {{ (in_array(6, old('unidade') ?? [null]) ? "checked":"") }} name="unidade[]" value="6" class="col-6 js-switch" data-switchery="true" style="display: none;">
+                                        <input type="checkbox" {{ (in_array(6, old('unidade') ?? [null]) ? "checked":"") }} name="unidade[]" value="6" class="col-6 js-switch" data-switchery="true" style="display: none;">
                                     </div>
                                     <div class="col-4 mt-2">
                                         <label class="col-6 form-check-label">Maceió</label>
-                                        <input disabled type="checkbox" {{ (in_array(7, old('unidade') ?? [null]) ? "checked":"") }} name="unidade[]" value="7" class="col-6 js-switch" data-switchery="true" style="display: none;">
+                                        <input type="checkbox" {{ (in_array(7, old('unidade') ?? [null]) ? "checked":"") }} name="unidade[]" value="7" class="col-6 js-switch" data-switchery="true" style="display: none;">
                                     </div>
                                     <div class="col-4 mt-2">
                                         <label class="col-6 form-check-label">Salvador</label>
-                                        <input disabled type="checkbox" {{ (in_array(8, old('unidade') ?? [null]) ? "checked":"") }} name="unidade[]" value="8" class="col-6 js-switch" data-switchery="true" style="display: none;">
+                                        <input type="checkbox" {{ (in_array(8, old('unidade') ?? [null]) ? "checked":"") }} name="unidade[]" value="8" class="col-6 js-switch" data-switchery="true" style="display: none;">
                                     </div>
                                     <div class="col-4 mt-2">
                                         <label class="col-6 form-check-label">Curitiba</label>
-                                        <input disabled type="checkbox" {{ (in_array(9, old('unidade') ?? [null]) ? "checked":"") }} name="unidade[]" value="9" class="col-6 js-switch" data-switchery="true" style="display: none;">
+                                        <input type="checkbox" {{ (in_array(9, old('unidade') ?? [null]) ? "checked":"") }} name="unidade[]" value="9" class="col-6 js-switch" data-switchery="true" style="display: none;">
                                     </div>
                                     <div class="col-4 mt-2">
                                         <label class="col-6 form-check-label">Londrina</label>
-                                        <input disabled type="checkbox" {{ (in_array(10, old('unidade') ?? [null]) ? "checked":"") }} name="unidade[]" value="10" class="col-6 js-switch" data-switchery="true" style="display: none;">
+                                        <input type="checkbox" {{ (in_array(10, old('unidade') ?? [null]) ? "checked":"") }} name="unidade[]" value="10" class="col-6 js-switch" data-switchery="true" style="display: none;">
                                     </div>
                                     <div class="col-4 mt-2">
                                         <label class="col-6 form-check-label">Santa Catarina</label>
-                                        <input disabled type="checkbox" {{ (in_array(11, old('unidade') ?? [null]) ? "checked":"") }} name="unidade[]" value="11" class="col-6 js-switch" data-switchery="true" style="display: none;">
+                                        <input type="checkbox" {{ (in_array(11, old('unidade') ?? [null]) ? "checked":"") }} name="unidade[]" value="11" class="col-6 js-switch" data-switchery="true" style="display: none;">
                                     </div>
                                     <div class="col-4 mt-2">
                                         <label class="col-6 form-check-label">Cascavel</label>
-                                        <input disabled type="checkbox" {{ (in_array(12, old('unidade') ?? [null]) ? "checked":"") }} name="unidade[]" value="12" class="col-6 js-switch" data-switchery="true" style="display: none;">
+                                        <input type="checkbox" {{ (in_array(12, old('unidade') ?? [null]) ? "checked":"") }} name="unidade[]" value="12" class="col-6 js-switch" data-switchery="true" style="display: none;">
                                     </div>
                                 </div>
                             </div>
