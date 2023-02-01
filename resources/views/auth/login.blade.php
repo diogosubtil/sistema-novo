@@ -1,48 +1,85 @@
 <x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
-        @if (Session::has('message'))
-            <div class="text-sm text-red-600 space-y-1 text-center">{{ Session::get('message') }}</div>
-        @endif
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+    <section class="login-block">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <form class="md-float-material form-material" method="POST" action="{{ route('login') }}">
+                        <div class="text-center">
+                            <img src="{{ asset('img/logo.png') }}" alt="logo.png">
+                        </div>
+                        <div class="auth-box card">
+                            <div class="card-block">
+                                <div class="row m-b-20 d-flex justify-content-center">
+                                    @csrf
+                                    @if (Session::has('message'))
+                                        <div class="text-red">{{ Session::get('message') }}</div>
+                                    @endif
+                                    @if (Session::has('status'))
+                                        <div class="text-success">{{ Session::get('status') }}</div>
+                                    @endif
+                                </div>
+                                <div class="form-group form-primary">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">@</span>
+                                        </div>
+                                        <input type="text" name="email" class="form-control" required="" placeholder="E-mail">
+                                    </div>
+                                    <span class="form-bar">
+                                        @if ($errors->get('email'))
+                                            <ul class="text-red">
+                                                @foreach ((array) $errors->get('email') as $message)
+                                                    <li>{{ $message }}</li>
+                                                @endforeach
+                                            </ul>
+                                        @endif
+                                    </span>
+                                </div>
+                                <div class="form-group form-primary">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <i class="icofont icofont-lock"></i>
+                                            </span>
+                                        </div>
+                                        <input type="password" name="password" class="form-control" required="" placeholder="Senha">
+                                    </div>
+                                    <span class="form-bar">
+                                        @if ($errors->get('password'))
+                                            <ul class="text-red">
+                                                @foreach ((array) $errors->get('password') as $message)
+                                                    <li>{{ $message }}</li>
+                                                @endforeach
+                                            </ul>
+                                        @endif
+                                    </span>
+                                </div>
+                                <div class="row m-t-25 text-left">
+                                    <div class="col-12">
+                                        <div class="checkbox-fade fade-in-primary d-">
+                                            <label>
+                                                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
+                                                <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
+                                                <span class="text-inverse">Manter conectado</span>
+                                            </label>
+                                        </div>
+                                        <div class="text-right f-right">
+                                            <a href="{{ route('password.request') }}" class="text-right f-w-600"> Esqueceu sua senha? </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row m-t-30">
+                                    <div class="col-md-12">
+                                        <button type="submit" class="btn btn-primary btn-md btn-block waves-effect waves-light text-center m-b-20">
+                                            Entrar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ml-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
+    </section>
 </x-guest-layout>

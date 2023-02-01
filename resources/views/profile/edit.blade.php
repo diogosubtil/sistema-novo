@@ -5,12 +5,12 @@
                 <div class="p-4 small-box bg-white">
                     <section>
                         <header>
-                            <h2 class="text-lg font-medium text-gray-900">
-                                {{ __('Verificação de e-mail') }}
-                            </h2>
+                            <h5 class="text-lg text-gray">
+                                Verificação de e-mail
+                            </h5>
 
-                            <p class="mt-1 text-sm text-red-600">
-                                {{ __('Clique no botão abaixo para enviar o email de verificação.') }}
+                            <p class="text-sm mt-1 text-red">
+                                Clique no botão abaixo para enviar o email de verificação.
                             </p>
                         </header>
 
@@ -19,14 +19,11 @@
                                 @csrf
 
                                 <div>
-                                    <x-primary-button>
-                                        {{ __('Enviar e-mail de verificação.') }}
-                                    </x-primary-button>
+                                    <button style="text-transform: none" type="submit" class="btn bg-primary b-radius-5">Enviar e-mail de verificação</button>
                                 </div>
                             </form>
                         </div>
                     </section>
-
                 </div>
             </div>
         @endif
@@ -54,20 +51,50 @@
                         @method('patch')
 
                         <div>
-                            <x-input-label for="name" :value="__('Name')" />
-                            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
-                            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+                            <label for="name">Nome</label>
+                            <div class="input-group input-group-default">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="icofont icofont-user"></i>
+                                    </span>
+                                </div>
+                                <input id="name" name="name" type="text" class="form-control" value="{{ old('name', $user->name) }}" required autofocus autocomplete="name" >
+                            </div>
+                            <span class="form-bar">
+                                @if ($errors->get('name'))
+                                    <ul class="text-red">
+                                        @foreach ((array) $errors->get('name') as $message)
+                                            <li>{{ $message }}</li>
+                                        @endforeach
+                                    </ul>
+                                @endif
+                            </span>
                         </div>
 
                         <div>
-                            <x-input-label for="email" :value="__('Email')" />
-                            @if(Auth::user()->email_verified_at == null)<b class="text-red-600">E-mail não verificado! </b> @endif
-                            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="email" />
-                            <x-input-error class="mt-2" :messages="$errors->get('email')" />
+                            <label for="email">Email</label>
+                            @if(Auth::user()->email_verified_at == null) <b class="text-sm text-red">"E-mail não verificado"</b>@endif
+                            <div class="input-group input-group-default">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        @
+                                    </span>
+                                </div>
+                                <input id="email" name="email" type="email" class="form-control" value="{{ old('email', $user->email) }}" required autofocus autocomplete="email" >
+                            </div>
+                            <span class="form-bar">
+                                @if ($errors->get('email'))
+                                    <ul class="text-red">
+                                        @foreach ((array) $errors->get('email') as $message)
+                                            <li>{{ $message }}</li>
+                                        @endforeach
+                                    </ul>
+                                @endif
+                            </span>
                         </div>
 
                         <div class="flex items-center gap-4">
-                            <x-primary-button>{{ __('Save') }}</x-primary-button>
+                            <button type="submit" class="text-sm pl-4 pr-4 btn bg-primary b-radius-5">SALVAR</button>
                         </div>
                     </form>
                 </section>
@@ -79,39 +106,82 @@
             <div class="p-4 small-box bg-white">
                 <section>
                     <header>
-                        <h2 class="text-lg font-medium text-gray-900">
-                            {{ __('Update Password') }}
+                        <h2 class="text-lg text-gray">
+                            Atualizar a senha
                         </h2>
 
-                        <p class="mt-1 text-sm text-gray-600">
-                            {{ __('Ensure your account is using a long, random password to stay secure.') }}
+                        <p class="mt-1 text-sm text-gray">
+                            Certifique-se de que sua conta esteja usando uma senha longa e aleatória para permanecer segura.
                         </p>
                     </header>
-
                     <form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">
                         @csrf
                         @method('put')
-
                         <div>
-                            <x-input-label for="current_password" :value="__('Current Password')" />
-                            <x-text-input id="current_password" name="current_password" type="password" class="mt-1 block w-full" autocomplete="current-password" />
-                            <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
+                            <label for="current_password">Senha Atual</label>
+                            <div class="input-group input-group-default">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="icofont icofont-shield"></i>
+                                    </span>
+                                </div>
+                                <input id="current_password" name="current_password" type="password" class="form-control" required>
+                            </div>
+                            <span class="form-bar">
+                                @if ($errors->updatePassword->get('current_password'))
+                                    <ul class="text-red">
+                                        @foreach ((array) $errors->updatePassword->get('current_password') as $message)
+                                            <li>{{ $message }}</li>
+                                        @endforeach
+                                    </ul>
+                                @endif
+                            </span>
                         </div>
 
                         <div>
-                            <x-input-label for="password" :value="__('New Password')" />
-                            <x-text-input id="password" name="password" type="password" class="mt-1 block w-full" autocomplete="new-password" />
-                            <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
+                            <label for="password">Nova Senha</label>
+                            <div class="input-group input-group-default">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="icofont icofont-shield"></i>
+                                    </span>
+                                </div>
+                                <input id="password" name="password" type="password" class="form-control" required>
+                            </div>
+                            <span class="form-bar">
+                                @if ($errors->updatePassword->get('password'))
+                                    <ul class="text-red">
+                                        @foreach ((array) $errors->updatePassword->get('password') as $message)
+                                            <li>{{ $message }}</li>
+                                        @endforeach
+                                    </ul>
+                                @endif
+                            </span>
                         </div>
 
                         <div>
-                            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-                            <x-text-input id="password_confirmation" name="password_confirmation" type="password" class="mt-1 block w-full" autocomplete="new-password" />
-                            <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
+                            <label for="password_confirmation">Confirmação de senha</label>
+                            <div class="input-group input-group-default">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="icofont icofont-shield"></i>
+                                    </span>
+                                </div>
+                                <input id="password_confirmation" name="password_confirmation" type="password" class="form-control" required>
+                            </div>
+                            <span class="form-bar">
+                                @if ($errors->updatePassword->get('password_confirmation'))
+                                    <ul class="text-red">
+                                        @foreach ((array) $errors->updatePassword->get('password_confirmation') as $message)
+                                            <li>{{ $message }}</li>
+                                        @endforeach
+                                    </ul>
+                                @endif
+                            </span>
                         </div>
 
                         <div class="flex items-center gap-4">
-                            <x-primary-button>{{ __('Save') }}</x-primary-button>
+                            <button type="submit" class="text-sm pl-4 pr-4 btn bg-primary b-radius-5">SALVAR</button>
                         </div>
                     </form>
                 </section>

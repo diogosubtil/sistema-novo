@@ -12,36 +12,96 @@
                                     Dados do Usuario
                                 </div>
                                 <div class="col-lg-4 col-12 mt-3">
-                                    <x-input-label for="name">Nome</x-input-label>
-                                    <x-text-input id="name" class="block mt-1 col-12" type="text" name="name" :value="old('name')" autofocus></x-text-input>
-                                    <x-input-error :messages="$errors->get('name')" class="mt-2"></x-input-error>
+                                    <label for="name">Nome</label>
+                                    <div class="input-group input-group-default">
+                                        <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="icofont icofont-user"></i>
+                                    </span>
+                                        </div>
+                                        <input id="name" name="name" type="text" class="form-control" value="{{ old('name') }}">
+                                    </div>
+                                    <span class="form-bar">
+                                        @if ($errors->get('name'))
+                                            <ul class="text-red">
+                                                @foreach ((array) $errors->get('name') as $message)
+                                                    <li>{{ $message }}</li>
+                                                @endforeach
+                                            </ul>
+                                        @endif
+                                    </span>
                                 </div>
                                 <!-- Telefone -->
                                 <div class="col-lg-2 col-12 mt-3">
-                                    <x-input-label for="telefone">Telefone</x-input-label>
-                                    <x-text-input id="telefone" class="block mt-1 col-12 telphone_with_code" data-mask="(99) 99999-9999" telphon type="text" name="telefone" :value="old('telefone')" autofocus></x-text-input>
-                                    <x-input-error :messages="$errors->get('telefone')" class="mt-2"></x-input-error>
+                                    <label for="telefone">Telefone</label>
+                                    <div class="input-group input-group-default">
+                                        <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="icofont icofont-phone"></i>
+                                    </span>
+                                        </div>
+                                        <input id="telefone" class="form-control block telphone_with_code" data-mask="(99) 99999-9999" telphon type="text" name="telefone" value="{{ old('telefone') }}">
+                                    </div>
+                                    <span class="form-bar">
+                                        @if ($errors->get('telefone'))
+                                            <ul class="text-red">
+                                                @foreach ((array) $errors->get('telefone') as $message)
+                                                    <li>{{ $message }}</li>
+                                                @endforeach
+                                            </ul>
+                                        @endif
+                                    </span>
                                 </div>
                                 <!-- Funcao -->
                                 <div class="col-lg-3 col-12 mt-3">
-                                    <x-input-label for="funcao">Função</x-input-label>
-                                    <x-select-input name="funcao" id="funcao" :value="old('funcao')" class="col-12">
-                                        <option value="">Selecione</option>
-                                        <option {{ (old("funcao") == '1' ? "selected":"") }} value="1">Master</option>
-                                        <option {{ (old("funcao") == '2' ? "selected":"") }} value="2">Gerente</option>
-                                        <option {{ (old("funcao") == '3' ? "selected":"") }} value="3">Aplicadora</option>
-                                    </x-select-input>
-                                    <x-input-error :messages="$errors->get('funcao')" class="mt-2"></x-input-error>
+                                    <label for="funcao">Função</label>
+                                    <div class="input-group input-group-default">
+                                        <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="icofont icofont-book-mark"></i>
+                                    </span>
+                                        </div>
+                                        <select id="funcao" name="funcao" class="form-control">
+                                            <option value="">Selecione</option>
+                                            <option {{ (old("funcao") == '1' ? "selected":"") }} value="1">Master</option>
+                                            <option {{ (old("funcao") == '2' ? "selected":"") }} value="2">Gerente</option>
+                                            <option {{ (old("funcao") == '3' ? "selected":"") }} value="3">Aplicadora</option>
+                                        </select>
+                                    </div>
+                                    <span class="form-bar">
+                                        @if ($errors->get('funcao'))
+                                            <ul class="text-red">
+                                                @foreach ((array) $errors->get('funcao') as $message)
+                                                    <li>{{ $message }}</li>
+                                                @endforeach
+                                            </ul>
+                                        @endif
+                                    </span>
                                 </div>
                                 <!-- Treinamento -->
                                 <div class="col-lg-3 col-12 mt-3">
-                                    <x-input-label for="treinamento">Treinamento</x-input-label>
-                                    <x-select-input name="treinamento" id="treinamento" :value="old('treinamento')" class="col-12">
-                                        <option value="">Selecione</option>
-                                        <option {{ (old("treinamento") == 'n' ? "selected":"") }} value="n">Não</option>
-                                        <option {{ (old("treinamento") == 's' ? "selected":"") }} value="s">Sim</option>
-                                    </x-select-input>
-                                    <x-input-error :messages="$errors->get('treinamento')" class="mt-2"></x-input-error>
+                                    <label for="treinamento">Treinamento</label>
+                                    <div class="input-group input-group-default">
+                                        <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="icofont icofont-users"></i>
+                                    </span>
+                                        </div>
+                                        <select id="treinamento" name="treinamento" class="form-control">
+                                            <option value="">Selecione</option>
+                                            <option {{ (old("treinamento") == 'n' ? "selected":"") }} value="n">Não</option>
+                                            <option {{ (old("treinamento") == 's' ? "selected":"") }} value="s">Sim</option>
+                                        </select>
+                                    </div>
+                                    <span class="form-bar">
+                                        @if ($errors->get('treinamento'))
+                                            <ul class="text-red">
+                                                @foreach ((array) $errors->get('treinamento') as $message)
+                                                    <li>{{ $message }}</li>
+                                                @endforeach
+                                            </ul>
+                                        @endif
+                                    </span>
                                 </div>
                             </div>
                             <div class="col-12">
@@ -53,31 +113,65 @@
                                 </div>
                                 <!-- Email Address -->
                                 <div class="col-12 mt-3">
-                                    <x-input-label for="email">E-mail</x-input-label>
-                                    <x-text-input id="email" class="block mt-1 col-12" type="email" name="email" :value="old('email')"></x-text-input>
-                                    <x-input-error :messages="$errors->get('email')" class="mt-2"></x-input-error>
+                                    <label class="text-inverse">E-mail</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">@</span>
+                                        </div>
+                                        <input type="text" name="email" class="form-control" value="{{ old('email') }}">
+                                    </div>
+                                    <span class="form-bar">
+                                        @if ($errors->get('email'))
+                                            <ul class="text-red">
+                                                @foreach ((array) $errors->get('email') as $message)
+                                                    <li>{{ $message }}</li>
+                                                @endforeach
+                                            </ul>
+                                        @endif
+                                    </span>
                                 </div>
                                 <!-- Password -->
                                 <div class="col-12 mt-3">
-                                    <x-input-label for="password">Senha</x-input-label>
-
-                                    <x-text-input id="password" class="block mt-1 col-12"
-                                                  type="password"
-                                                  name="password"
-                                                  autocomplete="new-password"></x-text-input>
-
-                                    <x-input-error :messages="$errors->get('password')" class="mt-2"></x-input-error>
+                                    <label class="text-inverse">Senha</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <i class="icofont icofont-lock"></i>
+                                            </span>
+                                        </div>
+                                        <input type="password" name="password" class="form-control" value="{{ old('password') }}" placeholder="Senha">
+                                    </div>
+                                    <span class="form-bar">
+                                        @if ($errors->get('password'))
+                                            <ul class="text-red">
+                                                @foreach ((array) $errors->get('password') as $message)
+                                                    <li>{{ $message }}</li>
+                                                @endforeach
+                                            </ul>
+                                        @endif
+                                    </span>
                                 </div>
 
                                 <!-- Confirm Password -->
                                 <div class="col-12 mt-3">
-                                    <x-input-label for="password_confirmation">Confirmação de senha</x-input-label>
-
-                                    <x-text-input id="password_confirmation" class="block mt-1 col-12"
-                                                  type="password"
-                                                  name="password_confirmation"></x-text-input>
-
-                                    <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2"></x-input-error>
+                                    <label class="text-inverse">Confirmação de senha</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <i class="icofont icofont-lock"></i>
+                                            </span>
+                                        </div>
+                                        <input type="password" name="password_confirmation" value="{{ old('password_confirmation') }}" class="form-control" placeholder="Senha">
+                                    </div>
+                                    <span class="form-bar">
+                                        @if ($errors->get('password_confirmation'))
+                                            <ul class="text-red">
+                                                @foreach ((array) $errors->get('password_confirmation') as $message)
+                                                    <li>{{ $message }}</li>
+                                                @endforeach
+                                            </ul>
+                                        @endif
+                                    </span>
                                 </div>
                             </div>
 
@@ -90,7 +184,15 @@
                                 <div>
                                     Unidades de acesso
                                 </div>
-                                <x-input-error :messages="$errors->get('unidade')" class="mt-2"></x-input-error>
+                                <span class="form-bar">
+                                        @if ($errors->get('unidade'))
+                                        <ul class="text-red">
+                                            @foreach ((array) $errors->get('unidade') as $message)
+                                                <li>{{ $message }}</li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
+                                </span>
                                 <div class="row col-12 mt-4">
                                     <div class="col-lg-4 col-12">
                                         <div class="mt-2">
@@ -153,9 +255,7 @@
                         </div>
 
                         <div class="flex items-center justify-end mt-4">
-                            <x-primary-button class="ml-4">
-                                Cadastrar
-                            </x-primary-button>
+                            <button type="submit" class="text-sm pl-4 pr-4 btn bg-primary b-radius-5">Cadastrar</button>
                         </div>
                     </form>
                 </div>
