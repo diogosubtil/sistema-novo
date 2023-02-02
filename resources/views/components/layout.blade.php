@@ -104,7 +104,7 @@
 
             <div class="navbar-wrapper">
                 <div class="navbar-logo" logo-theme="theme1">
-                    <a class="mobile-menu" id="mobile-collapse" href="#!">
+                    <a class="mobile-menu mt-1" id="mobile-collapse" href="#!">
                         <i class="feather icon-toggle-right"></i>
                     </a>
                     <a href="{{ route('dashboard') }}">
@@ -190,7 +190,7 @@
                                             <div class="card-block">
                                                 <i id="statusUser" class="feather icon-user bg-success card1-icon"></i>
                                                 <h4>{{ Auth::user()->name }}</h4>
-                                                <p>Master</p>
+                                                <p>{{ Helper::funcao(Auth::user()->funcao) }}</p>
                                             </div>
                                         </a>
 
@@ -490,12 +490,12 @@
                                                 <span class="pcoded-mtext">Usuarios</span>
                                             </a>
                                             <ul class="pcoded-submenu">
-                                                <li class=" ">
+                                                <li id="{{ route('users.index') }}" class="">
                                                     <a href="{{ route('users.index') }}">
                                                         <span class="pcoded-mtext">Painel</span>
                                                     </a>
                                                 </li>
-                                                <li class=" ">
+                                                <li id="{{ route('users.create') }}" class="">
                                                     <a href="{{ route('users.create') }}">
                                                         <span class="pcoded-mtext">Cadastro</span>
                                                     </a>
@@ -567,26 +567,20 @@
         </div>
     </div>
 </div>
-
 <script type="text/javascript" src="{{ asset('/js/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('/js/jquery-ui.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('/js/popper.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('/js/bootstrap.min.js') }}"></script>
-
+<script type="text/javascript" src="{{ asset('/js/newScripts.js') }}"></script>
 <script type="text/javascript" src="{{ asset('/js/jquery.slimscroll.js') }}"></script>
-
 <script type="text/javascript" src="{{ asset('/js/modernizr.js') }}"></script>
 <script type="text/javascript" src="{{ asset('/js/css-scrollbars.js') }}"></script>
-
 <script type="text/javascript" src="{{ asset('/js/Chart.js') }}"></script>
 <script type="text/javascript" src="{{ asset('/js/custom-dashboard.js') }}"></script>
-
 <script type="text/javascript" src="{{ asset('/js/amcharts.js') }}"></script>
 <script type="text/javascript" src="{{ asset('/js/serial.js') }}"></script>
 <script type="text/javascript" src="{{ asset('/js/light.js') }}"></script>
-
 <script type="text/javascript" src="{{ asset('/js/switchery.min.js') }}"></script>
-
 <script type="text/javascript" src="{{ asset('/dist/js/SmoothScroll.js') }}"></script>
 <script type="text/javascript" src="{{ asset('/js/pcoded.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
@@ -597,7 +591,6 @@
 <script type="text/javascript" src="{{ asset('/js/form-mask.js') }}"></script>
 <script type="text/javascript" src="{{ asset('/js/autoNumeric.js') }}"></script>
 <script type="text/javascript" src="{{ asset('/js/script.js') }}"></script>
-
 <script type="text/javascript" src="{{ asset('/js/bootstrap-tagsinput.js') }}"></script>
 <script type="text/javascript" src="{{ asset('/js/typeahead.bundle.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('/js/bootstrap-maxlength.js') }}"></script>
@@ -606,10 +599,7 @@
 <script type="text/javascript" src="{{ asset('/js/i18nextBrowserLanguageDetector.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('/js/jquery-i18next.min.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('/js/swithces.js') }}"></script>
-<script type="text/javascript" src="{{ asset('/js/newScripts.js') }}"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 </body>
-
 </html>
 
