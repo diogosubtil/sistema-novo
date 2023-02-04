@@ -5,29 +5,27 @@
                 <div class="col-sm-12">
                     <form class="md-float-material form-material" method="POST" action="{{ route('login') }}">
                         <div class="text-center">
-                            <img src="{{ asset('img/logo.png') }}" alt="logo.png">
+                            <img src="{{ asset('/files/assets/images/logo.png') }}" alt="logo.png">
                         </div>
                         <div class="auth-box card">
                             <div class="card-block">
                                 <div class="row m-b-20 d-flex justify-content-center">
                                     @csrf
                                     @if (Session::has('message'))
-                                        <div class="text-red">{{ Session::get('message') }}</div>
+                                        <div class="text-danger">{{ Session::get('message') }}</div>
                                     @endif
                                     @if (Session::has('status'))
                                         <div class="text-success">{{ Session::get('status') }}</div>
                                     @endif
                                 </div>
-                                <div class="form-group form-primary">
+                                <div class="form-group">
                                     <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">@</span>
-                                        </div>
-                                        <input type="text" name="email" class="form-control" required="" placeholder="E-mail">
+                                        <span class="input-group-addon" id="basic-addon1">@</span>
+                                        <input type="text" name="email" class="form-control" placeholder="E-mail" required>
                                     </div>
                                     <span class="form-bar">
                                         @if ($errors->get('email'))
-                                            <ul class="text-red">
+                                            <ul class="text-danger">
                                                 @foreach ((array) $errors->get('email') as $message)
                                                     <li>{{ $message }}</li>
                                                 @endforeach
@@ -35,18 +33,16 @@
                                         @endif
                                     </span>
                                 </div>
-                                <div class="form-group form-primary">
+                                <div class="form-group">
                                     <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">
-                                                <i class="icofont icofont-lock"></i>
-                                            </span>
-                                        </div>
-                                        <input type="password" name="password" class="form-control" required="" placeholder="Senha">
+                                        <span class="input-group-addon" id="basic-addon1">
+                                            <i class="icofont icofont-lock"></i>
+                                        </span>
+                                        <input type="password" name="password" class="form-control" placeholder="Senha" required>
                                     </div>
                                     <span class="form-bar">
                                         @if ($errors->get('password'))
-                                            <ul class="text-red">
+                                            <ul class="text-danger">
                                                 @foreach ((array) $errors->get('password') as $message)
                                                     <li>{{ $message }}</li>
                                                 @endforeach

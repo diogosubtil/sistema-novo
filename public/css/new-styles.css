@@ -1,0 +1,14 @@
+@media (min-width: 800px) {
+
+    #userUnidade {
+        border-left:1px solid #e5e7eb
+    }
+
+    #userDivider {
+        display: none;
+    }
+}
+
+#profileButton:hover, #logoutButton:hover {
+    color: silver!important;
+}

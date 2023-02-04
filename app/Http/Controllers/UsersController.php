@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UsersFormRequest;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use App\Repositories\UsersRepository;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\RedirectResponse;
@@ -19,31 +21,29 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class UsersController extends Controller
 {
+    public function __construct(private UsersRepository $repository)
+    {
+    }
 
     //FUNÇÃO PARA EXIBIR A VIEW (PAINEL)
     public function index()
     {
-        $usuarios = User::query()->paginate(15);
+        $usuarios = User::query()->orderBy('name')->paginate(15);
         $total = User::all();
 
+        //OBTEM ATIVOS,DESATIVADOS,ONLINE
         $ativos = 0;
-        foreach ($total as $ativo){
-            if ($ativo->ativo == 's'){
+        $desativados = 0;
+        $online = [];
+        foreach ($total as $users){
+            if ($users->ativo == 's'){
                 $ativos++;
             }
-        }
-
-        $desativados = 0;
-        foreach ($total as $desativado){
-            if ($desativado->ativo == 'n'){
+            if ($users->ativo == 'n'){
                 $desativados++;
             }
-        }
-
-        $online = [];
-        foreach ($total as $on){
-            if ($on->last_seen != null){
-                $online[] = $on;
+            if ($users->last_seen != null){
+                $online[] = $users;
             }
         }
 
@@ -63,35 +63,12 @@ class UsersController extends Controller
     }
 
     //FUNÇÃO PARA CADASTRAR NO BANCO
-    public function store(Request $request)
+    public function store(UsersFormRequest $request, UsersRepository $repository)
     {
-        //VALIDAÇÕES
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'funcao' => ['required', 'integer', 'max:255'],
-            'telefone' => ['required', 'string'],
-            'unidade' => ['required'],
-            'treinamento' => ['required', 'string', 'max:255'],
-        ]);
+        //ADICIONA NO BANCO VIA REPOSITORY
+        $user = $this->repository->add($request);
 
-        //INICIA A TRANSAÇÃO
-        DB::beginTransaction();
-
-        //OBTEM OS DADOS DO REQUEST E FAZ O CADASTRO
-        $data = $request->except('_token');
-        $data['unidade'] = implode(',', $data['unidade']);
-        $data['password'] = Hash::make($data['password']);
-
-        $user = User::create($data);
-        //ENVIA A TRASAÇÃO (COMMIT)
-        DB::commit();
-
-        //ENVIA O EMAIL DE CONFIRMAÇÃO
-        $user->sendEmailVerificationNotification();
-
-        Alert::success('Concluido', 'Usuario cadastrado com sucesso!');
+        Alert::success('Concluido', 'Usuario ' . $user->name .  ' cadastrado com sucesso!');
 
         return to_route('users.index');
     }
@@ -108,46 +85,10 @@ class UsersController extends Controller
     //FUNÇÃO PARA FAZER UPDATE NO USUARIO
     public function update(Request $request, User $user)
     {
-        //VALIDAÇÃO DA SENHA
-        if ($request->password){
-            $request->validate([
-                'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            ]);
-        }
+        //EDITA NO BANCO VIA REPOSITORY
+        $this->repository->edit($request, $user);
 
-        if ($request->email != $user->email){
-            $request->validate([
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
-            ]);
-        }
-
-        //VALIDAÇÕES
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'funcao' => ['required', 'integer', 'max:255'],
-            'telefone' => ['required', 'string'],
-            'unidade' => ['required'],
-            'treinamento' => ['required', 'string', 'max:255'],
-        ]);
-
-        //INICIA A TRANSAÇÃO
-        DB::beginTransaction();
-
-        //VALIDAÇÃO E-MAIL
-        if ($request->email != $user->email){
-            $user->email_verified_at = null;
-        }
-        //OBTEM OS DADOS DO REQUEST E FAZ O UPDATE
-        $data = $request->except('_token');
-        $data['unidade'] = implode(',', $data['unidade']);
-        $data['password'] = Hash::make($request->password);
-        $user->fill($data);
-        $user->save();
-
-        //ENVIA A TRASAÇÃO (COMMIT)
-        DB::commit();
-
-        Alert::success('Concluido', 'Usuario editado com sucesso!');
+        Alert::success('Concluido', 'Usuario ' . $user->name . ' editado com sucesso!');
 
         return to_route('users.index');
     }
@@ -155,14 +96,8 @@ class UsersController extends Controller
     //FUNÇÃO PARA DESATIVAR USUARIO
     public function deactivate(User $user)
     {
-        //INICIA A TRANSAÇÃO
-        DB::beginTransaction();
-
-        $user->ativo = 'n';
-        $user->save();
-
-        //ENVIA A TRASAÇÃO (COMMIT)
-        DB::commit();
+        //DESABILITA USUARIO VIA REPOSITORY
+        $this->repository->disable($user);
 
         Alert::success('Concluido', 'Usuario desativado com sucesso!');
 
@@ -172,14 +107,8 @@ class UsersController extends Controller
     //FUNÇÃO PARA ATIVAR USUARIO
     public function activate(User $user)
     {
-        //INICIA A TRANSAÇÃO
-        DB::beginTransaction();
-
-        $user->ativo = 's';
-        $user->save();
-
-        //ENVIA A TRASAÇÃO (COMMIT)
-        DB::commit();
+        //ATIVA USUARIO VIA REPOSITORY
+        $this->repository->active($user);
 
         Alert::success('Concluido', 'Usuario ativado com sucesso!');
 

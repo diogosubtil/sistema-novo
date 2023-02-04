@@ -13,16 +13,15 @@
                         </div>
                         <div class="auth-box card">
                             <div class="card-block">
-                                <div class="form-group form-primary">
+                                <div class="form-group">
+                                    <label class="text-inverse">E-mail</label>
                                     <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">@</span>
-                                        </div>
+                                        <span class="input-group-addon" id="basic-addon1">@</span>
                                         <input type="text" name="email" class="form-control" value="{{ old('email', $request->email) }}">
                                     </div>
                                     <span class="form-bar">
                                         @if ($errors->get('email'))
-                                            <ul class="text-red">
+                                            <ul class="text-danger">
                                                 @foreach ((array) $errors->get('email') as $message)
                                                     <li>{{ $message }}</li>
                                                 @endforeach
@@ -33,16 +32,14 @@
                                 <div class="form-group form-primary">
                                     <label class="text-inverse">Nova Senha</label>
                                     <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">
-                                                <i class="icofont icofont-lock"></i>
-                                            </span>
-                                        </div>
+                                        <span class="input-group-addon" id="basic-addon1">
+                                            <i class="icofont icofont-lock"></i>
+                                        </span>
                                         <input type="password" name="password" class="form-control" value="{{ old('password') }}" placeholder="Senha">
                                     </div>
                                     <span class="form-bar">
                                         @if ($errors->get('password'))
-                                            <ul class="text-red">
+                                            <ul class="text-danger">
                                                 @foreach ((array) $errors->get('password') as $message)
                                                     <li>{{ $message }}</li>
                                                 @endforeach
@@ -53,16 +50,14 @@
                                 <div class="form-group form-primary">
                                     <label class="text-inverse">Confirmação de senha</label>
                                     <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">
-                                                <i class="icofont icofont-lock"></i>
-                                            </span>
-                                        </div>
+                                        <span class="input-group-addon" id="basic-addon1">
+                                            <i class="icofont icofont-lock"></i>
+                                        </span>
                                         <input type="password" name="password_confirmation" value="{{ old('password_confirmation') }}" class="form-control" placeholder="Senha">
                                     </div>
                                     <span class="form-bar">
                                         @if ($errors->get('password_confirmation'))
-                                            <ul class="text-red">
+                                            <ul class="text-danger">
                                                 @foreach ((array) $errors->get('password_confirmation') as $message)
                                                     <li>{{ $message }}</li>
                                                 @endforeach

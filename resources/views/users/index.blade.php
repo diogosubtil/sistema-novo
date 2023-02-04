@@ -1,7 +1,10 @@
 <x-layout>
+    @slot('stylesheet')
+    @endslot
+    @slot('slot')
     <div class="row">
         <div class="col-xl-4 col-md-4 col-12">
-            <div class="card bg-c-yellow text-white">
+            <div class="card bg-c-blue text-white">
                 <div class="card-block">
                     <div class="row align-items-center">
                         <div class="col">
@@ -9,7 +12,7 @@
                             <h4 class="m-b-0">{{ $total->count() }}</h4>
                         </div>
                         <div class="col col-auto text-right">
-                            <i class="feather icon-user f-50 text-c-yellow"></i>
+                            <i class="feather icon-user f-50 text-c-blue"></i>
                         </div>
                     </div>
                 </div>
@@ -138,4 +141,7 @@
             </div>
         </div>
     </div>
+    @endslot
+    @slot('scripts')
+    @endslot
 </x-layout>

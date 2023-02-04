@@ -6,7 +6,7 @@
                     <form class="md-float-material form-material" method="POST" action="{{ route('password.email') }}">
                         @csrf
                         <div class="text-center">
-                            <img src="{{ asset('img/logo.png') }}" alt="logo.png">
+                            <img src="{{ asset('/files/assets/images/logo.png') }}" alt="logo.png">
                         </div>
                         <div class="auth-box card">
                             <div class="card-block">
@@ -21,11 +21,14 @@
                                 @if (Session::has('status'))
                                     <div class="text-sm text-success space-y-1 text-center">{{ Session::get('status') }}</div>
                                 @endif
-                                <div class="form-group form-primary">
-                                    <input type="text" name="email" class="form-control" required="" value="{{ old('email') }}" placeholder="Seu e-mail">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon" id="basic-addon1">@</span>
+                                        <input type="text" name="email" class="form-control" placeholder="E-mail" required>
+                                    </div>
                                     <span class="form-bar">
                                         @if ($errors->get('email'))
-                                            <ul class="text-red">
+                                            <ul class="text-danger">
                                                 @foreach ((array) $errors->get('email') as $message)
                                                     <li>{{ $message }}</li>
                                                 @endforeach
