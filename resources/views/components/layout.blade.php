@@ -282,7 +282,7 @@
                     <div class="pcoded-inner-navbar main-menu">
                         <div class="pcoded-navigatio-lavel">Navigation</div>
                         <ul class="pcoded-item pcoded-left-item">
-                            <li class="">
+                            <li id="{{ route('dashboard') }}">
                                 <a href="{{ route('dashboard') }}">
                                     <span class="pcoded-micon"><i class="feather icon-home"></i></span>
                                     <span class="pcoded-mtext">Home</span>
@@ -297,12 +297,12 @@
                                     <span class="pcoded-mtext">Usuarios</span>
                                 </a>
                                 <ul class="pcoded-submenu">
-                                    <li id="{{ route('users.index') }}" class="">
+                                    <li id="{{ route('users.index') }}">
                                         <a href="{{ route('users.index') }}">
                                             <span class="pcoded-mtext">Painel</span>
                                         </a>
                                     </li>
-                                    <li id="{{ route('users.create') }}" class="">
+                                    <li id="{{ route('users.create') }}">
                                         <a href="{{ route('users.create') }}">
                                             <span class="pcoded-mtext">Cadastro</span>
                                         </a>
