@@ -2,21 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\UsersFormRequest;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
 use App\Repositories\UsersRepository;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Auth\Events\Verified;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
-use Illuminate\Validation\Rules\Password;
-use Illuminate\View\View;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class UsersController extends Controller
@@ -26,10 +15,13 @@ class UsersController extends Controller
     }
 
     //FUNÇÃO PARA EXIBIR A VIEW (PAINEL)
-    public function index()
+    public function index(Request $request)
     {
-        $usuarios = User::query()->orderBy('name')->paginate(15);
-        $total = User::all();
+        //OBTEM TODOS OS USUARIOS COM PAGINAÇÃO
+        $usuarios = User::filter($request->all())->paginate('10');
+
+        //OBTEM USUARIOS PARA CONTAGEM E ONLINE
+        $total = User::filter($request->all())->get();
 
         //OBTEM ATIVOS,DESATIVADOS,ONLINE
         $ativos = 0;
@@ -63,7 +55,7 @@ class UsersController extends Controller
     }
 
     //FUNÇÃO PARA CADASTRAR NO BANCO
-    public function store(UsersFormRequest $request, UsersRepository $repository)
+    public function store(UsersFormRequest $request)
     {
         //ADICIONA NO BANCO VIA REPOSITORY
         $user = $this->repository->add($request);

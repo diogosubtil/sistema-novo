@@ -8,6 +8,12 @@
         display: none;
     }
 }
+@media (max-width: 800px) {
+
+    #mostrarPaginas {
+        display: none;
+    }
+}
 
 #profileButton:hover, #logoutButton:hover {
     color: silver!important;

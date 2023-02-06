@@ -195,6 +195,12 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        //Repositories Providers
+        App\Providers\RepositoriesProviders::class,
+
+        //Filter Eloquent
+        eloquentFilter\ServiceProvider::class,
+
     ],
 
     /*
@@ -210,6 +216,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         'Helper' => App\Helpers\Helper::class,
+        'EloquentFilter' => eloquentFilter\Facade\EloquentFilter::class,
     ])->toArray(),
 
 ];
