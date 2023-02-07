@@ -74,7 +74,7 @@ class UnidadesController extends Controller
     public function store(UnidadesFormRequest $request)
     {
         //ADICIONA NO BANCO VIA REPOSITORY
-        $unidade = $this->repository->add($request);
+        $this->repository->add($request);
 
         //ALERT
         Alert::success('Concluido', 'Unidade cadastrado com sucesso!');
