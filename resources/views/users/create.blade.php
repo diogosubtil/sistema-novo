@@ -190,8 +190,8 @@
                                             <input type="checkbox" name="js-single" class="col-4 js-single">
                                         </div>
                                         @foreach($unidades as $unidade)
-                                            <div class="col-4 mt-2">
-                                                <label class="col-9 form-check-label">{{$unidade->bairro}} - <b>{{$unidade->estado }}</b></label>
+                                            <div class="col-xl-4 col-sm-6 col-12 mt-2">
+                                                <label class="col-xl-9 col-sm-9 col-8 form-check-label">{{$unidade->bairro}} - <b>{{$unidade->estado }}</b></label>
                                                 <input type="checkbox" {{ (in_array($unidade->id, old('unidade') ?? [null]) ? "checked":"") }} name="unidade[]" value="{{ $unidade->id }}" class="col-3 js-switch">
                                             </div>
                                         @endforeach
@@ -209,6 +209,10 @@
         </div>
     @endslot
         @slot('scripts')
-
+            <script type="text/javascript" src="{{ asset('/files/assets/pages/form-masking/inputmask.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('/files/assets/pages/form-masking/jquery.inputmask.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('/files/assets/pages/form-masking/form-mask.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('/files/bower_components/switchery/js/switchery.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('/files/assets/pages/advance-elements/swithces.js') }}"></script>
         @endslot
 </x-layout>

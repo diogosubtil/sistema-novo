@@ -28,7 +28,6 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('/files/assets/icon/feather/css/feather.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/files/assets/css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/files/assets/css/jquery.mCustomScrollbar.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('/files/assets/scss/partials/menu/_pcmenu.htm') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/files/bower_components/switchery/css/switchery.min.css') }}">
     {{ $stylesheet }}
 </head>
@@ -368,11 +367,6 @@
 <script type="text/javascript" src="{{ asset('/files/assets/js/vartical-layout.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('/files/assets/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('/files/assets/js/script.js') }}"></script>
-<script type="text/javascript" src="{{ asset('/files/assets/pages/form-masking/inputmask.js') }}"></script>
-<script type="text/javascript" src="{{ asset('/files/assets/pages/form-masking/jquery.inputmask.js') }}"></script>
-<script type="text/javascript" src="{{ asset('/files/assets/pages/form-masking/form-mask.js') }}"></script>
-<script type="text/javascript" src="{{ asset('/files/bower_components/switchery/js/switchery.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('/files/assets/pages/advance-elements/swithces.js') }}"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
