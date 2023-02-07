@@ -23,7 +23,7 @@
                     <div class="card-block">
                         <div class="row align-items-center">
                             <div class="col">
-                                <p class="m-b-5">Usuarios Ativos</p>
+                                <p class="m-b-5">Ativos</p>
                                 <h4 class="m-b-0">{{ $ativos }}</h4>
                             </div>
                             <div class="col col-auto text-right">
@@ -38,7 +38,7 @@
                     <div class="card-block">
                         <div class="row align-items-center">
                             <div class="col">
-                                <p class="m-b-5">Usuarios Desativados</p>
+                                <p class="m-b-5">Desativados</p>
                                 <h4 class="m-b-0">{{ $desativados }}</h4>
                             </div>
                             <div class="col col-auto text-right">

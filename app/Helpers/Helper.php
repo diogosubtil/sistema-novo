@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Models\User;
 use Illuminate\Support\Facades\Cache;
 
 class Helper
@@ -46,5 +47,13 @@ class Helper
         } else {
             return 'bg-danger';
         }
+    }
+
+    //OBTEM NOME DO USUARIO
+    public static function getUserTittle($id)
+    {
+        $user = User::query()->where('id', '=', $id)->get()->first()->name;
+
+        return $user;
     }
 }

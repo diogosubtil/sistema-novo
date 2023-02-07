@@ -23,6 +23,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/new-styles.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/files/bower_components/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/files/assets/icon/themify-icons/themify-icons.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/files/assets/icon/font-awesome/css/font-awesome.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/files/assets/icon/icofont/css/icofont.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/files/assets/icon/feather/css/feather.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/files/assets/css/style.css') }}">
@@ -284,7 +285,7 @@
                         <ul class="pcoded-item pcoded-left-item">
                             <li id="{{ route('dashboard') }}">
                                 <a href="{{ route('dashboard') }}">
-                                    <span class="pcoded-micon"><i class="feather icon-home"></i></span>
+                                    <span class="pcoded-micon"><i class="fa fa-bar-chart"></i></span>
                                     <span class="pcoded-mtext">Home</span>
                                 </a>
                             </li>
@@ -304,6 +305,24 @@
                                     </li>
                                     <li id="{{ route('users.create') }}">
                                         <a href="{{ route('users.create') }}">
+                                            <span class="pcoded-mtext">Cadastro</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="pcoded-hasmenu">
+                                <a href="javascript:void(0)">
+                                    <span class="pcoded-micon"><i class="feather icon-home"></i></span>
+                                    <span class="pcoded-mtext">Unidades</span>
+                                </a>
+                                <ul class="pcoded-submenu">
+                                    <li id="{{ route('unidades.index') }}">
+                                        <a href="{{ route('unidades.index') }}">
+                                            <span class="pcoded-mtext">Painel</span>
+                                        </a>
+                                    </li>
+                                    <li id="{{ route('unidades.create') }}">
+                                        <a href="{{ route('unidades.create') }}">
                                             <span class="pcoded-mtext">Cadastro</span>
                                         </a>
                                     </li>

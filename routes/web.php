@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UnidadesController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -71,4 +72,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('/users', UsersController::class);
     Route::put('/users/deactivate/{user}', [UsersController::class, 'deactivate'])->name('users.deactivate');
     Route::put('/users/activate/{user}', [UsersController::class, 'activate'])->name('users.activate');
+
+    //UNIDADES
+    Route::resource('/unidades', UnidadesController::class);
+    Route::put('/unidades/deactivate/{user}', [UsersController::class, 'deactivate'])->name('unidades.deactivate');
+    Route::put('/unidades/activate/{user}', [UsersController::class, 'activate'])->name('unidades.activate');
 });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UsersFormRequest;
+use App\Models\Unidade;
 use App\Models\User;
 use App\Repositories\UsersRepository;
 use Illuminate\Http\Request;
@@ -10,6 +11,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class UsersController extends Controller
 {
+    //CONSTRUTOR COM REPOSITORY INJETADO
     public function __construct(private UsersRepository $repository)
     {
     }
@@ -18,7 +20,7 @@ class UsersController extends Controller
     public function index(Request $request)
     {
         //OBTEM TODOS OS USUARIOS COM PAGINAÇÃO
-        $usuarios = User::filter($request->all())->paginate('10');
+        $usuarios = User::filter($request->all())->paginate('15');
 
         //OBTEM USUARIOS PARA CONTAGEM E ONLINE
         $total = User::filter($request->all())->get();
@@ -39,7 +41,7 @@ class UsersController extends Controller
             }
         }
 
-        //RETORNA PARA A PAGINA
+        //RETORNA A VIEW COM OS DADOS
         return view('users.index')
             ->with('usuarios', $usuarios)
             ->with('total', $total)
@@ -51,7 +53,12 @@ class UsersController extends Controller
     //FUNÇÃO PARA EXIBIR A VIEW (CADASTRAR)
     public function create()
     {
-        return view('users.create');
+        //OBTEM AS UNIDADES
+        $unidades = Unidade::query()->where('ativo', '=', 's')->get();
+
+        //RETORNA A VIEW COM OS DADOS
+        return view('users.create')
+            ->with('unidades', $unidades);
     }
 
     //FUNÇÃO PARA CADASTRAR NO BANCO
@@ -60,18 +67,27 @@ class UsersController extends Controller
         //ADICIONA NO BANCO VIA REPOSITORY
         $user = $this->repository->add($request);
 
+        //ALERT
         Alert::success('Concluido', 'Usuario ' . $user->name .  ' cadastrado com sucesso!');
 
+        //RETORNA A VIEW
         return to_route('users.index');
     }
 
     //FUNÇÃO PARA EXIBIR A VIEW (EDITAR)
     public function edit(User $user)
     {
-        $unidades = explode(',' , $user->unidade);
+        //OBTEM AS UNIDADES DO USUARIO
+        $unidadesUser = explode(',' , $user->unidade);
+
+        //OBTEM AS UNIDADES
+        $unidades = Unidade::query()->where('ativo', '=', 's')->get();
+
+        //RETORNA A VIEW COM OS DADOS
         return view('users.edit')
             ->with('user', $user)
-            ->with('unidades', $unidades);
+            ->with('unidades', $unidades)
+            ->with('unidadesUser', $unidadesUser);
     }
 
     //FUNÇÃO PARA FAZER UPDATE NO USUARIO
@@ -80,8 +96,10 @@ class UsersController extends Controller
         //EDITA NO BANCO VIA REPOSITORY
         $this->repository->edit($request, $user);
 
+        //ALERT
         Alert::success('Concluido', 'Usuario ' . $user->name . ' editado com sucesso!');
 
+        //RETORNA A VIEW
         return to_route('users.index');
     }
 
@@ -91,8 +109,10 @@ class UsersController extends Controller
         //DESABILITA USUARIO VIA REPOSITORY
         $this->repository->disable($user);
 
-        Alert::success('Concluido', 'Usuario desativado com sucesso!');
+        //ALERT
+        Alert::success('Concluido', 'Usuario ' . $user->name . ' desativado com sucesso!');
 
+        //RETORNA A VIEW
         return to_route('users.index');
     }
 
@@ -102,8 +122,10 @@ class UsersController extends Controller
         //ATIVA USUARIO VIA REPOSITORY
         $this->repository->active($user);
 
-        Alert::success('Concluido', 'Usuario ativado com sucesso!');
+        //ALERT
+        Alert::success('Concluido', 'Usuario ' . $user->name . ' ativado com sucesso!');
 
+        //RETORNA A VIEW
         return to_route('users.index');
     }
 
