@@ -185,8 +185,8 @@
                                         </ul>
                                         @endif
                                 </span>
-                                    <div hidden class="row col-12 mt-4">
-                                        <div class="row col-12 mt-4">
+                                    <div class="row col-12 mt-4">
+                                        <div hidden class="row col-12 mt-4">
                                             <label for="js-single" class="col-8 form-check-label">js-single</label>
                                             <input type="checkbox" name="js-single" class="col-4 js-single">
                                         </div>
