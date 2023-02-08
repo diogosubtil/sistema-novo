@@ -18,5 +18,5 @@ interface UsersRepository
     public function disable(User $user);
 
     //ATIVA USUARIO
-    public function active(User $user);
+    public function enable(User $user);
 }

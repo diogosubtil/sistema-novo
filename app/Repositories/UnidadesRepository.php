@@ -17,5 +17,5 @@ interface UnidadesRepository
     public function disable(Unidade $unidade);
 
     //ATIVA USUARIO
-    public function active(Unidade $unidade);
+    public function enable(Unidade $unidade);
 }

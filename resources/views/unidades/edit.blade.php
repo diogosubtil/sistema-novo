@@ -24,7 +24,7 @@
                                             <span class="input-group-addon" id="basic-addon1">
                                                 <i class="fa fa-building"></i>
                                             </span>
-                                            <input id="cnpj" name="cnpj" type="text" class="form-control" value="{{ $unidade->cnpj }}" placeholder="CNPJ">
+                                            <input id="cnpj" name="cnpj" type="text" class="form-control cnpj" value="{{ $unidade->cnpj }}" placeholder="CNPJ">
                                         </div>
                                         <span class="form-bar">
                                             @if ($errors->get('cnpj'))
@@ -62,7 +62,7 @@
                                                 <span class="input-group-addon" id="basic-addon1">
                                                     <i class="icofont icofont-phone"></i>
                                                 </span>
-                                            <input id="whatsapp" class="form-control telphone_with_code" data-mask="(99) 99999-9999" telphon type="text" name="whatsapp" value="{{ $unidade->whatsapp }}" placeholder="Whatsapp">
+                                            <input id="whatsapp" class="form-control telphone_with_code" type="text" name="whatsapp" value="{{ $unidade->whatsapp }}" placeholder="Whatsapp">
                                         </div>
                                         <span class="form-bar">
                                             @if ($errors->get('whatsapp'))
@@ -122,7 +122,7 @@
                                         <label for="timezone">Timezone</label>
                                         <div class="input-group">
                                             <span class="input-group-addon" id="basic-addon1">
-                                                <i class="icofont icofont-user"></i>
+                                                <i class="icofont icofont-clock-time"></i>
                                             </span>
                                             <select id="timezone" name="timezone" class="form-control">
                                                 <option value="">Selecione</option>
@@ -156,7 +156,7 @@
                                             <span class="input-group-addon" id="basic-addon1">
                                                 <i class="fa fa-home"></i>
                                             </span>
-                                            <input id="cep" name="cep" onblur="pesquisacep(this.value)" type="text" class="form-control" value="{{ $unidade->cep }}" placeholder="CEP">
+                                            <input id="cep" name="cep" onblur="pesquisacep(this.value)" type="text" class="form-control cep" value="{{ $unidade->cep }}" placeholder="CEP">
                                         </div>
                                         <span class="form-bar">
                                             @if ($errors->get('cep'))
@@ -300,6 +300,10 @@
         </div>
     @endslot
     @slot('scripts')
+        <script type="text/javascript" src="{{ asset('/files/assets/pages/form-masking/inputmask.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('/files/assets/pages/form-masking/jquery.inputmask.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('/files/assets/pages/form-masking/form-mask.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('/files/assets/pages/form-masking/autoNumeric.js') }}"></script>
         <script src="{{ asset('/js/consulta-cep.js') }}"></script>
         <script src="{{ asset('/files/bower_components/jSignature/jSignature.min.noconflict.js') }}"></script>
         <script type="text/javascript">

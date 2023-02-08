@@ -65,6 +65,7 @@ class EloquentUsersRepository implements UsersRepository
         if ($request->email != $user->email){
             $user->email_verified_at = null;
         }
+
         //OBTEM OS DADOS DO REQUEST E FAZ O UPDATE
         $data = $request->except('_token');
         $data['unidade'] = implode(',', $data['unidade']);
@@ -90,7 +91,7 @@ class EloquentUsersRepository implements UsersRepository
     }
 
     //FUNÇÃO PARA ATIVAR USUARIO
-    public function active(User $user)
+    public function enable(User $user)
     {
         //INICIA A TRANSAÇÃO
         DB::beginTransaction();

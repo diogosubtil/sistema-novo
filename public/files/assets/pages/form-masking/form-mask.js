@@ -1,6 +1,6 @@
   'use strict';
 $(function() {
-    
+
     /*date*/
     $(".date").inputmask({ mask: "99/99/9999"});
     $(".date2").inputmask({ mask: "99-99-9999"});
@@ -13,6 +13,8 @@ $(function() {
     $(".phone").inputmask({ mask: "9999-9999"});
     $(".telphone_with_code").inputmask({ mask: "(99) 99999-9999"});
     $(".us_telephone").inputmask({ mask: "(999) 999-9999"});
+    $(".cep").inputmask({ mask: "99999-999"});
+    $(".cnpj").inputmask({ mask: "99.999.999/9999-99"});
     $(".ip").inputmask({ mask: "999.999.999.999"});
     $(".isbn1").inputmask({ mask: "999-99-999-9999-9"});
     $(".isbn2").inputmask({ mask: "999 99 999 9999 9"});

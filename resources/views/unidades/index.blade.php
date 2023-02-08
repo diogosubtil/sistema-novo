@@ -67,7 +67,6 @@
                                     <th>Whatsapp</th>
                                     <th>Meta</th>
                                     <th>Abertura</th>
-                                    <th class="text-center">Assinatura</th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -83,8 +82,18 @@
                                         <td>{{ $unidade->whatsapp }}</td>
                                         <td>{{ $unidade->meta }}</td>
                                         <td>{{ $unidade->dataAbertura }}</td>
-                                        <td class="text-center "><img width="60%" src="{{ $unidade->assinatura }}"></td>
-                                        <td><a href="{{ route('unidades.edit', $unidade->id) }}"><i class="icofont icofont-edit"></i></a></td>
+                                        <td class="d-flex">
+                                            <a href="{{ route('unidades.edit', $unidade->id) }}"  data-toggle="tooltip" data-placement="right"  title="" data-original-title="Editar">
+                                                <i style="font-size: 20px" class="fa fa-edit m-0 text-primary"></i>
+                                            </a>
+                                            <form class="ml-2" method="POST" action="{{ $unidade->ativo == 's' ? route('unidades.disable', $unidade->id) : route('unidades.enable', $unidade->id) }}">
+                                                @csrf
+                                                @method('PUT')
+                                                    <button style="background: none;color: inherit;border: none;padding: 0;" type="submit"  data-toggle="tooltip" data-placement="right"  title="" data-original-title="{{ $unidade->ativo == 's' ? 'Desativar' : 'Ativar' }}">
+                                                        <i style="font-size: 18px" class="fa fa-power-off m-0 {{ $unidade->ativo == 's' ? 'text-danger' : 'text-success' }}"></i>
+                                                    </button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>

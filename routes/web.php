@@ -70,11 +70,11 @@ Route::middleware('auth')->group(function () {
 
     //USER
     Route::resource('/users', UsersController::class);
-    Route::put('/users/deactivate/{user}', [UsersController::class, 'deactivate'])->name('users.deactivate');
-    Route::put('/users/activate/{user}', [UsersController::class, 'activate'])->name('users.activate');
+    Route::put('/users/disable/{user}', [UsersController::class, 'disable'])->name('users.disable');
+    Route::put('/users/enable/{user}', [UsersController::class, 'enable'])->name('users.enable');
 
     //UNIDADES
     Route::resource('/unidades', UnidadesController::class);
-    Route::put('/unidades/deactivate/{user}', [UsersController::class, 'deactivate'])->name('unidades.deactivate');
-    Route::put('/unidades/activate/{user}', [UsersController::class, 'activate'])->name('unidades.activate');
+    Route::put('/unidades/disable/{unidade}', [UnidadesController::class, 'disable'])->name('unidades.disable');
+    Route::put('/unidades/enable/{unidade}', [UnidadesController::class, 'enable'])->name('unidades.enable');
 });

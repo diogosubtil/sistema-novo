@@ -19,7 +19,7 @@ class UnidadesController extends Controller
     public function index()
     {
         //OBTEM AS UNIDADE
-        $unidades = Unidade::query()->where('ativo', '=', 's')->paginate(15);
+        $unidades = Unidade::query()->paginate(15);
 
         //OBTEM ATIVOS,DESATIVADOS,ONLINE
         $ativos = 0;
@@ -77,7 +77,7 @@ class UnidadesController extends Controller
         $this->repository->add($request);
 
         //ALERT
-        Alert::success('Concluido', 'Unidade cadastrado com sucesso!');
+        Alert::success('Concluido', 'Unidade cadastrada com sucesso!');
 
         //RETORNA A VIEW
         return to_route('unidades.index');
@@ -121,33 +121,33 @@ class UnidadesController extends Controller
         $this->repository->edit($request, $unidade);
 
         //ALERT
-        Alert::success('Concluido', 'Unidade editado com sucesso!');
+        Alert::success('Concluido', 'Unidade editada com sucesso!');
 
         //RETORNA A VIEW
         return to_route('unidades.index');
     }
 
     //FUNÇÃO PARA DESATIVAR USUARIO
-    public function deactivate(Unidade $unidade)
+    public function disable(Unidade $unidade)
     {
         //DESABILITA USUARIO VIA REPOSITORY
         $this->repository->disable($unidade);
 
         //ALERT
-        Alert::success('Concluido', 'Unidade desativado com sucesso!');
+        Alert::success('Concluido', 'Unidade desativada com sucesso!');
 
         //RETORNA A VIEW
         return to_route('unidades.index');
     }
 
     //FUNÇÃO PARA ATIVAR USUARIO
-    public function activate(Unidade $unidade)
+    public function enable(Unidade $unidade)
     {
         //ATIVA USUARIO VIA REPOSITORY
-        $this->repository->active($unidade);
+        $this->repository->enable($unidade);
 
         //ALERT
-        Alert::success('Concluido', 'Unidade ativado com sucesso!');
+        Alert::success('Concluido', 'Unidade ativada com sucesso!');
 
         //RETORNA A VIEW
         return to_route('unidades.index');

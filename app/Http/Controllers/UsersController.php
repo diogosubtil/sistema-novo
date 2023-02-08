@@ -104,7 +104,7 @@ class UsersController extends Controller
     }
 
     //FUNÇÃO PARA DESATIVAR USUARIO
-    public function deactivate(User $user)
+    public function disable(User $user)
     {
         //DESABILITA USUARIO VIA REPOSITORY
         $this->repository->disable($user);
@@ -117,10 +117,10 @@ class UsersController extends Controller
     }
 
     //FUNÇÃO PARA ATIVAR USUARIO
-    public function activate(User $user)
+    public function enable(User $user)
     {
         //ATIVA USUARIO VIA REPOSITORY
-        $this->repository->active($user);
+        $this->repository->enable($user);
 
         //ALERT
         Alert::success('Concluido', 'Usuario ' . $user->name . ' ativado com sucesso!');

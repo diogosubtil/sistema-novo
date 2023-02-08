@@ -39,6 +39,7 @@ class EloquentUnidadesRepository implements UnidadesRepository
 
         //ENVIA A TRASAÇÃO (COMMIT)
         DB::commit();
+
     }
 
     //FUNÇÃO PARA DESATIVAR USUARIO
@@ -47,23 +48,27 @@ class EloquentUnidadesRepository implements UnidadesRepository
         //INICIA A TRANSAÇÃO
         DB::beginTransaction();
 
+        //OBTEM OS DADOS DO REQUEST E FAZ O UPDATE
         $unidade->ativo = 'n';
         $unidade->save();
 
         //ENVIA A TRASAÇÃO (COMMIT)
         DB::commit();
+
     }
 
     //FUNÇÃO PARA ATIVAR USUARIO
-    public function active(Unidade $unidade)
+    public function enable(Unidade $unidade)
     {
         //INICIA A TRANSAÇÃO
         DB::beginTransaction();
 
+        //OBTEM OS DADOS DO REQUEST E FAZ O UPDATE
         $unidade->ativo = 's';
         $unidade->save();
 
         //ENVIA A TRASAÇÃO (COMMIT)
         DB::commit();
+
     }
 }
