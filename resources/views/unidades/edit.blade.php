@@ -292,6 +292,9 @@
 
                             <div class="flex items-center justify-end mt-4">
                                 <button id="salvar"  type="submit" class="text-sm pl-4 pr-4 btn bg-primary b-radius-5">Salvar</button>
+                                <a href="{{ route('unidades.index') }}">
+                                    <button type="button" class="text-sm pl-4 pr-4 btn bg-danger b-radius-5">Cancelar</button>
+                                </a>
                             </div>
                         </form>
                     </div>
