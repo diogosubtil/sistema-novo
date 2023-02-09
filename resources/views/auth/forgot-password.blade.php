@@ -5,8 +5,10 @@
                 <div class="col-sm-12">
                     <form class="md-float-material form-material" method="POST" action="{{ route('password.email') }}">
                         @csrf
-                        <div style="width: 100%;height: 100%;display: flex; justify-content: center" class="text-center mb-5">
-                            <img src="{{ asset(Helper::settings()->logo) }}" alt="logo.png">
+                        <div style="width: 100%;height: 100%;display: flex" class="text-center mb-5 col-12 d-flex justify-content-center">
+                            <div>
+                                <img src="{{ asset(Helper::settings()->logo) }}" alt="logo.png">
+                            </div>
                         </div>
                         <div class="auth-box card">
                             <div class="card-block">

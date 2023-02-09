@@ -75,7 +75,7 @@
                                             <div class="input-group input-group-button">
                                                 <div class="side-menu-user-info">
                                                     <div class="side-menu-user-photo">
-                                                        <img style="width: 100%;height: 100%" id="imgLogo" src="{{ asset($setting->logo) }}" alt="your image"/>
+                                                        <img id="imgLogo" src="{{ asset($setting->logo) }}" alt="your image"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -98,7 +98,7 @@
                                             <div class="input-group input-group-button">
                                                 <div class="side-menu-user-info">
                                                     <div class="side-menu-user-photo">
-                                                        <img style="width: 100%;height: 100%" id="imgFavicon" src="{{ asset($setting->favicon) }}" alt="your image"/>
+                                                        <img id="imgFavicon" src="{{ asset($setting->favicon) }}" alt="your image"/>
                                                     </div>
                                                 </div>
                                             </div>
