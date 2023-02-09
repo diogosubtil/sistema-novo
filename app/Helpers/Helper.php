@@ -2,12 +2,21 @@
 
 namespace App\Helpers;
 
+use App\Models\Setting;
 use App\Models\Unidade;
 use App\Models\User;
 use Illuminate\Support\Facades\Cache;
 
 class Helper
 {
+
+    //FUNÇÃO PARA OBTER AS CONFIGURAÇÕES DO SISTEMA
+    public static function settings(){
+
+       return Setting::all()->first();
+
+    }
+
     //FUNÇÃO PARA OBTER NOME DA FUNÇÃO DO USUARIO
     public static function funcao($number)
     {
@@ -36,9 +45,9 @@ class Helper
     public static function online($id)
     {
         if (Cache::has('user-is-online-' . $id)){
-            return 'bg-success';
+            return 'text-success';
         } else {
-            return 'bg-danger';
+            return 'text-danger';
         }
     }
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\UnidadesController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ProfileController;
@@ -77,4 +78,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/unidades', UnidadesController::class);
     Route::put('/unidades/disable/{unidade}', [UnidadesController::class, 'disable'])->name('unidades.disable');
     Route::put('/unidades/enable/{unidade}', [UnidadesController::class, 'enable'])->name('unidades.enable');
+
+    //CONFIGURAÇÕES
+    Route::resource('/settings', SettingsController::class);
 });

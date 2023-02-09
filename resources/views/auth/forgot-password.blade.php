@@ -5,8 +5,8 @@
                 <div class="col-sm-12">
                     <form class="md-float-material form-material" method="POST" action="{{ route('password.email') }}">
                         @csrf
-                        <div class="text-center">
-                            <img src="{{ asset('/files/assets/images/logo.png') }}" alt="logo.png">
+                        <div style="width: 100%;height: 100%;display: flex; justify-content: center" class="text-center mb-5">
+                            <img src="{{ asset(Helper::settings()->logo) }}" alt="logo.png">
                         </div>
                         <div class="auth-box card">
                             <div class="card-block">
@@ -23,7 +23,7 @@
                                 @endif
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <span class="input-group-addon" id="basic-addon1">@</span>
+                                        <span class="input-group-addon bg-primary" id="basic-addon1">@</span>
                                         <input type="text" name="email" class="form-control" placeholder="E-mail" required>
                                     </div>
                                     <span class="form-bar">
@@ -44,7 +44,7 @@
                                     </div>
                                 </div>
                                 <div class="text-right f-right">
-                                    <a href="{{ route('login') }}" class="text-right f-w-600">Voltar ao Login.</a>
+                                    <a href="{{ route('login') }}" class="text-right f-w-600 text-primary">Voltar ao Login.</a>
                                 </div>
                             </div>
                         </div>

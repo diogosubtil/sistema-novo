@@ -48,7 +48,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-2 col-md-4 col-12">
+            <div class="col-md-3 col-12">
                 <div class="card feed-card">
                     <div class="card-header d-flex justify-content-between">
                         <div class="col-4">
@@ -59,23 +59,13 @@
                         @foreach ($online as $on)
                             @if(Cache::has('user-is-online-' . $on->id))
                                 <div class="row m-b-30 d-flex align-items-center">
-                                    <div class="col-3">
+                                    <div class="col-12 d-flex">
                                         @if(Cache::has('user-is-online-' . $on->id))
-                                            <div class="col-auto p-r-0">
-                                                <i class="feather icon-user bg-success feed-icon"></i>
-                                            </div>
-                                        @elseif(Cache::has('user-is-absent-' . $on->id))
-                                            <div class="col-auto p-r-0">
-                                                <i class="feather icon-user bg-yellow feed-icon"></i>
-                                            </div>
-                                        @else
-                                            <div class="col-auto p-r-0">
-                                                <i class="feather icon-user bg-danger feed-icon"></i>
+                                            <div class="col-auto p-r-0 d-flex align-items-center">
+                                                <i class="feather icon-user text-success f-20"></i>
                                             </div>
                                         @endif
-                                    </div>
-                                    <div class="col-6">
-                                        <h6 class="m-b-5">{{ $on->name }}</h6>
+                                            <h6 class="ml-3 m-b-5">{{ $on->name }}</h6>
                                     </div>
                                 </div>
                             @endif
@@ -83,7 +73,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-10 col-md-8 col-12">
+            <div class="col-md-9 col-12">
                 <div class="card">
                     <div class="card-header">
                         <h5>Filtros</h5>
@@ -93,18 +83,18 @@
                             <div class="col-sm-4 col-12">
                                 <label for="name" class="col-form-label">Nome</label>
                                 <div class="input-group">
-                                            <span class="input-group-addon" id="basic-addon1">
-                                                <i class="icofont icofont-user"></i>
-                                            </span>
+                                    <span class="input-group-addon bg-primary" id="basic-addon1">
+                                        <i class="icofont icofont-user"></i>
+                                    </span>
                                     <input id="name" name="name" type="text" class="form-control" value="{{ isset($_GET['name']) ? $_GET['name'] : null }}" placeholder="Nome">
                                 </div>
                             </div>
                             <div class="col-sm-4 col-12">
                                 <label for="funcao">Função</label>
                                 <div class="input-group">
-                                            <span class="input-group-addon" id="basic-addon1">
-                                                <i class="icofont icofont-book-mark"></i>
-                                            </span>
+                                    <span class="input-group-addon bg-primary" id="basic-addon1">
+                                        <i class="icofont icofont-book-mark"></i>
+                                    </span>
                                     <select id="funcao" name="funcao" class="form-control">
                                         <option value="">Selecione</option>
                                         <option {{ (isset($_GET['funcao']) && $_GET['funcao'] == '1' ? "selected":"") }} value="1">Master</option>
@@ -116,9 +106,9 @@
                             <div class="col-sm-4 col-12">
                                 <label for="unidade">Função</label>
                                 <div class="input-group">
-                                            <span class="input-group-addon" id="basic-addon1">
-                                                <i class="icofont icofont-book-mark"></i>
-                                            </span>
+                                    <span class="input-group-addon bg-primary" id="basic-addon1">
+                                        <i class="icofont icofont-book-mark"></i>
+                                    </span>
                                     <select id="unidade" name="unidade" class="form-control">
                                         <option value="">Selecione</option>
                                         <option {{ (isset($_GET['unidade']) && $_GET['unidade'] == '1' ? "selected":"") }} value="1">Master</option>
@@ -139,7 +129,7 @@
                             <div class="col-sm-4 col-12">
                                 <button type="submit" class="btn btn-primary b-radius-5">Filtrar</button>
                                 <a href="{{ route('users.index') }}">
-                                    <button type="button" class="btn btn-secondary b-radius-5">Limpar</button>
+                                    <button type="button" class="btn btn-round b-radius-5">Limpar</button>
                                 </a>
                             </div>
                         </form>
@@ -168,7 +158,7 @@
                                     <tr>
                                         <td class="feed-card">
                                             <div class="col-auto p-r-0">
-                                                <i class="feather icon-user {{ Helper::online($usuario->id) }} feed-icon"></i>
+                                                <i class="feather icon-user {{ Helper::online($usuario->id) }} f-20"></i>
                                             </div>
                                         </td>
                                         <td>{{ $usuario->name }}</td>
@@ -177,7 +167,7 @@
                                         <td>{{ Helper::unidade($usuario->unidade) }}</td>
                                         <td class="d-flex">
                                             <a href="{{ route('users.edit', $usuario->id) }}"  class="waves-effect waves-light" data-toggle="tooltip" data-placement="left" title="Editar">
-                                                <i style="font-size: 20px" class="fa fa-edit m-0 text-primary"></i>
+                                                <i style="font-size: 20px" class="fa fa-edit m-0 text-amazon"></i>
                                             </a>
                                             <form class="ml-2" method="POST" action="{{ $usuario->ativo == 's' ? route('users.disable', $usuario->id) : route('users.enable', $usuario->id) }}">
                                                 @csrf

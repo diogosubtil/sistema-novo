@@ -17,7 +17,7 @@
     <meta name="keywords" content="flat ui, admin Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
     <meta name="author" content="#">
     <!-- Favicon icon -->
-    <link rel="icon" href="{{ asset('/files/assets/images/favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset(Helper::settings()->favicon) }}" type="image/x-icon">
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/new-styles.css') }}">
@@ -29,6 +29,101 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('/files/assets/css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/files/assets/css/jquery.mCustomScrollbar.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/files/bower_components/switchery/css/switchery.min.css') }}">
+
+    <!-- SETTINGS -->
+    <style>
+        .header-navbar .navbar-wrapper .navbar-container .header-notification .profile-notification:after {
+            border: 10px solid {{ Helper::settings()->color_secondary }};
+            border-right-color: transparent;
+            border-bottom-color: transparent;
+        }
+        .pcoded .pcoded-navbar[active-item-theme=theme1] .pcoded-item li .pcoded-submenu li.active>a,.pcoded .pcoded-navbar[active-item-theme=theme1] .pcoded-item li .pcoded-submenu li:hover>a
+        {
+            color:{{ Helper::settings()->color_primary }}!important;
+        }
+        .pcoded .pcoded-navbar[active-item-theme=theme1] .pcoded-item li .pcoded-submenu li.active>a
+        {
+            font-weight:600
+        }
+        .pcoded .pcoded-navbar[active-item-theme=theme1] .pcoded-item li.pcoded-hasmenu:hover>a
+        {
+            color:#fff!important
+        }
+        .pcoded .pcoded-navbar[active-item-theme=theme1] .pcoded-item li:hover>a
+        {
+            color:{{ Helper::settings()->color_primary }}!important;
+        }
+        .pcoded .pcoded-navbar[active-item-theme=theme1] .pcoded-item>li.pcoded-trigger .pcoded-submenu li>a:before,.pcoded .pcoded-navbar[active-item-theme=theme1] .pcoded-item>li.active .pcoded-submenu li>a:before
+        {
+            border-left-color:{{ Helper::settings()->color_primary }}!important;
+        }
+        .pcoded .pcoded-navbar[active-item-theme=theme1] .pcoded-item>li.pcoded-trigger>a:before,.pcoded .pcoded-navbar[active-item-theme=theme1] .pcoded-item>li.active>a:before
+        {
+            border-left-color:{{ Helper::settings()->color_primary }}!important;
+        }
+        .pcoded .pcoded-navbar[active-item-theme=theme1] .searchbar-toggle
+        {
+            color:{{ Helper::settings()->color_primary }}
+        }
+        .bg-c-primary {
+            background: -webkit-gradient(linear, left top, right top, from({{ Helper::settings()->color_primary }}), to({{ Helper::settings()->color_secondary }}));
+            background: linear-gradient(to right, {{ Helper::settings()->color_primary }}, {{ Helper::settings()->color_secondary }});
+        }
+        .btn-primary
+        {
+            background: {{ Helper::settings()->color_primary }}!important;
+            border-color: {{ Helper::settings()->color_primary }}!important;
+        }
+        .btn-secondary
+        {
+            background: {{ Helper::settings()->color_secondary }}!important;
+            border-color: {{ Helper::settings()->color_secondary }}!important;
+        }
+        .text-primary
+        {
+            color: {{ Helper::settings()->color_primary }}!important;
+        }
+        .text-secondary
+        {
+            color: {{ Helper::settings()->color_secondary }}!important;
+        }
+        .bg-primary
+        {
+            background: {{ Helper::settings()->color_primary }}!important;
+        }
+        .bg-secondary
+        {
+            background: {{ Helper::settings()->color_secondary }}!important;
+        }
+        .frame
+        {
+            border-left-color:{{ Helper::settings()->color_secondary }}!important;
+            border-right-color:{{ Helper::settings()->color_secondary }}!important;
+        }
+        .ring
+        {
+            border-left-color:{{ Helper::settings()->color_primary }}!important;
+            border-right-color:{{ Helper::settings()->color_primary }}!important;
+        }
+        .pcoded .pcoded-header .navbar-logo[logo-theme=theme1]
+        {
+            background-color:{{ Helper::settings()->color_menu }}!important;
+        }
+        .checkbox-fade.fade-in-primary .cr, .checkbox-fade.zoom-primary .cr, .checkbox-zoom.fade-in-primary .cr, .checkbox-zoom.zoom-primary .cr {
+            border: 2px solid {{ Helper::settings()->color_primary }};
+        }
+        .checkbox-fade.fade-in-primary .cr .cr-icon, .checkbox-fade.zoom-primary .cr .cr-icon, .checkbox-zoom.fade-in-primary .cr .cr-icon, .checkbox-zoom.zoom-primary .cr .cr-icon {
+            color: {{ Helper::settings()->color_primary }};
+        }
+        input:focus, input:active{
+            border-color:{{ Helper::settings()->color_primary }}!important;
+        }
+        select:focus, select:active{
+            border-color:{{ Helper::settings()->color_primary }}!important;
+        }
+    </style>
+    <!-- SETTINGS -->
+
     {{ $stylesheet }}
 </head>
 
@@ -37,8 +132,8 @@
 <!-- SWEET ALERT -->
 @include('sweetalert::alert')
 <!-- SWEET ALERT -->
-<!-- Pre-loader start -->
 
+<!-- Pre-loader start -->
 <div class="theme-loader">
     <div class="ball-scale">
         <div class='contain'>
@@ -61,9 +156,12 @@
                     <a class="mobile-menu" id="mobile-collapse" href="#!">
                         <i class="feather icon-menu"></i>
                     </a>
-                    <a onclick="$('#mobile-collapse').click()" href="#!">
-                        <img class="img-fluid" src="..\files\assets\images\logo.png" alt="Theme-Logo">
-                    </a>
+                    <div style="width: 100%;height: 100%;display: flex;justify-content: center">
+                        <a  onclick="$('#mobile-collapse').click()" href="#!">
+                            <img style="width: 100%;height: 100%" class="img-fluid" src="{{ asset(Helper::settings()->logo) }}" alt="Logo Sistema">
+                        </a>
+                    </div>
+
                     <a class="mobile-options">
                         <i class="feather icon-more-horizontal"></i>
                     </a>
@@ -136,26 +234,26 @@
                                     <span>{{ Auth::user()->name }}</span>
                                     <i class="feather icon-chevron-down"></i>
                                 </div>
-                                <ul class="m-0 p-0  show-notification profile-notification dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-                                    <div class="m-0 p-0  user-widget-card bg-c-blue">
-                                        <a class="bg-c-blue m-0 p-0 text-white" href="{{ route('profile.edit') }}">
+                                <ul class="bg-c-primary m-0 p-0 show-notification profile-notification dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                                    <div class="bg-c-primary m-0 p-0 user-widget-card" style="border-radius: 5px 5px 0px 0px">
+                                        <a class="m-0 p-0 text-white" href="{{ route('profile.edit') }}">
                                             <div class="card-block">
-                                                <i id="statusUser" class="feather icon-user bg-success card1-icon"></i>
+                                                <i id="statusUser" class="feather icon-user text-success bg-white card1-icon"></i>
                                                 <h4>{{ Auth::user()->name }}</h4>
                                                 <p>{{ Helper::funcao(Auth::user()->funcao) }}</p>
                                             </div>
                                         </a>
 
                                     </div>
-                                    <a class="bg-c-blue m-0 p-0 text-white" id="profileButton" href="{{ route('profile.edit') }}">
-                                        <li class="bg-c-blue">
+                                    <a class="m-0 p-0 text-white" id="profileButton" href="{{ route('profile.edit') }}">
+                                        <li class="bg-c-primary">
                                             <i class="feather icon-user"></i> Perfil
                                         </li>
                                     </a>
-                                    <form class="p-0 m-0" method="POST" action="{{ route('logout') }}">
+                                    <form class="p-0 m-0" method="POST" action="{{ route('logout') }}" >
                                         @csrf
                                         <a class="p-0 m-0 text-white" id="logoutButton" href="#" onclick="event.preventDefault();this.closest('form').submit();">
-                                            <li class="bg-c-blue">
+                                            <li class="bg-c-primary" style="border-radius: 0px 0px 5px 5px">
                                                 <i class="feather icon-log-out"></i>
                                                 Sair
                                             </li>
@@ -323,6 +421,19 @@
                                     <li id="{{ route('unidades.create') }}">
                                         <a href="{{ route('unidades.create') }}">
                                             <span class="pcoded-mtext">Cadastro</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="pcoded-hasmenu">
+                                <a href="javascript:void(0)">
+                                    <span class="pcoded-micon"><i class="icofont icofont-gear"></i></span>
+                                    <span class="pcoded-mtext">Configurações</span>
+                                </a>
+                                <ul class="pcoded-submenu">
+                                    <li id="{{ route('settings.edit', 1) }}">
+                                        <a href="{{ route('settings.edit', 1) }}">
+                                            <span class="pcoded-mtext">Painel</span>
                                         </a>
                                     </li>
                                 </ul>

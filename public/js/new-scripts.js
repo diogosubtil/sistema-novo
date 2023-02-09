@@ -1,7 +1,7 @@
 //FUNÇÃO PARA ALTERAR STATUS ONLINE NO PERFIL
 setTimeout(function (){
-    document.getElementById('statusUser').classList.remove('bg-success')
-    document.getElementById('statusUser').classList.add('bg-danger')
+    document.getElementById('statusUser').classList.remove('text-success')
+    document.getElementById('statusUser').classList.add('text-danger')
 }, 15*60000)
 
 //FUNÇÃO PARA MOSTRAR MENU ATIVO

@@ -16,7 +16,7 @@
         <meta name="keywords" content="flat ui, admin Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
         <meta name="author" content="#">
         <!-- Favicon icon -->
-        <link rel="icon" href="{{ asset('/files/assets/images/favicon.ico') }}" type="image/x-icon">
+        <link rel="icon" href="{{ asset(Helper::settings()->favicon) }}" type="image/x-icon">
         <!-- Google font-->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="{{ asset('/css/new-styles.css') }}">
@@ -28,8 +28,52 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('/files/assets/css/jquery.mCustomScrollbar.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('/files/assets/scss/partials/menu/_pcmenu.htm') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('/files/bower_components/switchery/css/switchery.min.css') }}">
+
+        <!-- SETTINGS -->
+        <style>
+            .btn-primary
+            {
+                background: {{ Helper::settings()->color_primary }}!important;
+                border-color: {{ Helper::settings()->color_primary }}!important;
+            }
+            .btn-secondary
+            {
+                background: {{ Helper::settings()->color_secondary }}!important;
+                border-color: {{ Helper::settings()->color_secondary }}!important;
+            }
+            .text-primary
+            {
+                color: {{ Helper::settings()->color_primary }}!important;
+            }
+            .text-secondary
+            {
+                color: {{ Helper::settings()->color_secondary }}!important;
+            }
+            .bg-primary
+            {
+                background: {{ Helper::settings()->color_primary }}!important;
+            }
+            .bg-secondary
+            {
+                background: {{ Helper::settings()->color_secondary }}!important;
+            }
+            .checkbox-fade.fade-in-primary .cr, .checkbox-fade.zoom-primary .cr, .checkbox-zoom.fade-in-primary .cr, .checkbox-zoom.zoom-primary .cr {
+                border: 2px solid {{ Helper::settings()->color_primary }};
+            }
+            .checkbox-fade.fade-in-primary .cr .cr-icon, .checkbox-fade.zoom-primary .cr .cr-icon, .checkbox-zoom.fade-in-primary .cr .cr-icon, .checkbox-zoom.zoom-primary .cr .cr-icon {
+                 color: {{ Helper::settings()->color_primary }};
+            }
+            input:focus, input:active{
+                border-color:{{ Helper::settings()->color_primary }}!important;
+            }
+            select:focus, select:active{
+                border-color:{{ Helper::settings()->color_primary }}!important;
+            }
+        </style>
+        <!-- SETTINGS -->
+
     </head>
-    <body class="bg-primary" _c_t_common="1" cz-shortcut-listen="true">
+    <body style="background: #404e67" _c_t_common="1" cz-shortcut-listen="true">
         {{ $slot }}
     </body>
 </html>

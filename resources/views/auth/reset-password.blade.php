@@ -7,16 +7,15 @@
                         @csrf
                         <!-- Password Reset Token -->
                         <input type="hidden" name="token" value="{{ $request->route('token') }}">
-
-                        <div class="text-center">
-                            <img src="{{ asset('img/logo.png') }}" alt="logo.png">
+                        <div style="width: 100%;height: 100%;display: flex; justify-content: center" class="text-center mb-5">
+                            <img src="{{ asset(Helper::settings()->logo) }}" alt="logo.png">
                         </div>
                         <div class="auth-box card">
                             <div class="card-block">
                                 <div class="form-group">
                                     <label class="text-inverse">E-mail</label>
                                     <div class="input-group">
-                                        <span class="input-group-addon" id="basic-addon1">@</span>
+                                        <span class="input-group-addon bg-primary" id="basic-addon1">@</span>
                                         <input type="text" name="email" class="form-control" value="{{ old('email', $request->email) }}">
                                     </div>
                                     <span class="form-bar">
@@ -32,7 +31,7 @@
                                 <div class="form-group form-primary">
                                     <label class="text-inverse">Nova Senha</label>
                                     <div class="input-group">
-                                        <span class="input-group-addon" id="basic-addon1">
+                                        <span class="input-group-addon bg-primary" id="basic-addon1">
                                             <i class="icofont icofont-lock"></i>
                                         </span>
                                         <input type="password" name="password" class="form-control" value="{{ old('password') }}" placeholder="Senha">
@@ -50,7 +49,7 @@
                                 <div class="form-group form-primary">
                                     <label class="text-inverse">Confirmação de senha</label>
                                     <div class="input-group">
-                                        <span class="input-group-addon" id="basic-addon1">
+                                        <span class="input-group-addon bg-primary" id="basic-addon1">
                                             <i class="icofont icofont-lock"></i>
                                         </span>
                                         <input type="password" name="password_confirmation" value="{{ old('password_confirmation') }}" class="form-control" placeholder="Senha">
