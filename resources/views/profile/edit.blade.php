@@ -56,7 +56,7 @@
                         <div>
                             <label for="name">Nome</label>
                             <div class="input-group">
-                                <span class="input-group-addon">
+                                <span class="input-group-addon bg-primary">
                                     <i class="icofont icofont-user"></i>
                                 </span>
                                 <input id="name" name="name" type="text" class="form-control" value="{{ old('name', $user->name) }}" required autocomplete="name" >
@@ -76,7 +76,7 @@
                             <label for="email">Email</label>
                             @if(Auth::user()->email_verified_at == null) <b class="text-sm text-danger">"E-mail não verificado"</b>@endif
                             <div class="input-group">
-                                <span class="input-group-addon">
+                                <span class="input-group-addon bg-primary">
                                     @
                                 </span>
                                 <input id="email" name="email" type="email" class="form-control" value="{{ old('email', $user->email) }}" required autocomplete="email" >
@@ -93,7 +93,7 @@
                         </div>
 
                         <div class="flex items-center gap-4">
-                            <button type="submit" class="text-sm pl-4 pr-4 btn bg-primary b-radius-5">SALVAR</button>
+                            <button type="submit" class="text-sm pl-4 pr-4 btn bg-primary b-radius-5">Salvar</button>
                         </div>
                     </form>
                 </section>
@@ -119,7 +119,7 @@
                         <div>
                             <label for="current_password">Senha Atual</label>
                             <div class="input-group ">
-                                <span class="input-group-addon">
+                                <span class="input-group-addon bg-primary">
                                     <i class="icofont icofont-lock"></i>
                                 </span>
                                 <input id="current_password" name="current_password" type="password" class="form-control" required>
@@ -138,7 +138,7 @@
                         <div>
                             <label for="password">Nova Senha</label>
                             <div class="input-group">
-                                <span class="input-group-addon">
+                                <span class="input-group-addon bg-primary">
                                     <i class="icofont icofont-lock"></i>
                                 </span>
                                 <input id="password" name="password" type="password" class="form-control" required>
@@ -157,7 +157,7 @@
                         <div>
                             <label for="password_confirmation">Confirmação de senha</label>
                             <div class="input-group">
-                                <span class="input-group-addon">
+                                <span class="input-group-addon bg-primary">
                                     <i class="icofont icofont-lock"></i>
                                 </span>
                                 <input id="password_confirmation" name="password_confirmation" type="password" class="form-control" required>
@@ -174,7 +174,7 @@
                         </div>
 
                         <div class="flex items-center gap-4">
-                            <button type="submit" class="text-sm pl-4 pr-4 btn bg-primary b-radius-5">SALVAR</button>
+                            <button type="submit" class="text-sm pl-4 pr-4 btn bg-primary b-radius-5">Salvar</button>
                         </div>
                     </form>
                 </section>

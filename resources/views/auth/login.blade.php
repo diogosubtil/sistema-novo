@@ -4,8 +4,8 @@
             <div class="row">
                 <div class="col-sm-12">
                     <form class="md-float-material form-material" method="POST" action="{{ route('login') }}">
-                        <div style="width: 100%;height: 100%;display: flex" class="text-center mb-5 col-12 d-flex justify-content-center">
-                            <div>
+                        <div style="width: 100%;height: 100%;display: flex" class="text-center col-12 d-flex justify-content-center">
+                            <div class="col-4">
                                 <img src="{{ asset(Helper::settings()->logo) }}" alt="logo.png">
                             </div>
                         </div>
