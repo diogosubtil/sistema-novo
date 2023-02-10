@@ -66,6 +66,8 @@
                                                     <option {{ (old("funcao") == '1' ? "selected":"") }} value="1">Master</option>
                                                     <option {{ (old("funcao") == '2' ? "selected":"") }} value="2">Gerente</option>
                                                     <option {{ (old("funcao") == '3' ? "selected":"") }} value="3">Aplicadora</option>
+                                                    <option {{ (old("funcao") == '4' ? "selected":"") }} value="4">Recepção/Vendedor</option>
+                                                    <option {{ (old("funcao") == '10' ? "selected":"") }} value="10">Cliente</option>
                                                 </select>
                                             </div>
                                             <span class="form-bar">

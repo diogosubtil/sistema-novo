@@ -67,6 +67,8 @@
                                                     <option {{ ($user->funcao == '1' ? "selected":"") }} value="1">Master</option>
                                                     <option {{ ($user->funcao == '2' ? "selected":"") }} value="2">Gerente</option>
                                                     <option {{ ($user->funcao == '3' ? "selected":"") }} value="3">Aplicadora</option>
+                                                    <option {{ ($user->funcao == '4' ? "selected":"") }} value="4">Recepção/Vendedor</option>
+                                                    <option {{ ($user->funcao == '10' ? "selected":"") }} value="10">Cliente</option>
                                                 </select>
                                             </div>
                                             <span class="form-bar">

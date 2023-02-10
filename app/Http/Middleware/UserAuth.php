@@ -30,10 +30,9 @@ class UserAuth
             }
 
             //USUARIO ONLINE
-            $expiresAt = now()->addMinutes(15);
             if (!Cache::has('user-is-online-' . Auth::user()->id)){
+                $expiresAt = now()->addMinutes(15);
                 Cache::put('user-is-online-' . Auth::user()->id, true, $expiresAt);
-                User::where('id', Auth::user()->id)->update(['last_seen' => now()]);
             }
         }
 

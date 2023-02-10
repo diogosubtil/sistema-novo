@@ -28,7 +28,6 @@ class User extends Authenticatable
         'telefone',
         'unidade',
         'treinamento',
-        'last_seen',
     ];
 
     //Filter Eloquent
@@ -52,4 +51,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    //FUNÇÃO PARA ORDENAR A LISTAGEM
+    protected static function booted()
+    {
+        self::addGlobalScope('ordered', function (Builder $queryBuilder){
+            $queryBuilder->orderBy('name', 'asc');
+        });
+    }
 }

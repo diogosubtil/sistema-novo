@@ -40,7 +40,6 @@ class AuthenticatedSessionController extends Controller
     public function destroy(Request $request): RedirectResponse
     {
         Cache::delete('user-is-online-' . Auth::user()->id);
-        Cache::delete('user-is-absent-' . Auth::user()->id);
 
         Auth::guard('web')->logout();
 

@@ -36,9 +36,6 @@ class UsersController extends Controller
             if ($users->ativo == 'n'){
                 $desativados++;
             }
-            if ($users->last_seen != null){
-                $online[] = $users;
-            }
         }
 
         //RETORNA A VIEW COM OS DADOS
@@ -46,8 +43,7 @@ class UsersController extends Controller
             ->with('usuarios', $usuarios)
             ->with('total', $total)
             ->with('ativos', $ativos)
-            ->with('desativados', $desativados)
-            ->with('online', $online);
+            ->with('desativados', $desativados);
     }
 
     //FUNÇÃO PARA EXIBIR A VIEW (CADASTRAR)

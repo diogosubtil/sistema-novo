@@ -56,16 +56,14 @@
                         </div>
                     </div>
                     <div class="card-block">
-                        @foreach ($online as $on)
+                        @foreach ($total as $on)
                             @if(Cache::has('user-is-online-' . $on->id))
                                 <div class="row m-b-30 d-flex align-items-center">
                                     <div class="col-12 d-flex">
-                                        @if(Cache::has('user-is-online-' . $on->id))
-                                            <div class="col-auto p-r-0 d-flex align-items-center">
-                                                <i class="feather icon-user text-success f-20"></i>
-                                            </div>
-                                        @endif
-                                            <h6 class="ml-3 m-b-5">{{ $on->name }}</h6>
+                                        <div class="col-auto p-r-0 d-flex align-items-center">
+                                            <i class="feather icon-user text-success f-20"></i>
+                                        </div>
+                                        <h6 class="ml-3 m-b-5">{{ $on->name }}</h6>
                                     </div>
                                 </div>
                             @endif

@@ -386,6 +386,9 @@
                                 </a>
                             </li>
                         </ul>
+
+                        <!-- FUNÇÃO MASTER PARA ACESSAR PAINEL -->
+                        @if(Helper::requireFuncao(1))
                         <div class="pcoded-navigatio-lavel">Administração</div>
                         <ul class="pcoded-item pcoded-left-item">
                             <li class="pcoded-hasmenu">
@@ -438,6 +441,9 @@
                                 </ul>
                             </li>
                         </ul>
+                        @endif
+                        <!-- FUNÇÃO MASTER PARA ACESSAR PAINEL -->
+
                     </div>
                 </nav>
                 <div class="pcoded-content">

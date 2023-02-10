@@ -5,6 +5,7 @@ namespace App\Helpers;
 use App\Models\Setting;
 use App\Models\Unidade;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
 class Helper
@@ -15,6 +16,18 @@ class Helper
 
        return Setting::all()->first();
 
+    }
+
+    //FUNÇÃO PARA OBTEM NIVEL DE ACESSO
+    public static function requireFuncao($funcao)
+    {
+        $funcoesUsuario = explode(',', Auth::user()->funcao);
+        $funcoes        = explode(',', $funcao);
+        foreach ($funcoes as $funcao) {
+            if (in_array($funcao, $funcoesUsuario)) {
+                return true;
+            }
+        }
     }
 
     //FUNÇÃO PARA OBTER NOME DA FUNÇÃO DO USUARIO
@@ -28,7 +41,13 @@ class Helper
                 echo 'Gerente';
                 break;
             case 3:
-                echo 'Aplicadora';
+                echo 'Aplicador(a)';
+                break;
+            case 4:
+                echo 'Recepção/Vendedor';
+                break;
+           case 10:
+                echo 'Cliente';
                 break;
         }
     }
