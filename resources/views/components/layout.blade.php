@@ -454,7 +454,7 @@
             <div class="pcoded-wrapper">
                 <nav class="pcoded-navbar">
                     <div class="pcoded-inner-navbar main-menu">
-                        <div class="pcoded-navigatio-lavel">Dashboards</div>
+                        <div class="pcoded-navigatio-lavel">Dashboards </div>
                         <ul class="pcoded-item pcoded-left-item">
                             <li id="{{ route('dashboard') }}">
                                 <a href="{{ route('dashboard') }}">
