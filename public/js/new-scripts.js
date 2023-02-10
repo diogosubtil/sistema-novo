@@ -6,11 +6,13 @@ setTimeout(function (){
 
 //FUNÇÃO PARA MOSTRAR MENU ATIVO
 window.onload = function activeMenu(){
-    let li = document.getElementById(window.location.href) // PAGINA
-    let ul = li.parentElement.parentElement // MENU
-    let ull = ul.parentElement.parentElement // SUB MENU
+    let link = document.getElementById(window.location.href) // PAGINA
+    let menu = link.parentElement.parentElement // MENU
+    let submenu = menu.parentElement.parentElement // SUB MENU
+    let submenu1 = submenu.parentElement.parentElement // SUB MENU
 
-    li.classList.add('active')
-    ul.classList.add('pcoded-trigger')
-    ull.classList.add('pcoded-trigger')
+    link.classList.add('active')
+    menu.classList.add('pcoded-trigger')
+    submenu.classList.add('pcoded-trigger')
+    submenu1.classList.add('pcoded-trigger')
 }

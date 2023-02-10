@@ -60,7 +60,9 @@
         .pcoded .pcoded-navbar[navbar-theme=theme1] .pcoded-item .pcoded-hasmenu .pcoded-submenu li>a {
             background-color: {{ Helper::settings()->color_menu }}!important;
         }
-
+        .pcoded .pcoded-navbar[navbar-theme=theme1] .pcoded-item .pcoded-hasmenu .pcoded-submenu li {
+            background-color: {{ Helper::settings()->color_menu }}!important;
+        }
         .pcoded[theme-layout=vertical] .pcoded-navbar .pcoded-item[item-border=true][item-border-style=none] li>a:hover {
             background: none!important;
         }
@@ -108,8 +110,8 @@
             color:{{ Helper::settings()->color_menu_letter_active }}!important;
         }
         .pcoded .pcoded-navbar[navbar-theme=theme1] .pcoded-item .pcoded-hasmenu .pcoded-submenu li.active>a {
-            color: {{ Helper::settings()->color_menu_letter_active }}!important;
-        }
+             color: {{ Helper::settings()->color_menu_letter_active }}!important;
+         }
         .pcoded .pcoded-navbar[active-item-theme=theme1] .pcoded-item li .pcoded-submenu li.active>a,.pcoded .pcoded-navbar[active-item-theme=theme1] .pcoded-item li .pcoded-submenu li>a
         {
             color:{{ Helper::settings()->color_menu_letter }}!important;
@@ -510,7 +512,7 @@
                                 <ul class="pcoded-submenu">
                                     <li id="{{ route('settings.edit', 1) }}">
                                         <a href="{{ route('settings.edit', 1) }}">
-                                            <span class="pcoded-mtext">Painel</span>
+                                            <span class="pcoded-mtext">Tema</span>
                                         </a>
                                     </li>
                                 </ul>
