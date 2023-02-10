@@ -16,6 +16,11 @@ class Setting extends Model
         'name',
         'color_primary',
         'color_secondary',
+        'color_menu',
+        'color_menu_letter',
+        'color_menu_letter_active',
+        'color_menu_tittle',
+        'color_menu_icon',
         'logo',
         'favicon',
     ];

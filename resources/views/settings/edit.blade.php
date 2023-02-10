@@ -19,12 +19,12 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="row">
-                                        <div class="col-12 mt-2">
+                                        <div class="col-12 mt-2 mb-3">
                                             Configurações do Sistema
                                         </div>
-                                        <div class="col-4">
+                                        <div class="col-xl-4 col-12">
                                             <div class="row">
-                                                <div class="col-12 mt-3">
+                                                <div class="col-12">
                                                     <label for="name" class="col-form-label">Nome da Empresa</label>
                                                     <div class="input-group">
                                                         <span class="input-group-addon bg-primary" id="basic-addon1">
@@ -42,7 +42,7 @@
                                                         @endif
                                                     </span>
                                                 </div>
-                                                <div class="col-12">
+                                                <div class="col-xl-12 col-md-6 col-12">
                                                     <label for="color_primary" class="col-form-label">Cor Primaria</label>
                                                     <input type="text" id="hue-demo" name="color_primary" class="form-control demo" data-control="hue" value="{{ $setting->color_primary }}">
                                                     <span class="form-bar">
@@ -55,7 +55,7 @@
                                                         @endif
                                                     </span>
                                                 </div>
-                                                <div class="col-12">
+                                                <div class="col-xl-12 col-md-6 col-12">
                                                     <label for="color_secondary" class="col-form-label">Cor Secundario</label>
                                                     <input type="text" id="hue-demo" name="color_secondary" class="form-control demo" data-control="hue" value="{{ $setting->color_secondary }}">
                                                     <span class="form-bar">
@@ -70,7 +70,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-xl-4 col-12 mt-3">
+                                        <div class="col-xl-4 col-md-6 col-12">
                                             <label for="logo" class="col-form-label">Logo</label>
                                             <div class="input-group input-group-button">
                                                 <div class="side-menu-user-info">
@@ -93,7 +93,7 @@
                                                 @endif
                                             </span>
                                         </div>
-                                        <div class="col-xl-4 col-12 mt-3">
+                                        <div class="col-xl-4 col-md-6 col-6">
                                             <label for="favicon" class="col-form-label">Favicon</label>
                                             <div class="input-group input-group-button">
                                                 <div class="side-menu-user-info">
@@ -110,6 +110,81 @@
                                                 @if ($errors->get('favicon'))
                                                     <ul class="text-danger">
                                                         @foreach ((array) $errors->get('favicon') as $message)
+                                                            <li>{{ $message }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <hr>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-12 mb-3">
+                                            Menu Lateral
+                                        </div>
+                                        <div class="col-xl-4 col-md-6 col-12">
+                                            <label for="color_menu" class="col-form-label">Cor de fundo</label>
+                                            <input type="text" id="hue-demo" name="color_menu" class="form-control demo" data-control="hue" value="{{ $setting->color_menu }}">
+                                            <span class="form-bar">
+                                                @if ($errors->get('color_menu'))
+                                                    <ul class="text-danger">
+                                                        @foreach ((array) $errors->get('color_menu') as $message)
+                                                            <li>{{ $message }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                @endif
+                                            </span>
+                                        </div>
+                                        <div class="col-xl-4 col-md-6 col-12">
+                                            <label for="color_menu_letter" class="col-form-label">Cor das Letras</label>
+                                            <input type="text" id="hue-demo" name="color_menu_letter" class="form-control demo" data-control="hue" value="{{ $setting->color_menu_letter }}">
+                                            <span class="form-bar">
+                                                @if ($errors->get('color_menu_letter'))
+                                                    <ul class="text-danger">
+                                                        @foreach ((array) $errors->get('color_menu_letter') as $message)
+                                                            <li>{{ $message }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                @endif
+                                            </span>
+                                        </div>
+                                        <div class="col-xl-4 col-md-6 col-12">
+                                            <label for="color_menu_letter_active" class="col-form-label">Cor das Letras (Ativas)</label>
+                                            <input type="text" id="hue-demo" name="color_menu_letter_active" class="form-control demo" data-control="hue" value="{{ $setting->color_menu_letter_active }}">
+                                            <span class="form-bar">
+                                                @if ($errors->get('color_menu_letter_active'))
+                                                    <ul class="text-danger">
+                                                        @foreach ((array) $errors->get('color_menu_letter_active') as $message)
+                                                            <li>{{ $message }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                @endif
+                                            </span>
+                                        </div>
+                                        <div class="col-xl-4 col-md-6 col-12">
+                                            <label for="color_menu_tittle" class="col-form-label">Cor dos Titulos</label>
+                                            <input type="text" id="hue-demo" name="color_menu_tittle" class="form-control demo" data-control="hue" value="{{ $setting->color_menu_tittle }}">
+                                            <span class="form-bar">
+                                                @if ($errors->get('color_menu_tittle'))
+                                                    <ul class="text-danger">
+                                                        @foreach ((array) $errors->get('color_menu_tittle') as $message)
+                                                            <li>{{ $message }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                @endif
+                                            </span>
+                                        </div>
+                                        <div class="col-xl-4 col-md-6 col-12">
+                                            <label for="color_menu_icon" class="col-form-label">Cor dos Icones</label>
+                                            <input type="text" id="hue-demo" name="color_menu_icon" class="form-control demo" data-control="hue" value="{{ $setting->color_menu_icon }}">
+                                            <span class="form-bar">
+                                                @if ($errors->get('color_menu_icon'))
+                                                    <ul class="text-danger">
+                                                        @foreach ((array) $errors->get('color_menu_icon') as $message)
                                                             <li>{{ $message }}</li>
                                                         @endforeach
                                                     </ul>

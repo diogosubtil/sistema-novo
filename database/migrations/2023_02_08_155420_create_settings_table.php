@@ -19,6 +19,11 @@ return new class extends Migration
             $table->string('name');
             $table->string('color_primary');
             $table->string('color_secondary');
+            $table->string('color_menu');
+            $table->string('color_menu_letter');
+            $table->string('color_menu_letter_active');
+            $table->string('color_menu_tittle');
+            $table->string('color_menu_icon');
             $table->string('logo');
             $table->string('favicon');
             $table->timestamps();
@@ -29,6 +34,11 @@ return new class extends Migration
                 'name' => 'Sem Nome',
                 'color_primary' => '#01a9ac',
                 'color_secondary' => '#01dbdf',
+                'color_menu' => '#404e67',
+                'color_menu_letter' => '#FFFFFF',
+                'color_menu_letter_active' => '#01a9ac',
+                'color_menu_tittle' => '#FFFFFF',
+                'color_menu_icon' => '#FFFFFF',
                 'logo' => '/files/assets/images/logo.png',
                 'favicon' => '/files/assets/images/favicon.ico',
                 'created_at' => date('Y-m-d H:i:s'),

@@ -32,39 +32,112 @@
 
     <!-- SETTINGS -->
     <style>
+        /* DROPDOWN MENU USUARIO */
         .header-navbar .navbar-wrapper .navbar-container .header-notification .profile-notification:after {
             border: 10px solid {{ Helper::settings()->color_secondary }};
             border-right-color: transparent;
             border-bottom-color: transparent;
         }
+        /* DROPDOWN MENU USUARIO */
+
+        /* MENU BACKGROUD */
+        .pcoded .pcoded-header .navbar-logo[logo-theme=theme1] {
+            background-color: {{ Helper::settings()->color_menu }}!important;
+        }
+        .pcoded .pcoded-navbar[navbar-theme=theme1] .main-menu {
+            background-color: {{ Helper::settings()->color_menu }}!important;
+        }
+        .pcoded .pcoded-navbar[navbar-theme=theme1] {
+            background: {{ Helper::settings()->color_menu }}!important;
+        }
+        .pcoded .pcoded-navbar[navbar-theme=theme1] .pcoded-item>li.pcoded-trigger>a {
+            background: {{ Helper::settings()->color_menu }}!important;
+        }
+
+        .pcoded .pcoded-navbar[navbar-theme=theme1] .pcoded-item .pcoded-hasmenu .pcoded-submenu li.active>a {
+            background-color: {{ Helper::settings()->color_menu }}!important;
+        }
+        .pcoded .pcoded-navbar[navbar-theme=theme1] .pcoded-item .pcoded-hasmenu .pcoded-submenu li>a {
+            background-color: {{ Helper::settings()->color_menu }}!important;
+        }
+
+        .pcoded[theme-layout=vertical] .pcoded-navbar .pcoded-item[item-border=true][item-border-style=none] li>a:hover {
+            background: none!important;
+        }
+
+        .pcoded .pcoded-navbar[navbar-theme=theme1] .pcoded-item li.pcoded-hasmenu .pcoded-submenu li>a:hover {
+            background: {{ Helper::settings()->color_menu }}!important;
+        }
+        .pcoded .pcoded-navbar[navbar-theme=theme1] .pcoded-item>li.active>a {
+            background: {{ Helper::settings()->color_menu }}!important;
+        }
+        .pcoded .pcoded-navbar[active-item-theme=theme1] .pcoded-item>li.pcoded-trigger>a:before,.pcoded .pcoded-navbar[active-item-theme=theme1] .pcoded-item>li>a:before
+        {
+            border-left-color:{{ Helper::settings()->color_menu }}!important;
+        }
+        /* MENU BACKGROUD */
+
+
+        /* MENU ICON */
+        .pcoded .pcoded-navbar[navbar-theme=theme1] .pcoded-item>li>a>span>i {
+            color: {{ Helper::settings()->color_menu_icon }}!important;
+        }
+        /* MENU ICON */
+
+        /* MENU TITTLE */
+        .pcoded .pcoded-navbar .pcoded-navigatio-lavel[menu-title-theme=theme5] {
+            color: {{ Helper::settings()->color_menu_tittle }}!important;
+        }
+        /* MENU TITTLE */
+
+        /* MENU LETRAS */
         .pcoded .pcoded-navbar[active-item-theme=theme1] .pcoded-item li .pcoded-submenu li.active>a,.pcoded .pcoded-navbar[active-item-theme=theme1] .pcoded-item li .pcoded-submenu li:hover>a
         {
-            color:{{ Helper::settings()->color_primary }}!important;
-        }
-        .pcoded .pcoded-navbar[active-item-theme=theme1] .pcoded-item li .pcoded-submenu li.active>a
-        {
-            font-weight:600
+            color:{{ Helper::settings()->color_menu_letter_active }}!important;
         }
         .pcoded .pcoded-navbar[active-item-theme=theme1] .pcoded-item li.pcoded-hasmenu:hover>a
         {
-            color:#fff!important
+            color:{{ Helper::settings()->color_menu_letter_active }}!important
         }
         .pcoded .pcoded-navbar[active-item-theme=theme1] .pcoded-item li:hover>a
         {
-            color:{{ Helper::settings()->color_primary }}!important;
-        }
-        .pcoded .pcoded-navbar[active-item-theme=theme1] .pcoded-item>li.pcoded-trigger .pcoded-submenu li>a:before,.pcoded .pcoded-navbar[active-item-theme=theme1] .pcoded-item>li.active .pcoded-submenu li>a:before
-        {
-            border-left-color:{{ Helper::settings()->color_primary }}!important;
-        }
-        .pcoded .pcoded-navbar[active-item-theme=theme1] .pcoded-item>li.pcoded-trigger>a:before,.pcoded .pcoded-navbar[active-item-theme=theme1] .pcoded-item>li.active>a:before
-        {
-            border-left-color:{{ Helper::settings()->color_primary }}!important;
+            color:{{ Helper::settings()->color_menu_letter_active }}!important;
         }
         .pcoded .pcoded-navbar[active-item-theme=theme1] .searchbar-toggle
         {
-            color:{{ Helper::settings()->color_primary }}
+            color:{{ Helper::settings()->color_menu_letter_active }}!important;
         }
+        .pcoded .pcoded-navbar[navbar-theme=theme1] .pcoded-item .pcoded-hasmenu .pcoded-submenu li.active>a {
+            color: {{ Helper::settings()->color_menu_letter_active }}!important;
+        }
+        .pcoded .pcoded-navbar[active-item-theme=theme1] .pcoded-item li .pcoded-submenu li.active>a,.pcoded .pcoded-navbar[active-item-theme=theme1] .pcoded-item li .pcoded-submenu li>a
+        {
+            color:{{ Helper::settings()->color_menu_letter }}!important;
+        }
+
+        .pcoded .pcoded-navbar[active-item-theme=theme1] .pcoded-item li.pcoded-hasmenu>a
+        {
+            color:{{ Helper::settings()->color_menu_letter }}!important;
+        }
+        .pcoded .pcoded-navbar[active-item-theme=theme1] .pcoded-item li>a
+        {
+            color:{{ Helper::settings()->color_menu_letter }}!important;
+        }
+        /* MENU LETRAS */
+
+        /* MENU BORDA */
+        .pcoded .pcoded-navbar[active-item-theme=theme1] .pcoded-item>li.pcoded-trigger .pcoded-submenu li>a:before,.pcoded .pcoded-navbar[active-item-theme=theme1] .pcoded-item>li.active .pcoded-submenu li>a:before
+        {
+            border-left-color:{{ Helper::settings()->color_menu_letter_active }}!important;
+        }
+        .pcoded .pcoded-navbar[active-item-theme=theme1] .pcoded-item>li.pcoded-trigger>a:before,.pcoded .pcoded-navbar[active-item-theme=theme1] .pcoded-item>li.active>a:before
+        {
+            border-left-color:{{ Helper::settings()->color_menu_letter_active }}!important;
+        }
+        /* MENU BORDA */
+
+
+        /* BACKGROUNS TEXT BUTTONS INPUTS */
         .bg-c-primary {
             background: -webkit-gradient(linear, left top, right top, from({{ Helper::settings()->color_primary }}), to({{ Helper::settings()->color_secondary }}));
             background: linear-gradient(to right, {{ Helper::settings()->color_primary }}, {{ Helper::settings()->color_secondary }});
@@ -121,6 +194,8 @@
         select:focus, select:active{
             border-color:{{ Helper::settings()->color_primary }}!important;
         }
+        /* BACKGROUNS TEXT BUTTONS INPUTS */
+
     </style>
     <!-- SETTINGS -->
 
