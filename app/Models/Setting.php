@@ -21,6 +21,7 @@ class Setting extends Model
         'color_menu_letter_active',
         'color_menu_tittle',
         'color_menu_icon',
+        'color_login',
         'logo',
         'favicon',
     ];

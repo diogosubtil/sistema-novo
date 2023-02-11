@@ -23,7 +23,7 @@ class EloquentSettingsRepository implements SettingsRepository
 
         //VERIFICA SE EXISTE UPLOAD DA LOGO
         if ($request->logo){
-            $logoName = time().'.'.$request->logo->extension();
+            $logoName = 'l'.time().'.'.$request->logo->extension();
             $request->logo->move(public_path('files/assets/images'), $logoName);
             $data['logo'] = $directory . $logoName;
 
@@ -31,7 +31,7 @@ class EloquentSettingsRepository implements SettingsRepository
 
         //VERIFICA SE EXISTE UPLOAD DO FAVICON
         if ($request->favicon){
-            $faviconName = time().'.'.$request->favicon->extension();
+            $faviconName = 'f'.time().'.'.$request->favicon->extension();
             $request->favicon->move(public_path('files/assets/images'), $faviconName);
             $data['favicon'] = $directory . $faviconName;
         }

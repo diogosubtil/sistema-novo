@@ -73,7 +73,7 @@
         <!-- SETTINGS -->
 
     </head>
-    <body style="background: #404e67" _c_t_common="1" cz-shortcut-listen="true">
+    <body style="background: {{ Helper::settings()->color_login }}!important;" _c_t_common="1" cz-shortcut-listen="true">
         {{ $slot }}
     </body>
 </html>
