@@ -20,7 +20,7 @@
                                 <div class="col-12">
                                     <div class="row">
                                         <div class="col-12 mt-2 mb-3">
-                                            Configurações do Sistema
+                                            Configurações do Tema
                                         </div>
                                         <div class="col-xl-4 col-12">
                                             <div class="row">
@@ -72,7 +72,7 @@
                                         </div>
                                         <div class="col-xl-4 col-md-6 col-12">
                                             <label for="logo" class="col-form-label">Logo</label>
-                                            <div class="input-group input-group-button">
+                                            <div class="input-group input-group-button d-flex justify-content-center align-content-center">
                                                 <div class="side-menu-user-info">
                                                     <div class="side-menu-user-photo">
                                                         <img id="imgLogo" src="{{ asset($setting->logo) }}" alt="your image"/>
@@ -93,9 +93,9 @@
                                                 @endif
                                             </span>
                                         </div>
-                                        <div class="col-xl-4 col-md-6 col-6">
+                                        <div class="col-xl-4 col-md-6 col-12">
                                             <label for="favicon" class="col-form-label">Favicon</label>
-                                            <div class="input-group input-group-button">
+                                            <div class="input-group input-group-button d-flex justify-content-center align-content-center">
                                                 <div class="side-menu-user-info">
                                                     <div class="side-menu-user-photo">
                                                         <img id="imgFavicon" src="{{ asset($setting->favicon) }}" alt="your image"/>

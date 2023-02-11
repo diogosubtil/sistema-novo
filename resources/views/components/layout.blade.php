@@ -235,7 +235,7 @@
                     </a>
                     <div style="width: 100%;height: 100%;display: flex;justify-content: center">
                         <a onclick="$('#mobile-collapse').click()" href="#!">
-                            <img style="width: 100%;height: 100%" class="img-fluid" src="{{ asset(Helper::settings()->logo) }}" alt="Logo Sistema">
+                            <img style="max-width: 100%;max-height: 100%" class="img-fluid" src="{{ asset(Helper::settings()->logo) }}" alt="Logo Sistema">
                         </a>
                     </div>
                     <a class="mobile-options">
