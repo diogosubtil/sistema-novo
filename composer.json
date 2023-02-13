@@ -23,6 +23,7 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "mehdi-fathi/eloquent-filter": "^3.0",
+        "panoscape/history": "^2.4",
         "realrashid/sweet-alert": "^5.1"
     },
     "require-dev": {

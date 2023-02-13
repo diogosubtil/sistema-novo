@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Cache;
 
 class Helper
 {
-
     //FUNÇÃO PARA OBTER AS CONFIGURAÇÕES DO SISTEMA
     public static function settings(){
 
@@ -53,11 +52,20 @@ class Helper
     }
 
     //FUNÇÃO PARA OBTER NOME DA UNIDADE
-    public static function unidade($id)
+    public static function getUnidadeTittle($id)
     {
         $unidade =  optional(Unidade::query()->where('id', '=', $id)->first())->bairro;
 
         return $unidade;
+    }
+
+    //FUNÇÃO PARA OBTER AS UNIDADES DO USUARIO
+    public static function getUnidades()
+    {
+        $unidades =  User::query()->where('id', '=', Auth::user()->id)->first()->unidade;
+        $unidadesUser = explode(',',$unidades);
+
+        return $unidadesUser;
     }
 
     //FUNÇÃO PARA VERIFICAR USUARIO ONLINE
@@ -76,5 +84,28 @@ class Helper
         $user = User::query()->where('id', '=', $id)->first()->name;
 
         return $user;
+    }
+
+    public static function timezones()
+    {
+        //TIMEZONES BRASIL
+        $timezones = array(
+            'AC' => 'America/Rio_branco',   'AL' => 'America/Maceio',
+            'AP' => 'America/Belem',        'AM' => 'America/Manaus',
+            'BA' => 'America/Bahia',        'CE' => 'America/Fortaleza',
+            'DF' => 'America/Sao_Paulo',    'ES' => 'America/Sao_Paulo',
+            'GO' => 'America/Sao_Paulo',    'MA' => 'America/Fortaleza',
+            'MT' => 'America/Cuiaba',       'MS' => 'America/Campo_Grande',
+            'MG' => 'America/Sao_Paulo',    'PR' => 'America/Sao_Paulo',
+            'PB' => 'America/Fortaleza',    'PA' => 'America/Belem',
+            'PE' => 'America/Recife',       'PI' => 'America/Fortaleza',
+            'RJ' => 'America/Sao_Paulo',    'RN' => 'America/Fortaleza',
+            'RS' => 'America/Sao_Paulo',    'RO' => 'America/Porto_Velho',
+            'RR' => 'America/Boa_Vista',    'SC' => 'America/Sao_Paulo',
+            'SE' => 'America/Maceio',       'SP' => 'America/Sao_Paulo',
+            'TO' => 'America/Araguaia',
+        );
+
+        return $timezones;
     }
 }

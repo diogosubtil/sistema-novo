@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\Http\Requests\UnidadesFormRequest;
 use App\Models\Unidade;
 use App\Models\User;
 use App\Repositories\UnidadesRepository;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class UnidadesController extends Controller
@@ -43,30 +46,12 @@ class UnidadesController extends Controller
     //FUNÇÃO PARA EXIBIR A VIEW (CADASTRAR)
     public function create()
     {
-        //TIMEZONES BRASIL
-        $timezones = array(
-            'AC' => 'America/Rio_branco',   'AL' => 'America/Maceio',
-            'AP' => 'America/Belem',        'AM' => 'America/Manaus',
-            'BA' => 'America/Bahia',        'CE' => 'America/Fortaleza',
-            'DF' => 'America/Sao_Paulo',    'ES' => 'America/Sao_Paulo',
-            'GO' => 'America/Sao_Paulo',    'MA' => 'America/Fortaleza',
-            'MT' => 'America/Cuiaba',       'MS' => 'America/Campo_Grande',
-            'MG' => 'America/Sao_Paulo',    'PR' => 'America/Sao_Paulo',
-            'PB' => 'America/Fortaleza',    'PA' => 'America/Belem',
-            'PE' => 'America/Recife',       'PI' => 'America/Fortaleza',
-            'RJ' => 'America/Sao_Paulo',    'RN' => 'America/Fortaleza',
-            'RS' => 'America/Sao_Paulo',    'RO' => 'America/Porto_Velho',
-            'RR' => 'America/Boa_Vista',    'SC' => 'America/Sao_Paulo',
-            'SE' => 'America/Maceio',       'SP' => 'America/Sao_Paulo',
-            'TO' => 'America/Araguaia',
-        );
-
         //OBTEM OS USUARIOS
         $usuarios = User::query()->where('ativo', '=', 's')->get();
 
         //RETORNA A VIEW
         return view('unidades.create')
-            ->with('timezones', $timezones)
+            ->with('timezones', Helper::timezones())
             ->with('usuarios', $usuarios);
     }
 
@@ -86,31 +71,13 @@ class UnidadesController extends Controller
     //FUNÇÃO PARA EXIBIR A VIEW (EDITAR)
     public function edit(Unidade $unidade)
     {
-        //TIMEZONES BRASIL
-        $timezones = array(
-            'AC' => 'America/Rio_branco',   'AL' => 'America/Maceio',
-            'AP' => 'America/Belem',        'AM' => 'America/Manaus',
-            'BA' => 'America/Bahia',        'CE' => 'America/Fortaleza',
-            'DF' => 'America/Sao_Paulo',    'ES' => 'America/Sao_Paulo',
-            'GO' => 'America/Sao_Paulo',    'MA' => 'America/Fortaleza',
-            'MT' => 'America/Cuiaba',       'MS' => 'America/Campo_Grande',
-            'MG' => 'America/Sao_Paulo',    'PR' => 'America/Sao_Paulo',
-            'PB' => 'America/Fortaleza',    'PA' => 'America/Belem',
-            'PE' => 'America/Recife',       'PI' => 'America/Fortaleza',
-            'RJ' => 'America/Sao_Paulo',    'RN' => 'America/Fortaleza',
-            'RS' => 'America/Sao_Paulo',    'RO' => 'America/Porto_Velho',
-            'RR' => 'America/Boa_Vista',    'SC' => 'America/Sao_Paulo',
-            'SE' => 'America/Maceio',       'SP' => 'America/Sao_Paulo',
-            'TO' => 'America/Araguaia',
-        );
-
         //OBTEM OS USUARIOS
         $usuarios = User::query()->where('ativo', '=', 's')->get();
 
         //RETORNA A VIEW COM OS DADOS
         return view('unidades.edit')
             ->with('unidade', $unidade)
-            ->with('timezones', $timezones)
+            ->with('timezones', Helper::timezones())
             ->with('usuarios', $usuarios);
     }
 
@@ -151,5 +118,13 @@ class UnidadesController extends Controller
 
         //RETORNA A VIEW
         return to_route('unidades.index');
+    }
+
+    //FUNÇÃO PARA ALTERAR UNIDADE EXIBIDA
+    public function setUnidade(Request $request){
+
+        Session::put(['unidade' => $request->unidade]);
+
+        return redirect()->back();
     }
 }

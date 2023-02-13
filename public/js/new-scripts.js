@@ -16,3 +16,24 @@ window.onload = function activeMenu(){
     submenu.classList.add('pcoded-trigger')
     submenu1.classList.add('pcoded-trigger')
 }
+
+//FUNÇÃO PARA SELCIONAR A UNIDADE EXIBIDA
+function setUnidade(id){
+    $.ajax({
+        headers: {
+            'X-CSRF-Token': $('meta[name="_token"]').attr('content')
+        },
+        url: '/unidades/setUnidade',
+        data: {
+            unidade: id,
+        },
+        type: 'POST',
+        success: function(data){
+            window.location.reload()
+        },
+        error: function(data){
+            console.log(data)
+        }
+    });
+}
+

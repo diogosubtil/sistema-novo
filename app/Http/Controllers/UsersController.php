@@ -20,10 +20,11 @@ class UsersController extends Controller
     public function index(Request $request)
     {
         //OBTEM TODOS OS USUARIOS COM PAGINAÇÃO
-        $usuarios = User::filter($request->all())->paginate('15');
+        $usuarios = User::query()->orderBy('name')
+            ->filter($request->all())->paginate('15');
 
         //OBTEM USUARIOS PARA CONTAGEM E ONLINE
-        $total = User::filter($request->all())->get();
+        $total = User::all();
 
         //OBTEM ATIVOS,DESATIVADOS,ONLINE
         $ativos = 0;

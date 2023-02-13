@@ -7,10 +7,18 @@
     #userDivider {
         display: none;
     }
+
+    #setUnidadeMobile{
+        display: none;
+    }
 }
 @media (max-width: 991px) {
 
     #mostrarPaginas {
+        display: none;
+    }
+
+    #setUnidadeFull{
         display: none;
     }
 }

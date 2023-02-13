@@ -21,7 +21,6 @@ class EloquentUsersRepository implements UsersRepository
         $data = $request->except('_token');
         $data['unidade'] = implode(',', $data['unidade']);
         $data['password'] = Hash::make($data['password']);
-
         $user = User::create($data);
 
         //ENVIA A TRASAÇÃO (COMMIT)
@@ -43,6 +42,7 @@ class EloquentUsersRepository implements UsersRepository
             ]);
         }
 
+        //VALIDAÇÃO EMAIL
         if ($request->email != $user->email){
             $request->validate([
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
@@ -69,7 +69,14 @@ class EloquentUsersRepository implements UsersRepository
         //OBTEM OS DADOS DO REQUEST E FAZ O UPDATE
         $data = $request->except('_token');
         $data['unidade'] = implode(',', $data['unidade']);
-        $data['password'] = Hash::make($request->password);
+
+        //VALIDAÇÃO PARA REDEFINIR SENHA
+        if ($request->password){
+            $data['password'] = Hash::make($request->password);
+        } else {
+            $data['password'] = $user->password;
+        }
+
         $user->fill($data);
         $user->save();
 

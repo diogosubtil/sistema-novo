@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Setting;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
@@ -30,8 +31,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        DB::table('settings')->insert(
-            array(
+        Setting::create([
                 'name' => 'Sem Nome',
                 'color_primary' => '#01a9ac',
                 'color_secondary' => '#01dbdf',
@@ -45,7 +45,7 @@ return new class extends Migration
                 'favicon' => '/files/assets/images/favicon.ico',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
-            )
+            ],
         );
     }
 

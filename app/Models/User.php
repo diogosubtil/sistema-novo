@@ -10,10 +10,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Panoscape\History\HasHistories;
+use Panoscape\History\HasOperations;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, UsersFilter, Filterable;
+    use HasApiTokens, HasFactory, Notifiable, UsersFilter, Filterable, HasOperations, HasHistories;
 
     /**
      * The attributes that are mass assignable.
@@ -52,11 +54,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    //FUNÇÃO PARA ORDENAR A LISTAGEM
-    protected static function booted()
+    //FUNÇÃO HISTORICO
+    public function getModelLabel()
     {
-        self::addGlobalScope('ordered', function (Builder $queryBuilder){
-            $queryBuilder->orderBy('name', 'asc');
-        });
+        return $this->display_name;
     }
 }

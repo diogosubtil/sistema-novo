@@ -241,7 +241,7 @@
                                             <span class="input-group-addon bg-primary" id="basic-addon1">
                                                 <i class="fa fa-sort-numeric-desc"></i>
                                             </span>
-                                                <input id="numero" name="numero" type="text" class="form-control" value="{{ old('numero') }}" placeholder="Numero">
+                                                <input id="numero" name="numero" type="number" class="form-control" value="{{ old('numero') }}" placeholder="Numero">
                                             </div>
                                             <span class="form-bar">
                                             @if ($errors->get('numero'))

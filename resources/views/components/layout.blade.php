@@ -243,12 +243,23 @@
                     </a>
                 </div>
 
-                <div class="navbar-container container-fluid">
-                    <ul class="nav-left">
-                        <li>
+                <div class="navbar-container container-fluid col-12">
+                    <ul class="nav-left col-7">
+                        <li class="">
                             <a href="#!" onclick="javascript:toggleFullScreen()">
                                 <i class="feather icon-maximize full-screen"></i>
                             </a>
+                        </li>
+                        <li id="setUnidadeFull" class="col-10 mt-1 d-flex align-items-center">
+                            <span class="input-group-addon bg-primary" ><i class="fa fa-home mr-1" style="font-size: 20px"></i></span>
+                            <meta name="_token" content="{{ csrf_token() }}">
+                            <select onchange="setUnidade(this.value)" name="unidade" class="form-control col-3 mr-3" style="font-size: 14px">
+                                <option value="">Selecione</option>
+                                @foreach(Helper::getUnidades() as $unidade)
+                                    <option value="{{$unidade}}">{{ Helper::getUnidadeTittle($unidade) }}</option>
+                                @endforeach
+                            </select>
+                            <span class="">Unidade: <strong class="text-primary">{{ Helper::getUnidadeTittle(Session::get('unidade')) }}</strong></span>
                         </li>
                     </ul>
                     <ul class="nav-right">
@@ -454,12 +465,30 @@
             <div class="pcoded-wrapper">
                 <nav class="pcoded-navbar">
                     <div class="pcoded-inner-navbar main-menu">
-                        <div class="pcoded-navigatio-lavel">Dashboards </div>
+
+                        <!-- FUNÇÃO MASTER PARA ACESSAR PAINEL -->
+                        <div id="setUnidadeMobile">
+                            <div class="pcoded-navigatio-lavel">Unidade</div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="d-flex align-items-center" style="margin-left: 20px">
+                                    <span class="pcoded-micon"><i class="fa fa-home" style="font-size: 20px;color: {{ Helper::settings()->color_menu_icon }}"></i></span>
+                                    <meta name="_token" content="{{ csrf_token() }}">
+                                    <select onchange="setUnidade(this.value)" name="unidade" class="form-control col-10" style="border: none;font-size: 14px;background: {{ Helper::settings()->color_menu }};color: {{ Helper::settings()->color_menu_letter_active }}">
+                                        @foreach(Helper::getUnidades() as $unidade)
+                                            <option {{ Session::get('unidade') == $unidade ? 'selected' : null }} style="color: {{ Helper::settings()->color_menu_letter }}" value="{{$unidade}}">{{ Helper::getUnidadeTittle($unidade) }}</option>
+                                        @endforeach
+                                    </select>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- FUNÇÃO MASTER PARA ACESSAR PAINEL -->
+
+                        <div class="pcoded-navigatio-lavel">Home</div>
                         <ul class="pcoded-item pcoded-left-item">
                             <li id="{{ route('dashboard') }}">
                                 <a href="{{ route('dashboard') }}">
                                     <span class="pcoded-micon"><i class="fa fa-bar-chart"></i></span>
-                                    <span class="pcoded-mtext">Home</span>
+                                    <span class="pcoded-mtext">Dashborads</span>
                                 </a>
                             </li>
                         </ul>

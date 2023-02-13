@@ -34,6 +34,13 @@ class UserAuth
                 $expiresAt = now()->addMinutes(15);
                 Cache::put('user-is-online-' . Auth::user()->id, true, $expiresAt);
             }
+
+            //OBTEM A PRIMEIRA UNIDADE PARA EXIBIR DADOS NO SISTEMA
+            if (!Session::has('unidade')){
+                $unidadesUser = explode(',', Auth::user()->unidade);
+                Session::put(['unidade' => $unidadesUser[0]]);
+            }
+
         }
 
         return $next($request);

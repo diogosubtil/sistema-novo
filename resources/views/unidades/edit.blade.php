@@ -241,7 +241,7 @@
                                             <span class="input-group-addon bg-primary" id="basic-addon1">
                                                 <i class="fa fa-sort-numeric-desc"></i>
                                             </span>
-                                                <input id="numero" name="numero" type="text" class="form-control" value="{{ $unidade->numero }}" placeholder="Numero">
+                                                <input id="numero" name="numero" type="number" class="form-control" value="{{ $unidade->numero }}" placeholder="Numero">
                                             </div>
                                             <span class="form-bar">
                                             @if ($errors->get('numero'))
@@ -297,7 +297,7 @@
                                 </div>
 
                                 <div class="col-12">
-                                    <button id="cadastrar"  type="submit" class="text-sm pl-4 pr-4 btn bg-primary b-radius-5">Salvar</button>
+                                    <button id="salvar"  type="submit" class="text-sm pl-4 pr-4 btn bg-primary b-radius-5">Salvar</button>
                                     <a href="{{ route('unidades.index') }}">
                                         <button type="button" class="text-sm pl-4 pr-4 ml-2 btn bg-round b-radius-5">Cancelar</button>
                                     </a>

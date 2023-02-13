@@ -78,6 +78,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/unidades', UnidadesController::class);
     Route::put('/unidades/disable/{unidade}', [UnidadesController::class, 'disable'])->name('unidades.disable');
     Route::put('/unidades/enable/{unidade}', [UnidadesController::class, 'enable'])->name('unidades.enable');
+    Route::post('/unidades/setUnidade', [UnidadesController::class, 'setUnidade'])->name('unidades.setUnidade');
 
     //CONFIGURAÇÕES
     Route::resource('/settings', SettingsController::class);
