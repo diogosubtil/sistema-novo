@@ -4,11 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Panoscape\History\HasHistories;
 
 class Setting extends Model
 {
-    use HasFactory, HasHistories;
+    use HasFactory;
 
     //TABELA QUE A MODEL FAZ REFERENCIA NO BANCO DE DADOS
     protected $table = 'settings';
@@ -26,10 +25,4 @@ class Setting extends Model
         'logo',
         'favicon',
     ];
-
-    //FUNÇÃO HISTORICO
-    public function getModelLabel()
-    {
-        return $this->display_name;
-    }
 }

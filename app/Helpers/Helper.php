@@ -30,7 +30,7 @@ class Helper
     }
 
     //FUNÇÃO PARA OBTER NOME DA FUNÇÃO DO USUARIO
-    public static function funcao($number)
+    public static function getTittleFuncao($number)
     {
         switch ($number) {
             case 1:
@@ -86,6 +86,7 @@ class Helper
         return $user;
     }
 
+    //FUNÇÃO PARA OBTER AS TIME ZONES
     public static function timezones()
     {
         //TIMEZONES BRASIL
@@ -108,4 +109,21 @@ class Helper
 
         return $timezones;
     }
+
+    //FUNÇÃO PARA OBTER TIPO DE REGISTRO
+    public static function getRegisterTipo($tipo)
+    {
+        switch ($tipo) {
+            case 'c':
+                echo 'Cadastro';
+                break;
+            case 'e':
+                echo 'Edição';
+                break;
+            case 'ex':
+                echo 'Exclusão';
+                break;
+        }
+    }
+
 }

@@ -6,7 +6,7 @@
 @if ($level === 'error')
 # @lang('Whoops!')
 @else
-# @lang('Hello!')
+# @lang('Hello!'), tudo bem?.
 @endif
 @endif
 
@@ -40,7 +40,7 @@
 {{ $salutation }}
 @else
 @lang('Regards'),<br>
-{{ config('app.name') }}
+{{ Helper::settings()->name }}
 @endif
 
 {{-- Subcopy --}}

@@ -7,16 +7,6 @@
     </div>
 </x-mail::header>
 </x-slot:header>
-    <style>
-        .button-primary {
-            background: {{ Helper::settings()->color_primary }}!important;
-            background-color: {{ Helper::settings()->color_primary }}!important;
-            border-bottom: 8px solid {{ Helper::settings()->color_primary }}!important;
-            border-left: 18px solid {{ Helper::settings()->color_primary }}!important;
-            border-right: 18px solid {{ Helper::settings()->color_primary }}!important;
-            border-top: 8px solid {{ Helper::settings()->color_primary }}!important;
-        }
-    </style>
 
 {{-- Body --}}
 {{ $slot }}

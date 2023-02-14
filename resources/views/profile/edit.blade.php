@@ -22,7 +22,7 @@
                                 @csrf
 
                                 <div>
-                                    <button style="text-transform: none" type="submit" class="btn bg-primary b-radius-5">Enviar e-mail de verificação</button>
+                                    <button style="text-transform: none" type="submit" class="btn btn-primary b-radius-5">Enviar e-mail de verificação</button>
                                 </div>
                             </form>
                         </div>
@@ -93,7 +93,7 @@
                         </div>
 
                         <div class="flex items-center gap-4">
-                            <button type="submit" class="text-sm pl-4 pr-4 btn bg-primary b-radius-5">Salvar</button>
+                            <button type="submit" class="text-sm pl-4 pr-4 btn btn-primary b-radius-5">Salvar</button>
                         </div>
                     </form>
                 </section>
@@ -174,7 +174,7 @@
                         </div>
 
                         <div class="flex items-center gap-4">
-                            <button type="submit" class="text-sm pl-4 pr-4 btn bg-primary b-radius-5">Salvar</button>
+                            <button type="submit" class="text-sm pl-4 pr-4 btn btn-primary b-radius-5">Salvar</button>
                         </div>
                     </form>
                 </section>

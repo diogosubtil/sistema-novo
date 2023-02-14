@@ -127,7 +127,7 @@
                             <div class="col-sm-4 col-12">
                                 <button type="submit" class="btn btn-primary b-radius-5">Filtrar</button>
                                 <a href="{{ route('users.index') }}">
-                                    <button type="button" class="btn btn-round b-radius-5">Limpar</button>
+                                    <button class="btn btn-round b-radius-5" type="button" >Limpar</button>
                                 </a>
                             </div>
                         </form>
@@ -161,7 +161,7 @@
                                         </td>
                                         <td>{{ $usuario->name }}</td>
                                         <td>{{ $usuario->email }}</td>
-                                        <td>{{ Helper::funcao($usuario->funcao) }}</td>
+                                        <td>{{ Helper::getTittleFuncao($usuario->funcao) }}</td>
                                         <td>{{ Helper::getUnidadeTittle($usuario->unidade) }}</td>
                                         <td class="d-flex">
                                             <a href="{{ route('users.edit', $usuario->id) }}"  class="waves-effect waves-light" data-toggle="tooltip" data-placement="left" title="Editar">

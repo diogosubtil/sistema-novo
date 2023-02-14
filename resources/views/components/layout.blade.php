@@ -196,6 +196,12 @@
         select:focus, select:active{
             border-color:{{ Helper::settings()->color_primary }}!important;
         }
+        .swal2-styled.swal2-confirm{
+            background-color:{{ Helper::settings()->color_primary }}!important;
+        }
+        .swal2-styled.swal2-confirm:focus {
+            box-shadow: none!important;
+        }
         /* BACKGROUNS TEXT BUTTONS INPUTS */
 
     </style>
@@ -327,7 +333,7 @@
                                             <div class="card-block">
                                                 <i id="statusUser" class="feather icon-user text-success bg-white card1-icon"></i>
                                                 <h4>{{ Auth::user()->name }}</h4>
-                                                <p>{{ Helper::funcao(Auth::user()->funcao) }}</p>
+                                                <p>{{ Helper::getTittleFuncao(Auth::user()->funcao) }}</p>
                                             </div>
                                         </a>
 
@@ -529,6 +535,19 @@
                                     <li id="{{ route('unidades.create') }}">
                                         <a href="{{ route('unidades.create') }}">
                                             <span class="pcoded-mtext">Cadastro</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="pcoded-hasmenu">
+                                <a href="javascript:void(0)">
+                                    <span class="pcoded-micon"><i class="icofont icofont-folder-open"></i></span>
+                                    <span class="pcoded-mtext">Registros</span>
+                                </a>
+                                <ul class="pcoded-submenu">
+                                    <li id="{{ route('registers.index') }}">
+                                        <a href="{{ route('registers.index') }}">
+                                            <span class="pcoded-mtext">Painel</span>
                                         </a>
                                     </li>
                                 </ul>

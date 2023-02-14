@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RegistersController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\UnidadesController;
 use App\Http\Controllers\UsersController;
@@ -82,4 +83,7 @@ Route::middleware('auth')->group(function () {
 
     //CONFIGURAÇÕES
     Route::resource('/settings', SettingsController::class);
+
+    //REGISTROS
+    Route::resource('/registers', RegistersController::class);
 });

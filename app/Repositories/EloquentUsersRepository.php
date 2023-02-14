@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Http\Requests\UsersFormRequest;
+use App\Models\Register;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -11,6 +12,11 @@ use Illuminate\Validation\Rules;
 
 class EloquentUsersRepository implements UsersRepository
 {
+    //CONSTRUTOR COM REPOSITORY INJETADO
+    public function __construct(private RegistersRepository $repository)
+    {
+    }
+
     //FUNÇÂO PARA CADASTRAR NO BANCO
     public function add(UsersFormRequest $request): User
     {
@@ -25,6 +31,9 @@ class EloquentUsersRepository implements UsersRepository
 
         //ENVIA A TRASAÇÃO (COMMIT)
         DB::commit();
+
+        //SALVA O REGISTRO
+        $this->repository->add($user->id,'c','User');
 
         //ENVIA O EMAIL DE VERIFICAÇÃO
         $user->sendEmailVerificationNotification();
@@ -58,6 +67,9 @@ class EloquentUsersRepository implements UsersRepository
             'treinamento' => ['required', 'string', 'max:255'],
         ]);
 
+        //OBTEM DADOS ANTES DAS ALTERAÇÔES PARA REGISTRO
+        $dataOld = $user->getOriginal();
+
         //INICIA A TRANSAÇÃO
         DB::beginTransaction();
 
@@ -80,8 +92,14 @@ class EloquentUsersRepository implements UsersRepository
         $user->fill($data);
         $user->save();
 
+        //OBTEM DADOS ANTES DAS ALTERAÇÔES PARA REGISTRO
+        $dataNew = $user->getChanges();
+
         //ENVIA A TRASAÇÃO (COMMIT)
         DB::commit();
+
+        //SALVA O REGISTRO
+        $this->repository->add($user->id,'e','User', $dataNew, $dataOld);
     }
 
     //FUNÇÃO PARA DESATIVAR USUARIO
@@ -95,6 +113,10 @@ class EloquentUsersRepository implements UsersRepository
 
         //ENVIA A TRASAÇÃO (COMMIT)
         DB::commit();
+
+        //SALVA O REGISTRO
+        $this->repository->add($user->id,'ex','User');
+
     }
 
     //FUNÇÃO PARA ATIVAR USUARIO

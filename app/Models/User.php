@@ -10,12 +10,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Panoscape\History\HasHistories;
-use Panoscape\History\HasOperations;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, UsersFilter, Filterable, HasOperations, HasHistories;
+    use HasApiTokens, HasFactory, Notifiable, UsersFilter, Filterable;
 
     /**
      * The attributes that are mass assignable.
@@ -53,10 +51,4 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    //FUNÇÃO HISTORICO
-    public function getModelLabel()
-    {
-        return $this->display_name;
-    }
 }
