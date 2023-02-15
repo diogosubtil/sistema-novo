@@ -209,7 +209,7 @@
                                 </div>
 
                                 <div class="col-12">
-                                    <button id="cadastrar"  type="submit" class="text-sm pl-4 pr-4 btn bg-primary b-radius-5">Cadastrar</button>
+                                    <button id="cadastrar"  type="submit" class="text-sm pl-4 pr-4 btn btn-primary b-radius-5">Cadastrar</button>
                                 </div>
 
                             </div>

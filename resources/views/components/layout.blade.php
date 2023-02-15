@@ -29,6 +29,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('/files/assets/css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/files/assets/css/jquery.mCustomScrollbar.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/files/bower_components/switchery/css/switchery.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/files/assets/pages/notification/notification.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/files/bower_components/animate.css/css/animate.css') }}">
 
     <!-- SETTINGS -->
     <style>
@@ -592,7 +594,6 @@
 </div>
 
 <!-- Required Jquery -->
-<script type="text/javascript" src="{{ asset('/js/new-scripts.js') }}"></script>
 <script type="text/javascript" src="{{ asset('/files/bower_components/jquery/js/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('/files/bower_components/jquery-ui/js/jquery-ui.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('/files/bower_components/popper.js/js/popper.min.js') }}"></script>
@@ -608,6 +609,10 @@
 <script type="text/javascript" src="{{ asset('/files/assets/js/vartical-layout.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('/files/assets/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('/files/assets/js/script.js') }}"></script>
+<script type="text/javascript" src="{{ asset('/files/assets/js/bootstrap-growl.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('/files/assets/pages/notification/notification.js') }}"></script>
+<script type="text/javascript" src="{{ asset('/js/new-scripts.js') }}"></script>
+<script type="text/javascript" src="{{ asset('/js/websocket-notify.js') }}"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -619,7 +624,6 @@
 
     gtag('config', 'UA-23581568-13');
 </script>
-
 <!-- SLOTS DE SCRIPTS -->
 {{ $scripts }}
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\RegistersController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\UnidadesController;
@@ -86,4 +87,7 @@ Route::middleware('auth')->group(function () {
 
     //REGISTROS
     Route::resource('/registers', RegistersController::class);
+
+    //CHAT
+    Route::resource('/chat', ChatController::class);
 });

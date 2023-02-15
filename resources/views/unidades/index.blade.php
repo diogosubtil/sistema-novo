@@ -89,7 +89,7 @@
                                             <form class="ml-2" method="POST" action="{{ $unidade->ativo == 's' ? route('unidades.disable', $unidade->id) : route('unidades.enable', $unidade->id) }}">
                                                 @csrf
                                                 @method('PUT')
-                                                <button style="background: none;color: inherit;border: none;padding: 0;" type="submit"  class="waves-effect waves-light" data-toggle="tooltip" data-placement="left" title="{{ $unidade->ativo == 's' ? 'Desativar' : 'Ativar' }}">
+                                                <button style="background: none;color: inherit;border: none;padding: 0;font: inherit;cursor: pointer;outline: inherit;" type="submit"  class="waves-effect waves-light" data-toggle="tooltip" data-placement="left" title="{{ $unidade->ativo == 's' ? 'Desativar' : 'Ativar' }}">
                                                     <i style="font-size: 18px" class="fa fa-power-off m-0 {{ $unidade->ativo == 's' ? 'text-danger' : 'text-success' }}"></i>
                                                 </button>
                                             </form>

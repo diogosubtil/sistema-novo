@@ -117,7 +117,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-warning btn-block p-t-15 p-b-15">Download Overall Report</button>
+                        <button id="testeMenssage" class="btn btn-warning btn-block p-t-15 p-b-15">Download Overall Report</button>
                     </div>
                 </div>
                 <!--  sale analytics end -->
@@ -505,5 +505,11 @@
             <script type="text/javascript" src="{{ asset('/files/assets/pages/widget/amchart/amcharts.js') }}"></script>
             <script type="text/javascript" src="{{ asset('/files/assets/pages/widget/amchart/serial.js') }}"></script>
             <script type="text/javascript" src="{{ asset('/files/assets/pages/widget/amchart/light.js') }}"></script>
+            <script>
+                var btn_env = document.getElementById('testeMenssage');
+                btn_env.addEventListener('click', function(e){
+                    connectionWeb.send('support');
+                });
+            </script>
     @endslot
 </x-layout>
