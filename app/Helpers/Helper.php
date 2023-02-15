@@ -62,7 +62,7 @@ class Helper
     //FUNÇÃO PARA OBTER AS UNIDADES DO USUARIO
     public static function getUnidades()
     {
-        $unidades =  User::query()->where('id', '=', Auth::user()->id)->first()->unidade;
+        $unidades =  User::query()->where('id', '=', Auth::user()->id)->first()->unidade_id;
         $unidadesUser = explode(',',$unidades);
 
         return $unidadesUser;

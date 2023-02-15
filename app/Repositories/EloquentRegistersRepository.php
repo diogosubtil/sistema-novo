@@ -21,7 +21,7 @@ class EloquentRegistersRepository implements RegistersRepository
         $data['id_model'] = $id_model;
         $data['action'] = $action;
         $data['model'] = $model;
-        $data['unidade'] = Session::get('unidade');
+        $data['unidade_id'] = Session::get('unidade');
 
 
 

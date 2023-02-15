@@ -31,7 +31,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Setting::create([
+        DB::table('settings')->insert([
                 'name' => 'Sem Nome',
                 'color_primary' => '#01a9ac',
                 'color_secondary' => '#01dbdf',

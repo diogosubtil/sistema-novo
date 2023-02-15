@@ -23,6 +23,8 @@ class UsersController extends Controller
         $usuarios = User::query()->orderBy('name')
             ->filter($request->all())->paginate('15');
 
+        $unidades = Unidade::query()->where('ativo', '=', 's')->get();
+
         //OBTEM USUARIOS PARA CONTAGEM E ONLINE
         $total = User::all();
 
@@ -42,6 +44,7 @@ class UsersController extends Controller
         //RETORNA A VIEW COM OS DADOS
         return view('users.index')
             ->with('usuarios', $usuarios)
+            ->with('unidades', $unidades)
             ->with('total', $total)
             ->with('ativos', $ativos)
             ->with('desativados', $desativados);
@@ -75,7 +78,7 @@ class UsersController extends Controller
     public function edit(User $user)
     {
         //OBTEM AS UNIDADES DO USUARIO
-        $unidadesUser = explode(',' , $user->unidade);
+        $unidadesUser = explode(',' , $user->unidade_id);
 
         //OBTEM AS UNIDADES
         $unidades = Unidade::query()->where('ativo', '=', 's')->get();

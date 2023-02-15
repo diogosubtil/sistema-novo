@@ -1,8 +1,8 @@
 <?php
 
-use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -22,24 +22,24 @@ return new class extends Migration
             $table->string('password');
             $table->string('telefone');
             $table->integer('funcao');
-            $table->string('unidade');
+            $table->string('unidade_id');
             $table->enum('treinamento', ['s','n']);
             $table->enum('ativo', ['s','n']);
             $table->rememberToken();
             $table->timestamps();
         });
 
-        User::create([
+        DB::table('users')->insert([
                 'name' => 'Administrador',
                 'email' => 'admin@admin.com.br',
                 'email_verified_at' => null,
                 'password' => '$2y$10$xaR.LHVTRnc9FkyM5c4VJeys/LnsF.brS/VdGQceCKX7S.m.J1Yci',
                 'telefone' => '99999999999',
-                'funcao' => '1',
-                'unidade' => '1',
+                'funcao' => 1,
+                'unidade_id' => 1,
                 'treinamento' => 'n',
                 'ativo' => 's',
-                'rememberToken' => null,
+                'remember_token' => null,
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],

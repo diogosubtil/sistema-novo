@@ -98,29 +98,22 @@
                                         <option {{ (isset($_GET['funcao']) && $_GET['funcao'] == '1' ? "selected":"") }} value="1">Master</option>
                                         <option {{ (isset($_GET['funcao']) && $_GET['funcao'] == '2' ? "selected":"") }} value="2">Gerente</option>
                                         <option {{ (isset($_GET['funcao']) && $_GET['funcao'] == '3' ? "selected":"") }} value="3">Aplicadora</option>
+                                        <option {{ (isset($_GET['funcao']) && $_GET['funcao'] == '4' ? "selected":"") }} value="4">Recepção/Vendedor</option>
+                                        <option {{ (isset($_GET['funcao']) && $_GET['funcao'] == '10' ? "selected":"") }} value="10">Cliente</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-sm-4 col-12">
-                                <label for="unidade">Função</label>
+                                <label for="unidade_id">Unidade</label>
                                 <div class="input-group">
                                     <span class="input-group-addon bg-primary" id="basic-addon1">
-                                        <i class="icofont icofont-book-mark"></i>
+                                        <i class="fa fa-building"></i>
                                     </span>
-                                    <select id="unidade" name="unidade" class="form-control">
+                                    <select id="unidade_id" name="unidade_id" class="form-control">
                                         <option value="">Selecione</option>
-                                        <option {{ (isset($_GET['unidade']) && $_GET['unidade'] == '1' ? "selected":"") }} value="1">Master</option>
-                                        <option {{ (isset($_GET['unidade']) && $_GET['unidade'] == '2' ? "selected":"") }} value="2">Gerente</option>
-                                        <option {{ (isset($_GET['unidade']) && $_GET['unidade'] == '3' ? "selected":"") }} value="3">Aplicadora</option>
-                                        <option {{ (isset($_GET['unidade']) && $_GET['unidade'] == '4' ? "selected":"") }} value="3">Aplicadora</option>
-                                        <option {{ (isset($_GET['unidade']) && $_GET['unidade'] == '5' ? "selected":"") }} value="3">Aplicadora</option>
-                                        <option {{ (isset($_GET['unidade']) && $_GET['unidade'] == '6' ? "selected":"") }} value="3">Aplicadora</option>
-                                        <option {{ (isset($_GET['unidade']) && $_GET['unidade'] == '7' ? "selected":"") }} value="3">Aplicadora</option>
-                                        <option {{ (isset($_GET['unidade']) && $_GET['unidade'] == '8' ? "selected":"") }} value="3">Aplicadora</option>
-                                        <option {{ (isset($_GET['unidade']) && $_GET['unidade'] == '9' ? "selected":"") }} value="3">Aplicadora</option>
-                                        <option {{ (isset($_GET['unidade']) && $_GET['unidade'] == '10' ? "selected":"") }} value="3">Aplicadora</option>
-                                        <option {{ (isset($_GET['unidade']) && $_GET['unidade'] == '11' ? "selected":"") }} value="3">Aplicadora</option>
-                                        <option {{ (isset($_GET['unidade']) && $_GET['unidade'] == '12' ? "selected":"") }} value="3">Aplicadora</option>
+                                        @foreach($unidades as $unidade)
+                                            <option {{ (isset($_GET['unidade_id']) && $_GET['unidade_id'] == $unidade->id ? "selected":"") }} value="{{ $unidade->id }}">{{ $unidade->bairro }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -162,7 +155,7 @@
                                         <td>{{ $usuario->name }}</td>
                                         <td>{{ $usuario->email }}</td>
                                         <td>{{ Helper::getTittleFuncao($usuario->funcao) }}</td>
-                                        <td>{{ Helper::getUnidadeTittle($usuario->unidade) }}</td>
+                                        <td>{{ Helper::getUnidadeTittle($usuario->unidade_id) }}</td>
                                         <td class="d-flex">
                                             <a href="{{ route('users.edit', $usuario->id) }}"  class="waves-effect waves-light" data-toggle="tooltip" data-placement="left" title="Editar">
                                                 <i style="font-size: 20px" class="fa fa-edit m-0 text-amazon"></i>

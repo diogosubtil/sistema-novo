@@ -19,9 +19,15 @@ class Register extends Model
         'action',
         'model',
         'data',
-        'unidade',
+        'unidade_id',
     ];
 
     //Filter Eloquent
     private static array $whiteListFilter = ['*'];
+
+    //FUNÇAO DE RELACIONAMENTOS
+    public function unidade()
+    {
+        return $this->belongsTo(Unidade::class);
+    }
 }

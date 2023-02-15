@@ -261,7 +261,7 @@
                         <li id="setUnidadeFull" class="col-10 mt-1 d-flex align-items-center">
                             <span class="input-group-addon bg-primary" ><i class="fa fa-home mr-1" style="font-size: 20px"></i></span>
                             <meta name="_token" content="{{ csrf_token() }}">
-                            <select onchange="setUnidade(this.value)" name="unidade" class="form-control col-3 mr-3" style="font-size: 14px">
+                            <select onchange="setUnidade(this.value)" name="unidade_id" class="form-control col-3 mr-3" style="font-size: 14px">
                                 <option value="">Selecione</option>
                                 @foreach(Helper::getUnidades() as $unidade)
                                     <option value="{{$unidade}}">{{ Helper::getUnidadeTittle($unidade) }}</option>
@@ -481,7 +481,7 @@
                                 <li class="d-flex align-items-center" style="margin-left: 20px">
                                     <span class="pcoded-micon"><i class="fa fa-home" style="font-size: 20px;color: {{ Helper::settings()->color_menu_icon }}"></i></span>
                                     <meta name="_token" content="{{ csrf_token() }}">
-                                    <select onchange="setUnidade(this.value)" name="unidade" class="form-control col-10" style="border: none;font-size: 14px;background: {{ Helper::settings()->color_menu }};color: {{ Helper::settings()->color_menu_letter_active }}">
+                                    <select onchange="setUnidade(this.value)" name="unidade_id" class="form-control col-10" style="border: none;font-size: 14px;background: {{ Helper::settings()->color_menu }};color: {{ Helper::settings()->color_menu_letter_active }}">
                                         @foreach(Helper::getUnidades() as $unidade)
                                             <option {{ Session::get('unidade') == $unidade ? 'selected' : null }} style="color: {{ Helper::settings()->color_menu_letter }}" value="{{$unidade}}">{{ Helper::getUnidadeTittle($unidade) }}</option>
                                         @endforeach

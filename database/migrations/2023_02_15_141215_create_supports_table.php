@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('registers', function (Blueprint $table) {
+        Schema::create('supports', function (Blueprint $table) {
             $table->id();
             $table->integer('user');
-            $table->integer('id_model');
-            $table->string('action','10');
-            $table->string('model','50');
-            $table->text('data')->nullable();
             $table->foreignId('unidade_id')->constrained();
+            $table->string('status','20');
+            $table->string('subject','128');
+            $table->text('description');
+            $table->enum('ativo', ['s','n'])->default('s');
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('registers');
+        Schema::dropIfExists('supports');
     }
 };

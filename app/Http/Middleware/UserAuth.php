@@ -37,7 +37,7 @@ class UserAuth
 
             //OBTEM A PRIMEIRA UNIDADE PARA EXIBIR DADOS NO SISTEMA
             if (!Session::has('unidade')){
-                $unidadesUser = explode(',', Auth::user()->unidade);
+                $unidadesUser = explode(',', Auth::user()->unidade_id);
                 Session::put(['unidade' => $unidadesUser[0]]);
             }
 

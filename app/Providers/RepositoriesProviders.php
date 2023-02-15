@@ -4,10 +4,14 @@ namespace App\Providers;
 
 use App\Repositories\EloquentRegistersRepository;
 use App\Repositories\EloquentSettingsRepository;
+use App\Repositories\EloquentSupportsAnswersRepository;
+use App\Repositories\EloquentSupportsRepository;
 use App\Repositories\EloquentUnidadesRepository;
 use App\Repositories\EloquentUsersRepository;
 use App\Repositories\RegistersRepository;
 use App\Repositories\SettingsRepository;
+use App\Repositories\SupportsAnswersRepository;
+use App\Repositories\SupportsRepository;
 use App\Repositories\UnidadesRepository;
 use App\Repositories\UsersRepository;
 use Closure;
@@ -17,10 +21,12 @@ class RepositoriesProviders extends ServiceProvider
 {
     //COMPACT BINDINGS
     public array $bindings = [
-        UsersRepository::class          => EloquentUsersRepository::class,
-        UnidadesRepository::class       => EloquentUnidadesRepository::class,
-        SettingsRepository::class       => EloquentSettingsRepository::class,
-        RegistersRepository::class      => EloquentRegistersRepository::class,
+        UsersRepository::class              => EloquentUsersRepository::class,
+        UnidadesRepository::class           => EloquentUnidadesRepository::class,
+        SettingsRepository::class           => EloquentSettingsRepository::class,
+        RegistersRepository::class          => EloquentRegistersRepository::class,
+        SupportsRepository::class           => EloquentSupportsRepository::class,
+        SupportsAnswersRepository::class    => EloquentSupportsAnswersRepository::class
     ];
 
     /**

@@ -32,7 +32,7 @@ class UsersFormRequest extends FormRequest
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'funcao' => ['required', 'integer', 'max:255'],
             'telefone' => ['required', 'string'],
-            'unidade' => ['required'],
+            'unidade_id' => ['required'],
             'treinamento' => ['required', 'string', 'max:255'],
         ];
     }

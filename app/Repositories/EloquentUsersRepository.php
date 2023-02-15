@@ -25,7 +25,7 @@ class EloquentUsersRepository implements UsersRepository
 
         //OBTEM OS DADOS DO REQUEST E FAZ O CADASTRO
         $data = $request->except('_token');
-        $data['unidade'] = implode(',', $data['unidade']);
+        $data['unidade_id'] = implode(',', $data['unidade_id']);
         $data['password'] = Hash::make($data['password']);
         $user = User::create($data);
 
@@ -63,7 +63,7 @@ class EloquentUsersRepository implements UsersRepository
             'name' => ['required', 'string', 'max:255'],
             'funcao' => ['required', 'integer', 'max:255'],
             'telefone' => ['required', 'string'],
-            'unidade' => ['required'],
+            'unidade_id' => ['required'],
             'treinamento' => ['required', 'string', 'max:255'],
         ]);
 
@@ -80,7 +80,7 @@ class EloquentUsersRepository implements UsersRepository
 
         //OBTEM OS DADOS DO REQUEST E FAZ O UPDATE
         $data = $request->except('_token');
-        $data['unidade'] = implode(',', $data['unidade']);
+        $data['unidade_id'] = implode(',', $data['unidade_id']);
 
         //VALIDAÇÃO PARA REDEFINIR SENHA
         if ($request->password){
@@ -98,8 +98,10 @@ class EloquentUsersRepository implements UsersRepository
         //ENVIA A TRASAÇÃO (COMMIT)
         DB::commit();
 
-        //SALVA O REGISTRO
-        $this->repository->add($user->id,'e','User', $dataNew, $dataOld);
+        //VERIFICA SE HOUVE ALTERAÇÃO E SALVA O REGISTRO
+        if ($dataNew){
+            $this->repository->add($user->id,'e','User', $dataNew, $dataOld);
+        }
     }
 
     //FUNÇÃO PARA DESATIVAR USUARIO

@@ -13,14 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('registers', function (Blueprint $table) {
+        Schema::create('supports_answers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('support_id')->constrained();
             $table->integer('user');
-            $table->integer('id_model');
-            $table->string('action','10');
-            $table->string('model','50');
-            $table->text('data')->nullable();
             $table->foreignId('unidade_id')->constrained();
+            $table->integer('answer');
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('registers');
+        Schema::dropIfExists('supports_answers');
     }
 };

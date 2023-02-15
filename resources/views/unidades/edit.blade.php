@@ -81,7 +81,7 @@
                                             <span class="input-group-addon bg-primary" id="basic-addon1">
                                                 <i class="icofont icofont-money"></i>
                                             </span>
-                                                <input id="meta" name="meta" type="number" class="form-control" value="{{ $unidade->meta }}" placeholder="Meta">
+                                                <input id="meta" name="meta" type="number" class="form-control" value="{{ $unidade->meta }}" min="0" placeholder="Meta">
                                             </div>
                                             <span class="form-bar">
                                             @if ($errors->get('meta'))

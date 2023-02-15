@@ -27,4 +27,22 @@ class Unidade extends Model
         'timezone',
         'assinatura',
     ];
+
+    //FUNÇAO DE RELACIONAMENTOS
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
+
+    //FUNÇAO DE RELACIONAMENTOS
+    public function registers()
+    {
+        return $this->hasMany(Register::class);
+    }
+
+    //FUNÇAO DE RELACIONAMENTOS
+    public function supports()
+    {
+        return $this->hasMany(Support::class);
+    }
 }

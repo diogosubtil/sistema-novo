@@ -182,9 +182,9 @@
                                         Unidades de acesso
                                     </div>
                                     <span class="form-bar">
-                                        @if ($errors->get('unidade'))
+                                        @if ($errors->get('unidade_id'))
                                             <ul class="text-danger">
-                                            @foreach ((array) $errors->get('unidade') as $message)
+                                            @foreach ((array) $errors->get('unidade_id') as $message)
                                                     <li>{{ $message }}</li>
                                                 @endforeach
                                         </ul>
@@ -198,7 +198,7 @@
                                         @foreach($unidades as $unidade)
                                             <div class="row col-lg-4 col-md-6 col-12 mt-2 align-items-center">
                                                 <label class="col-xl-8 col-9 form-check-label">{{$unidade->bairro}} - <b>{{$unidade->estado }}</b></label>
-                                                <input class="col-xl-2 col-2 js-switch" type="checkbox" {{ (in_array($unidade->id, old('unidade') ?? [null]) ? "checked":"") }} name="unidade[]" value="{{ $unidade->id }}">
+                                                <input class="col-xl-2 col-2 js-switch" type="checkbox" {{ (in_array($unidade->id, old('unidade_id') ?? [null]) ? "checked":"") }} name="unidade_id[]" value="{{ $unidade->id }}">
                                             </div>
                                         @endforeach
                                     </div>

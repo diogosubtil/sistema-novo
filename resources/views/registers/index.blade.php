@@ -13,7 +13,7 @@
                     <div class="card-block">
                         <form method="GET" class="row" action=" {{ route('registers.index') }}">
                             <div class="col-xl-3 col-md-6 col-12">
-                                <label for="funcao">Função</label>
+                                <label for="funcao">Usuarios</label>
                                 <div class="input-group">
                                     <span class="input-group-addon bg-primary" id="basic-addon1">
                                         <i class="icofont icofont-user"></i>
@@ -32,7 +32,7 @@
                                 <label for="action">Ação</label>
                                 <div class="input-group">
                                     <span class="input-group-addon bg-primary" id="basic-addon1">
-                                        <i class="icofont icofont-user"></i>
+                                        <i class="fa fa-pencil"></i>
                                     </span>
                                     <select id="action" name="action" class="form-control">
                                         <option value="">Selecione</option>
@@ -46,7 +46,7 @@
                                 <label for="model">Tipo</label>
                                 <div class="input-group">
                                     <span class="input-group-addon bg-primary" id="basic-addon1">
-                                        <i class="icofont icofont-user"></i>
+                                        <i class="fa fa-list"></i>
                                     </span>
                                     <select id="model" name="model" class="form-control">
                                         <option value="">Selecione</option>
@@ -56,7 +56,7 @@
                                 </div>
                             </div>
                             <div class="col-xl-3 col-md-6 col-12">
-                                <label for="created_at">Tipo</label>
+                                <label for="created_at">Data</label>
                                 <div class="input-group">
                                     <div class="input-group">
                                         <span class="input-group-addon bg-primary">
@@ -64,6 +64,20 @@
                                         </span>
                                         <input type="date" class="form-control" name="created_at" id="created_at" value="{{ isset($_GET['created_at']) ? $_GET['created_at'] : null }}">
                                     </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6 col-12">
+                                <label for="unidade_id">Unidade</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon bg-primary" id="basic-addon1">
+                                        <i class="fa fa-building"></i>
+                                    </span>
+                                    <select id="unidade_id" name="unidade_id" class="form-control">
+                                        <option value="">Selecione</option>
+                                        @foreach($unidades as $unidade)
+                                            <option {{ (isset($_GET['unidade_id']) && $_GET['unidade_id'] == $unidade->id ? "selected":"") }} value="{{ $unidade->id }}">{{ $unidade->bairro }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-12">
@@ -98,7 +112,7 @@
                                 @foreach ($registers as $register)
                                     <tr id="register-{{$register->id}}" style="cursor: pointer" >
                                         <td><span id="icon-{{$register->id}}"  class="fa fa-plus mr-3 text-success"></span>{{ Helper::getUserTittle($register->user) }}</td>
-                                        <td>{{ Helper::getUnidadeTittle($register->unidade) }}</td>
+                                        <td>{{ Helper::getUnidadeTittle($register->unidade_id) }}</td>
                                         <td>{{ Helper::getRegisterTipo($register->action) }}</td>
                                         <td>{{ $register->model }}</td>
                                         <td>{{ date('d/m/Y H:i:s', strtotime($register->created_at)) }}</td>
@@ -115,7 +129,7 @@
                                             @endif
                                             @if($register->action === 'e')
                                                 <div class="row col-12">
-                                                    <p class="col-12" style="font-size: 16px"><b>Dados Alterados</b></p>
+                                                    <p class="col-12" style="font-size: 16px"><b>Dados Alterados: {{ Helper::getUserTittle($register->id_model) }}</b></p>
                                                     @foreach(json_decode($register->data) as $key => $data)
                                                         <div class="col-4">
                                                             <b>{{ $key === 'novo' ? '- Novos' : '- Antigo' }}</b><br>

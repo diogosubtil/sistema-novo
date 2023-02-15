@@ -26,7 +26,7 @@ class User extends Authenticatable
         'password',
         'funcao',
         'telefone',
-        'unidade',
+        'unidade_id',
         'treinamento',
     ];
 
@@ -51,4 +51,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    //FUNÇAO DE RELACIONAMENTOS
+    public function unidade()
+    {
+        return $this->belongsTo(Unidade::class);
+    }
 }
