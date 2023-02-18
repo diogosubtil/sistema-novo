@@ -89,7 +89,7 @@
                                     @foreach($answersAndUp as $answerAndUp)
                                         <div class="media mt-2 ml-5">
                                             <a class="media-left" href="#">
-                                                @if(Helper::getUser($answerAndUp['answer']->user)->funcao === 1)
+                                                @if(Helper::getUser($answerAndUp['answer']->user)->funcao == 1)
                                                     <label class="label label-danger">Suporte</label>
                                                 @else
                                                     <label class="label label-warning">Usuario</label>
@@ -98,7 +98,7 @@
                                             <div class="media-body">
                                                 <span style="color: #919aa3;font-size: 13px" class="f-right">{{ date('d/m/Y H:i', strtotime($answerAndUp['answer']->created_at)) }}</span>
                                                 <b>{{ Helper::getUserTittle($answerAndUp['answer']->user) }}</b><br>
-                                                @if(Helper::getUser($answerAndUp['answer']->user)->funcao === 1)
+                                                @if(Helper::getUser($answerAndUp['answer']->user)->funcao == 1)
                                                     <span>Administrador</span>
                                                 @else
                                                     <span>Unidade: <b>{{ Helper::getUnidadeTittle($answerAndUp['answer']->unidade_id) }}</b></span>
