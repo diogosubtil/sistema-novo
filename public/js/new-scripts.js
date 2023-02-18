@@ -37,3 +37,10 @@ function setUnidade(id){
     });
 }
 
+//FUNÇÃO PARA OBTER NOMES E CLICAR NO INPUT FILE
+var enviar = document.getElementsByClassName("botaoArquivo")[0];
+var input = document.getElementById("files");
+input.addEventListener("change", function(){
+    enviar.value = input.files.length + ' Arquivo selecionado.';
+});
+

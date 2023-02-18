@@ -18,7 +18,7 @@
                                         <div class="col-12 mt-2">
                                             Dados do Usuario
                                         </div>
-                                        <div class="col-xl-3 col-12 mt-3">
+                                        <div class="col-xl-3 col-md-6 col-12 mt-3">
                                             <label for="name" class="col-form-label">Nome</label>
                                             <div class="input-group">
                                             <span class="input-group-addon bg-primary" id="basic-addon1">
@@ -37,7 +37,7 @@
                                         </span>
                                         </div>
                                         <!-- Telefone -->
-                                        <div class="col-xl-3 col-12 mt-3">
+                                        <div class="col-xl-3 col-md-6 col-12 mt-3">
                                             <label for="telefone" class="col-form-label">Telefone</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon bg-primary" id="basic-addon1">
@@ -56,7 +56,7 @@
                                         </span>
                                         </div>
                                         <!-- Funcao -->
-                                        <div class="col-xl-3 col-12 mt-3">
+                                        <div class="col-xl-3 col-md-6 col-12 mt-3">
                                             <label for="funcao">Função</label>
                                             <div class="input-group">
                                             <span class="input-group-addon bg-primary" id="basic-addon1">
@@ -82,7 +82,7 @@
                                         </span>
                                         </div>
                                         <!-- Treinamento -->
-                                        <div class="col-xl-3 col-12 mt-3">
+                                        <div class="col-xl-3 col-md-6 col-12 mt-3">
                                             <label for="treinamento">Treinamento</label>
                                             <div class="input-group">
                                             <span class="input-group-addon bg-primary" id="basic-addon1">
@@ -191,17 +191,22 @@
                                         </ul>
                                         @endif
                                     </span>
-                                    <div class="row col-12 mt-4">
-                                        <div hidden class="col-4 mt-2">
-                                            <label for="js-single" class="col-8 form-check-label">js-single</label>
-                                            <input type="checkbox" name="js-single" class="col-4 js-single">
-                                        </div>
-                                        @foreach($unidades as $unidade)
-                                            <div class="row col-lg-4 col-md-6 col-12 mt-2 align-items-center">
-                                                <label class="col-xl-8 col-9 form-check-label">{{$unidade->bairro}} - <b>{{$unidade->estado }}</b></label>
-                                                <input class="col-xl-2 col-2 js-switch" type="checkbox" {{ (in_array($unidade->id, $unidadesUser) ? "checked":"") }} name="unidade_id[]" value="{{ $unidade->id }}">
+                                    <div class="col-12 mt-4">
+                                        <div class="row">
+                                            <div hidden class="col-4 mt-2">
+                                                <label for="js-single" class="col-8 form-check-label">js-single</label>
+                                                <input type="checkbox" name="js-single" class="col-4 js-single">
                                             </div>
-                                        @endforeach
+                                            @foreach($unidades as $unidade)
+                                                <div class="col-xl-4 col-md-6 col-12 mt-2 align-items-center">
+                                                    <div class="row">
+                                                        <label class="col-xl-9 col-9 form-check-label">{{$unidade->bairro}} - <b>{{$unidade->estado }}</b></label>
+                                                        <input class="col-xl-2 col-2 js-switch" type="checkbox" {{ (in_array($unidade->id, $unidadesUser) ? "checked":"") }} name="unidade_id[]" value="{{ $unidade->id }}">
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+
                                     </div>
                                 </div>
 

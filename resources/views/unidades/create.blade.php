@@ -18,7 +18,7 @@
                                             Dados do Unidade
                                         </div>
 
-                                        <div class="col-lg-3 col-12 mt-3">
+                                        <div class="col-xl-3 col-md-6 col-12 mt-3">
                                             <label for="cnpj" class="col-form-label">CNPJ</label>
                                             <div class="input-group">
                                             <span class="input-group-addon bg-primary" id="basic-addon1">
@@ -37,7 +37,7 @@
                                         </span>
                                         </div>
 
-                                        <div class="col-lg-3 col-12 mt-3">
+                                        <div class="col-xl-3 col-md-6 mt-3">
                                             <label for="dataAbertura" class="col-form-label">Data de Abertura</label>
                                             <div class="input-group">
                                             <span class="input-group-addon bg-primary" id="basic-addon1">
@@ -56,7 +56,7 @@
                                         </span>
                                         </div>
 
-                                        <div class="col-lg-3 col-12 mt-3">
+                                        <div class="col-xl-3 col-md-6 mt-3">
                                             <label for="whatsapp" class="col-form-label">Whatsapp</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon bg-primary" id="basic-addon1">
@@ -75,7 +75,7 @@
                                         </span>
                                         </div>
 
-                                        <div class="col-lg-3 col-12 mt-3">
+                                        <div class="col-xl-3 col-md-6 mt-3">
                                             <label for="meta" class="col-form-label">Meta</label>
                                             <div class="input-group">
                                             <span class="input-group-addon bg-primary" id="basic-addon1">
@@ -94,7 +94,7 @@
                                         </span>
                                         </div>
 
-                                        <div class="col-lg-3 col-12 mt-3">
+                                        <div class="col-xl-3 col-md-6 mt-3">
                                             <label for="gerente">Gerente</label>
                                             <div class="input-group">
                                             <span class="input-group-addon bg-primary" id="basic-addon1">
@@ -118,7 +118,7 @@
                                         </span>
                                         </div>
 
-                                        <div class="col-lg-3 col-12 mt-3">
+                                        <div class="col-xl-3 col-md-6 mt-3">
                                             <label for="timezone">Timezone</label>
                                             <div class="input-group">
                                             <span class="input-group-addon bg-primary" id="basic-addon1">

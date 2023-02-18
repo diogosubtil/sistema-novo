@@ -19,7 +19,7 @@
                                         <i class="icofont icofont-user"></i>
                                     </span>
                                     <select id="user" name="user" class="form-control">
-                                        <option value="">Selecione</option>
+                                        <option selected disabled value="">Selecione</option>
                                         @foreach($users as $user)
                                             <option {{ (isset($_GET['user']) && $_GET['user'] == $user->id ? "selected":"") }} value="{{$user->id}}">
                                                 {{ $user->name }}
@@ -35,7 +35,7 @@
                                         <i class="fa fa-pencil"></i>
                                     </span>
                                     <select id="action" name="action" class="form-control">
-                                        <option value="">Selecione</option>
+                                        <option selected disabled value="">Selecione</option>
                                         <option {{ (isset($_GET['action']) && $_GET['action'] == 'c' ? "selected":"") }} value="c">Cadastro</option>
                                         <option {{ (isset($_GET['action']) && $_GET['action'] == 'e' ? "selected":"") }} value="e">Edição</option>
                                         <option {{ (isset($_GET['action']) && $_GET['action'] == 'ex' ? "selected":"") }} value="ex">Exclusão</option>
@@ -49,7 +49,7 @@
                                         <i class="fa fa-list"></i>
                                     </span>
                                     <select id="model" name="model" class="form-control">
-                                        <option value="">Selecione</option>
+                                        <option selected disabled value="">Selecione</option>
                                         <option {{ (isset($_GET['model']) && $_GET['model'] == 'User' ? "selected":"") }} value="User">User</option>
                                         <option {{ (isset($_GET['model']) && $_GET['model'] == 'Unidade' ? "selected":"") }} value="Unidade">Unidade</option>
                                     </select>
@@ -58,12 +58,10 @@
                             <div class="col-xl-3 col-md-6 col-12">
                                 <label for="created_at">Data</label>
                                 <div class="input-group">
-                                    <div class="input-group">
-                                        <span class="input-group-addon bg-primary">
-                                            <i class="icofont icofont-calendar"></i>
-                                        </span>
-                                        <input type="date" class="form-control" name="created_at" id="created_at" value="{{ isset($_GET['created_at']) ? $_GET['created_at'] : null }}">
-                                    </div>
+                                    <span class="input-group-addon bg-primary">
+                                        <i class="icofont icofont-calendar"></i>
+                                    </span>
+                                    <input type="date" class="form-control" name="created_at" id="created_at" value="{{ isset($_GET['created_at']) ? $_GET['created_at'] : null }}">
                                 </div>
                             </div>
                             <div class="col-xl-3 col-md-6 col-12">
@@ -73,7 +71,7 @@
                                         <i class="fa fa-building"></i>
                                     </span>
                                     <select id="unidade_id" name="unidade_id" class="form-control">
-                                        <option value="">Selecione</option>
+                                        <option selected disabled value="">Selecione</option>
                                         @foreach($unidades as $unidade)
                                             <option {{ (isset($_GET['unidade_id']) && $_GET['unidade_id'] == $unidade->id ? "selected":"") }} value="{{ $unidade->id }}">{{ $unidade->bairro }}</option>
                                         @endforeach
@@ -109,48 +107,54 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($registers as $register)
-                                    <tr id="register-{{$register->id}}" style="cursor: pointer" >
-                                        <td><span id="icon-{{$register->id}}"  class="fa fa-plus mr-3 text-success"></span>{{ Helper::getUserTittle($register->user) }}</td>
-                                        <td>{{ Helper::getUnidadeTittle($register->unidade_id) }}</td>
-                                        <td>{{ Helper::getRegisterTipo($register->action) }}</td>
-                                        <td>{{ $register->model }}</td>
-                                        <td>{{ date('d/m/Y H:i:s', strtotime($register->created_at)) }}</td>
-                                    </tr>
-                                    <tr hidden  id="register-data-{{$register->id}}">
-                                        <td colspan="6" class="bg-c-yellow text-white" >
-                                            @if($register->action === 'c')
-                                                @if($register->model === 'User')
-                                                    <p><b>Novo usuario: </b></p>
-                                                    <a href="{{ route('users.edit', $register->id_model) }}">
-                                                        <button class="btn btn-primary b-radius-5">{{ Helper::getUserTittle($register->id_model) }}</button>
-                                                    </a>
+                                @if($registers->count())
+                                    @foreach ($registers as $register)
+                                        <tr id="register-{{$register->id}}" style="cursor: pointer" >
+                                            <td><span id="icon-{{$register->id}}"  class="fa fa-plus mr-3 text-success"></span>{{ Helper::getUserTittle($register->user) }}</td>
+                                            <td>{{ Helper::getUnidadeTittle($register->unidade_id) }}</td>
+                                            <td>{{ Helper::getRegisterTipo($register->action) }}</td>
+                                            <td>{{ $register->model }}</td>
+                                            <td>{{ date('d/m/Y H:i:s', strtotime($register->created_at)) }}</td>
+                                        </tr>
+                                        <tr hidden  id="register-data-{{$register->id}}">
+                                            <td colspan="6" class="bg-c-yellow text-white" >
+                                                @if($register->action === 'c')
+                                                    @if($register->model === 'User')
+                                                        <p><b>Novo usuario: </b></p>
+                                                        <a href="{{ route('users.edit', $register->id_model) }}">
+                                                            <button class="btn btn-primary b-radius-5">{{ Helper::getUserTittle($register->id_model) }}</button>
+                                                        </a>
+                                                    @endif
                                                 @endif
-                                            @endif
-                                            @if($register->action === 'e')
-                                                <div class="row col-12">
-                                                    <p class="col-12" style="font-size: 16px"><b>Dados Alterados: {{ Helper::getUserTittle($register->id_model) }}</b></p>
-                                                    @foreach(json_decode($register->data) as $key => $data)
-                                                        <div class="col-4">
-                                                            <b>{{ $key === 'novo' ? '- Novos' : '- Antigo' }}</b><br>
-                                                            @foreach($data as $key => $dat)
-                                                                <span>{{ ucfirst($key) . ': ' . $dat }}</span><br>
-                                                            @endforeach
-                                                        </div>
-                                                    @endforeach
-                                                </div>
-                                            @endif
-                                            @if($register->action === 'ex')
-                                                @if($register->model === 'User')
-                                                    <p><b>Usuario desativado: </b></p>
-                                                    <a href="{{ route('users.edit', $register->id_model) }}">
-                                                        <button class="btn btn-primary b-radius-5">{{ Helper::getUserTittle($register->id_model) }}</button>
-                                                    </a>
+                                                @if($register->action === 'e')
+                                                    <div class="row col-12">
+                                                        <p class="col-12" style="font-size: 16px"><b>Dados Alterados: {{ Helper::getUserTittle($register->id_model) }}</b></p>
+                                                        @foreach(json_decode($register->data) as $key => $data)
+                                                            <div class="col-4">
+                                                                <b>{{ $key === 'novo' ? '- Novos' : '- Antigo' }}</b><br>
+                                                                @foreach($data as $key => $dat)
+                                                                    <span>{{ ucfirst($key) . ': ' . $dat }}</span><br>
+                                                                @endforeach
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
                                                 @endif
-                                            @endif
-                                        </td>
+                                                @if($register->action === 'ex')
+                                                    @if($register->model === 'User')
+                                                        <p><b>Usuario desativado: </b></p>
+                                                        <a href="{{ route('users.edit', $register->id_model) }}">
+                                                            <button class="btn btn-primary b-radius-5">{{ Helper::getUserTittle($register->id_model) }}</button>
+                                                        </a>
+                                                    @endif
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    <tr class="text-center">
+                                        <td colspan="10">Nenhum registro encontrado.</td>
                                     </tr>
-                                @endforeach
+                                @endif
                                 </tbody>
                             </table>
                             <div class="pr-4 pl-4">

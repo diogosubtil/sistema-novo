@@ -4,8 +4,7 @@
         <!-- Color Picker css -->
         <link rel="stylesheet" type="text/css" href="{{ asset('/files/bower_components/spectrum/css/spectrum.css') }}">
         <!-- Mini-color css -->
-        <link rel="stylesheet" type="text/css"
-              href="{{ asset('/files/bower_components/jquery-minicolors/css/jquery.minicolors.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('/files/bower_components/jquery-minicolors/css/jquery.minicolors.css') }}">
     @endslot
 
     @slot('slot')
@@ -13,8 +12,7 @@
             <div class="col-lg-12 col-12">
                 <div class="p-2 card">
                     <div class="col-12">
-                        <form method="POST" action="{{ route('settings.update', $setting->id) }}"
-                              enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('settings.update', $setting->id) }}" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <!-- Name -->

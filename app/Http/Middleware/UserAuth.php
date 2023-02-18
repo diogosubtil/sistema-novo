@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Unidade;
 use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
@@ -41,6 +42,9 @@ class UserAuth
                 Session::put(['unidade' => $unidadesUser[0]]);
             }
 
+            //SET TIMEZONE DA UNIDADE
+            $unidade = Unidade::query()->where('id', '=', Session::get('unidade'))->first();
+            date_default_timezone_set($unidade->timezone);
         }
 
         return $next($request);

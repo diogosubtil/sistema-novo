@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('support_id')->constrained();
             $table->integer('user');
             $table->foreignId('unidade_id')->constrained();
-            $table->integer('answer');
+            $table->text('answer');
             $table->timestamps();
         });
     }

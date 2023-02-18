@@ -7,6 +7,7 @@ use App\Models\Unidade;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Session;
 
 class Helper
 {
@@ -86,6 +87,13 @@ class Helper
         return $user;
     }
 
+    public static function getUser($id)
+    {
+        $user = User::query()->where('id', '=', $id)->first();
+
+        return $user;
+    }
+
     //FUNÇÃO PARA OBTER AS TIME ZONES
     public static function timezones()
     {
@@ -126,4 +134,41 @@ class Helper
         }
     }
 
+    //FUNÇÃO PARA OBTER COR STATUS SUPORTE
+    public static function getColorSupport($status)
+    {
+        switch ($status) {
+            case '1':
+                echo 'label-primary';
+                break;
+            case '2':
+                echo 'label-warning';
+                break;
+            case '3':
+                echo 'label-danger';
+                break;
+            case '4':
+                echo 'label-success';
+                break;
+        }
+    }
+
+    //FUNÇÃO PARA OBTER COR STATUS SUPORTE
+    public static function getStatusSupport($status)
+    {
+        switch ($status) {
+            case '1':
+                echo 'Novo';
+                break;
+            case '2':
+                echo 'Usuario Respondeu';
+                break;
+            case '3':
+                echo 'Suporte Respondeu';
+                break;
+            case '4':
+                echo 'Concluido';
+                break;
+        }
+    }
 }

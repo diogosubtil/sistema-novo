@@ -8,7 +8,7 @@
                         <!-- Password Reset Token -->
                         <input type="hidden" name="token" value="{{ $request->route('token') }}">
                         <div style="width: 100%;height: 100%;display: flex" class="text-center col-12 d-flex justify-content-center">
-                            <div class="col-4">
+                            <div class="col-xl-4 col-md-6 col-10">
                                 <img style="max-width: 100%;max-height: 100%" src="{{ asset(Helper::settings()->logo) }}" alt="logo.png">
                             </div>
                         </div>

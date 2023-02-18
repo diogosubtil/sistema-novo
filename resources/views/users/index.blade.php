@@ -48,7 +48,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 col-12">
+            <div class="col-xl-3 col-md-12 col-12">
                 <div class="card feed-card">
                     <div class="card-header d-flex justify-content-between">
                         <div class="col-4">
@@ -71,7 +71,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-9 col-12">
+            <div class="col-xl-9 col-md-12 col-12">
                 <div class="card">
                     <div class="card-header">
                         <h5>Filtros</h5>
@@ -94,7 +94,7 @@
                                         <i class="icofont icofont-book-mark"></i>
                                     </span>
                                     <select id="funcao" name="funcao" class="form-control">
-                                        <option value="">Selecione</option>
+                                        <option selected disabled value="">Selecione</option>
                                         <option {{ (isset($_GET['funcao']) && $_GET['funcao'] == '1' ? "selected":"") }} value="1">Master</option>
                                         <option {{ (isset($_GET['funcao']) && $_GET['funcao'] == '2' ? "selected":"") }} value="2">Gerente</option>
                                         <option {{ (isset($_GET['funcao']) && $_GET['funcao'] == '3' ? "selected":"") }} value="3">Aplicadora</option>
@@ -110,7 +110,7 @@
                                         <i class="fa fa-building"></i>
                                     </span>
                                     <select id="unidade_id" name="unidade_id" class="form-control">
-                                        <option value="">Selecione</option>
+                                        <option selected disabled value="">Selecione</option>
                                         @foreach($unidades as $unidade)
                                             <option {{ (isset($_GET['unidade_id']) && $_GET['unidade_id'] == $unidade->id ? "selected":"") }} value="{{ $unidade->id }}">{{ $unidade->bairro }}</option>
                                         @endforeach

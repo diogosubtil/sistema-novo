@@ -31,6 +31,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('/files/bower_components/switchery/css/switchery.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/files/assets/pages/notification/notification.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/files/bower_components/animate.css/css/animate.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/files/assets/css/component.css') }}">
+
 
     <!-- SETTINGS -->
     <style>
@@ -140,6 +142,12 @@
         }
         /* MENU BORDA */
 
+
+        /* LINKS HOVER */
+         a:hover{
+             color: {{ Helper::settings()->color_primary }};
+         }
+        /* LINKS HOVER */
 
         /* BACKGROUNS TEXT BUTTONS INPUTS */
         .bg-c-primary {
@@ -345,6 +353,11 @@
                                             <i class="feather icon-user"></i> Perfil
                                         </li>
                                     </a>
+                                    <a class="m-0 p-0 text-white" id="profileButton" href="{{ route('supports.indexuser') }}">
+                                        <li class="bg-c-primary">
+                                            <i class="feather icon-help-circle"></i> Suporte
+                                        </li>
+                                    </a>
                                     <form class="p-0 m-0" method="POST" action="{{ route('logout') }}" >
                                         @csrf
                                         <a class="p-0 m-0 text-white" id="logoutButton" href="#" onclick="event.preventDefault();this.closest('form').submit();">
@@ -543,6 +556,19 @@
                             </li>
                             <li class="pcoded-hasmenu">
                                 <a href="javascript:void(0)">
+                                    <span class="pcoded-micon"><i class="feather icon-help-circle"></i></span>
+                                    <span class="pcoded-mtext">Suporte</span>
+                                </a>
+                                <ul class="pcoded-submenu">
+                                    <li id="{{ route('supports.index') }}">
+                                        <a href="{{ route('supports.index') }}">
+                                            <span class="pcoded-mtext">Painel</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="pcoded-hasmenu">
+                                <a href="javascript:void(0)">
                                     <span class="pcoded-micon"><i class="icofont icofont-folder-open"></i></span>
                                     <span class="pcoded-mtext">Registros</span>
                                 </a>
@@ -614,6 +640,46 @@
 <script type="text/javascript" src="{{ asset('/js/new-scripts.js') }}"></script>
 <script type="text/javascript" src="{{ asset('/js/websocket-notify.js') }}"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript" src="{{ asset('/files/assets/js/modalEffects.js') }}"></script>
+<script type="text/javascript" src="{{ asset('/files/assets/js/classie.js') }}"></script>
+
+<script>
+    //WebSocket
+    var connectionWeb = new WebSocket('ws://127.0.0.1:8090');
+
+    connectionWeb.onopen = function(e) {
+        console.log("Connection established!");
+    };
+
+    connectionWeb.onmessage = function(e) {
+        if(e.data === 'support-create') {
+            @if(Auth::user()->funcao == 1)
+            supportCreate();
+            @endif
+        }
+        if(e.data === 'support-answer') {
+            @if(Auth::user()->funcao == 1)
+                supportAnswerSupport();
+            @endif
+        }
+        if(e.data === 'support-answer-{{ Auth::user()->id }}') {
+            supportAnswerUser();
+        }
+    };
+
+    function supportCreate() {
+        notifysimple('Novo Ticket de suporte ', 'inverse');
+    }
+    function supportAnswerSupport() {
+        notifysimple('Ticket de suporte repondido', 'inverse');
+    }
+    function supportAnswerUser() {
+        notifysimple('Ticket de suporte repondido', 'inverse');
+    }
+    //WebSocket
+
+
+</script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>

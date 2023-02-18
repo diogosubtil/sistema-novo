@@ -7,12 +7,14 @@ use App\Repositories\EloquentSettingsRepository;
 use App\Repositories\EloquentSupportsAnswersRepository;
 use App\Repositories\EloquentSupportsRepository;
 use App\Repositories\EloquentUnidadesRepository;
+use App\Repositories\EloquentUploadsRepository;
 use App\Repositories\EloquentUsersRepository;
 use App\Repositories\RegistersRepository;
 use App\Repositories\SettingsRepository;
 use App\Repositories\SupportsAnswersRepository;
 use App\Repositories\SupportsRepository;
 use App\Repositories\UnidadesRepository;
+use App\Repositories\UploadsRepository;
 use App\Repositories\UsersRepository;
 use Closure;
 use Illuminate\Support\ServiceProvider;
@@ -26,7 +28,8 @@ class RepositoriesProviders extends ServiceProvider
         SettingsRepository::class           => EloquentSettingsRepository::class,
         RegistersRepository::class          => EloquentRegistersRepository::class,
         SupportsRepository::class           => EloquentSupportsRepository::class,
-        SupportsAnswersRepository::class    => EloquentSupportsAnswersRepository::class
+        SupportsAnswersRepository::class    => EloquentSupportsAnswersRepository::class,
+        UploadsRepository::class            => EloquentUploadsRepository::class
     ];
 
     /**

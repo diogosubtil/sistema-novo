@@ -3,6 +3,8 @@
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\RegistersController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\SupportsAnswersController;
+use App\Http\Controllers\SupportsController;
 use App\Http\Controllers\UnidadesController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ProfileController;
@@ -90,4 +92,12 @@ Route::middleware('auth')->group(function () {
 
     //CHAT
     Route::resource('/chat', ChatController::class);
+
+    //SUPPORTS
+    Route::resource('/supports', SupportsController::class);
+    Route::get('/supports/painel/user', [SupportsController::class, 'indexUser'])->name('supports.indexuser');
+    Route::get('/supports/ticket/{support}', [SupportsController::class, 'showUser'])->name('supports.showuser');
+    Route::resource('/supportsanswers', SupportsAnswersController::class);
+    Route::post('/supportsanswers/storeuser', [SupportsAnswersController::class, 'storeUser'])->name('supportsanswers.storeuser');
 });
+
