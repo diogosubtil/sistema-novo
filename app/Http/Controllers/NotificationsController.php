@@ -22,13 +22,6 @@ class NotificationsController extends Controller
             ->limit($request->limit)
             ->get();
 
-        //OBTEM AS INFORMAÇÕES
-        $data = [];
-        foreach ($notifications as $notification){
-            $data[] = json_decode($notification->data);
-        }
-
-
         return json_encode($notifications);
     }
 
@@ -43,7 +36,7 @@ class NotificationsController extends Controller
         return $quantity;
     }
 
-    //FUNÇÃO PARA OBTER NOTIFICAÇÕES NOVAS
+    //FUNÇÃO PARA MARCA COMO LIDA AS NOTIFICAÇÕES
     public function seen()
     {
         return $this->repository->seen();
