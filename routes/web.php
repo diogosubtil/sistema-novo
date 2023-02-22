@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\RegistersController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SupportsAnswersController;
@@ -99,5 +100,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/supports/ticket/{support}', [SupportsController::class, 'showUser'])->name('supports.showuser');
     Route::resource('/supportsanswers', SupportsAnswersController::class);
     Route::post('/supportsanswers/storeuser', [SupportsAnswersController::class, 'storeUser'])->name('supportsanswers.storeuser');
+
+    //NOTIFICAÇÕES
+    Route::resource('/notifications', NotificationsController::class);
+    Route::post('/notifications/get', [NotificationsController::class, 'get'])->name('notifications.get');
+    Route::post('/notifications/quantity', [NotificationsController::class, 'quantity'])->name('notifications.quantity');
+    Route::post('/notifications/seen', [NotificationsController::class, 'seen'])->name('notifications.seen');
+
 });
 

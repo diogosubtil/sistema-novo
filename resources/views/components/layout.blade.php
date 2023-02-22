@@ -214,6 +214,12 @@
         }
         /* BACKGROUNS TEXT BUTTONS INPUTS */
 
+        /* BACKGROUNS NOTIFICAÇÃO */
+        .growl-animated.alert-inverse {
+            background: linear-gradient(to right, #fe9365,#fe9365);;
+        }
+        /* BACKGROUNS NOTIFICAÇÃO */
+
     </style>
     <!-- SETTINGS -->
 
@@ -261,7 +267,7 @@
 
                 <div class="navbar-container container-fluid col-12">
                     <ul class="nav-left col-7">
-                        <li class="">
+                        <li>
                             <a href="#!" onclick="javascript:toggleFullScreen()">
                                 <i class="feather icon-maximize full-screen"></i>
                             </a>
@@ -279,58 +285,38 @@
                         </li>
                     </ul>
                     <ul class="nav-right">
-                        <li class="header-notification">
+                        <li id="notifications"  class="header-notification">
                             <div class="dropdown-primary dropdown">
-                                <div class="dropdown-toggle" data-toggle="dropdown">
+                                <div onclick="abrirNotificacoes();seenNotyfy()"  id="qtdNotify" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="feather icon-bell"></i>
-                                    <span class="badge bg-c-pink">5</span>
                                 </div>
-                                <ul class="show-notification notification-view dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                                <ul id="notifyMobile" class="show-notification notification-view dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="overflow: auto;max-height: 60vh">
                                     <li>
-                                        <h6>Notifications</h6>
-                                        <label class="label label-danger">New</label>
+                                        <h6>Notificações</h6>
                                     </li>
-                                    <li>
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="..\files\assets\images\avatar-4.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">John Doe</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
+                                    <div id="bodyNotifications">
+                                        <li>
+                                            <div class="media text-center">
+                                                <div class="media-body">
+                                                    <p class="notification-msg">Nenhuma Notificação</p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="..\files\assets\images\avatar-3.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">Joseph William</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="..\files\assets\images\avatar-4.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">Sara Soudein</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
+                                        </li>
+                                    </div>
+                                    <a onclick="clickLista()" class="text-center p-0">
+                                        <h6>Ver mais</h6>
+                                    </a>
                                 </ul>
                             </div>
                         </li>
-                        <li class="header-notification">
-                            <div class="dropdown-primary dropdown">
-                                <div class="displayChatbox dropdown-toggle" data-toggle="dropdown">
-                                    <i class="feather icon-message-square"></i>
-                                    <span class="badge bg-c-green">3</span>
-                                </div>
-                            </div>
-                        </li>
+{{--                        <li class="header-notification">--}}
+{{--                            <div class="dropdown-primary dropdown">--}}
+{{--                                <div class="displayChatbox dropdown-toggle" data-toggle="dropdown">--}}
+{{--                                    <i class="feather icon-message-square"></i>--}}
+{{--                                    <span class="badge bg-c-green">3</span>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </li>--}}
                         <li class="user-profile header-notification">
                             <div class="dropdown-primary dropdown">
                                 <div class="dropdown-toggle" data-toggle="dropdown">
@@ -638,6 +624,7 @@
 <script type="text/javascript" src="{{ asset('/files/assets/js/bootstrap-growl.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('/files/assets/pages/notification/notification.js') }}"></script>
 <script type="text/javascript" src="{{ asset('/js/new-scripts.js') }}"></script>
+<script type="text/javascript" src="{{ asset('/js/notifications.js') }}"></script>
 <script type="text/javascript" src="{{ asset('/js/websocket-notify.js') }}"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript" src="{{ asset('/files/assets/js/modalEffects.js') }}"></script>
@@ -654,28 +641,36 @@
     connectionWeb.onmessage = function(e) {
         if(e.data === 'support-create') {
             @if(Auth::user()->funcao == 1)
-            supportCreate();
+
+            //NOTIFICA OS ADMINS
+            notifySupport('Novo Ticket de suporte ');
+
+            //ATUALIZA O NUMERO DE NOTIFICAÇÕES
+            newsNotify();
+
             @endif
         }
         if(e.data === 'support-answer') {
             @if(Auth::user()->funcao == 1)
-                supportAnswerSupport();
+
+                //NOTIFICA OS ADMINS
+                notifySupport('Ticket de suporte respondido');
+
+                //ATUALIZA O NUMERO DE NOTIFICAÇÕES
+                newsNotify();
+
             @endif
         }
         if(e.data === 'support-answer-{{ Auth::user()->id }}') {
-            supportAnswerUser();
+
+            //NOTIFICA O USUARIO
+            notifySupport('Ticket de suporte respondido');
+
+            //ATUALIZA O NUMERO DE NOTIFICAÇÕES
+            newsNotify();
+
         }
     };
-
-    function supportCreate() {
-        notifysimple('Novo Ticket de suporte ', 'inverse');
-    }
-    function supportAnswerSupport() {
-        notifysimple('Ticket de suporte repondido', 'inverse');
-    }
-    function supportAnswerUser() {
-        notifysimple('Ticket de suporte repondido', 'inverse');
-    }
     //WebSocket
 
 

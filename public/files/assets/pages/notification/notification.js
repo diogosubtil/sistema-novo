@@ -1,38 +1,34 @@
 'use strict';
 
 //Welcome Message (not for login page)
-function notifysimple(message, type){
+function notifySupport(message){
     $.growl({
-        message: message
+        icon: 'feather icon-help-circle',
+        title: ' Suporte: ',
+        message: message,
+        url: ''
     },{
-        type: type,
-        allow_dismiss: false,
-        label: 'Cancel',
-        className: 'btn-xs btn-inverse',
+        element: 'body',
+        type: 'inverse',
+        allow_dismiss: true,
         placement: {
             from: 'bottom',
             align: 'right'
-        },
-        delay: 5000,
-        animate: {
-            enter: 'animated fadeInRight',
-            exit: 'animated fadeOutRight'
         },
         offset: {
             x: 30,
             y: 30
         },
-        icon_type: 'class',
-        template: '<div data-growl="container" class="alert" role="alert">' +
-            '<button type="button" class="close" data-growl="dismiss">' +
-            '<span aria-hidden="true">&times;</span>' +
-            '<span class="sr-only">Close</span>' +
-            '</button>' +
-            '<span data-growl="icon"></span>' +
-            '<span data-growl="title"></span>' +
-            '<span data-growl="message"></span>' +
-            '<a href="#" data-growl="url"></a>' +
-            '</div>'
+        spacing: 10,
+        z_index: 999999,
+        delay: 15*60000,
+        timer: 1000,
+        url_target: '_blank',
+        mouse_over: false,
+        animate: {
+            enter: 'animated bounceInRight',
+            exit: 'animated bounceOutRight'
+        },
     });
 };
 
@@ -80,16 +76,16 @@ function notify(from, align, icon, type, animIn, animOut){
     });
 };
 
-$('.notifications-btn').on('click',function(e){
-    e.preventDefault();
-    var nFrom = $(this).attr('data-from');
-    var nAlign = $(this).attr('data-align');
-    var nIcons = $(this).attr('data-icon');
-    var nType = $(this).attr('data-type');
-    var nAnimIn = $(this).attr('data-animation-in');
-    var nAnimOut = $(this).attr('data-animation-out');
-
-    notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut);
-});
+// $('.notifications-btn').on('click',function(e){
+//     e.preventDefault();
+//     var nFrom = $(this).attr('data-from');
+//     var nAlign = $(this).attr('data-align');
+//     var nIcons = $(this).attr('data-icon');
+//     var nType = $(this).attr('data-type');
+//     var nAnimIn = $(this).attr('data-animation-in');
+//     var nAnimOut = $(this).attr('data-animation-out');
+//
+//     notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut);
+// });
 
 

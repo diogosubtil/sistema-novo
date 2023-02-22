@@ -4,13 +4,15 @@ namespace App\Repositories;
 
 use App\Http\Requests\SupportsFormRequest;
 use App\Models\Support;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class EloquentSupportsRepository implements SupportsRepository
 {
 
     //CONSTRUTOR COM REPOSITORY INJETADO
-    public function __construct(private UploadsRepository $repository)
+    public function __construct(private UploadsRepository $repository, private NotificationsRepository $notificationsRepository)
     {
     }
 
@@ -24,8 +26,23 @@ class EloquentSupportsRepository implements SupportsRepository
         $data = $request->except('_token');
         $supporte = Support::create($data);
 
+        //UPLOAD DOS ARQUIVOS
         if ($request->file){
             $this->repository->add(20,$supporte->id,$request->file);
+        }
+
+        //CADASTRA A NOTIFICAÇÃO PARA OS ADMINS
+        $admins = User::query()->where('funcao', '=', 1)->get();
+        foreach ($admins as $admin){
+            $data = [
+                'title'     => 'Novo Ticket de Suporte',
+                'content'   => 'O usuário '.Auth::user()->name.' adicionou um novo suporte.',
+                'url'       => '/supports/'.$supporte->id,
+                'type'      => 'Suporte',
+                'color'     => 'primary',
+                'date'      => date('d/m/Y H:i')
+            ];
+            $this->notificationsRepository->add('Support','User',$admin->id, $data);
         }
 
         //ENVIA A TRASAÇÃO (COMMIT)

@@ -23,6 +23,15 @@
     }
 }
 
+@media only screen and (max-width: 576px){
+
+    #notifyMobile {
+        left: -9.0rem!important;
+        width: 18rem!important;
+    }
+}
+
+
 #profileButton:hover, #logoutButton:hover {
     color: silver!important;
 }

@@ -4,6 +4,7 @@
     @endslot
     @slot('slot')
         <div class="row justify-content-center">
+            <!-- VERIFICA SE O TICKET JA FOI FINALIZADO -->
             @if($support->status != 4)
                 <div class="col-xl-4 col-md-12 col-12">
                     <div class="row">
@@ -64,6 +65,7 @@
                     </div>
                 </div>
             @endif
+            <!-- VERIFICA SE O TICKET JA FOI FINALIZADO -->
             <div class="col-xl-8 col-md-12 col-12 ">
                 <div class="card comment-block">
                     <div class="card-header">
@@ -151,7 +153,7 @@
                     success: function(data){
                         //REDIRECIONA PARA A PAGINA
                         window.location.reload()
-                        //NOTIFICA OS ADMINISTRADORES
+                        //NOTIFICA O USUARIO DO TICKET
                         connectionWeb.send('support-answer-{{ $support->user }}');
                     },
                     error: function(data){

@@ -4,13 +4,14 @@
     @endslot
     @slot('slot')
         <div class="row justify-content-center">
-            @if($support->status != 4)
                 <div class="col-xl-4 col-md-12 col-12">
                     <div class="row">
                         <div class="col-12">
                             <div class="card table-card">
                                 <div class="card-header">
-                                    <h6 class="text-primary"><p><b>Seu ticket foi resolvido?</b></p></h6>
+                                    <h6 class="text-primary"><p><b>@if($support->status == 4) Esse Ticket ja foi concluido! @else Seu ticket foi resolvido? @endif</b></p></h6>
+                                    <!-- VERIFICA SE O TICKET JA FOI FINALIZADO -->
+                                    @if($support->status != 4)
                                     <form method="POST" action="{{ route('supports.update', $support->id) }}">
                                         @csrf
                                         @method('PUT')
@@ -21,9 +22,13 @@
                                         <input hidden name="unidade_id" value="{{ $support->unidade_id }}">
                                         <button type="submit" class="btn b-radius-5 btn-success">Finalizar</button>
                                     </form>
+                                    @endif
+                                    <!-- VERIFICA SE O TICKET JA FOI FINALIZADO -->
                                 </div>
                             </div>
                         </div>
+                        <!-- VERIFICA SE O TICKET JA FOI FINALIZADO -->
+                        @if($support->status != 4)
                         <div class="col-xl-12 col-md-12 col-12">
                             <div class="card table-card p-3">
                                 <form id="answer-support" method="POST" class="row" action="{{ route('supportsanswers.storeuser') }}" enctype="multipart/form-data">
@@ -61,6 +66,8 @@
                                 </form>
                             </div>
                         </div>
+                        @endif
+                        <!-- VERIFICA SE O TICKET JA FOI FINALIZADO -->
                         <div class="col-12">
                             <div class="card table-card">
                                 <div class="card-header">
@@ -79,7 +86,6 @@
                         </div>
                     </div>
                 </div>
-            @endif
             <div class="col-xl-8 col-md-12 col-12 ">
                 <div class="card comment-block">
                     <div class="card-header">

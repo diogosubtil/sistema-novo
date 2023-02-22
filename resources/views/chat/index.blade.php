@@ -189,8 +189,8 @@
     @endslot
 
     @slot('slot')
-            <div class="row">
-            <aside class="col-6">
+        <div class="row">
+            <aside class="col-6" style="height: 80vh">
                 <img src="{{ asset('/files/assets/images/Icon ionic-ios-chatboxes.png') }}" alt="Chat" title="Chat"/>
 
                 <form id="form1">
@@ -201,23 +201,35 @@
                 <button  id="btn1">Enviar</button>
             </aside>
 
-            <section class="col-6" id="content">
+            <section style="overflow:auto;height: 80vh" class="col-6" id="content">
             </section>
         </div>
     @endslot
 
     @slot('scripts')
         <script>
-            //WebSocket
-            var conn = new WebSocket('ws://127.0.0.1:8090');
 
-            conn.onopen = function(e) {
-                console.log("Connection established!");
+            connectionWeb.onopen = function(e) {
+                console.log("Cenectado ao Chat!");
             };
 
-            conn.onmessage = function(e) {
-                // console.log(e.data);
-                showMessages('other', e.data);
+            let send = true
+            connectionWeb.onmessage = function(e) {
+                let user = JSON.parse(e.data)
+                if(send){
+                    user.forEach(function (data) {
+                        let userid = JSON.parse(data)
+                        if(userid.id === {{ Auth::user()->id }}){
+                            showMessages('me', data)
+                        } else {
+                            showMessages('other', data)
+                        }
+                        send = false
+                    })
+                } else {
+                    showMessages('other', e.data)
+                }
+
             };
 
             // conn.send('Hello World!');
@@ -230,10 +242,10 @@
 
             btn_env.addEventListener('click', function(){
                 if (inp_message.value !== '') {
-                    var msg = {'name': inp_name.value, 'msg': inp_message.value};
+                    var msg = {'id': {{ Auth::user()->id }}, 'name': inp_name.value, 'msg': inp_message.value, 'chat': 'chat'};
                     msg = JSON.stringify(msg);
 
-                    conn.send(msg);
+                    connectionWeb.send(msg);
 
                     showMessages('me', msg);
 
@@ -241,16 +253,14 @@
                 }
             });
 
-
             function showMessages(how, data) {
-                data = JSON.parse(data);
-
+                let message = JSON.parse(data)
                 // console.log(data);
-
+                var img_src = '';
                 if (how === 'me') {
-                    var img_src = "{{ asset('/files/assets/images/Icon awesome-rocketchat.png') }}";
+                    img_src = "{{ asset('/files/assets/images/Icon awesome-rocketchat.png') }}";
                 } else if (how === 'other') {
-                    var img_src = "{{ asset('/files/assets/images/Icon awesome-rocketchat-1.png') }}";
+                    img_src = "{{ asset('/files/assets/images/Icon awesome-rocketchat-1.png') }}";
                 }
 
                 var div = document.createElement('div');
@@ -263,10 +273,10 @@
                 div_txt.setAttribute('class', 'text');
 
                 var h5 = document.createElement('h5');
-                h5.textContent = data.name;
+                h5.textContent = message.name;
 
                 var p = document.createElement('p');
-                p.textContent = data.msg;
+                p.textContent = message.msg;
 
                 div_txt.appendChild(h5);
                 div_txt.appendChild(p);
@@ -275,6 +285,7 @@
                 div.appendChild(div_txt);
 
                 area_content.appendChild(div);
+                area_content.scrollTop = area_content.scrollHeight
             }
         </script>
         <script>
