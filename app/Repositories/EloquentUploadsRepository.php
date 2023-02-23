@@ -19,6 +19,7 @@ class EloquentUploadsRepository implements UploadsRepository
             //MOVE O ARQUIVO PARA O LOCAL
             $path = '/files/uploads/supports/';
             $name = $file->hashName();
+            $extension = $file->extension();
             $file->move(public_path('files/uploads/supports'), $name);
 
             //OBTEM OS DADOS E FAZ O CADASTRO
@@ -26,6 +27,7 @@ class EloquentUploadsRepository implements UploadsRepository
             $data['type_id'] = $type_id;
             $data['url'] = $path . $name;
             $data['name'] = $name;
+            $data['extension'] = $extension;
             $data['user'] = Auth::user()->id;
             $upload = Upload::create($data);
         }

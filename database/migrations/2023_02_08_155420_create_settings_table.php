@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('color_menu','15');
             $table->string('color_menu_letter','15');
             $table->string('color_menu_letter_active','15');
-            $table->string('color_menu_tittle','15');
+            $table->string('color_menu_title','15');
             $table->string('color_menu_icon','15');
             $table->string('color_login','15');
             $table->string('logo');
@@ -38,7 +38,7 @@ return new class extends Migration
                 'color_menu' => '#404e67',
                 'color_menu_letter' => '#FFFFFF',
                 'color_menu_letter_active' => '#01a9ac',
-                'color_menu_tittle' => '#FFFFFF',
+                'color_menu_title' => '#FFFFFF',
                 'color_menu_icon' => '#FFFFFF',
                 'color_login' => '#01a9ac',
                 'logo' => '/files/assets/images/logo.png',

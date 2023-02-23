@@ -73,7 +73,7 @@
                                 <tbody>
                                 @foreach ($unidades as $unidade)
                                     <tr>
-                                        <td>{{ Helper::getUserTittle($unidade->gerente) }}</td>
+                                        <td>{{ Helper::getUserTitle($unidade->gerente) }}</td>
                                         <td>{{ $unidade->bairro }}</td>
                                         <td>{{ $unidade->cidade }}</td>
                                         <td>{{ $unidade->estado }}</td>

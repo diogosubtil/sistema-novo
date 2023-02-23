@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Http\Requests\SupportsAnswersFormRequest;
 use App\Models\Support;
 use App\Models\SupportAnswer;
 use App\Models\User;
@@ -17,7 +18,7 @@ class EloquentSupportsAnswersRepository implements SupportsAnswersRepository
     }
 
     //FUNÇÂO PARA CADASTRAR NO BANCO
-    public function add(Request $request): SupportAnswer
+    public function add(SupportsAnswersFormRequest $request): SupportAnswer
     {
         //INICIA A TRANSAÇÃO
         DB::beginTransaction();

@@ -17,6 +17,7 @@ class Upload extends Model
         'type_id',
         'url',
         'name',
+        'extension',
         'user',
     ];
 }

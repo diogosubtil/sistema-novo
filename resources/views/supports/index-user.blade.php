@@ -73,8 +73,8 @@
                                             <td class="col-1">#{{ $support->id }}</td>
                                             <td class="col-2 text-center text"><label class="label {{ Helper::getColorSupport($support->status) }}">{{ Helper::getStatusSupport($support->status) }}</label></td>
                                             <td>{{ $support->subject }}</td>
-                                            <td class="col-2">{{ Helper::getUserTittle($support->user) }}</td>
-                                            <td class="col-2">{{ Helper::getUnidadeTittle($support->unidade_id) }}</td>
+                                            <td class="col-2">{{ Helper::getUserTitle($support->user) }}</td>
+                                            <td class="col-2">{{ Helper::getUnidadeTitle($support->unidade_id) }}</td>
                                             <td class="col-1 text-center">{{ date('d/m/Y - H:i', strtotime($support->updated_at)) }}</td>
                                         </tr>
                                     @endforeach

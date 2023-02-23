@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SupportsAnswersFormRequest;
 use App\Repositories\SupportsAnswersRepository;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -13,7 +14,7 @@ class SupportsAnswersController extends Controller
     {
     }
 
-    public function store(Request $request)
+    public function store(SupportsAnswersFormRequest $request)
     {
         //ADICIONA NO BANCO VIA REPOSITORY
         $this->repository->add($request);
@@ -27,7 +28,7 @@ class SupportsAnswersController extends Controller
         return true;
     }
 
-    public function storeUser(Request $request)
+    public function storeUser(SupportsAnswersFormRequest $request)
     {
         //ADICIONA NO BANCO VIA REPOSITORY
         $this->repository->add($request);

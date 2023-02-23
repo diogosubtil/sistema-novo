@@ -110,8 +110,8 @@
                                 @if($registers->count())
                                     @foreach ($registers as $register)
                                         <tr id="register-{{$register->id}}" style="cursor: pointer" >
-                                            <td><span id="icon-{{$register->id}}"  class="fa fa-plus mr-3 text-success"></span>{{ Helper::getUserTittle($register->user) }}</td>
-                                            <td>{{ Helper::getUnidadeTittle($register->unidade_id) }}</td>
+                                            <td><span id="icon-{{$register->id}}"  class="fa fa-plus mr-3 text-success"></span>{{ Helper::getUserTitle($register->user) }}</td>
+                                            <td>{{ Helper::getUnidadeTitle($register->unidade_id) }}</td>
                                             <td>{{ Helper::getRegisterTipo($register->action) }}</td>
                                             <td>{{ $register->model }}</td>
                                             <td>{{ date('d/m/Y H:i:s', strtotime($register->created_at)) }}</td>
@@ -122,13 +122,13 @@
                                                     @if($register->model === 'User')
                                                         <p><b>Novo usuario: </b></p>
                                                         <a href="{{ route('users.edit', $register->id_model) }}">
-                                                            <button class="btn btn-primary b-radius-5">{{ Helper::getUserTittle($register->id_model) }}</button>
+                                                            <button class="btn btn-primary b-radius-5">{{ Helper::getUserTitle($register->id_model) }}</button>
                                                         </a>
                                                     @endif
                                                 @endif
                                                 @if($register->action === 'e')
                                                     <div class="row col-12">
-                                                        <p class="col-12" style="font-size: 16px"><b>Dados Alterados: {{ Helper::getUserTittle($register->id_model) }}</b></p>
+                                                        <p class="col-12" style="font-size: 16px"><b>Dados Alterados: {{ Helper::getUserTitle($register->id_model) }}</b></p>
                                                         @foreach(json_decode($register->data) as $key => $data)
                                                             <div class="col-4">
                                                                 <b>{{ $key === 'novo' ? '- Novos' : '- Antigo' }}</b><br>
@@ -143,7 +143,7 @@
                                                     @if($register->model === 'User')
                                                         <p><b>Usuario desativado: </b></p>
                                                         <a href="{{ route('users.edit', $register->id_model) }}">
-                                                            <button class="btn btn-primary b-radius-5">{{ Helper::getUserTittle($register->id_model) }}</button>
+                                                            <button class="btn btn-primary b-radius-5">{{ Helper::getUserTitle($register->id_model) }}</button>
                                                         </a>
                                                     @endif
                                                 @endif

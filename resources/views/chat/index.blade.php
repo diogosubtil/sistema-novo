@@ -1,222 +1,94 @@
 <x-layout>
     @slot('stylesheet')
-        <style>
-            * {
-                padding:0;
-                margin:0;
-                box-sizing: border-box;
-                font-family: 'Segoe UI', 'Arial';
-            }
-
-            body{
-                display: flex;
-            }
-
-            aside {
-                background: #FFAF71;
-                width: 650px;
-                height: 100vh;
-                display: grid;
-                grid-template-columns: 1fr 1fr 1fr;
-                /*grid-template-rows: 460px 160px 70px;*/
-                grid-template-rows: 50% 25% 25%;
-                align-items: center;
-            }
-
-            aside > img {
-                grid-row: 1/2;
-                grid-column: 2/3;
-                margin:0 auto;
-                width: 215px;
-                height: 215px;
-            }
-
-            form {
-                grid-row: 2/3;
-                grid-column: 2/3;
-                align-self: flex-end;
-            }
-
-            form > input{
-                width: 374px;
-                height: 40px;
-                margin-bottom: 20px;
-                border:0;
-                border-radius: 5px;
-                background: #EEEEEE;
-                opacity: .7;
-                padding: 10px 20px;
-            }
-
-            aside > button{
-                width: 374px;
-                height: 40px;
-                grid-row: 3;
-                grid-column: 2/3;
-                border:0;
-                border-radius: 5px;
-                background: #232F48;
-                color:#FBFBFB;
-                text-align: center;
-            }
-
-            aside > button:hover{
-                opacity: .8;
-                box-shadow: 2px 2px 2px #444;
-                transition: all .3s;
-                cursor: pointer;
-            }
-
-            section {
-                background: #FFFFFF;
-                width: calc(100% - 650px);
-                height: 100vh;
-                padding: 40px 50px;
-            }
-
-            .me {
-                display: flex;
-                align-items: center;
-                text-align: left;
-                justify-content: flex-start;
-                margin: 25px 0px;
-            }
-
-            .me > img {
-                width: 53px;
-                height: 47px;
-                margin-right: 35px;
-            }
-
-            .me > .text > h5, .other > .text > h5{
-                font-size: 15px;
-                color: #232F48;
-            }
-
-            .me > .text > p, .other > .text > p{
-                font-size: 15px;
-                color: #232F48;
-                opacity: .68;
-            }
-
-            .other {
-                display: flex;
-                align-items: center;
-                text-align: right;
-                margin: 25px 0px;
-                flex-direction: row-reverse;
-            }
-
-            .other > img {
-                width: 53px;
-                height: 47px;
-                margin-left: 35px;
-                justify-self: flex-end;
-            }
-
-            /*Media Queries*/
-
-            @media (max-width: 1250px){
-                aside {
-                    width: 320px;
-                }
-
-                aside > img {
-                    width: 155px;
-                    height: 155px;
-                }
-
-                form > input{
-                    width: 250px;
-                }
-
-                aside > button{
-                    width: 250px;
-                }
-
-                section {
-                    width: calc(100% - 320px);
-                    padding: 30px 40px;
-                }
-
-                .me > img {
-                    width: 50px;
-                    height: 43px;
-                    margin-right: 33px;
-                }
-            }
-
-            @media (max-width: 650px){
-                aside {
-                    width: 240px;
-                }
-
-                aside > img {
-                    width: 115px;
-                    height: 115px;
-                }
-
-                form > input{
-                    width: 210px;
-                    padding: 10px 15px;
-                }
-
-                aside > button{
-                    width: 210px;
-                }
-
-                section {
-                    width: calc(100% - 240px);
-                    padding: 20px 30px;
-                }
-
-                .me > img {
-                    width: 30px;
-                    height: 25px;
-                    margin-right: 20px;
-                }
-
-                .me > .text > h5, .other > .text > h5{
-                    font-size: 14px;
-                }
-
-                .me > .text > p, .other > .text > p{
-                    font-size: 14px;
-                }
-            }
-
-        </style>
+        <link rel="stylesheet" type="text/css" href="{{ asset('/files/assets/pages/message/message.css') }}">
     @endslot
 
     @slot('slot')
-        <div class="row">
-            <aside class="col-6" style="height: 80vh">
-                <img src="{{ asset('/files/assets/images/Icon ionic-ios-chatboxes.png') }}" alt="Chat" title="Chat"/>
+            <div class="message">
+                <div class="row">
+                    <!-- Message section start -->
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header bg-primary">
+                                <div class="media">
+                                    <div class="media-body">
+                                        <div class="txt-white">Unidade: {{ \App\Helpers\Helper::getUnidadeTitle(Session::get('unidade')) }}</div>
+                                        </div>
+                                    <i class="icon-options-vertical f-24 p-absolute msg-ellipsis hidden-md-down"></i>
+                                </div>
+                            </div>
+                            <div class="card-block">
+                                <div class="row">
+                                    <div class="col-lg-9 col-md-12 messages-content">
+                                        <div id="content" style="overflow-y: auto;height: 55vh">
+                                        </div>
+                                        <hr>
+                                        <div class="messages-send">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <input id="name" hidden type="text"  class="form-control new-msg" value="{{ Auth::user()->name }}">
+                                                    <input id="message" type="text"  class="form-control new-msg" placeholder="Escreva sua mensagem..." aria-describedby="basic-addon2">
+                                                    <span id="send" class="input-group-addon bg-white" ><i class="icofont icofont-paper-plane f-18 text-primary"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-12 message-left">
+                                        <div class="card-block user-box contact-box assign-user" style="overflow-y: auto;height: 60vh" >
+                                            @foreach ($total as $on)
+                                                @if(Cache::has('user-is-online-' . $on->id))
+                                                    <div class="media">
+                                                        <div class="media-left media-middle photo-table">
+                                                            <a href="#">
+                                                                <i class="feather icon-user text-success f-20"></i>
+                                                            </a>
+                                                        </div>
+                                                        <div class="media-body">
+                                                            <h6><b>{{ $on->name }}</b></h6>
+                                                            <p>Online</p>
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Message section end -->
+                </div>
+            </div>
 
-                <form id="form1">
-                    <input type="text" disabled placeholder="Digite seu nome..." name="name" id="name" value="{{ Auth::user()->name }}" />
-                    <input type="text" placeholder="Digite sua mensagem..." name="message" id="message" />
-                </form>
+{{--            <div class="row">--}}
+{{--                <aside class="col-6" style="height: 80vh">--}}
+{{--                    <img src="{{ asset('/files/assets/images/Icon ionic-ios-chatboxes.png') }}" alt="Chat" title="Chat"/>--}}
+{{--                    {{ Session::get('usersChat') }}--}}
+{{--                    <form id="form1">--}}
+{{--                        <input type="text" disabled placeholder="Digite seu nome..." name="name" id="name" value="{{ Auth::user()->name }}" />--}}
+{{--                        <input type="text" placeholder="Digite sua mensagem..." name="message" id="message" />--}}
+{{--                    </form>--}}
 
-                <button  id="btn1">Enviar</button>
-            </aside>
+{{--                    <button  id="btn1">Enviar</button>--}}
+{{--                </aside>--}}
 
-            <section style="overflow:auto;height: 80vh" class="col-6" id="content">
-            </section>
-        </div>
+{{--                <section style="overflow:auto;height: 80vh" class="col-6" id="content">--}}
+{{--                </section>--}}
+{{--            </div>--}}
     @endslot
 
     @slot('scripts')
         <script>
 
-            connectionWeb.onopen = function(e) {
+            var connectionChat = new WebSocket('ws://127.0.0.1:8055');
+
+            connectionChat.onopen = function(e) {
                 console.log("Cenectado ao Chat!");
             };
 
-            let send = true
-            connectionWeb.onmessage = function(e) {
+            connectionChat.onmessage = function(e) {
                 let user = JSON.parse(e.data)
-                if(send){
+                if (user && user.length > 1) {
                     user.forEach(function (data) {
                         let userid = JSON.parse(data)
                         if(userid.id === {{ Auth::user()->id }}){
@@ -224,7 +96,6 @@
                         } else {
                             showMessages('other', data)
                         }
-                        send = false
                     })
                 } else {
                     showMessages('other', e.data)
@@ -234,18 +105,33 @@
 
             // conn.send('Hello World!');
             ///////////////////////////////////////////////
-            var form1 = document.getElementById('form1');
             var inp_message = document.getElementById('message');
             var inp_name = document.getElementById('name');
-            var btn_env = document.getElementById('btn1');
+            var btn_env = document.getElementById('send');
             var area_content = document.getElementById('content');
 
             btn_env.addEventListener('click', function(){
                 if (inp_message.value !== '') {
-                    var msg = {'id': {{ Auth::user()->id }}, 'name': inp_name.value, 'msg': inp_message.value, 'chat': 'chat'};
+
+                    //FUNÇÃO PARA ADICIONAR UM ZERO
+                    function adicionaZero(numero) {
+                        if (numero <= 9)
+                            return "0" + numero;
+                        else
+                            return numero;
+                    }
+
+                    var dataAtual = new Date();
+                    var dia = adicionaZero(dataAtual.getDate());
+                    var mes = adicionaZero((dataAtual.getMonth() + 1));
+                    var ano = dataAtual.getFullYear();
+                    var horas = dataAtual.getHours();
+                    var minutos = dataAtual.getMinutes();
+
+                    var msg = {'id': {{ Auth::user()->id }}, 'name': inp_name.value, 'msg': inp_message.value, 'date': horas + ":" + minutos + "h. de " + dia + "/" + mes + "/" + ano};
                     msg = JSON.stringify(msg);
 
-                    connectionWeb.send(msg);
+                    connectionChat.send(msg);
 
                     showMessages('me', msg);
 
@@ -256,40 +142,40 @@
             function showMessages(how, data) {
                 let message = JSON.parse(data)
                 // console.log(data);
-                var img_src = '';
-                if (how === 'me') {
-                    img_src = "{{ asset('/files/assets/images/Icon awesome-rocketchat.png') }}";
-                } else if (how === 'other') {
-                    img_src = "{{ asset('/files/assets/images/Icon awesome-rocketchat-1.png') }}";
+
+                let html
+
+                if(how === 'other'){
+                    html =
+                        '<div class="media">' +
+                        '<div class="media-left friend-box">' +
+                        '<a href="#">' +
+                        '<span>' + message.name + '</span>' +
+                        '</a>' +
+                        '</div>' +
+                        '<div class="media-body">' +
+                        '<p class="msg-send">' + message.msg + '</p>' +
+                        '<p><i class="icofont icofont-wall-clock f-12"></i>' + message.date + '</p>' +
+                        '</div>' +
+                        '</div>'
+                } else {
+                    html =
+                        '<div class="media">' +
+                        '<div class="media-body text-right">' +
+                        '<p class="msg-reply bg-primary">' + message.msg + '</p>' +
+                        '<p><i class="icofont icofont-wall-clock"></i>' + message.date + '</p>' +
+                        '</div>' +
+                        '<div class="media-right friend-box">' +
+                        '<a href="#">' +
+                        '<span>' + message.name + '</span>' +
+                        '</a>' +
+                        '</div>' +
+                        '</div>'
                 }
 
-                var div = document.createElement('div');
-                div.setAttribute('class', how);
-
-                var img = document.createElement('img');
-                img.setAttribute('src', img_src);
-
-                var div_txt = document.createElement('div');
-                div_txt.setAttribute('class', 'text');
-
-                var h5 = document.createElement('h5');
-                h5.textContent = message.name;
-
-                var p = document.createElement('p');
-                p.textContent = message.msg;
-
-                div_txt.appendChild(h5);
-                div_txt.appendChild(p);
-
-                div.appendChild(img);
-                div.appendChild(div_txt);
-
-                area_content.appendChild(div);
+                $('#content').append(html);
                 area_content.scrollTop = area_content.scrollHeight
             }
-        </script>
-        <script>
-
         </script>
     @endslot
 </x-layout>

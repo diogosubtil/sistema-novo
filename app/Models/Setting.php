@@ -19,7 +19,7 @@ class Setting extends Model
         'color_menu',
         'color_menu_letter',
         'color_menu_letter_active',
-        'color_menu_tittle',
+        'color_menu_title',
         'color_menu_icon',
         'color_login',
         'logo',

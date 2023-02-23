@@ -154,8 +154,8 @@
                                         </td>
                                         <td>{{ $usuario->name }}</td>
                                         <td>{{ $usuario->email }}</td>
-                                        <td>{{ Helper::getTittleFuncao($usuario->funcao) }}</td>
-                                        <td>{{ Helper::getUnidadeTittle($usuario->unidade_id) }}</td>
+                                        <td>{{ Helper::getTitleFuncao($usuario->funcao) }}</td>
+                                        <td>{{ Helper::getUnidadeTitle($usuario->unidade_id) }}</td>
                                         <td class="d-flex">
                                             <a href="{{ route('users.edit', $usuario->id) }}"  class="waves-effect waves-light" data-toggle="tooltip" data-placement="left" title="Editar">
                                                 <i style="font-size: 20px" class="fa fa-edit m-0 text-amazon"></i>

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('type_id');
             $table->string('url');
             $table->string('name');
+            $table->string('extension');
             $table->string('user');
             $table->enum('ativo', ['s','n'])->default('s');
             $table->timestamps();

@@ -18,8 +18,10 @@ function newsNotify() {
         success: function(data) {
             if(data){
                 let html =
-                    '<span  class="badge bg-c-yellow">' + data + '</span>\n'
+                    '<span id="numberNotify"  class="badge bg-c-yellow">' + data + '</span>\n'
                 $('#qtdNotify').append(html);
+            } else {
+                $('#numberNotify').remove();
             }
         },
         error: function(data) {
@@ -31,14 +33,15 @@ function newsNotify() {
 //QTD DE NOTIFICAÇÕES INICIAL
 let listnotify = 5
 
-//ADICONA 5 NOTIFICAÇÃO NA LISTA A CADA CLICK
+//ADICONA 5 NOTIFICAÇÃO NA LISTA A CADA CLICK NO VER MAIS
 function clickLista() {
     listnotify += 5;
-    abrirNotificacoes()
+    openNotification()
 }
 
 //FUNÇÃO PARA OBTER AS NOTIFICAÇÕES
-function abrirNotificacoes(){
+function openNotification(){
+
     //BUCAS TODAS AS NOTIFIÇÕES
     $.ajax({
         headers: {
@@ -54,13 +57,18 @@ function abrirNotificacoes(){
         success: function(data) {
             //VERIFICA SE EXISTE NOTIFICAÇÃO
             if (data){
-                let html = '';
+
+                //VARIAVEL DE HTML PARA AS NOTIFICAÇÔES
+                let html = '<a class="p-0"></a>';
+
+                //OBTER AS NOTIFICAÇÕES PARA A VARIAVEL
                 data.forEach(function (data){
                     const dados = JSON.parse(data.data)
 
                     //VERIFICA SE A NOTIFICAÇÃO JA FOI LIDA
-                    let seen = data.seen ? '' : '<label class="label f-right label-success">New</label>\n'
+                    const seen = data.seen ? '' : '<label class="label f-right label-success">New</label>\n'
 
+                    //VARIAVEL COM AS NOTIFICAÇÕES
                     html +=
                         '<li>\n' +
                         '<a class="p-0" href="' + dados.url + '">\n' +
@@ -77,7 +85,30 @@ function abrirNotificacoes(){
                         '</li>\n'
 
                 })
+
+                //EXIBIR AS NOTIFICAÇÕES
                 $('#bodyNotifications').html(html)
+
+                //FUNÇÃO PARA MARCAR COMO LIDA AS NOTIFICAÇÕES NOVAS COM DELAY DE 1 SEC
+                setTimeout(function (){
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-Token': $('meta[name="_token"]').attr('content')
+                        },
+                        type: "POST",
+                        url: "/notifications/seen",
+                        dataType: "json",
+                        success: function(data) {
+                        },
+                        error: function(data) {
+                            console.log(data)
+                        }
+                    });
+                    //FUNÇÃO PARA VERIFICA NOVAS NOTIFICAÇÕES
+                    newsNotify();
+
+                },800)
+
             }
 
         },
@@ -85,22 +116,5 @@ function abrirNotificacoes(){
             console.log(data)
         }
 
-    });
-}
-
-//MARCA COMO LIDA AS NOTIFICAÇÕES NOVAS
-function seenNotyfy() {
-    $.ajax({
-        headers: {
-            'X-CSRF-Token': $('meta[name="_token"]').attr('content')
-        },
-        type: "POST",
-        url: "/notifications/seen",
-        dataType: "json",
-        success: function(data) {
-        },
-        error: function(data) {
-            console.log(data)
-        }
     });
 }

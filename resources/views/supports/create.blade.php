@@ -73,7 +73,7 @@
                                     <span class="input-group-addon bg-primary">
                                         <i class="fa fa-building"></i>
                                     </span>
-                                        <input disabled type="text" class="form-control" name="created_at" id="created_at" value="{{ Helper::getUnidadeTittle(Session::get('unidade')) }}">
+                                        <input disabled type="text" class="form-control" name="created_at" id="created_at" value="{{ Helper::getUnidadeTitle(Session::get('unidade')) }}">
                                     </div>
                                 </div>
                             </div>
@@ -95,14 +95,10 @@
                                 <input hidden type="number" class="form-control" name="status" id="status" value="1">
                                 <div class="col-6">
                                     <label for="subject">Assunto</label>
-                                    <input class="form-control" placeholder="Assunto do Ticket" value="{{ old('subject') }}" type="text" maxlength="50" id="subject" name="subject">
-                                    @if ($errors->get('subject'))
-                                        <ul class="text-danger">
-                                            @foreach ((array) $errors->get('subject') as $message)
-                                                <li>{{ $message }}</li>
-                                            @endforeach
-                                        </ul>
-                                    @endif
+                                    <input class="form-control" placeholder="Assunto do Ticket" value="{{ old('subject') }}" type="text" maxlength="50" name="subject">
+                                    <ul class="text-danger">
+                                            <li id="subject"></li>
+                                    </ul>
                                 </div>
                                 <div class="col-6">
                                     <label for="subject">Arquivos</label>
@@ -111,18 +107,14 @@
                                             <span onclick="$('#files').click()">Buscar</span>
                                         </span>
                                         <input onclick="$('#files').click()" value="Nenhum arquivo selecionado" class="form-control botaoArquivo" type="text" id="filesName"/>
-                                        <input hidden onchange="$('#filesName').val(this.name)" class="form-control" type="file" id="files" name="file[]" multiple/>
+                                        <input hidden onchange="$('#filesName').val(this.name)" class="form-control" type="file" id="files" accept="image/jpeg,image/jpg,image/png,application/pdf" name="file[]" multiple/>
                                     </div>
                                 </div>
                                 <div class="col-12 mt-4">
                                     <label for="description">Descrição</label>
-                                    @if ($errors->get('description'))
-                                        <ul class="text-danger">
-                                            @foreach ((array) $errors->get('description') as $message)
-                                                <li>{{ $message }}</li>
-                                            @endforeach
-                                        </ul>
-                                    @endif
+                                    <ul class="text-danger">
+                                        <li id="description"></li>
+                                    </ul>
                                     <textarea id="summernote" name="description" placeholder="Sua mensagem">{{ old('description') }}</textarea>
                                 </div>
                                 <div class="col-12 mt-4">
@@ -168,6 +160,9 @@
                     },
                     error: function(data){
                         console.log(data)
+                        let errors = JSON.parse(data.responseText)
+                        $('#subject').text(errors.errors.subject)
+                        $('#description').text(errors.errors.description)
                     }
                 });
             })

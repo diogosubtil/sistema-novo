@@ -1,12 +1,17 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
 
-class WebSocketController extends Controller implements MessageComponentInterface
+class WebSocketControllerChat extends Controller implements MessageComponentInterface
 {
     protected $clients;
+    protected $messages;
+    protected $users;
 
     public function __construct() {
         $this->clients = new \SplObjectStorage;
@@ -18,9 +23,25 @@ class WebSocketController extends Controller implements MessageComponentInterfac
 
         //echo "New connection! ({$conn->resourceId})\n";
 
+        //VERIFICA SE EXISTE MENSAGEM PARA O CHAT
+        if (isset($this->messages)) {
+            $json = '['.$this->messages.']';
+            $conn->send($json);
+        }
     }
 
-    public function onMessage(ConnectionInterface $from, $msg, $chat = null) {
+    public function onMessage(ConnectionInterface $from, $msg) {
+
+        //  $numRecv = count($this->clients) - 1;
+        // echo sprintf('Connection %d sending message "%s" to %d other connection%s' . "\n"
+        // , $from->resourceId, $msg, $numRecv, $numRecv == 1 ? '' : 's');
+
+        //VERIFICA SE É EXISTE A VARIAVEL DE messages
+        if (!isset($this->messages)) {
+            $this->messages = json_encode($msg);
+        } else {
+            $this->messages .= ', '.json_encode($msg);
+        }
 
         //ENVIA A MENSAGEM PARA TODOS MENOS PARA O PROPRIO USUARIO
         foreach ($this->clients as $client) {

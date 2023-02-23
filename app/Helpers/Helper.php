@@ -31,7 +31,7 @@ class Helper
     }
 
     //FUNÇÃO PARA OBTER NOME DA FUNÇÃO DO USUARIO
-    public static function getTittleFuncao($number)
+    public static function getTitleFuncao($number)
     {
         switch ($number) {
             case 1:
@@ -53,7 +53,7 @@ class Helper
     }
 
     //FUNÇÃO PARA OBTER NOME DA UNIDADE
-    public static function getUnidadeTittle($id)
+    public static function getUnidadeTitle($id)
     {
         $unidade =  optional(Unidade::query()->where('id', '=', $id)->first())->bairro;
 
@@ -80,7 +80,7 @@ class Helper
     }
 
     //OBTEM NOME DO USUARIO
-    public static function getUserTittle($id)
+    public static function getUserTitle($id)
     {
         $user = User::query()->where('id', '=', $id)->first()->name;
 

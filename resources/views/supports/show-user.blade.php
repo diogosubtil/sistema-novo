@@ -43,11 +43,14 @@
                                                         <span onclick="$('#files').click()">Buscar</span>
                                                     </span>
                                             <input onclick="$('#files').click()" value="Nenhum arquivo selecionado" class="form-control botaoArquivo" type="text" id="filesName"/>
-                                            <input hidden onchange="$('#filesName').val(this.name)" class="form-control" type="file" id="files" name="file[]" multiple/>
+                                            <input hidden onchange="$('#filesName').val(this.name)" class="form-control" type="file" id="files" accept="image/jpeg,image/jpg,image/png,application/pdf" name="file[]" multiple/>
                                         </div>
                                     </div>
                                     <div class="col-12 mt-4">
                                         <label for="summernote">Resposta</label>
+                                        <ul class="text-danger">
+                                            <li id="answer"></li>
+                                        </ul>
                                         @if ($errors->get('answer'))
                                             <ul class="text-danger">
                                                 @foreach ((array) $errors->get('answer') as $message)
@@ -90,8 +93,8 @@
                 <div class="card comment-block">
                     <div class="card-header">
                         <span style="color: #919aa3;font-size: 13px" class="f-right">{{ date('d/m/Y H:i', strtotime($support->created_at)) }}</span>
-                        <b>{{ Helper::getUserTittle($support->user) }}</b><br>
-                        <span>Unidade: <b>{{ Helper::getUnidadeTittle($support->unidade_id) }}</b></span>
+                        <b>{{ Helper::getUserTitle($support->user) }}</b><br>
+                        <span>Unidade: <b>{{ Helper::getUnidadeTitle($support->unidade_id) }}</b></span>
                     </div>
                     <div class="card-block">
                         <ul class="media-list">
@@ -103,7 +106,11 @@
                                     <div class="mt-5">
                                         <div class="task-list-table">
                                             @foreach($uploads as $upload)
-                                                <a class="ml-2" target="_blank" href="{{ $upload->url }}"><img class="img-fluid img-radius" src="{{ $upload->url }}" alt="1"></a>
+                                                @if($upload->extension == 'pdf')
+                                                    <a class="ml-2 text-pink" target="_blank" href="{{ $upload->url }}">Arquivo PDF</a>
+                                                @else
+                                                    <a class="ml-2" target="_blank" href="{{ $upload->url }}"><img class="img-fluid img-radius" src="{{ $upload->url }}" alt="1"></a>
+                                                @endif
                                             @endforeach
                                         </div>
                                     </div>
@@ -119,17 +126,21 @@
                                             </a>
                                             <div class="media-body">
                                                 <span style="color: #919aa3;font-size: 13px" class="f-right">{{ date('d/m/Y H:i', strtotime($answerAndUp['answer']->created_at)) }}</span>
-                                                <b>{{ Helper::getUserTittle($answerAndUp['answer']->user) }}</b><br>
+                                                <b>{{ Helper::getUserTitle($answerAndUp['answer']->user) }}</b><br>
                                                 @if(Helper::getUser($answerAndUp['answer']->user)->funcao == 1)
                                                     <span>Administrador</span>
                                                 @else
-                                                    <span>Unidade: <b>{{ Helper::getUnidadeTittle($answerAndUp['answer']->unidade_id) }}</b></span>
+                                                    <span>Unidade: <b>{{ Helper::getUnidadeTitle($answerAndUp['answer']->unidade_id) }}</b></span>
                                                 @endif
                                                 <p class="mt-3">{!! $answerAndUp['answer']->answer !!}</p>
                                                 <div class="mt-5">
                                                     <div class="task-list-table">
                                                         @foreach($answerAndUp['uploads'] as $upload)
-                                                            <a class="ml-2" target="_blank" href="{{ $upload->url }}"><img class="img-fluid img-radius" src="{{ $upload->url }}" alt="1"></a>
+                                                            @if($upload->extension == 'pdf')
+                                                                <a class="ml-2 text-pink" target="_blank" href="{{ $upload->url }}">Arquivo PDF</a>
+                                                            @else
+                                                                <a class="ml-2" target="_blank" href="{{ $upload->url }}"><img class="img-fluid img-radius" src="{{ $upload->url }}" alt="1"></a>
+                                                            @endif
                                                         @endforeach
                                                     </div>
                                                 </div>
@@ -176,7 +187,10 @@
                             connectionWeb.send('support-answer');
                         },
                         error: function(data){
-                            console.log(data)
+                            let errors = JSON.parse(data.responseText)
+                            if(errors.errors.answer){
+                                $('#answer').text('O campo resposta é obrigatório')
+                            }
                         }
                     });
                 })

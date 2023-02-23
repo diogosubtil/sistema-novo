@@ -187,15 +187,15 @@
                                             </span>
                                         </div>
                                         <div class="col-xl-4 col-md-6 col-12">
-                                            <label for="color_menu_tittle" class="col-form-label">Cor dos
+                                            <label for="color_menu_title" class="col-form-label">Cor dos
                                                 Titulos</label>
-                                            <input type="text" id="hue-demo" name="color_menu_tittle"
+                                            <input type="text" id="hue-demo" name="color_menu_title"
                                                    class="form-control demo" data-control="hue"
-                                                   value="{{ $setting->color_menu_tittle }}">
+                                                   value="{{ $setting->color_menu_title }}">
                                             <span class="form-bar">
-                                                @if ($errors->get('color_menu_tittle'))
+                                                @if ($errors->get('color_menu_tttle'))
                                                     <ul class="text-danger">
-                                                        @foreach ((array) $errors->get('color_menu_tittle') as $message)
+                                                        @foreach ((array) $errors->get('color_menu_title') as $message)
                                                             <li>{{ $message }}</li>
                                                         @endforeach
                                                     </ul>

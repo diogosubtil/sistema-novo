@@ -30,7 +30,7 @@ class SettingsFormRequest extends FormRequest
             'color_menu' => ['required'],
             'color_menu_letter' => ['required'],
             'color_menu_letter_active' => ['required'],
-            'color_menu_tittle' => ['required'],
+            'color_menu_title' => ['required'],
             'color_menu_icon' => ['required'],
             'color_login' => ['required'],
             'logo' => ['mimes:jpg,png,jpeg|max:2048'],

@@ -7,14 +7,27 @@ setTimeout(function (){
 //FUNÇÃO PARA MOSTRAR MENU ATIVO
 window.onload = function activeMenu(){
     let link = document.getElementById(window.location.href) // PAGINA
-    let menu = link.parentElement.parentElement // MENU
-    let submenu = menu.parentElement.parentElement // SUB MENU
-    let submenu1 = submenu.parentElement.parentElement // SUB MENU
+    if (link){
+        link.classList.add('active')
+    }
 
-    link.classList.add('active')
-    menu.classList.add('pcoded-trigger')
-    submenu.classList.add('pcoded-trigger')
-    submenu1.classList.add('pcoded-trigger')
+    let menu
+    if (link){
+        menu = link.parentElement.parentElement // MENU
+        menu.classList.add('pcoded-trigger')
+    }
+
+    let submenu
+    if (menu){
+        submenu = menu.parentElement.parentElement // SUB MENU
+        submenu.classList.add('pcoded-trigger')
+    }
+
+    if (submenu){
+        let submenu1 = submenu.parentElement.parentElement // SUB MENU
+        submenu1.classList.add('pcoded-trigger')
+    }
+
 }
 
 //FUNÇÃO PARA SELCIONAR A UNIDADE EXIBIDA
@@ -40,7 +53,10 @@ function setUnidade(id){
 //FUNÇÃO PARA INPUT PERSONALIZADO DE UPLOAD
 var enviar = document.getElementsByClassName("botaoArquivo")[0];
 var input = document.getElementById("files");
-input.addEventListener("change", function(){
-    enviar.value = input.files.length + ' Arquivo selecionado.';
-});
+if (input){
+    input.addEventListener("change", function(){
+        enviar.value = input.files.length + ' Arquivo selecionado.';
+    });
+}
+
 
