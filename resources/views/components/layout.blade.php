@@ -518,7 +518,7 @@
 
 <script>
     //WebSocket
-    var connectionWeb = new WebSocket('ws://127.0.0.1:8050');
+    var connectionWeb = new WebSocket('wss://diogosubtil.online:8050');
 
     connectionWeb.onopen = function(e) {
         console.log("Connection established!");

@@ -3,11 +3,13 @@
 namespace App\Console\Commands;
 
 use App\Http\Controllers\WebSocketController;
-use App\Http\Controllers\WebSocketControllerChat;
 use Illuminate\Console\Command;
 use Ratchet\Http\HttpServer;
 use Ratchet\Server\IoServer;
 use Ratchet\WebSocket\WsServer;
+use React\EventLoop\Factory;
+use React\Socket\SecureServer;
+use React\Socket\Server;
 
 class WebSocketServer extends Command
 {
@@ -42,15 +44,29 @@ class WebSocketServer extends Command
      */
     public function handle()
     {
-        $server = IoServer::factory(
+
+        $loop   = Factory::create();
+        $webSock = new SecureServer(
+            new Server('0.0.0.0:8050', $loop),
+            $loop,
+            array(
+                'local_cert'        => '/home/diogosubtil/ssl.cert', // path to your cert
+                'local_pk'          => '/home/diogosubtil/ssl.key', // path to your server private key
+                'allow_self_signed' => TRUE, // Allow self signed certs (should be false in production)
+                'verify_peer' => FALSE
+            )
+        );
+        // Ratchet magic
+        $webServer = new IoServer(
             new HttpServer(
                 new WsServer(
                     new WebSocketController()
                 )
             ),
-            8050
+            $webSock
         );
-        $server->run();
-
+        $loop->run();
     }
+
+
 }
