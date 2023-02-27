@@ -4,10 +4,33 @@ namespace App\Repositories;
 
 use App\Http\Requests\UnidadesFormRequest;
 use App\Models\Unidade;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class EloquentUnidadesRepository implements UnidadesRepository
 {
+
+    //FUNÇÃO PARA OBTER DADOS PARA O INDEX
+    public function index(): array
+    {
+        //OBTEM AS UNIDADE
+        $data['unidades'] = Unidade::query()->paginate(15);
+
+        //OBTEM ATIVOS,DESATIVADOS,ONLINE
+        $data['ativos'] = 0;
+        $data['desativados'] = 0;
+        foreach ($data['unidades'] as $unidade){
+            if ($unidade->ativo == 's'){
+                $data['ativos']++;
+            }
+            if ($unidade->ativo == 'n'){
+                $data['desativados']++;
+            }
+        }
+
+        return $data;
+    }
+
     //FUNÇÂO PARA CADASTRAR NO BANCO
     public function add(UnidadesFormRequest $request): Unidade
     {

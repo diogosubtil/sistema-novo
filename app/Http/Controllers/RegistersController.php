@@ -5,33 +5,27 @@ namespace App\Http\Controllers;
 use App\Models\Register;
 use App\Models\Unidade;
 use App\Models\User;
+use App\Repositories\RegistersRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class RegistersController extends Controller
 {
+    //CONSTRUTOR COM REPOSITORY INJETADO
+    public function __construct(private RegistersRepository $repository)
+    {
+    }
+
     //FUNÇÃO PARA EXIBIR A VIEW (PAINEL)
     public function index(Request $request)
     {
-        //OBTEM REGISTROS
-        $registers = Register::query();
-
-        if (!$request->has('created_at')){
-            $registers->whereBetween('created_at', [date('Y-m-d') . ' 00:00:00', date('Y-m-d') . ' 23:59:59']);
-        }
-
-        $registers->filter($request->all());
-
-        //OBTEM AS UNIDADES
-        $unidades = Unidade::query()->where('ativo', '=', 's')->get();
-
-        //OBTEM OS USUARIOS
-        $users = User::query()->where('unidade_id', '=' ,Session::get('unidade'))->get();
+        //OBTEM OS DADOS VIA REPOSITORY
+        $data = $this->repository->index($request);
 
         return view('registers.index')
-            ->with('users', $users)
-            ->with('unidades', $unidades)
-            ->with('registers',$registers->paginate(15));
+            ->with('users', $data['users'])
+            ->with('unidades', $data['unidades'])
+            ->with('registers',$data['registers']->paginate(15));
 
     }
 }

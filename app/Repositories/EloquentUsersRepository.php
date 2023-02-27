@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Http\Requests\UsersFormRequest;
 use App\Models\Register;
+use App\Models\Unidade;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -15,6 +16,34 @@ class EloquentUsersRepository implements UsersRepository
     //CONSTRUTOR COM REPOSITORY INJETADO
     public function __construct(private RegistersRepository $repository)
     {
+    }
+
+    //FUNÇÃO PARA OBTER DADOS PARA O INDEX
+    public function index(Request $request): array
+    {
+        //OBTEM TODOS OS USUARIOS COM PAGINAÇÃO
+        $data['usuarios'] = User::query()->orderBy('name')
+            ->filter($request->all())->paginate('15');
+
+        $data['unidades'] = Unidade::query()->where('ativo', '=', 's')->get();
+
+        //OBTEM USUARIOS PARA CONTAGEM E ONLINE
+        $data['total'] = User::all();
+
+        //OBTEM ATIVOS,DESATIVADOS,ONLINE
+        $data['ativos'] = 0;
+        $data['desativados'] = 0;
+        $data['online'] = [];
+        foreach ($data['total'] as $users){
+            if ($users->ativo == 's'){
+                $data['ativos']++;
+            }
+            if ($users->ativo == 'n'){
+                $data['desativados']++;
+            }
+        }
+
+        return $data;
     }
 
     //FUNÇÂO PARA CADASTRAR NO BANCO

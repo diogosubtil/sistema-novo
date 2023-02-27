@@ -16,29 +16,21 @@ class NotificationsController extends Controller
     //FUNÇÃO PARA OBTER AS NOTIFICAÇÕES
     public function get(Request $request)
     {
-        $notifications = Notification::query()
-            ->where('notifiable_id', '=', Auth::user()->id)
-            ->orderBy('id', 'desc')
-            ->limit($request->limit)
-            ->get();
-
-        return json_encode($notifications);
+        //OBTEM OS DADOS VIA REPOSITORY
+        return json_encode($this->repository->get($request));
     }
 
-    //FUNÇÃO PARA OBTER NOTIFICAÇÕES NOVAS
+    //FUNÇÃO PARA OBTER A QUANTIDADE DE NOTIFICAÇÕES NOVAS
     public function quantity()
     {
-        $quantity = Notification::query()
-            ->where('notifiable_id', '=', Auth::user()->id)
-            ->whereNull('seen')
-            ->count();
-
-        return $quantity;
+        //OBTEM OS DADOS VIA REPOSITORY
+        return $this->repository->quantity();
     }
 
     //FUNÇÃO PARA MARCA COMO LIDA AS NOTIFICAÇÕES
     public function seen()
     {
+        //OBTEM OS DADOS VIA REPOSITORY
         return $this->repository->seen();
     }
 }

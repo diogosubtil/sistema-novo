@@ -4,7 +4,9 @@ namespace App\Repositories;
 
 use App\Http\Requests\SupportsFormRequest;
 use App\Models\Support;
+use App\Models\Unidade;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -14,6 +16,38 @@ class EloquentSupportsRepository implements SupportsRepository
     //CONSTRUTOR COM REPOSITORY INJETADO
     public function __construct(private UploadsRepository $repository, private NotificationsRepository $notificationsRepository)
     {
+    }
+
+    //FUNÇÃO PARA OBTER DADOS PARA O INDEX
+    public function index(Request $request): array
+    {
+        //OBTEM OS USUARIOS
+        $data['users'] = User::all();
+        //OBTEM AS UNIDADE
+        $data['unidades'] = Unidade::query()
+            ->where('ativo', '=', 's')->get();
+
+        //OBTEM OS SUPORTES
+        $data['supports'] = Support::query()
+            ->where('ativo', '=', 's')
+            ->orderBy('status')
+            ->orderBy('updated_at')
+            ->filter($request->all());
+
+        //OBTEM DADOS PARA CALCULOS
+        $data['totals'] = Support::query()
+            ->where('ativo', '=', 's')->get();
+        $data['concluidos'] = 0;
+        $data['pendentes'] = 0;
+        foreach ($data['totals'] as $total){
+            if ($total->status == 4){
+                $data['concluidos']++;
+            } else {
+                $data['pendentes']++;
+            }
+        }
+
+        return $data;
     }
 
     //FUNÇÂO PARA CADASTRAR NO BANCO

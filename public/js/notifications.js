@@ -31,7 +31,7 @@ function newsNotify() {
 }
 
 //QTD DE NOTIFICAÇÕES INICIAL
-let listnotify = 5
+let listnotify = 4
 
 //ADICONA 5 NOTIFICAÇÃO NA LISTA A CADA CLICK NO VER MAIS
 function clickLista() {
@@ -53,7 +53,23 @@ function openNotification(){
             limit: listnotify,
         },
         dataType: "json",
-        beforeSend: function(xhr) {},
+        beforeSend: function(xhr) {
+            let html =
+                '<li>\n' +
+                '<div class="media text-center">\n' +
+                '<div class="media-body">\n' +
+                '<div style="height: 50px!important"  class="preloader3 loader-block">' +
+                '<span style="font-size: 14px;margin-right: 10px!important;" >Carregando</span> \n' +
+                '<div style="height: 5px;width: 5px;margin-top: 30px" class="circ1"></div>\n' +
+                '<div style="height: 5px;width: 5px;margin-top: 30px" class="circ2"></div>\n' +
+                '<div style="height: 5px;width: 5px;margin-top: 30px" class="circ3"></div>\n' +
+                '<div style="height: 5px;width: 5px;margin-top: 30px" class="circ4"></div>\n' +
+                '</div>\n' +
+                '</div>\n' +
+                '</div>\n' +
+                '</li>';
+            $('#bodyNotifications').html(html)
+        },
         success: function(data) {
             //VERIFICA SE EXISTE NOTIFICAÇÃO
             if (data){
@@ -108,6 +124,18 @@ function openNotification(){
                     newsNotify();
 
                 },800)
+
+            } else {
+
+                let html =
+                    '<li>\n' +
+                    '<div class="media text-center">\n' +
+                    '<div class="media-body">\n' +
+                    '<p class="notification-msg">Nenhuma Notificação</p>\n' +
+                    '</div>\n' +
+                    '</div>\n' +
+                    '</li>';
+                $('#bodyNotifications').html(html)
 
             }
 

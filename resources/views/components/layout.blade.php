@@ -295,13 +295,6 @@
                                         <h6>Notificações</h6>
                                     </li>
                                     <div id="bodyNotifications">
-                                        <li>
-                                            <div class="media text-center">
-                                                <div class="media-body">
-                                                    <p class="notification-msg">Nenhuma Notificação</p>
-                                                </div>
-                                            </div>
-                                        </li>
                                     </div>
                                     <a onclick="clickLista()" class="text-center p-0">
                                         <h6>Ver mais</h6>

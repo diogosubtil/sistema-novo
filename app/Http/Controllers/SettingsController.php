@@ -14,33 +14,6 @@ class SettingsController extends Controller
     {
     }
 
-    //FUNÇÃO PARA EXIBIR A VIEW (PAINEL)
-//    public function index()
-//    {
-//        //RETORNA A VIEW COM OS DADOS
-//        return view('settings.index');
-//    }
-
-    //FUNÇÃO PARA EXIBIR A VIEW (CADASTRAR)
-//    public function create()
-//    {
-//        //RETORNA A VIEW
-//        return view('settings.create');
-//    }
-
-    //FUNÇÃO PARA CADASTRAR NO BANCO
-//    public function store(SettingsFormRequest $request)
-//    {
-//        //EDITA NO BANCO VIA REPOSITORY
-//        $this->repository->add($request);
-//
-//        //ALERT
-//        Alert::success('Concluido', 'Configuração cadastrada com sucesso!');
-//
-//        //RETORNA A VIEW
-//        return to_route('settings.index');
-//    }
-
     //FUNÇÃO PARA EXIBIR A VIEW (EDITAR)
     public function edit(Setting $setting)
     {

@@ -4,9 +4,13 @@ namespace App\Repositories;
 
 use App\Http\Requests\SupportsFormRequest;
 use App\Models\Support;
+use Illuminate\Http\Request;
 
 interface SupportsRepository
 {
+    //INDEX
+    public function index(Request $request): array;
+
     //ADICIONA SUPORTE
     public function add(SupportsFormRequest $request): Support;
 

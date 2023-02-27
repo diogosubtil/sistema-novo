@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 
 interface UsersRepository
 {
+    //INDEX
+    public function index(Request $request): array;
+
     //ADICIONA USUARIO
     public function add(UsersFormRequest $request): User;
 

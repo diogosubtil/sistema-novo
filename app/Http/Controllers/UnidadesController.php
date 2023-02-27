@@ -21,26 +21,14 @@ class UnidadesController extends Controller
     //FUNÇÃO PARA EXIBIR A VIEW (PAINEL)
     public function index()
     {
-        //OBTEM AS UNIDADE
-        $unidades = Unidade::query()->paginate(15);
-
-        //OBTEM ATIVOS,DESATIVADOS,ONLINE
-        $ativos = 0;
-        $desativados = 0;
-        foreach ($unidades as $unidade){
-            if ($unidade->ativo == 's'){
-                $ativos++;
-            }
-            if ($unidade->ativo == 'n'){
-                $desativados++;
-            }
-        }
+        //OBTEM OS DADOS VIA REPOSITORY
+        $data = $this->repository->index();
 
         //RETORNA A VIEW COM OS DADOS
         return view('unidades.index')
-            ->with('unidades', $unidades)
-            ->with('ativos', $ativos)
-            ->with('desativados', $desativados);
+            ->with('unidades', $data['unidades'])
+            ->with('ativos', $data['ativos'])
+            ->with('desativados', $data['desativados']);
     }
 
     //FUNÇÃO PARA EXIBIR A VIEW (CADASTRAR)

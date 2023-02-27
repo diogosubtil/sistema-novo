@@ -49,4 +49,24 @@ class EloquentNotificationsRepository implements NotificationsRepository
 
         return true;
     }
+
+    //FUNÇÃO PARA OBTER AS NOTIFICAÇÕES
+    public function get(Request $request)
+    {
+        return Notification::query()
+            ->where('notifiable_id', '=', Auth::user()->id)
+            ->orderBy('id', 'desc')
+            ->limit($request->limit)
+            ->get();
+
+    }
+
+    //FUNÇÃO PARA OBTER QUANTIDADE DE NOTIFICAÇÕES NOVAS
+    public function quantity()
+    {
+        return Notification::query()
+            ->where('notifiable_id', '=', Auth::user()->id)
+            ->whereNull('seen')
+            ->count();
+    }
 }

@@ -19,35 +19,16 @@ class UsersController extends Controller
     //FUNÇÃO PARA EXIBIR A VIEW (PAINEL)
     public function index(Request $request)
     {
-        //OBTEM TODOS OS USUARIOS COM PAGINAÇÃO
-        $usuarios = User::query()->orderBy('name')
-            ->filter($request->all())->paginate('15');
-
-        $unidades = Unidade::query()->where('ativo', '=', 's')->get();
-
-        //OBTEM USUARIOS PARA CONTAGEM E ONLINE
-        $total = User::all();
-
-        //OBTEM ATIVOS,DESATIVADOS,ONLINE
-        $ativos = 0;
-        $desativados = 0;
-        $online = [];
-        foreach ($total as $users){
-            if ($users->ativo == 's'){
-                $ativos++;
-            }
-            if ($users->ativo == 'n'){
-                $desativados++;
-            }
-        }
+        //OBTEM DADOS VIA REPOSITORY
+        $data = $this->repository->index($request);
 
         //RETORNA A VIEW COM OS DADOS
         return view('users.index')
-            ->with('usuarios', $usuarios)
-            ->with('unidades', $unidades)
-            ->with('total', $total)
-            ->with('ativos', $ativos)
-            ->with('desativados', $desativados);
+            ->with('usuarios', $data['usuarios'])
+            ->with('unidades', $data['unidades'])
+            ->with('total', $data['total'])
+            ->with('ativos', $data['ativos'])
+            ->with('desativados', $data['desativados']);
     }
 
     //FUNÇÃO PARA EXIBIR A VIEW (CADASTRAR)

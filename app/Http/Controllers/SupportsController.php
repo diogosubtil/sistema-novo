@@ -23,39 +23,16 @@ class SupportsController extends Controller
     //FUNÇÃO PARA EXIBIR A VIEW (PAINEL)
     public function index(Request $request)
     {
-        //OBTEM OS USUARIOS
-        $users = User::all();
-        //OBTEM AS UNIDADE
-        $unidades = Unidade::query()
-            ->where('ativo', '=', 's')->get();
-
-        //OBTEM OS SUPORTES
-        $supports = Support::query()
-            ->where('ativo', '=', 's')
-            ->orderBy('status')
-            ->orderBy('updated_at')
-            ->filter($request->all());
-
-        //OBTEM DADOS PARA CALCULOS
-        $totals = Support::query()
-            ->where('ativo', '=', 's')->get();
-        $concluidos = 0;
-        $pendentes = 0;
-        foreach ($totals as $total){
-            if ($total->status == 4){
-                $concluidos++;
-            } else {
-                $pendentes++;
-            }
-        }
+        //OBTEM OS DADOS VIA REPOSITORY
+        $data = $this->repository->index($request);
 
         //RETORNA A VIEW COM OS DADOS
         return view('supports.index')
-            ->with('supports', $supports->paginate(15))
-            ->with('users', $users)
-            ->with('concluidos', $concluidos)
-            ->with('pendentes', $pendentes)
-            ->with('unidades', $unidades);
+            ->with('supports', $data['supports']->paginate(15))
+            ->with('users', $data['users'])
+            ->with('concluidos', $data['concluidos'])
+            ->with('pendentes', $data['pendentes'])
+            ->with('unidades', $data['unidades']);
     }
 
     //FUNÇÃO PARA EXIBIR A VIEW (SUPORT USER)
