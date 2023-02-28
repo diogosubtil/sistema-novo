@@ -11,8 +11,8 @@ class NotificationsController extends Controller
 {
     public function __construct(private NotificationsRepository $repository)
     {
-
     }
+
     //FUNÇÃO PARA OBTER AS NOTIFICAÇÕES
     public function get(Request $request)
     {

@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Http\Requests\SupportsFormRequest;
 use App\Models\Support;
 use App\Models\Unidade;
+use App\Models\Upload;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +19,7 @@ class EloquentSupportsRepository implements SupportsRepository
     {
     }
 
-    //FUNÇÃO PARA OBTER DADOS PARA O INDEX
+    //FUNÇÃO PARA OBTER DADOS PARA A VIEW INDEX
     public function index(Request $request): array
     {
         //OBTEM OS USUARIOS
@@ -47,6 +48,66 @@ class EloquentSupportsRepository implements SupportsRepository
             }
         }
 
+        //RETORNA OS DADOS
+        return $data;
+    }
+
+    //FUNÇÃO PARA OBTER DADOS PARA A VIEW INDEX USER
+    public function indexUser(): array
+    {
+        //OBTEM OS SUPORTES
+        $data['supports'] = Support::query()
+            ->where('ativo', '=', 's')
+            ->where('user', '=', Auth::user()->id)
+            ->orderBy('id', 'desc')
+            ->orderBy('updated_at')->paginate(10);
+
+
+        //OBTEM O ULTIMO SUPORTE
+        $data['ultimoSuporte'] = Support::query()
+            ->where('ativo', '=', 's')
+            ->where('user', '=', Auth::user()->id)
+            ->orderBy('id', 'desc')
+            ->first();
+
+        //RETORNA OS DADOS
+        return $data;
+    }
+
+    //FUNÇÃO PARA OBTER DADOS PARA A VIEW CREATE
+    public function create(): array
+    {
+        //OBTEM O ULTIMO SUPORTE
+        $data['ultimoSuporte'] = Support::query()
+            ->where('ativo', '=', 's')
+            ->where('user', '=', Auth::user()->id)
+            ->orderBy('id', 'desc')
+            ->first();
+
+        //RETORNA OS DADOS
+        return $data;
+    }
+
+    //FUNÇÃO PARA OBTER DADOS PARA A VIEW SHOW
+    public function show(Support $support): array
+    {
+        //OBTEM OS UPLOADS DO SUPORTE
+        $data['uploads'] = Upload::query()
+            ->where('type', '=', 20)
+            ->where('type_id', '=', $support->id)
+            ->get();
+
+        //OBTEM AS REPOSTAS E UPLOADS
+        $data['answersAndUp'] = [];
+        foreach ($support->answers as $answer){
+            $upAnswers = Upload::query()
+                ->where('type', '=', 21)
+                ->where('type_id', '=', $answer->id)
+                ->get();
+            $data['answersAndUp'][] = ['answer' => $answer, 'uploads' => $upAnswers];
+        }
+
+        //RETORNA OS DADOS
         return $data;
     }
 

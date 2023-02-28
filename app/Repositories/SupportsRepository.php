@@ -11,6 +11,15 @@ interface SupportsRepository
     //INDEX
     public function index(Request $request): array;
 
+    //INDEX USER
+    public function indexUser(): array;
+
+    //CREATE
+    public function create(): array;
+
+    //CREATE
+    public function show(Support $support): array;
+
     //ADICIONA SUPORTE
     public function add(SupportsFormRequest $request): Support;
 
