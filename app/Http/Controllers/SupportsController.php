@@ -105,7 +105,7 @@ class SupportsController extends Controller
     public function store(SupportsFormRequest $request)
     {
         //ADICIONA NO BANCO VIA REPOSITORY
-        $this->repository->add($request);
+        $support = $this->repository->add($request);
 
         //ALERT
         Alert::success('Concluido', 'Ticket aberto com sucesso!');
@@ -113,7 +113,7 @@ class SupportsController extends Controller
         //RETORNA A VIEW
         //return to_route('supports.indexuser', Auth::user()->id);
 
-        return true;
+        return $support;
     }
 
     //FUNÇÃO PARA EXIBIR A VIEW (SHOW)

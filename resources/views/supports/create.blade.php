@@ -153,10 +153,16 @@
                     processData: false,
                     data: formData,
                     success: function(data){
+
                         //REDIRECIONA PARA A PAGINA
                         window.location = '{{ route('supports.indexuser', Auth::user()->id) }}'
+
+                        //OBTEM DADOS PARA ENVIAR NOTIFICAÇÃO
+                        let info = { msg: 'support-create', support: data.id }
+
                         //NOTIFICA OS ADMINISTRADORES
-                        connectionWeb.send('support-create');
+                        connectionWeb.send(JSON.stringify(info));
+
                     },
                     error: function(data){
                         console.log(data)

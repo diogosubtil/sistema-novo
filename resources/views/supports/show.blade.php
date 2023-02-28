@@ -162,10 +162,16 @@
                     processData: false,
                     data: formData,
                     success: function(data){
+
                         //REDIRECIONA PARA A PAGINA
                         window.location.reload()
+
+                        //OBTEM DADOS PARA ENVIAR NOTIFICAÇÃO
+                        let info = { msg: 'support-answer-{{ $support->user }}', support: {{ $support->id }} }
+
                         //NOTIFICA O USUARIO DO TICKET
-                        connectionWeb.send('support-answer-{{ $support->user }}');
+                        connectionWeb.send(JSON.stringify(info));
+
                     },
                     error: function(data){
                         let errors = JSON.parse(data.responseText)

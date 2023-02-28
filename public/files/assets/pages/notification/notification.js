@@ -1,12 +1,12 @@
 'use strict';
 
 //Welcome Message (not for login page)
-function notifySupport(message){
+function notifySupport(message, url){
     $.growl({
         icon: 'feather icon-help-circle',
         title: ' Suporte: ',
         message: message,
-        url: ''
+        url: url
     },{
         element: 'body',
         type: 'inverse',
@@ -23,7 +23,7 @@ function notifySupport(message){
         z_index: 999999,
         delay: 15*60000,
         timer: 1000,
-        url_target: '_blank',
+        url_target: '_self',
         mouse_over: false,
         animate: {
             enter: 'animated bounceInRight',

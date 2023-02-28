@@ -525,12 +525,16 @@
     };
 
     connectionWeb.onmessage = function(e) {
+
+        //OBTEM OS DADOS
+        let data = JSON.parse(e.data)
+
         //VERIFICAÇÃO PARA SUPORTE CRIADO
-        if(e.data === 'support-create') {
+        if(data.msg === 'support-create') {
             @if(Auth::user()->funcao == 1)
 
             //NOTIFICA OS ADMINS
-            notifySupport('Novo Ticket de suporte ');
+            notifySupport('Novo Ticket de suporte ', '/supports/' + data.support);
 
             //ATUALIZA O NUMERO DE NOTIFICAÇÕES
             newsNotify();
@@ -539,11 +543,11 @@
         }
 
         //VERIFICAÇÃO PARA SUPORTE RESPONDIDO PELO USUARIO
-        if(e.data === 'support-answer') {
+        if(data.msg === 'support-answer') {
             @if(Auth::user()->funcao == 1)
 
                 //NOTIFICA OS ADMINS
-                notifySupport('Ticket de suporte respondido');
+                notifySupport('#' + data.support + ' Ticket de suporte respondido', '/supports/' + data.support);
 
                 //ATUALIZA O NUMERO DE NOTIFICAÇÕES
                 newsNotify();
@@ -552,10 +556,10 @@
         }
 
         //VERIFICAÇÃO PARA SUPORTE RESPONDIDO PELO ADMIN
-        if(e.data === 'support-answer-{{ Auth::user()->id }}') {
+        if(data.msg === 'support-answer-{{ Auth::user()->id }}') {
 
             //NOTIFICA O USUARIO
-            notifySupport('Ticket de suporte respondido');
+            notifySupport('#' + data.support + ' Ticket de suporte respondido', '/supports/ticket/' + data.support);
 
             //ATUALIZA O NUMERO DE NOTIFICAÇÕES
             newsNotify();

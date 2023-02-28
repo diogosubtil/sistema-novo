@@ -181,10 +181,16 @@
                         processData: false,
                         data: formData,
                         success: function(data){
+
                             //REDIRECIONA PARA A PAGINA
                             window.location.reload()
+
+                            //OBTEM DADOS PARA ENVIAR NOTIFICAÇÃO
+                            let info = { msg: 'support-answer', support: {{ $support->id }} }
+
                             //NOTIFICA OS ADMINISTRADORES
-                            connectionWeb.send('support-answer');
+                            connectionWeb.send(JSON.stringify(info));
+
                         },
                         error: function(data){
                             let errors = JSON.parse(data.responseText)
