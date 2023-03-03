@@ -154,9 +154,7 @@
                 $.ajax({
                     url: '{{ route('supportsanswers.store') }}',
                     type: 'POST',
-                    xhr: function() {
-                        return $.ajaxSettings.xhr();
-                    },
+                    enctype: "multipart/form-data",
                     cache: false,
                     contentType: false,
                     processData: false,

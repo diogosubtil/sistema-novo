@@ -173,9 +173,7 @@
                     $.ajax({
                         url: '{{ route('supportsanswers.storeuser') }}',
                         type: 'POST',
-                        xhr: function() {
-                            return $.ajaxSettings.xhr();
-                        },
+                        enctype: "multipart/form-data",
                         cache: false,
                         contentType: false,
                         processData: false,

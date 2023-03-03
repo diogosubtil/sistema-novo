@@ -47,7 +47,7 @@ class WebSocketServer extends Command
 
         $loop   = Factory::create();
         $webSock = new SecureServer(
-            new Server('0.0.0.0:8090', $loop),
+            new Server('0.0.0.0:8050', $loop),
             $loop,
             array(
                 'local_cert'        => '/home/diogosubtil/ssl.cert', // path to your cert
