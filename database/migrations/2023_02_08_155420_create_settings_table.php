@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('logo');
             $table->string('favicon');
             $table->timestamps();
+            $table->softDeletes();
         });
 
         DB::table('settings')->insert([

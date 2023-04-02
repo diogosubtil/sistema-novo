@@ -22,6 +22,7 @@ return new class extends Migration
             $table->text('description');
             $table->enum('ativo', ['s','n'])->default('s');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -15,11 +15,12 @@ return new class extends Migration
     {
         Schema::create('supports_answers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('support_id')->constrained();
+            $table->foreignId('support_id')->constrained()->onDelete('cascade');
             $table->integer('user');
-            $table->foreignId('unidade_id')->constrained();
+            $table->foreignId('unidade_id')->constrained()->onDelete('cascade');
             $table->text('answer');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

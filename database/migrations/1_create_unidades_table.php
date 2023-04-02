@@ -31,6 +31,7 @@ return new class extends Migration
             $table->longText('assinatura');
             $table->enum('ativo', ['s','n'])->default('s');
             $table->timestamps();
+            $table->softDeletes();
         });
 
         DB::table('unidades')->insert([

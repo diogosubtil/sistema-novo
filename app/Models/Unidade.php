@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Unidade extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     //TABELA QUE A MODEL FAZ REFERENCIA NO BANCO DE DADOS
     protected $table = 'unidades';
@@ -27,6 +28,9 @@ class Unidade extends Model
         'timezone',
         'assinatura',
     ];
+
+    //SOFTDELETES
+    protected $dates = ['deleted_at'];
 
     //FUNÇAO DE RELACIONAMENTOS
     public function users()

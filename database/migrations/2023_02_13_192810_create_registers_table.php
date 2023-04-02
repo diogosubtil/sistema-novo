@@ -22,6 +22,7 @@ return new class extends Migration
             $table->text('data')->nullable();
             $table->foreignId('unidade_id')->constrained();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

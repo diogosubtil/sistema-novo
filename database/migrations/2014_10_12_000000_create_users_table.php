@@ -27,6 +27,7 @@ return new class extends Migration
             $table->enum('ativo', ['s','n']);
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
 
         DB::table('users')->insert([

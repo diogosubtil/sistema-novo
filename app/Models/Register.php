@@ -5,10 +5,11 @@ namespace App\Models;
 use eloquentFilter\QueryFilter\ModelFilters\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Register extends Model
 {
-    use HasFactory, Filterable;
+    use HasFactory, Filterable, SoftDeletes;
 
     //TABELA QUE A MODEL FAZ REFERENCIA NO BANCO DE DADOS
     protected $table = 'registers';
@@ -21,6 +22,9 @@ class Register extends Model
         'data',
         'unidade_id',
     ];
+
+    //SOFTDELETES
+    protected $dates = ['deleted_at'];
 
     //Filter Eloquent
     private static array $whiteListFilter = ['*'];

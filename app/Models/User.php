@@ -7,19 +7,15 @@ use App\ModelFilters\UsersFilter;
 use eloquentFilter\QueryFilter\ModelFilters\Filterable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, UsersFilter, Filterable;
+    use HasApiTokens, HasFactory, Notifiable, UsersFilter, Filterable, SoftDeletes;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'name',
         'email',
@@ -29,6 +25,9 @@ class User extends Authenticatable
         'unidade_id',
         'treinamento',
     ];
+
+    //SOFTDELETES
+    protected $dates = ['deleted_at'];
 
     //Filter Eloquent
     private static array $whiteListFilter = ['*'];
