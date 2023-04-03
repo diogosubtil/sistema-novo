@@ -36,4 +36,17 @@ class UsersFormRequest extends FormRequest
             'treinamento' => ['required', 'string', 'max:255'],
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'O campo nome é obrigatório',
+            'email.required' => 'O campo e-mail é obrigatório',
+            'password.required' => 'O campo senha é obrigatório',
+            'funcao.required' => 'O campo função é obrigatório',
+            'telefone.required' => 'O campo telefone é obrigatório',
+            'unidade_id.required' => 'O campo unidades de acesso é obrigatório',
+            'treinamento.required' => 'O campo treinamento é obrigatório',
+        ];
+    }
 }

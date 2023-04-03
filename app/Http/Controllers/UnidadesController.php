@@ -115,4 +115,17 @@ class UnidadesController extends Controller
 
         return redirect()->back();
     }
+
+    //FUNÇÃO PARA EXCLUIR UNIDADE
+    public function destroy(Unidade $unidade)
+    {
+        //EXCLUI A UNIDADE VIA REPOSITORY
+        $this->repository->delete($unidade);
+
+        //ALERT
+        Alert::success('Concluido', 'Unidade excluida com sucesso!');
+
+        //RETORNA A VIEW
+        return to_route('unidades.index');
+    }
 }

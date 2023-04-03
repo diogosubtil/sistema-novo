@@ -164,7 +164,7 @@ class EloquentSupportsRepository implements SupportsRepository
 
     }
 
-    //FUNÇÃO PARA DESATIVAR USUARIO
+    //FUNÇÃO PARA DESATIVAR SUPORTE
     public function disable(Support $support)
     {
         //INICIA A TRANSAÇÃO
@@ -179,7 +179,7 @@ class EloquentSupportsRepository implements SupportsRepository
 
     }
 
-    //FUNÇÃO PARA ATIVAR USUARIO
+    //FUNÇÃO PARA ATIVAR SUPORTE
     public function enable(Support $support)
     {
         //INICIA A TRANSAÇÃO

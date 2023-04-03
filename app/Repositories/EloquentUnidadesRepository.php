@@ -65,7 +65,7 @@ class EloquentUnidadesRepository implements UnidadesRepository
 
     }
 
-    //FUNÇÃO PARA DESATIVAR USUARIO
+    //FUNÇÃO PARA DESATIVAR UNIDADE
     public function disable(Unidade $unidade)
     {
         //INICIA A TRANSAÇÃO
@@ -80,7 +80,7 @@ class EloquentUnidadesRepository implements UnidadesRepository
 
     }
 
-    //FUNÇÃO PARA ATIVAR USUARIO
+    //FUNÇÃO PARA ATIVAR UNIDADE
     public function enable(Unidade $unidade)
     {
         //INICIA A TRANSAÇÃO
@@ -89,6 +89,20 @@ class EloquentUnidadesRepository implements UnidadesRepository
         //OBTEM OS DADOS DO REQUEST E FAZ O UPDATE
         $unidade->ativo = 's';
         $unidade->save();
+
+        //ENVIA A TRASAÇÃO (COMMIT)
+        DB::commit();
+
+    }
+
+    //FUNÇÃO PARA ATIVAR USUARIO
+    public function delete(Unidade $unidade)
+    {
+        //INICIA A TRANSAÇÃO
+        DB::beginTransaction();
+
+        //DELETA A UNIDADE
+        $unidade->delete();
 
         //ENVIA A TRASAÇÃO (COMMIT)
         DB::commit();

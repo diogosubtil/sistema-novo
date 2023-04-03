@@ -162,4 +162,16 @@ class EloquentUsersRepository implements UsersRepository
         //ENVIA A TRASAÇÃO (COMMIT)
         DB::commit();
     }
+
+    //FUNÇÃO PARA EXCLUIR USUARIO
+    public function delete(User $user)
+    {
+        //INICIA A TRANSAÇÃO
+        DB::beginTransaction();
+
+        $user->delete();
+
+        //ENVIA A TRASAÇÃO (COMMIT)
+        DB::commit();
+    }
 }

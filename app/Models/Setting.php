@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Panoscape\History\HasHistories;
 
 class Setting extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, HasHistories;
 
     //TABELA QUE A MODEL FAZ REFERENCIA NO BANCO DE DADOS
     protected $table = 'settings';
@@ -29,4 +30,10 @@ class Setting extends Model
 
     //SOFTDELETES
     protected $dates = ['deleted_at'];
+
+    //FUNÇÃO HISTORICO
+    public function getModelLabel()
+    {
+        return $this->display_name;
+    }
 }

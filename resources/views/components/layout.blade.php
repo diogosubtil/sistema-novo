@@ -378,10 +378,10 @@
 
                         <div class="pcoded-navigatio-lavel">Home</div>
                         <ul class="pcoded-item pcoded-left-item">
-                            <li id="{{ route('dashboard') }}">
+                            <li class="@if(Request::url() == route('dashboard')) pcoded-trigger @endif">
                                 <a href="{{ route('dashboard') }}">
                                     <span class="pcoded-micon"><i class="fa fa-bar-chart"></i></span>
-                                    <span class="pcoded-mtext">Dashborads</span>
+                                    <span class="pcoded-mtext">Dashborad</span>
                                 </a>
                             </li>
                         </ul>
@@ -390,75 +390,75 @@
                         @if(Helper::requireFuncao(1))
                         <div class="pcoded-navigatio-lavel">Administração</div>
                         <ul class="pcoded-item pcoded-left-item">
-                            <li class="pcoded-hasmenu">
-                                <a href="javascript:void(0)">
+                            <li class="pcoded-hasmenu  @if(Request::segment(1) == 'users') pcoded-trigger @endif">
+                                <a href="javascript:void(0)" class="">
                                     <span class="pcoded-micon"><i class="feather icon-users"></i></span>
                                     <span class="pcoded-mtext">Usuarios</span>
                                 </a>
                                 <ul class="pcoded-submenu">
-                                    <li id="{{ route('users.index') }}">
+                                    <li class="@if(Request::url() == route('users.index')) active @endif">
                                         <a href="{{ route('users.index') }}">
                                             <span class="pcoded-mtext">Painel</span>
                                         </a>
                                     </li>
-                                    <li id="{{ route('users.create') }}">
+                                    <li class="@if(Request::url() == route('users.create')) active @endif">
                                         <a href="{{ route('users.create') }}">
                                             <span class="pcoded-mtext">Cadastro</span>
                                         </a>
                                     </li>
                                 </ul>
                             </li>
-                            <li class="pcoded-hasmenu">
+                            <li class="pcoded-hasmenu @if(Request::segment(1) == 'unidades') pcoded-trigger @endif">
                                 <a href="javascript:void(0)">
                                     <span class="pcoded-micon"><i class="feather icon-home"></i></span>
                                     <span class="pcoded-mtext">Unidades</span>
                                 </a>
                                 <ul class="pcoded-submenu">
-                                    <li id="{{ route('unidades.index') }}">
+                                    <li class="@if(Request::url() == route('unidades.index')) active @endif">
                                         <a href="{{ route('unidades.index') }}">
                                             <span class="pcoded-mtext">Painel</span>
                                         </a>
                                     </li>
-                                    <li id="{{ route('unidades.create') }}">
+                                    <li class="@if(Request::url() == route('unidades.create')) active @endif">
                                         <a href="{{ route('unidades.create') }}">
                                             <span class="pcoded-mtext">Cadastro</span>
                                         </a>
                                     </li>
                                 </ul>
                             </li>
-                            <li class="pcoded-hasmenu">
+                            <li class="pcoded-hasmenu @if(Request::segment(1) == 'supports') pcoded-trigger @endif">
                                 <a href="javascript:void(0)">
                                     <span class="pcoded-micon"><i class="feather icon-help-circle"></i></span>
                                     <span class="pcoded-mtext">Suporte</span>
                                 </a>
                                 <ul class="pcoded-submenu">
-                                    <li id="{{ route('supports.index') }}">
+                                    <li class="@if(Request::url() == route('supports.index')) active @endif">
                                         <a href="{{ route('supports.index') }}">
                                             <span class="pcoded-mtext">Painel</span>
                                         </a>
                                     </li>
                                 </ul>
                             </li>
-                            <li class="pcoded-hasmenu">
+                            <li class="pcoded-hasmenu @if(Request::segment(1) == 'registers') pcoded-trigger @endif">
                                 <a href="javascript:void(0)">
                                     <span class="pcoded-micon"><i class="icofont icofont-folder-open"></i></span>
                                     <span class="pcoded-mtext">Registros</span>
                                 </a>
                                 <ul class="pcoded-submenu">
-                                    <li id="{{ route('registers.index') }}">
+                                    <li class="@if(Request::url() == route('registers.index')) active @endif">
                                         <a href="{{ route('registers.index') }}">
                                             <span class="pcoded-mtext">Painel</span>
                                         </a>
                                     </li>
                                 </ul>
                             </li>
-                            <li class="pcoded-hasmenu">
+                            <li class="pcoded-hasmenu @if(Request::segment(1) == 'settings') pcoded-trigger @endif">
                                 <a href="javascript:void(0)">
                                     <span class="pcoded-micon"><i class="icofont icofont-gear"></i></span>
                                     <span class="pcoded-mtext">Configurações</span>
                                 </a>
                                 <ul class="pcoded-submenu">
-                                    <li id="{{ route('settings.edit', 1) }}">
+                                    <li class="@if(Request::url() == route('settings.edit', 1)) active @endif">
                                         <a href="{{ route('settings.edit', 1) }}">
                                             <span class="pcoded-mtext">Tema</span>
                                         </a>

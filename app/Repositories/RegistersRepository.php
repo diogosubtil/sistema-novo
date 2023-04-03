@@ -10,6 +10,6 @@ interface RegistersRepository
     //INDEX
     public function index(Request $request): array;
 
-    //ADICIONA USUARIO
+    //ADICIONA O REGISTRO
     public function add($id_model, $action, $model, $dataNew = null, $dataOld = null): Register;
 }

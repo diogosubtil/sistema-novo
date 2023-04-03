@@ -110,5 +110,17 @@ class UsersController extends Controller
         return to_route('users.index');
     }
 
+    //FUNÇÃO PARA EXCLUIR USUARIO
+    public function destroy(User $user)
+    {
+        //ATIVA USUARIO VIA REPOSITORY
+        $this->repository->delete($user);
+
+        //ALERT
+        Alert::success('Concluido', 'Usuario ' . $user->name . ' excluido com sucesso!');
+
+        //RETORNA A VIEW
+        return to_route('users.index');
+    }
 
 }

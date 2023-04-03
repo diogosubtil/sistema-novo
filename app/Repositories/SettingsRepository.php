@@ -7,6 +7,6 @@ use App\Models\Setting;
 
 interface SettingsRepository
 {
-    //EDITA USUARIO
+    //EDITA AS CONFIGURAÇÕES
     public function edit(SettingsFormRequest $request,Setting $setting);
 }

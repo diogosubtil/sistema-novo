@@ -40,4 +40,23 @@ class UnidadesFormRequest extends FormRequest
             'assinatura' => ['required', 'string'],
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'cnpj.required' => 'O campo cnpj é obrigatório',
+            'cep.required' => 'O campo cep é obrigatório',
+            'bairro.required' => 'O campo bairro é obrigatório',
+            'cidade.required' => 'O campo cidade é obrigatório',
+            'estado.required' => 'O campo estado é obrigatório',
+            'numero.required' => 'O campo numero é obrigatório',
+            'whatsapp.required' => 'O campo whatsapp é obrigatório',
+            'dataAbertura.required' => 'O campo data de abertura é obrigatório',
+            'meta.required' => 'O campo meta é obrigatório',
+            'gerente.required' => 'O campo gerente é obrigatório',
+            'endereco.required' => 'O campo endereço é obrigatório',
+            'timezone.required' => 'O campo timezone é obrigatório',
+            'assinatura.required' => 'O campo assinatura é obrigatório',
+        ];
+    }
 }

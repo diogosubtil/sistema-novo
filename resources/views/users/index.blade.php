@@ -160,11 +160,18 @@
                                             <a href="{{ route('users.edit', $usuario->id) }}"  class="waves-effect waves-light" data-toggle="tooltip" data-placement="left" title="Editar">
                                                 <i style="font-size: 20px" class="fa fa-edit m-0 text-amazon"></i>
                                             </a>
-                                            <form class="ml-2" method="POST" action="{{ $usuario->ativo == 's' ? route('users.disable', $usuario->id) : route('users.enable', $usuario->id) }}">
+                                            <form class="ml-3" method="POST" action="{{ $usuario->ativo == 's' ? route('users.disable', $usuario->id) : route('users.enable', $usuario->id) }}">
                                                 @csrf
                                                 @method('PUT')
                                                 <button style="background: none;color: inherit;border: none;padding: 0;font: inherit;cursor: pointer;outline: inherit;" type="submit"  class="waves-effect waves-light" data-toggle="tooltip" data-placement="left" title="{{ $usuario->ativo == 's' ? 'Desativar' : 'Ativar' }}">
-                                                    <i style="font-size: 18px" class="fa fa-power-off m-0 {{ $usuario->ativo == 's' ? 'text-danger' : 'text-success' }}"></i>
+                                                    <i style="font-size: 18px" class="fa fa-power-off m-0 {{ $usuario->ativo == 's' ? 'text-warning' : 'text-success' }}"></i>
+                                                </button>
+                                            </form>
+                                            <form id="user-delete-{{ $usuario->id }}" class="ml-3" method="POST" action="{{ route('users.destroy', $usuario->id) }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button style="background: none;color: inherit;border: none;padding: 0;font: inherit;cursor: pointer;outline: inherit;" type="submit"  class="waves-effect waves-light" data-toggle="tooltip" data-placement="left" title="Excluir">
+                                                    <i style="font-size: 18px" class="fa fa-trash m-0 text-danger"></i>
                                                 </button>
                                             </form>
                                         </td>
@@ -197,5 +204,14 @@
         </div>
     @endslot
     @slot('scripts')
+        <script>
+            @foreach ($usuarios as $usuario)
+                let form{{ $usuario->id }} = document.getElementById("user-delete-{{ $usuario->id }}")
+                form{{ $usuario->id }}.addEventListener("submit", function(event){
+                    event.preventDefault()
+                    formDelet(this)
+                });
+            @endforeach
+        </script>
     @endslot
 </x-layout>

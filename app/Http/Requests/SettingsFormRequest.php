@@ -37,4 +37,19 @@ class SettingsFormRequest extends FormRequest
             'favicon' => ['mimes:jpg,png,jpeg,ico|max:2048'],
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'O campo nome da empresa é obrigatório',
+            'color_primary.required' => 'O campo cor primaria é obrigatório',
+            'color_secondary.required' => 'O campo cor secundaria é obrigatório',
+            'color_menu.required' => 'O campo cor de fundo é obrigatório',
+            'color_menu_letter.required' => 'O campo cor das letras é obrigatório',
+            'color_menu_letter_active.required' => 'O campo cor das letras ativas é obrigatório',
+            'color_menu_title.required' => 'O campo cor dos titulos é obrigatório',
+            'color_menu_icon.required' => 'O campo cor dos icones é obrigatório',
+            'color_login.required' => 'O campo cor de fundo é obrigatório',
+        ];
+    }
 }

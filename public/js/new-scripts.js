@@ -1,33 +1,33 @@
+"use strict"
 //FUNÇÃO PARA ALTERAR STATUS ONLINE NO PERFIL
 setTimeout(function (){
     document.getElementById('statusUser').classList.remove('text-success')
     document.getElementById('statusUser').classList.add('text-danger')
 }, 15*60000)
 
-//FUNÇÃO PARA MOSTRAR MENU ATIVO
-window.onload = function activeMenu(){
-    let link = document.getElementById(window.location.href) // PAGINA
-    if (link){
-        link.classList.add('active')
-    }
+//FUNÇÃO DE CONFIRMAÇÃO DE EXCLUSÃO
+function formDelet(form) {
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: 'btn btn-danger  ml-2',
+            cancelButton: 'btn btn-success'
+        },
+        buttonsStyling: false
+    })
 
-    let menu
-    if (link){
-        menu = link.parentElement.parentElement // MENU
-        menu.classList.add('pcoded-trigger')
-    }
-
-    let submenu
-    if (menu){
-        submenu = menu.parentElement.parentElement // SUB MENU
-        submenu.classList.add('pcoded-trigger')
-    }
-
-    if (submenu){
-        let submenu1 = submenu.parentElement.parentElement // SUB MENU
-        submenu1.classList.add('pcoded-trigger')
-    }
-
+    swalWithBootstrapButtons.fire({
+        title: 'Tem certeza?',
+        text: "Você não será capaz de reverter isso!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sim, deletar!',
+        cancelButtonText: 'Não, cancelar!',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            form.submit()
+        }
+    })
 }
 
 //FUNÇÃO PARA SELCIONAR A UNIDADE EXIBIDA

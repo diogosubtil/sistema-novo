@@ -30,4 +30,13 @@ class SupportsAnswersFormRequest extends FormRequest
             'answer' => ['required']
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'user.required' => 'O campo usuario é obrigatório',
+            'unidade_id.required' => 'O campo unidade é obrigatório',
+            'answer.required' => 'O campo resposta é obrigatório',
+        ];
+    }
 }

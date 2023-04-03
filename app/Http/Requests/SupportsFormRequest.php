@@ -31,4 +31,15 @@ class SupportsFormRequest extends FormRequest
             'status' => ['required']
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'subject.required' => 'O campo assunto é obrigatório',
+            'description.required' => 'O campo descrição é obrigatório',
+            'user.required' => 'O campo usuario é obrigatório',
+            'unidade_id.required' => 'O campo unidade é obrigatório',
+            'status.required' => 'O campo status é obrigatório',
+        ];
+    }
 }

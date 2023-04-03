@@ -11,15 +11,18 @@ interface UnidadesRepository
     //INDEX
     public function index(): array;
 
-    //ADICIONA USUARIO
+    //ADICIONA UNIDADE
     public function add(UnidadesFormRequest $request): Unidade;
 
-    //EDITA USUARIO
+    //EDITA UNIDADE
     public function edit(UnidadesFormRequest $request,Unidade $unidade);
 
-    //DESATIVA USUARIO
+    //DESATIVA UNIDADE
     public function disable(Unidade $unidade);
 
-    //ATIVA USUARIO
+    //ATIVA UNIDADE
     public function enable(Unidade $unidade);
+
+    //EXCLUIR UNIDADE
+    public function delete(Unidade $unidade);
 }

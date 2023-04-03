@@ -22,4 +22,7 @@ interface UsersRepository
 
     //ATIVA USUARIO
     public function enable(User $user);
+
+    //EXCLUIR USUARIO
+    public function delete(User $user);
 }

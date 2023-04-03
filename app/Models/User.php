@@ -11,10 +11,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Panoscape\History\HasHistories;
+use Panoscape\History\HasOperations;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, UsersFilter, Filterable, SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable, UsersFilter, Filterable, SoftDeletes, HasOperations, HasHistories;
 
     protected $fillable = [
         'name',
@@ -55,5 +57,14 @@ class User extends Authenticatable
     public function unidade()
     {
         return $this->belongsTo(Unidade::class);
+    }
+
+    //FUNÇÃO HISTORICO
+    public function getModelLabel()
+    {
+        self::addGlobalScope('ordered', function (Builder $queryBuilder){
+            $queryBuilder->orderBy('name', 'asc');
+        });
+        return $this->display_name;
     }
 }
