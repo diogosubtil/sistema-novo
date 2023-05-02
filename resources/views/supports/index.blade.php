@@ -9,7 +9,7 @@
                         <div class="row align-items-center">
                             <div class="col">
                                 <p class="m-b-5">Suportes</p>
-                                <h4 class="m-b-0">{{ $supports->count() }}</h4>
+                                <h4 class="m-b-0">{{ $total->count() }}</h4>
                             </div>
                             <div class="col col-auto text-right">
                                 <i class="feather icon-help-circle f-50 text-c-blue"></i>

@@ -17,10 +17,13 @@ class EloquentUnidadesRepository implements UnidadesRepository
         //OBTEM AS UNIDADE
         $data['unidades'] = Unidade::query()->paginate(15);
 
+        //OBTEM USUARIOS PARA CONTAGEM E ONLINE
+        $data['total'] = Unidade::all();
+
         //OBTEM ATIVOS,DESATIVADOS,ONLINE
         $data['ativos'] = 0;
         $data['desativados'] = 0;
-        foreach ($data['unidades'] as $unidade){
+        foreach ($data['total'] as $unidade){
             if ($unidade->ativo == 's'){
                 $data['ativos']++;
             }

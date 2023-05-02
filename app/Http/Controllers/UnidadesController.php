@@ -27,6 +27,7 @@ class UnidadesController extends Controller
         //RETORNA A VIEW COM OS DADOS
         return view('unidades.index')
             ->with('unidades', $data['unidades'])
+            ->with('total', $data['total'])
             ->with('ativos', $data['ativos'])
             ->with('desativados', $data['desativados']);
     }

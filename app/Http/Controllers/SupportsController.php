@@ -30,6 +30,7 @@ class SupportsController extends Controller
         return view('supports.index')
             ->with('supports', $data['supports']->paginate(15))
             ->with('users', $data['users'])
+            ->with('total', $data['total'])
             ->with('concluidos', $data['concluidos'])
             ->with('pendentes', $data['pendentes'])
             ->with('unidades', $data['unidades']);

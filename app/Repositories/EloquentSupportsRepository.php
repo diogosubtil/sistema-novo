@@ -36,11 +36,11 @@ class EloquentSupportsRepository implements SupportsRepository
             ->filter($request->all());
 
         //OBTEM DADOS PARA CALCULOS
-        $data['totals'] = Support::query()
+        $data['total'] = Support::query()
             ->where('ativo', '=', 's')->get();
         $data['concluidos'] = 0;
         $data['pendentes'] = 0;
-        foreach ($data['totals'] as $total){
+        foreach ($data['total'] as $total){
             if ($total->status == 4){
                 $data['concluidos']++;
             } else {
