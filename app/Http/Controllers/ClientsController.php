@@ -5,14 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UsersFormRequest;
 use App\Models\Unidade;
 use App\Models\User;
+use App\Repositories\ClientsRepository;
 use App\Repositories\UsersRepository;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class UsersController extends Controller
+class ClientsController extends Controller
 {
     //CONSTRUTOR COM REPOSITORY INJETADO
-    public function __construct(private UsersRepository $repository)
+    public function __construct(private ClientsRepository $repository)
     {
     }
 
@@ -23,12 +24,7 @@ class UsersController extends Controller
         $data = $this->repository->index($request);
 
         //RETORNA A VIEW COM OS DADOS
-        return view('users.index')
-            ->with('usuarios', $data['usuarios'])
-            ->with('unidades', $data['unidades'])
-            ->with('total', $data['total'])
-            ->with('ativos', $data['ativos'])
-            ->with('desativados', $data['desativados']);
+        return view('clients.index');
     }
 
     //FUNÇÃO PARA EXIBIR A VIEW (CADASTRAR)
@@ -38,7 +34,7 @@ class UsersController extends Controller
         $unidades = Unidade::query()->where('ativo', '=', 's')->get();
 
         //RETORNA A VIEW COM OS DADOS
-        return view('users.create')
+        return view('clients.create')
             ->with('unidades', $unidades);
     }
 
@@ -52,7 +48,7 @@ class UsersController extends Controller
         Alert::success('Concluido', 'Usuario ' . $user->name .  ' cadastrado com sucesso!');
 
         //RETORNA A VIEW
-        return to_route('users.index');
+        return to_route('clients.index');
     }
 
     //FUNÇÃO PARA EXIBIR A VIEW (EDITAR)
@@ -65,10 +61,7 @@ class UsersController extends Controller
         $unidades = Unidade::query()->where('ativo', '=', 's')->get();
 
         //RETORNA A VIEW COM OS DADOS
-        return view('users.edit')
-            ->with('user', $user)
-            ->with('unidades', $unidades)
-            ->with('unidadesUser', $unidadesUser);
+        return view('clients.edit');
     }
 
     //FUNÇÃO PARA FAZER UPDATE NO USUARIO
@@ -78,10 +71,10 @@ class UsersController extends Controller
         $this->repository->edit($request, $user);
 
         //ALERT
-        Alert::success('Concluido', 'Usuario ' . $user->name . ' editado com sucesso!');
+        Alert::success('Concluido', 'Cliente ' . $user->name . ' editado com sucesso!');
 
         //RETORNA A VIEW
-        return to_route('users.index')->header('Content-Type', 'application/javascript');
+        return to_route('clients.index')->header('Content-Type', 'application/javascript');
     }
 
     //FUNÇÃO PARA DESATIVAR USUARIO

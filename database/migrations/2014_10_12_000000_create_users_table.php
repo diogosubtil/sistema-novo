@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('telefone');
+            $table->string('telefone')->nullable();
             $table->integer('funcao');
             $table->string('unidade_id');
             $table->enum('treinamento', ['s','n']);

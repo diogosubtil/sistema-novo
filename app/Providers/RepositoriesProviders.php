@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\ClientsRepository;
+use App\Repositories\EloquentClientsRepository;
 use App\Repositories\EloquentNotificationsRepository;
 use App\Repositories\EloquentRegistersRepository;
 use App\Repositories\EloquentSettingsRepository;
@@ -32,7 +34,8 @@ class RepositoriesProviders extends ServiceProvider
         SupportsRepository::class           => EloquentSupportsRepository::class,
         SupportsAnswersRepository::class    => EloquentSupportsAnswersRepository::class,
         UploadsRepository::class            => EloquentUploadsRepository::class,
-        NotificationsRepository::class      => EloquentNotificationsRepository::class
+        NotificationsRepository::class      => EloquentNotificationsRepository::class,
+        ClientsRepository::class            => EloquentClientsRepository::class
     ];
 
     /**

@@ -48,7 +48,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-xl-9 col-md-12 col-12">
                 <div class="card table-card">
                     <div class="card-header">
@@ -59,7 +58,7 @@
                         <div class="col-12">
                             <div class="row">
                                 <div class="col-xl-6 col-md-6 col-12">
-                                    <label for="created_at">Nome</label>
+                                    <label for="created_at">Usuario</label>
                                     <div class="input-group">
                                     <span class="input-group-addon bg-primary">
                                         <i class="icofont icofont-user"></i>
@@ -78,15 +77,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <div class="card table-card">
-                    <div class="card-header">
-                        <h5 class="text-primary"><p><b>Mensagem</b></p></h5>
-                        <hr>
-                    </div>
-                    <div class="card-block">
                         <div class="col-12">
                             <form id="create-support" method="POST" class="row" action=" {{ route('supports.store') }}" enctype="multipart/form-data">
                                 @csrf

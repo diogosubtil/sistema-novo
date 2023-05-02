@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('meta');
             $table->integer('gerente');
             $table->mediumText('endereco');
-            $table->integer('numero');
+            $table->string('numero');
             $table->string('timezone');
             $table->longText('assinatura');
             $table->enum('ativo', ['s','n'])->default('s');

@@ -25,4 +25,7 @@ interface UnidadesRepository
 
     //EXCLUIR UNIDADE
     public function delete(Unidade $unidade);
+
+    //MIGRAR
+    public function migration();
 }

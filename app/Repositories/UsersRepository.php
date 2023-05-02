@@ -25,4 +25,7 @@ interface UsersRepository
 
     //EXCLUIR USUARIO
     public function delete(User $user);
+
+    //MIGRAR
+    public function migration();
 }

@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Validation\Rules;
 
 class EloquentUsersRepository implements UsersRepository
@@ -144,10 +145,6 @@ class EloquentUsersRepository implements UsersRepository
 
         //ENVIA A TRASAÇÃO (COMMIT)
         DB::commit();
-
-        //SALVA O REGISTRO
-        $this->repository->add($user->id,'ex','User');
-
     }
 
     //FUNÇÃO PARA ATIVAR USUARIO
@@ -173,5 +170,68 @@ class EloquentUsersRepository implements UsersRepository
 
         //ENVIA A TRASAÇÃO (COMMIT)
         DB::commit();
+    }
+
+    //FUNÇÃO PARA MIGRAR
+    public function migration()
+    {
+        //FUNÇÃO PARA PODER SETAR O ID
+        User::unguard();
+
+        //OBTEM OS DADOS
+        $api = Http::get('https://unidade.espacoicelaser.com/migracao/usuarios');
+
+        $total = count($api->json());
+        $att = 0;
+        $add = 0;
+
+        //ADD OS DADOS
+        foreach ($api->json() as $user) {
+
+            //OBTEM USUARIO PARA VERIFICAÇÃO DE UPDADE OU CADASTRO
+            $getUser = User::where('id', $user['id'])->first();
+
+            if ($getUser) {
+
+                $getUser->name = $user['nome'];
+                $getUser->email = $user['email'];
+                $getUser->password = $user['senha'];
+                $getUser->telefone = $user['telefone'];
+                $getUser->funcao = $user['funcao'];
+                $getUser->unidade_id = $user['unidade'];
+                $getUser->treinamento = $user['treinamento'];
+                $getUser->ativo = $user['ativo'];
+                $getUser->created_at = $user['dataCadastro'];
+                $getUser->updated_at = $user['dataAtualizacao'];
+                $getUser->save();
+
+                $att++;
+
+            } else {
+
+                User::create([
+                    'id' => $user['id'],
+                    'name' => $user['nome'],
+                    'email' => $user['email'],
+                    'password' => $user['senha'],
+                    'telefone' => $user['telefone'],
+                    'funcao' => $user['funcao'],
+                    'unidade_id' => $user['unidade'],
+                    'treinamento' => $user['treinamento'],
+                    'ativo' => $user['ativo'],
+                    'created_at' => $user['dataCadastro'],
+                    'updated_at' => $user['dataAtualizacao'],
+                ]);
+
+                $add++;
+
+            }
+
+        }
+
+        echo 'Total de usuarios: ' . $total . '<br>';
+        echo 'Atualizados: ' . $att . '<br>';
+        echo 'Cadastrados: ' . $add . '<br>';
+
     }
 }

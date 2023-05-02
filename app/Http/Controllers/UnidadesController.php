@@ -128,4 +128,11 @@ class UnidadesController extends Controller
         //RETORNA A VIEW
         return to_route('unidades.index');
     }
+
+    //FUNÇÃO PARA MIGRAR
+    public function migrate()
+    {
+        //OBTEM VIA REPOSITORY
+        $this->repository->migration();
+    }
 }

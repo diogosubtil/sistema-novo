@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\RegistersController;
 use App\Http\Controllers\SettingsController;
@@ -58,6 +59,11 @@ Route::middleware('guest')->group(function () {
 //AUTENTICADOR DE USUARIOS LOGADO
 Route::middleware('auth')->group(function () {
 
+    //MIGRAÇÃO
+    Route::get('/migrate/unidades', [UnidadesController::class, 'migrate'])->name('unidades.migrate');
+    Route::get('/migrate/clients', [ClientsController::class, 'migrate'])->name('clients.migrate');
+    Route::get('/migrate/users', [UsersController::class, 'migrate'])->name('users.migrate');
+
     //PROFILE
     Route::get('verify-email', [EmailVerificationPromptController::class, '__invoke'])->name('verification.notice');
     Route::get('verify-email/{id}/{hash}', [VerifyEmailController::class, '__invoke'])->middleware(['signed', 'throttle:6,1'])->name('verification.verify');
@@ -106,6 +112,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/notifications/get', [NotificationsController::class, 'get'])->name('notifications.get');
     Route::post('/notifications/quantity', [NotificationsController::class, 'quantity'])->name('notifications.quantity');
     Route::post('/notifications/seen', [NotificationsController::class, 'seen'])->name('notifications.seen');
+
+    //CLIENTS
+    Route::resource('/clients', ClientsController::class);
 
 });
 
