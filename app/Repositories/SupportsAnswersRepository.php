@@ -8,6 +8,6 @@ use Illuminate\Http\Request;
 
 interface SupportsAnswersRepository
 {
-    //ADICIONA A RESPOSTA DO SUPORTE
+    //ADICIONA
     public function add(SupportsAnswersFormRequest $request): SupportAnswer;
 }

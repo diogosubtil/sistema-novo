@@ -72,7 +72,7 @@ function openNotification(){
         },
         success: function(data) {
             //VERIFICA SE EXISTE NOTIFICAÇÃO
-            if (data){
+            if (data.length > 0){
 
                 //VARIAVEL DE HTML PARA AS NOTIFICAÇÔES
                 let html = '<a class="p-0"></a>';
@@ -135,7 +135,8 @@ function openNotification(){
                     '</div>\n' +
                     '</div>\n' +
                     '</li>';
-                $('#bodyNotifications').html(html)
+                $('#bodyNotifications').html(html);
+                $('#vermais-noti').hide();
 
             }
 

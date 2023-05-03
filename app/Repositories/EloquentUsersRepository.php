@@ -189,7 +189,7 @@ class EloquentUsersRepository implements UsersRepository
         foreach ($api->json() as $user) {
 
             //OBTEM USUARIO PARA VERIFICAÇÃO DE UPDADE OU CADASTRO
-            $getUser = User::where('id', $user['id'])->first();
+            $getUser = User::where('id', $user['id'])->withTrashed()->first();
 
             if ($getUser) {
 

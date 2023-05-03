@@ -17,18 +17,18 @@ interface SupportsRepository
     //CREATE
     public function create(): array;
 
-    //CREATE
+    //SHOW
     public function show(Support $support): array;
 
-    //ADICIONA SUPORTE
+    //ADICIONA
     public function add(SupportsFormRequest $request): Support;
 
-    //EDITA SUPORTE
+    //EDITA
     public function edit(SupportsFormRequest $request,Support $support);
 
-    //DESATIVA SUPORTE
+    //DESATIVA
     public function disable(Support $support);
 
-    //ATIVA SUPORTE
+    //ATIVA
     public function enable(Support $support);
 }

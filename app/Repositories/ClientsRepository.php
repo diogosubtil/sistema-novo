@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Http\Requests\ClientsFormRequest;
-use App\Models\Clients;
+use App\Models\Client;
 use Illuminate\Http\Request;
 
 interface ClientsRepository
@@ -11,20 +11,14 @@ interface ClientsRepository
     //INDEX
     public function index(Request $request): array;
 
-    //ADICIONA UNIDADE
-    public function add(ClientsFormRequest $request): Clients;
+    //ADICIONA
+    public function add(ClientsFormRequest $request): Client;
 
-    //EDITA UNIDADE
-    public function edit(ClientsFormRequest $request,Clients $clients);
+    //EDITA
+    public function edit(ClientsFormRequest $request,Client $clients);
 
-    //DESATIVA UNIDADE
-    public function disable(Clients $clients);
-
-    //ATIVA UNIDADE
-    public function enable(Clients $clients);
-
-    //EXCLUIR UNIDADE
-    public function delete(Clients $clients);
+    //EXCLUIR
+    public function delete(Client $clients);
 
     //MIGRAR
     public function migration();

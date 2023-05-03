@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 
 interface UploadsRepository
 {
-    //ADICIONA UPLOADS
+    //ADICIONA
     public function add($type, $type_id, $files): Upload;
 }

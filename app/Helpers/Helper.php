@@ -55,7 +55,8 @@ class Helper
     //FUNÇÃO PARA OBTER NOME DA UNIDADE
     public static function getUnidadeTitle($id)
     {
-        $unidade =  optional(Unidade::query()->where('id', '=', $id)->first())->bairro;
+        $unidade =  optional(Unidade::query()->where('id', '=', $id)->first());
+        $unidade = $unidade->bairro. ' - ' . $unidade->cidade . ' - ' . $unidade->estado;
 
         return $unidade;
     }

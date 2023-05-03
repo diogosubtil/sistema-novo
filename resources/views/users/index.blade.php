@@ -48,7 +48,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-md-12 col-12">
+            <div class="hidden-mobile col-xl-3 col-md-12 col-12">
                 <div class="card feed-card">
                     <div class="card-header d-flex justify-content-between">
                         <div class="col-4">

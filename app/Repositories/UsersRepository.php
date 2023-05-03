@@ -11,19 +11,19 @@ interface UsersRepository
     //INDEX
     public function index(Request $request): array;
 
-    //ADICIONA USUARIO
+    //ADICIONA
     public function add(UsersFormRequest $request): User;
 
-    //EDITA USUARIO
+    //EDITA
     public function edit(Request $request,User $user);
 
-    //DESATIVA USUARIO
+    //DESATIVA
     public function disable(User $user);
 
-    //ATIVA USUARIO
+    //ATIVA
     public function enable(User $user);
 
-    //EXCLUIR USUARIO
+    //EXCLUIR
     public function delete(User $user);
 
     //MIGRAR

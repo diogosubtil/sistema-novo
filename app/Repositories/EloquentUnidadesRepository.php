@@ -130,7 +130,7 @@ class EloquentUnidadesRepository implements UnidadesRepository
         foreach ($api->json() as $unidade) {
 
             //OBTEM USUARIO PARA VERIFICAÇÃO DE UPDADE OU CADASTRO
-            $getUnidade = Unidade::where('id', $unidade['id'])->first();
+            $getUnidade = Unidade::where('id', $unidade['id'])->withTrashed()->first();
 
             if ($getUnidade) {
 

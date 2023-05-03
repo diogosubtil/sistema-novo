@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
+use App\ModelFilters\ClientsFilter;
 use eloquentFilter\QueryFilter\ModelFilters\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Clients extends Model
+class Client extends Model
 {
-    use HasFactory, Filterable, SoftDeletes;
+    use HasFactory, ClientsFilter, Filterable, SoftDeletes;
 
     //TABELA QUE A MODEL FAZ REFERENCIA NO BANCO DE DADOS
     protected $table = 'clients';

@@ -24,11 +24,7 @@ class UsersController extends Controller
 
         //RETORNA A VIEW COM OS DADOS
         return view('users.index')
-            ->with('usuarios', $data['usuarios'])
-            ->with('unidades', $data['unidades'])
-            ->with('total', $data['total'])
-            ->with('ativos', $data['ativos'])
-            ->with('desativados', $data['desativados']);
+            ->with($data);
     }
 
     //FUNÇÃO PARA EXIBIR A VIEW (CADASTRAR)

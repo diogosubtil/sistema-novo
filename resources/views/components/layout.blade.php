@@ -296,7 +296,7 @@
                                     </li>
                                     <div id="bodyNotifications">
                                     </div>
-                                    <a onclick="clickLista()" class="text-center p-0">
+                                    <a id="vermais-noti" onclick="clickLista()" class="text-center p-0">
                                         <h6>Ver mais</h6>
                                     </a>
                                 </ul>
@@ -383,6 +383,24 @@
                                     <span class="pcoded-micon"><i class="fa fa-bar-chart"></i></span>
                                     <span class="pcoded-mtext">Dashborad</span>
                                 </a>
+                            </li>
+                            <li class="pcoded-hasmenu  @if(Request::segment(1) == 'clients') pcoded-trigger @endif">
+                                <a href="javascript:void(0)" class="">
+                                    <span class="pcoded-micon"><i class="feather icon-users"></i></span>
+                                    <span class="pcoded-mtext">Clientes</span>
+                                </a>
+                                <ul class="pcoded-submenu">
+                                    <li class="@if(Request::url() == route('clients.index')) active @endif">
+                                        <a href="{{ route('clients.index') }}">
+                                            <span class="pcoded-mtext">Painel</span>
+                                        </a>
+                                    </li>
+                                    <li class="@if(Request::url() == route('clients.create')) active @endif">
+                                        <a href="{{ route('clients.create') }}">
+                                            <span class="pcoded-mtext">Cadastro</span>
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
 

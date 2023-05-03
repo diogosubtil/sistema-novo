@@ -24,7 +24,7 @@ return new class extends Migration
             $table->integer('funcao');
             $table->string('unidade_id');
             $table->enum('treinamento', ['s','n']);
-            $table->enum('ativo', ['s','n']);
+            $table->enum('ativo', ['s','n'])->default('s');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

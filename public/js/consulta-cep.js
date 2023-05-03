@@ -12,14 +12,21 @@ function limpa_formulário_cep() {
 
 function meu_callback(conteudo) {
     if (!("erro" in conteudo)) {
+        console.log(conteudo)
         document.getElementById('cidade').value=(conteudo.localidade);
-        document.getElementById('cidadeText').innerText=(conteudo.localidade);
         document.getElementById('bairro').value=(conteudo.bairro);
-        document.getElementById('bairroText').innerText=(conteudo.bairro);
-        document.getElementById('estado').value=(conteudo.uf);
-        document.getElementById('estadoText').innerText=(conteudo.uf);
+        document.getElementById('estado') ? document.getElementById('estado').value=(conteudo.uf) : null;
         document.getElementById('endereco').value=(conteudo.logradouro);
-        document.getElementById('enderecoText').innerText=(conteudo.logradouro);
+
+        if (document.getElementById('cidadeText')){
+            document.getElementById('cidadeText').innerText=(conteudo.localidade);
+            document.getElementById('estadoText').innerText=(conteudo.uf);
+            document.getElementById('enderecoText').innerText=(conteudo.logradouro);
+            document.getElementById('bairroText').innerText=(conteudo.bairro);
+        }
+
+
+
     } //end if.
     else {
         //CEP não Encontrado.
@@ -44,13 +51,16 @@ function pesquisacep(valor) {
             //Preenche os campos com "..." enquanto consulta webservice.
 
             document.getElementById('cidade').value="...";
-            document.getElementById('cidadeText').value="...";
             document.getElementById('bairro').value="...";
-            document.getElementById('bairroText').value="...";
-            document.getElementById('estado').value="...";
-            document.getElementById('estadoText').value="...";
+            document.getElementById('estado') ? document.getElementById('estado').value="..." : null;
             document.getElementById('endereco').value="...";
-            document.getElementById('enderecoText').value="...";
+
+            if (document.getElementById('cidadeText')){
+                document.getElementById('cidadeText').value="...";
+                document.getElementById('enderecoText').value="...";
+                document.getElementById('estadoText').value="...";
+                document.getElementById('bairroText').value="...";
+            }
 
             //Cria um elemento javascript.
             var script = document.createElement('script');
