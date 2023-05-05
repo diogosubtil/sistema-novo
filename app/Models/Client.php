@@ -30,7 +30,7 @@ class Client extends Model
         'whatsapp',
         'email',
         'senha',
-        'unidade',
+        'unidade_id',
         'transferido',
         'diabetes',
         'cardiaco',

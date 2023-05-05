@@ -55,25 +55,23 @@ class ClientsController extends Controller
     //FUNÇÃO PARA EXIBIR A VIEW (EDITAR)
     public function edit(Client $client)
     {
-
-        //OBTEM AS UNIDADES
-        $unidades = Unidade::query()->where('ativo', '=', 's')->get();
-
         //RETORNA A VIEW COM OS DADOS
-        return view('clients.edit');
+        return view('clients.edit')
+            ->with('client', $client);
     }
 
     //FUNÇÃO PARA FAZER UPDATE NO USUARIO
     public function update(Request $request, Client $client)
     {
+
         //EDITA NO BANCO VIA REPOSITORY
         $this->repository->edit($request, $client);
 
         //ALERT
-        Alert::success('Concluido', 'Cliente ' . $client->name . ' editado com sucesso!');
+        Alert::success('Concluido', 'Cliente editado com sucesso!');
 
         //RETORNA A VIEW
-        return to_route('clients.index')->header('Content-Type', 'application/javascript');
+        return to_route('clients.index');
     }
 
     //FUNÇÃO PARA EXCLUIR USUARIO

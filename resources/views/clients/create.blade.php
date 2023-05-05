@@ -8,7 +8,7 @@
             <div class="col-12">
                 <div class="p-2 card">
                     <div class="col-12">
-                        <form method="POST" action="{{ route('clients.store') }}">
+                        <form method="POST" action="{{ route('clients.store') }}" enctype="multipart/form-data">
                             @csrf
                             <!-- Name -->
                             <div class="row">
@@ -131,7 +131,7 @@
                                                     <span onclick="$('#files').click()">Buscar</span>
                                                 </span>
                                                 <input onclick="$('#files').click()" value="Nenhum arquivo selecionado" class="form-control botaoArquivo" type="text" id="filesName"/>
-                                                <input hidden onchange="$('#filesName').val(this.name)" class="form-control" type="file" id="files" accept="image/jpeg,image/jpg,image/png,application/pdf" name="file[]"/>
+                                                <input hidden onchange="$('#filesName').val(this.name)" class="form-control" type="file" id="files" accept="image/jpeg,image/jpg,image/png" name="foto[]"/>
                                             </div>
                                             <span class="form-bar">
                                                 @if ($errors->get('foto'))
@@ -283,7 +283,7 @@
                                         <div class="col-xl-2 col-md-6 col-12 mt-3">
                                             <div class="checkbox-fade fade-in-primary">
                                                 <label>
-                                                    <input {{ (old('diabetes') ? "checked":"") }} id="diabetes" name="diabetes" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                                    <input {{ (old('diabetes') ? "checked":"") }} value="s" id="diabetes" name="diabetes" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
                                                     <span class="cr">
                                                         <i class="cr-icon icofont icofont-ui-check"></i>
                                                     </span>
@@ -291,7 +291,303 @@
                                                 </label>
                                             </div>
                                         </div>
+                                        <div class="col-xl-3 col-md-6 col-12 mt-3">
+                                            <div class="checkbox-fade fade-in-primary">
+                                                <label>
+                                                    <input {{ (old('cardiaco') ? "checked":"") }} value="s" id="cardiaco" name="cardiaco" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                                    <span class="cr">
+                                                        <i class="cr-icon icofont icofont-ui-check"></i>
+                                                    </span>
+                                                    <span class="text-inverse">Portador de marcapasso/alterações cardíacas descontrolado?</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-md-6 col-12 mt-3">
+                                            <div class="checkbox-fade fade-in-primary">
+                                                <label>
+                                                    <input {{ (old('hormonal') ? "checked":"") }} value="s" id="hormonal" name="hormonal" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                                    <span class="cr">
+                                                        <i class="cr-icon icofont icofont-ui-check"></i>
+                                                    </span>
+                                                    <span class="text-inverse">Alteração hormonal? Como: Ovário policístico, Andropausa, Hirsutíssimo, Hipertireoidismo, Menopausa, Hipotireoidismo.</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-md-6 col-12 mt-3">
+                                            <div class="checkbox-fade fade-in-primary">
+                                                <label>
+                                                    <input {{ (old('foliculite') ? "checked":"") }} value="s" id="foliculite" name="foliculite" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                                    <span class="cr">
+                                                        <i class="cr-icon icofont icofont-ui-check"></i>
+                                                    </span>
+                                                    <span class="text-inverse">Tem ou teve alguma alteração na pele como manchas e foliculites?</span>
+                                                </label>
+                                            </div>
+                                            <input id="foliculite_onde" name="foliculite_onde" type="text" class="form-control" value="{{ old('foliculite_onde') }}" placeholder="Onde?">
+                                        </div>
+                                        <div class="col-xl-3 col-md-6 col-12 mt-3">
+                                            <div class="checkbox-fade fade-in-primary">
+                                                <label>
+                                                    <input {{ (old('doenca_de_pele') ? "checked":"") }} value="s" id="doenca_de_pele" name="doenca_de_pele" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                                    <span class="cr">
+                                                        <i class="cr-icon icofont icofont-ui-check"></i>
+                                                    </span>
+                                                    <span class="text-inverse">Doença de pele como vitligo, psoríase?</span>
+                                                </label>
+                                            </div>
+                                            <input id="doenca_de_pele_qual" name="doenca_de_pele_qual" type="text" class="form-control" value="{{ old('doenca_de_pele_qual') }}" placeholder="Qual?">
+                                        </div>
+                                        <div class="col-xl-2 col-md-6 col-12 mt-3">
+                                            <div class="checkbox-fade fade-in-primary">
+                                                <label>
+                                                    <input {{ (old('fotossensiveis') ? "checked":"") }} value="s" id="fotossensiveis" name="fotossensiveis" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                                    <span class="cr">
+                                                        <i class="cr-icon icofont icofont-ui-check"></i>
+                                                    </span>
+                                                    <span class="text-inverse">Doenças fotossensíveis?</span>
+                                                </label>
+                                            </div>
+                                            <input id="fotossensiveis_qual" name="fotossensiveis_qual" type="text" class="form-control" value="{{ old('fotossensiveis_qual') }}" placeholder="Qual?">
+                                        </div>
+                                        <div class="col-xl-4 col-md-6 col-12 mt-3">
+                                            <div class="checkbox-fade fade-in-primary">
+                                                <label>
+                                                    <input {{ (old('queloides') ? "checked":"") }} value="s" id="queloides" name="queloides" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                                    <span class="cr">
+                                                        <i class="cr-icon icofont icofont-ui-check"></i>
+                                                    </span>
+                                                    <span class="text-inverse">Tem histórico de cicatrizes, queloides ou hipertróficas?</span>
+                                                </label>
+                                            </div>
+                                            <input id="queloides_qual" name="queloides_qual" type="text" class="form-control" value="{{ old('queloides_qual') }}" placeholder="Qual?">
+                                        </div>
+                                        <div class="col-xl-3 col-md-6 col-12 mt-3">
+                                            <div class="checkbox-fade fade-in-primary">
+                                                <label>
+                                                    <input {{ (old('alergico') ? "checked":"") }} value="s" id="alergico" name="alergico" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                                    <span class="cr">
+                                                        <i class="cr-icon icofont icofont-ui-check"></i>
+                                                    </span>
+                                                    <span class="text-inverse">Antecedentes alérgicos?</span>
+                                                </label>
+                                            </div>
+                                            <input id="alergico_qual" name="alergico_qual" type="text" class="form-control" value="{{ old('alergico_qual') }}" placeholder="Qual?">
+                                        </div>
+                                        <div class="col-xl-3 col-md-6 col-12 mt-3">
+                                            <div class="checkbox-fade fade-in-primary">
+                                                <label>
+                                                    <input {{ (old('herpes') ? "checked":"") }} value="s" id="herpes" name="herpes" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                                    <span class="cr">
+                                                        <i class="cr-icon icofont icofont-ui-check"></i>
+                                                    </span>
+                                                    <span class="text-inverse">Tem ou teve herpes?</span>
+                                                </label>
+                                            </div>
+                                            <input id="herpes_frequencias" name="herpes_frequencias" type="text" class="form-control" value="{{ old('herpes_frequencias') }}" placeholder="Frequências?">
+                                        </div>
+                                        <div class="col-xl-3 col-md-6 col-12 mt-3">
+                                            <div class="checkbox-fade fade-in-primary">
+                                                <label>
+                                                    <input {{ (old('epilepsia') ? "checked":"") }} value="s" id="epilepsia" name="epilepsia" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                                    <span class="cr">
+                                                        <i class="cr-icon icofont icofont-ui-check"></i>
+                                                    </span>
+                                                    <span class="text-inverse">Epilepsia – convulsão?</span>
+                                                </label>
+                                            </div>
+                                            <input id="epilepsia_frequencias" name="epilepsia_frequencias" type="text" class="form-control" value="{{ old('epilepsia_frequencias') }}" placeholder="Frequências?">
+                                        </div>
+                                        <div class="col-xl-3 col-md-6 col-12 mt-3">
+                                            <div class="checkbox-fade fade-in-primary">
+                                                <label>
+                                                    <input {{ (old('neoplasias_metastases') ? "checked":"") }} value="s" id="neoplasias_metastases" name="neoplasias_metastases" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                                    <span class="cr">
+                                                        <i class="cr-icon icofont icofont-ui-check"></i>
+                                                    </span>
+                                                    <span class="text-inverse">Neoplasias e metástases?</span>
+                                                </label>
+                                            </div>
+                                            <input id="neopla_metast_qual" name="neopla_metast_qual" type="text" class="form-control" value="{{ old('neopla_metast_qual') }}" placeholder="Qual?">
+                                        </div>
+                                        <div class="col-xl-3 col-md-6 col-12 mt-3">
+                                            <div class="checkbox-fade fade-in-primary">
+                                                <label>
+                                                    <input {{ (old('medicamentos') ? "checked":"") }} value="s" id="medicamentos" name="medicamentos" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                                    <span class="cr">
+                                                        <i class="cr-icon icofont icofont-ui-check"></i>
+                                                    </span>
+                                                    <span class="text-inverse">Uso de medicamentos?</span>
+                                                </label>
+                                            </div>
+                                            <input id="medicamentos_qual" name="medicamentos_qual" type="text" class="form-control" value="{{ old('medicamentos_qual') }}" placeholder="Qual?">
+                                        </div>
+                                        <div class="col-xl-3 col-md-6 col-12 mt-3">
+                                            <div class="checkbox-fade fade-in-primary">
+                                                <label>
+                                                    <input {{ (old('doenca_autoimune') ? "checked":"") }} value="s" id="doenca_autoimune" name="doenca_autoimune" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                                    <span class="cr">
+                                                        <i class="cr-icon icofont icofont-ui-check"></i>
+                                                    </span>
+                                                    <span class="text-inverse">Algum tipo de doenças autoimune?</span>
+                                                </label>
+                                            </div>
+                                            <input id="doenca_autoimune_qual" name="doenca_autoimune_qual" type="text" class="form-control" value="{{ old('doenca_autoimune_qual') }}" placeholder="Qual?">
+                                        </div>
+                                        <div class="col-xl-3 col-md-6 col-12 mt-3">
+                                            <div class="checkbox-fade fade-in-primary">
+                                                <label>
+                                                    <input {{ (old('gestante') ? "checked":"") }} value="s" id="gestante" name="gestante" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                                    <span class="cr">
+                                                        <i class="cr-icon icofont icofont-ui-check"></i>
+                                                    </span>
+                                                    <span class="text-inverse">Gestante?</span>
+                                                </label>
+                                            </div>
+                                            <input id="gestante_meses" name="gestante_meses" type="text" class="form-control" value="{{ old('gestante_meses') }}" placeholder="Quantos meses?">
+                                        </div>
+                                        <div class="col-xl-3 col-md-6 col-12 mt-3">
+                                            <div class="checkbox-fade fade-in-primary">
+                                                <label>
+                                                    <input {{ (old('lactante') ? "checked":"") }} value="s" id="lactante" name="lactante" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                                    <span class="cr">
+                                                        <i class="cr-icon icofont icofont-ui-check"></i>
+                                                    </span>
+                                                    <span class="text-inverse">Lactante?</span>
+                                                </label>
+                                            </div>
+                                            <input id="lactante_tempo" name="lactante_tempo" type="text" class="form-control" value="{{ old('lactante_tempo') }}" placeholder="Quanto tempo?">
+                                        </div>
+                                        <div class="col-xl-3 col-md-6 col-12 mt-3">
+                                            <div class="checkbox-fade fade-in-primary">
+                                                <label>
+                                                    <input {{ (old('tratamento') ? "checked":"") }} value="s" id="tratamento" name="tratamento" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                                    <span class="cr">
+                                                        <i class="cr-icon icofont icofont-ui-check"></i>
+                                                    </span>
+                                                    <span class="text-inverse">Tratamentos Dermatológico/Estético?</span>
+                                                </label>
+                                            </div>
+                                            <input id="tratamento_qual" name="tratamento_qual" type="text" class="form-control" value="{{ old('tratamento_qual') }}" placeholder="Qual?">
+                                        </div>
+                                    </div>
+                                </div>
 
+                                <div class="col-12">
+                                    <hr>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-12 mt-2">
+                                            Hábitos Diários:
+                                        </div>
+                                        <div class="col-xl-2 col-md-6 col-12 mt-3">
+                                            <div class="checkbox-fade fade-in-primary">
+                                                <label>
+                                                    <input {{ (old('filtro_solar') ? "checked":"") }} value="s" id="filtro_solar" name="filtro_solar" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                                    <span class="cr">
+                                                        <i class="cr-icon icofont icofont-ui-check"></i>
+                                                    </span>
+                                                    <span class="text-inverse">Filtro Solar?</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-2 col-md-6 col-12 mt-3">
+                                            <div class="checkbox-fade fade-in-primary">
+                                                <label>
+                                                    <input {{ (old('exposicao_sol') ? "checked":"") }} value="s" id="exposicao_sol" name="exposicao_sol" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                                    <span class="cr">
+                                                        <i class="cr-icon icofont icofont-ui-check"></i>
+                                                    </span>
+                                                    <span class="text-inverse">Exposição ao sol?</span>
+                                                </label>
+                                            </div>
+                                            <input id="exposicao_sol_frequencia" name="exposicao_sol_frequencia" type="text" class="form-control" value="{{ old('exposicao_sol_frequencia') }}" placeholder="Frequência?">
+                                        </div>
+                                        <div class="col-xl-4 col-md-6 col-12 mt-3">
+                                            <div class="checkbox-fade fade-in-primary">
+                                                <label>
+                                                    <input {{ (old('roacutan') ? "checked":"") }} value="s" id="roacutan" name="roacutan" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                                    <span class="cr">
+                                                        <i class="cr-icon icofont icofont-ui-check"></i>
+                                                    </span>
+                                                    <span class="text-inverse">Uso de roacutan, anticoagulante ou corticoide a mais de 3 meses?</span>
+                                                </label>
+                                            </div>
+                                            <input id="roacutan_qual" name="roacutan_qual" type="text" class="form-control" value="{{ old('roacutan_qual') }}" placeholder="Qual?">
+                                        </div>
+                                        <div class="col-xl-4 col-md-6 col-12 mt-3">
+                                            <div class="checkbox-fade fade-in-primary">
+                                                <label>
+                                                    <input {{ (old('medic_fotossensiveis') ? "checked":"") }} value="s" id="medic_fotossensiveis" name="medic_fotossensiveis" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                                    <span class="cr">
+                                                        <i class="cr-icon icofont icofont-ui-check"></i>
+                                                    </span>
+                                                    <span class="text-inverse">Uso medicamentos fotossensíveis(Furocumarina)?</span>
+                                                </label>
+                                            </div>
+                                            <input id="medic_fotossensiveis_qual" name="medic_fotossensiveis_qual" type="text" class="form-control" value="{{ old('medic_fotossensiveis_qual') }}" placeholder="Qual?">
+                                        </div>
+                                        <div class="col-xl-2 col-md-6 col-12 mt-3">
+                                            <div class="checkbox-fade fade-in-primary">
+                                                <label>
+                                                    <input {{ (old('anabolizante') ? "checked":"") }} value="s" id="anabolizante" name="anabolizante" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                                    <span class="cr">
+                                                        <i class="cr-icon icofont icofont-ui-check"></i>
+                                                    </span>
+                                                    <span class="text-inverse">Uso de anabolizante?</span>
+                                                </label>
+                                            </div>
+                                            <input id="anabolizante_qual" name="anabolizante_qual" type="text" class="form-control" value="{{ old('anabolizante_qual') }}" placeholder="Qual?">
+                                        </div>
+                                        <div class="col-xl-3 col-md-6 col-12 mt-3">
+                                            <div class="checkbox-fade fade-in-primary">
+                                                <label>
+                                                    <input {{ (old('acidos') ? "checked":"") }} value="s" id="acidos" name="acidos" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                                    <span class="cr">
+                                                        <i class="cr-icon icofont icofont-ui-check"></i>
+                                                    </span>
+                                                    <span class="text-inverse">Uso de ácidos fotossensíveis?</span>
+                                                </label>
+                                            </div>
+                                            <input id="acidos_tempo" name="acidos_tempo" type="text" class="form-control" value="{{ old('acidos_tempo') }}" placeholder="Quanto tempo?">
+                                        </div>
+                                        <div class="col-xl-4 col-md-6 col-12 mt-3">
+                                            <div class="checkbox-fade fade-in-primary">
+                                                <label>
+                                                    <input {{ (old('laser') ? "checked":"") }} value="s" id="laser" name="laser" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                                    <span class="cr">
+                                                        <i class="cr-icon icofont icofont-ui-check"></i>
+                                                    </span>
+                                                    <span class="text-inverse">Já fez algum procedimento com Laser ou IPL para depilação?</span>
+                                                </label>
+                                            </div>
+                                            <input id="laser_qual" name="laser_qual" type="text" class="form-control" value="{{ old('laser_qual') }}" placeholder="Qual?">
+                                        </div>
+                                        <div class="col-xl-3 col-md-6 col-12 mt-3">
+                                            <div class="checkbox-fade fade-in-primary">
+                                                <label>
+                                                    <input {{ (old('tatuagem_micropig') ? "checked":"") }} value="s" id="tatuagem_micropig" name="tatuagem_micropig" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                                    <span class="cr">
+                                                        <i class="cr-icon icofont icofont-ui-check"></i>
+                                                    </span>
+                                                    <span class="text-inverse">Tem tatuagem ou Micropigmentação?</span>
+                                                </label>
+                                            </div>
+                                            <input id="tatuagem_micropig_onde" name="tatuagem_micropig_onde" type="text" class="form-control" value="{{ old('tatuagem_micropig_onde') }}" placeholder="Onde?">
+                                        </div>
+                                        <div class="col-xl-5 col-md-6 col-12 mt-3">
+                                            <div class="checkbox-fade fade-in-primary">
+                                                <label>
+                                                    <input {{ (old('reacoes') ? "checked":"") }} value="s" id="reacoes" name="reacoes" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                                    <span class="cr">
+                                                        <i class="cr-icon icofont icofont-ui-check"></i>
+                                                    </span>
+                                                    <span class="text-inverse">Reações relatadas frente aos métodos epilatórios habitualmente utilizados?</span>
+                                                </label>
+                                            </div>
+                                            <input id="reacoes_qual" name="reacoes_qual" type="text" class="form-control" value="{{ old('reacoes_qual') }}" placeholder="Qual?">
+                                        </div>
                                     </div>
                                 </div>
 
@@ -316,6 +612,5 @@
         <script type="text/javascript" src="{{ asset('/files/assets/pages/form-masking/form-mask.js') }}"></script>
         <script type="text/javascript" src="{{ asset('/files/assets/pages/form-masking/autoNumeric.js') }}"></script>
         <script src="{{ asset('/js/consulta-cep.js') }}"></script>
-
-        @endslot
+    @endslot
 </x-layout>

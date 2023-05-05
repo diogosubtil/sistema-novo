@@ -15,7 +15,7 @@ interface ClientsRepository
     public function add(ClientsFormRequest $request): Client;
 
     //EDITA
-    public function edit(ClientsFormRequest $request,Client $clients);
+    public function edit(Request $request,Client $clients);
 
     //EXCLUIR
     public function delete(Client $clients);

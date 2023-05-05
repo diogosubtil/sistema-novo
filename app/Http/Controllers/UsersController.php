@@ -77,7 +77,7 @@ class UsersController extends Controller
         Alert::success('Concluido', 'Usuario ' . $user->name . ' editado com sucesso!');
 
         //RETORNA A VIEW
-        return to_route('users.index')->header('Content-Type', 'application/javascript');
+        return to_route('users.index');
     }
 
     //FUNÇÃO PARA DESATIVAR USUARIO

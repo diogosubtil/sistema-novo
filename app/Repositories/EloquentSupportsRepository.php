@@ -15,7 +15,7 @@ class EloquentSupportsRepository implements SupportsRepository
 {
 
     //CONSTRUTOR COM REPOSITORY INJETADO
-    public function __construct(private UploadsRepository $repository, private NotificationsRepository $notificationsRepository)
+    public function __construct(private UploadsRepository $uploadsRepository, private NotificationsRepository $notificationsRepository)
     {
     }
 
@@ -93,7 +93,7 @@ class EloquentSupportsRepository implements SupportsRepository
     {
         //OBTEM OS UPLOADS DO SUPORTE
         $data['uploads'] = Upload::query()
-            ->where('type', '=', 20)
+            ->where('type', '=', 5)
             ->where('type_id', '=', $support->id)
             ->get();
 
@@ -101,7 +101,7 @@ class EloquentSupportsRepository implements SupportsRepository
         $data['answersAndUp'] = [];
         foreach ($support->answers as $answer){
             $upAnswers = Upload::query()
-                ->where('type', '=', 21)
+                ->where('type', '=', 5)
                 ->where('type_id', '=', $answer->id)
                 ->get();
             $data['answersAndUp'][] = ['answer' => $answer, 'uploads' => $upAnswers];
@@ -123,7 +123,7 @@ class EloquentSupportsRepository implements SupportsRepository
 
         //UPLOAD DOS ARQUIVOS
         if ($request->file){
-            $this->repository->add(20,$supporte->id,$request->file);
+            $this->uploadsRepository->add(5, $supporte->id, $request->file, $supporte->id);
         }
 
         //CADASTRA A NOTIFICAÇÃO PARA OS ADMINS
