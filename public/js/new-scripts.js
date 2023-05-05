@@ -59,4 +59,19 @@ if (input){
     });
 }
 
+//FUNÇÃO DE LOADING PARA BUTTONS SUBMIT
+document.querySelector('button[type="submit"]').addEventListener('click', function (e) {
+    this.innerHTML =
+        '<div style="height: 19px!important"  class="preloader3 loader-block">' +
+        '<span style="font-size: 14px" >Carregando</span> \n' +
+        '<div style="height: 5px;width: 5px;margin-top: 30px" class="circ1 loader-default"></div>\n' +
+        '<div style="height: 5px;width: 5px;margin-top: 30px" class="circ2 loader-default"></div>\n' +
+        '<div style="height: 5px;width: 5px;margin-top: 30px" class="circ3 loader-default"></div>\n' +
+        '<div style="height: 5px;width: 5px;margin-top: 30px" class="circ4 loader-default"></div>\n' +
+        '</div>\n';
+})
+$(document).on('submit', 'form', function() {
+    $('button').attr('disabled', 'disabled');
+});
+
 
