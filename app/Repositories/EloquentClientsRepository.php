@@ -178,8 +178,6 @@ class EloquentClientsRepository implements ClientsRepository
                     $getClient->fill($user);
                     $getClient->save();
                     $att++;
-                    echo 'Atualizados: ' . $att . '<br>';
-
 
                 } else {
 
@@ -255,16 +253,17 @@ class EloquentClientsRepository implements ClientsRepository
                     ]);
 
                     $add++;
-                    echo 'Cadastrados: ' . $add . '<br>';
 
                 }
             }
 
             $un++;
-            echo 'Unidades: ' . $un . '<br>';
         }
 
         echo 'Total de Clientes: ' . $total . '<br>';
+        echo 'Atualizados: ' . $att . '<br>';
+        echo 'Cadastrados: ' . $add . '<br>';
+        echo 'Unidades: ' . $un . '<br>';
 
     }
 }
