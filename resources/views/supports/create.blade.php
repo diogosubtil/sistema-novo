@@ -157,6 +157,9 @@
                         let errors = JSON.parse(data.responseText)
                         $('#subject').text(errors.errors.subject)
                         $('#description').text(errors.errors.description)
+                        $('button').removeAttr('disabled');
+                        $('#button-loading').html('Enviar');
+                        $('#button-loading').css({ 'font-size': '14px' });
                     }
                 });
             })

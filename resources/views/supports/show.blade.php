@@ -177,6 +177,8 @@
                             $('#answer').text('O campo resposta é obrigatório')
                         }
                         $('button').removeAttr('disabled');
+                        $('#button-loading').html('Responder');
+                        $('#button-loading').css({ 'font-size': '14px' });
                     }
                 });
             })
