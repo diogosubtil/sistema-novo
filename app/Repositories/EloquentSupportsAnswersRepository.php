@@ -29,7 +29,7 @@ class EloquentSupportsAnswersRepository implements SupportsAnswersRepository
 
         //UPLOAD DOS ARQUIVOS
         if ($request->file){
-            $this->repository->add(5, $supportAnswer->id, $request->file, $supportAnswer->id);
+            $this->repository->add(5, $data['support_id'] . $supportAnswer->id, $request->file, $supportAnswer->id);
         }
 
         //OBTEM O SUPORTE E VERIFICA O USUARIO PARA DEFINIR O STATUS DO SUPORTE E NOTIFICA

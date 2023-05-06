@@ -102,7 +102,7 @@ class EloquentSupportsRepository implements SupportsRepository
         foreach ($support->answers as $answer){
             $upAnswers = Upload::query()
                 ->where('type', '=', 5)
-                ->where('type_id', '=', $answer->id)
+                ->where('type_id', '=', $support->id . $answer->id)
                 ->get();
             $data['answersAndUp'][] = ['answer' => $answer, 'uploads' => $upAnswers];
         }
