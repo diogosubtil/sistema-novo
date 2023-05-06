@@ -60,10 +60,10 @@ function openNotification(){
                 '<div class="media-body">\n' +
                 '<div style="height: 50px!important"  class="preloader3 loader-block">' +
                 '<span style="font-size: 14px;margin-right: 10px!important;" >Carregando</span> \n' +
-                '<div style="height: 5px;width: 5px;margin-top: 30px" class="circ1"></div>\n' +
-                '<div style="height: 5px;width: 5px;margin-top: 30px" class="circ2"></div>\n' +
-                '<div style="height: 5px;width: 5px;margin-top: 30px" class="circ3"></div>\n' +
-                '<div style="height: 5px;width: 5px;margin-top: 30px" class="circ4"></div>\n' +
+                '<div style="height: 5px;width: 5px;margin-top: 30px" class="circ1 loader-default"></div>\n' +
+                '<div style="height: 5px;width: 5px;margin-top: 30px" class="circ2 loader-default"></div>\n' +
+                '<div style="height: 5px;width: 5px;margin-top: 30px" class="circ3 loader-default"></div>\n' +
+                '<div style="height: 5px;width: 5px;margin-top: 30px" class="circ4 loader-default"></div>\n' +
                 '</div>\n' +
                 '</div>\n' +
                 '</div>\n' +
