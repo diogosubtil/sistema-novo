@@ -536,7 +536,7 @@
 
 <script>
     //WebSocket
-    var connectionWeb = new WebSocket('ws://' + window.location.hostname + ':8050');
+    var connectionWeb = new WebSocket('wss://' + window.location.hostname + ':8050');
 
     connectionWeb.onopen = function(e) {
         console.log("Connection established!");
