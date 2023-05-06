@@ -1,6 +1,7 @@
 /node_modules
 /public/build
 /public/hot
+/public/error_log
 /public/storage
 /public/files/uploads
 /storage/*.key
@@ -17,3 +18,8 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+.user.ini
+.htaccess
+.php.ini
+error_log
+
