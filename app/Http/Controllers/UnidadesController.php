@@ -114,6 +114,7 @@ class UnidadesController extends Controller
 
         Session::put(['unidade' => $request->unidade]);
 
+        return true;
     }
 
     //FUNÇÃO PARA EXCLUIR UNIDADE
