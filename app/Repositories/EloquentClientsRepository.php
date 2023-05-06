@@ -258,8 +258,9 @@ class EloquentClientsRepository implements ClientsRepository
             }
 
             $un++;
+            echo 'Unidade: ' . $un . ' 100%<br>';
         }
-
+        echo '<br><br>';
         echo 'Total de Clientes: ' . $total . '<br>';
         echo 'Atualizados: ' . $att . '<br>';
         echo 'Cadastrados: ' . $add . '<br>';
