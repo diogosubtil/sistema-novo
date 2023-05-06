@@ -186,7 +186,7 @@ class EloquentClientsRepository implements ClientsRepository
                         'nome' => $user['nome'],
                         'sexo' => $user['sexo'],
                         'estado_civil' => $user['estado_civil'],
-                        'dataNascimento' => str_replace('-00-', '-01-', $user['dataNascimento']),
+                        'dataNascimento' => $user['dataNascimento'] != '' ? str_replace('-00-', '-01-', $user['dataNascimento']) : null,
                         'cpf' => preg_replace('/[^0-9]/', '', $user['cpf']),
                         'rg' => $user['rg'],
                         'endereco' => $user['endereco'],
