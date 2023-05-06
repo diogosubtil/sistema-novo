@@ -195,6 +195,7 @@
                             if(errors.errors.answer){
                                 $('#answer').text('O campo resposta é obrigatório')
                             }
+                            $('button').removeAttr('disabled');
                         }
                     });
                 })
