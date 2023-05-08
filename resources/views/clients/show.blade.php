@@ -14,7 +14,7 @@
                                 </div>
                             </div>
                             <div class="col-xl-9 mt-2">
-                                <div class="card-title mb-3"><strong style="font-size: 18px">Dados Pessoais:</strong></div>
+                                <div class="card-title mb-3"><strong style="font-size: 18px">{{ $client->nome }}</strong></div>
                                 <div class="row">
                                     <div class="col-xl-6">
                                         <span>
