@@ -532,8 +532,7 @@
 <script type="text/javascript" src="{{ asset('/js/websocket-notify.js') }}"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript" src="{{ asset('/files/assets/js/modalEffects.js') }}"></script>
-<script type="text/javascript" src="{{ asset('/files/assets/js/classie.js') }}?v=<?=hash('md5','123');?>"></script>
-
+<script type="text/javascript" src="{{ asset('/files/assets/js/classie.js') }}"></script>
 <script>
     //WebSocket
     var connectionWeb = new WebSocket('wss://' + window.location.hostname + ':8050');

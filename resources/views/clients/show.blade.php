@@ -39,6 +39,63 @@
                     </div>
                 </div>
             </div>
+            <div class="col-xl-12 col-12">
+                <div class="card card-light">
+                    <div class="card-body">
+                        @if(Helper::requireFuncao('1,2,3,4'))
+                            <div class="md-modal md-effect-2" id="modal-2">
+                                <div class="md-content">
+                                    <h3 class="bg-primary">Transferência de unidade</h3>
+                                    <div>
+                                        <ul>
+                                            <li>Você gostaria de transferir o cliente da unidade</li>
+                                            <li>{{ Helper::getUnidadeTitle($client->unidade_id) }}</li>
+                                            <br>
+                                            <li>Para qual unidade?</li>
+                                            <li>
+                                                <select name="unidade_id" class="form-control col-6">
+                                                    <option value="">Selecione</option>
+                                                    @foreach(Helper::getUnidades() as $unidade)
+                                                        <option value="{{$unidade}}">{{ Helper::getUnidadeTitle($unidade) }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </li>
+                                        </ul>
+                                        <div class="d-flex">
+                                            <button type="button" id="submit" class="text-sm pl-4 pr-4 b-radius-5 btn btn-primary">Transferir</button>
+                                            <button type="button" class="text-sm pl-4 pr-4 btn btn-round b-radius-5 waves-effect md-close">Cancelar</button>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--animation modal  Dialogs ends -->
+                            <div class="md-overlay"></div>
+                            <div class="row m-2">
+                                <a href="{{ route('clients.edit', $client->id) }}">
+                                    <button type="button" class="m-1 text-sm pl-4 pr-4 btn btn-primary b-radius-5">Editar</button>
+                                </a>
+
+                                <button type="button" class="m-1 text-sm pl-4 pr-4 btn btn-success b-radius-5" onclick="adicionarNota()">Adicionar Nota</button>
+
+                                <button type="button" class="m-1 text-sm pl-4 pr-4 btn btn-secondary b-radius-5 waves-effect md-trigger" data-modal="modal-2">Transferir</button>
+
+                                <button type="button" class="m-1 text-sm pl-4 pr-4 btn btn-light b-radius-5">Enviar Arquivos</button>
+
+                                <button type="button" class="m-1 text-sm pl-4 pr-4 btn btn-warning b-radius-5">Alterar Senha</button>
+
+                                <form id="client-delete-{{ $client->id }}" method="POST" action="{{ route('clients.destroy', $client->id) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"  class="m-1 text-sm pl-4 pr-4 btn btn-danger b-radius-5">Excluir</button>
+                                </form>
+
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
             @php if($client->transferido === 's') { @endphp
                 <div class="col-xl-4 col-md-12 col-12">
                     <strong>Histórico do Cliente:</strong>
@@ -156,5 +213,12 @@
         </div>
     @endslot
     @slot('scripts')
+            <script>
+                let form{{ $client->id }} = document.getElementById("client-delete-{{ $client->id }}")
+                form{{ $client->id }}.addEventListener("submit", function(event){
+                    event.preventDefault()
+                    formDelet(this)
+                });
+            </script>
     @endslot
 </x-layout>
