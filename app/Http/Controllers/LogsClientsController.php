@@ -27,6 +27,5 @@ class LogsClientsController extends Controller
         //OBTEM VIA REPOSITORY
         $this->repository->migration();
 
-        return true;
     }
 }
