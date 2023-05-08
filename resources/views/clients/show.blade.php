@@ -53,7 +53,7 @@
                                             <br>
                                             <li>Para qual unidade?</li>
                                             <li>
-                                                <select name="unidade_id" class="form-control col-12">
+                                                <select name="unidade_id" class="form-control col-11">
                                                     <option value="">Selecione</option>
                                                     @foreach(Helper::getUnidades() as $unidade)
                                                         <option value="{{$unidade}}">{{ Helper::getUnidadeTitle($unidade) }}</option>
