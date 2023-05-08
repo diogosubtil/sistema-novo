@@ -158,7 +158,7 @@
                                         <td>{{ Helper::getUnidadeTitle($usuario->unidade_id) }}</td>
                                         <td class="d-flex">
                                             <a href="{{ route('users.edit', $usuario->id) }}"  class="waves-effect waves-light" data-toggle="tooltip" data-placement="left" title="Editar">
-                                                <i style="font-size: 20px" class="fa fa-edit m-0 text-amazon"></i>
+                                                <i style="font-size: 20px" class="fa fa-edit m-0 text-black"></i>
                                             </a>
                                             <form class="ml-3" method="POST" action="{{ $usuario->ativo == 's' ? route('users.disable', $usuario->id) : route('users.enable', $usuario->id) }}">
                                                 @csrf

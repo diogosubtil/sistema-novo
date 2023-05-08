@@ -297,7 +297,7 @@
                                 </div>
 
                                 <div class="col-12">
-                                    <button id="salvar"  type="submit" class="text-sm pl-4 pr-4 btn btn-primary b-radius-5">Salvar</button>
+                                    <button id="submit" type="submit" class="text-sm pl-4 pr-4 btn btn-primary b-radius-5">Salvar</button>
                                     <a href="{{ route('unidades.index') }}">
                                         <button type="button" class="text-sm pl-4 pr-4 ml-2 btn bg-round b-radius-5">Cancelar</button>
                                     </a>

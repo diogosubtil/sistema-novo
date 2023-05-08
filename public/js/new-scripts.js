@@ -60,7 +60,7 @@ if (input){
 }
 
 //FUNÇÃO DE LOADING PARA BUTTONS SUBMIT
-const button_submit = document.querySelectorAll('button[type="submit"]')
+const button_submit = document.querySelectorAll('button[id="submit"]')
 button_submit.forEach(function (value) {
     value.addEventListener('click', function () {
         this.innerHTML =
@@ -71,10 +71,13 @@ button_submit.forEach(function (value) {
             '<div style="height: 5px;width: 5px;margin-top: 30px" class="circ3 loader-default"></div>\n' +
             '<div style="height: 5px;width: 5px;margin-top: 30px" class="circ4 loader-default"></div>\n' +
             '</div>\n';
+        setTimeout(function () {
+            $('button').attr('disabled', 'disabled');
+        },50)
     })
 })
-$(document).on('submit', 'form', function() {
-    $('button').attr('disabled', 'disabled');
-});
+// $(document).on('submit', 'form', function() {
+//     $('button').attr('disabled', 'disabled');
+// });
 
 

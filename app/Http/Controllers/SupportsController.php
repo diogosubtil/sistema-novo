@@ -117,4 +117,17 @@ class SupportsController extends Controller
         return $rota;
     }
 
+    //FUNÇÃO PARA EXCLUIR
+    public function destroy(Support $support)
+    {
+        //ATIVA USUARIO VIA REPOSITORY
+        $this->repository->delete($support);
+
+        //ALERT
+        Alert::success('Concluido', 'Suporte excluido com sucesso!');
+
+        //RETORNA A VIEW
+        return to_route('supports.index');
+    }
+
 }

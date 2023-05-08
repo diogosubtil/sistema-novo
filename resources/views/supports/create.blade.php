@@ -108,7 +108,7 @@
                                     <textarea id="summernote" name="description" placeholder="Sua mensagem">{{ old('description') }}</textarea>
                                 </div>
                                 <div class="col-12 mt-4">
-                                    <button type="submit" class="btn btn-primary b-radius-5">Enviar</button>
+                                    <button id="submit" type="submit" class="btn btn-primary b-radius-5">Enviar</button>
                                     <a href="{{ route('supports.indexuser') }}">
                                         <button type="button" class="btn btn-round b-radius-5">Cancelar</button>
                                     </a>

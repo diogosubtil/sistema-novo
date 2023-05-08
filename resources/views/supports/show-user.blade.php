@@ -20,7 +20,7 @@
                                         <input hidden name="description" value="{{ $support->description }}">
                                         <input hidden name="user" value="{{ $support->user }}">
                                         <input hidden name="unidade_id" value="{{ $support->unidade_id }}">
-                                        <button type="submit" class="btn b-radius-5 btn-success">Finalizar</button>
+                                        <button id="submit" type="submit" class="btn b-radius-5 btn-success">Finalizar</button>
                                     </form>
                                     @endif
                                     <!-- VERIFICA SE O TICKET JA FOI FINALIZADO -->
@@ -61,7 +61,7 @@
                                         <textarea id="summernote" name="answer" placeholder="Sua mensagem">{{ old('answer') }}</textarea>
                                     </div>
                                     <div class="col-12 mt-2">
-                                        <button type="submit" class="btn btn-primary b-radius-5">Responder</button>
+                                        <button id="submit" type="submit" class="btn btn-primary b-radius-5">Responder</button>
                                         <a href="{{ route('supports.indexuser') }}">
                                             <button type="button" class="btn btn-round b-radius-5">Cancelar</button>
                                         </a>

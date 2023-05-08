@@ -17,6 +17,9 @@ interface ClientsRepository
     //EDITA
     public function edit(Request $request,Client $clients);
 
+    //SHOW
+    public function show(Client $clients);
+
     //EXCLUIR
     public function delete(Client $clients);
 

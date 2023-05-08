@@ -193,4 +193,18 @@ class EloquentSupportsRepository implements SupportsRepository
         DB::commit();
 
     }
+
+    //FUNÇÃO PARA EXCLUIR
+    public function delete(Support $support)
+    {
+
+        //INICIA A TRANSAÇÃO
+        DB::beginTransaction();
+
+        $support->delete();
+
+        //ENVIA A TRASAÇÃO (COMMIT)
+        DB::commit();
+
+    }
 }

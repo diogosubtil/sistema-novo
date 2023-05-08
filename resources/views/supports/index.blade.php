@@ -136,18 +136,32 @@
                                     <th>Usuario</th>
                                     <th>Unidade</th>
                                     <th class="text-center">Data</th>
+                                    <th class="text-center">Ações</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @if ($supports->count())
                                     @foreach ($supports as $support)
-                                    <tr style="cursor: pointer" onclick="window.location.href = '{{ route('supports.show', $support->id) }}'">
+                                    <tr>
                                         <td class="col-1">#{{ $support->id }}</td>
                                         <td class="col-2 text-center text"><label class="label {{ Helper::getColorSupport($support->status) }}">{{ Helper::getStatusSupport($support->status) }}</label></td>
                                         <td>{{ $support->subject }}</td>
                                         <td class="col-2">{{ Helper::getUserTitle($support->user) }}</td>
                                         <td class="col-2">{{ Helper::getUnidadeTitle($support->unidade_id) }}</td>
                                         <td class="col-1 text-center">{{ date('d/m/Y - H:i', strtotime($support->updated_at)) }}</td>
+                                        <td class="d-flex justify-content-center">
+                                            <a href="{{ route('supports.show', $support->id) }}" class="waves-effect waves-light" data-toggle="tooltip" data-placement="left" title="Visualizar">
+                                                <i style="font-size: 18px" class="fa fa-eye m-0 text-blue"></i>
+                                            </a>
+                                            <form id="support-delete-{{ $support->id }}" class="ml-3" method="POST" action="{{ route('supports.destroy', $support->id) }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button style="background: none;color: inherit;border: none;padding: 0;font: inherit;cursor: pointer;outline: inherit;" type="submit"  class="waves-effect waves-light" data-toggle="tooltip" data-placement="left" title="Excluir">
+                                                    <i style="font-size: 18px" class="fa fa-trash m-0 text-danger"></i>
+                                                </button>
+                                            </form>
+
+                                        </td>
                                     </tr>
                                 @endforeach
                                 @else
@@ -182,5 +196,14 @@
         </div>
     @endslot
     @slot('scripts')
+            <script>
+                @foreach ($supports as $support)
+                let form{{ $support->id }} = document.getElementById("support-delete-{{ $support->id }}")
+                form{{ $support->id }}.addEventListener("submit", function(event){
+                    event.preventDefault()
+                    formDelet(this)
+                });
+                @endforeach
+            </script>
     @endslot
 </x-layout>

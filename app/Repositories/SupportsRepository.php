@@ -31,4 +31,7 @@ interface SupportsRepository
 
     //ATIVA
     public function enable(Support $support);
+
+    //EXCLUIR
+    public function delete(Support $support);
 }

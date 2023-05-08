@@ -74,6 +74,18 @@ class ClientsController extends Controller
         return to_route('clients.index');
     }
 
+    //FUNÇÃO PARA EXIBIR A VIEW (SHOW)
+    public function show(Client $client)
+    {
+
+        //OBTEM OS DADOS VIA REPOSITORY
+        $data = $this->repository->show($client);
+
+        //RETORNA A VIEW
+        return view('clients.show')
+            ->with($data);
+    }
+
     //FUNÇÃO PARA EXCLUIR USUARIO
     public function destroy(Client $client)
     {

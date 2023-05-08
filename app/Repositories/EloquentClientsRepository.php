@@ -130,6 +130,18 @@ class EloquentClientsRepository implements ClientsRepository
 
     }
 
+    //FUNÇÃO PARA OBTER DADOS PARA A VIEW SHOW
+    public function show(Client $client)
+    {
+        //OBTEM OS DADOS
+        $data['client'] = Client::where('id', $client->id)->first();
+
+        $data['client']->sexo === 'f' ? $data['photo'] = asset('/files/avatars/avatar-mulher.jpg') : $data['photo'] = asset('/files/avatars/avatar-homem.jpg');
+
+        //RETORNA OS DADOS
+        return $data;
+    }
+
     //FUNÇÃO PARA EXCLUIR
     public function delete(Client $client)
     {

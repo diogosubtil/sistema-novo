@@ -118,8 +118,11 @@
                                         <td>{{ $client->cpf }}</td>
                                         <td>{{ $client->whatsapp }}</td>
                                         <td class="d-flex">
-                                            <a href="{{ route('clients.edit', $client->id) }}"  class="waves-effect waves-light" data-toggle="tooltip" data-placement="left" title="Editar">
-                                                <i style="font-size: 20px" class="fa fa-edit m-0 text-amazon"></i>
+                                            <a href="{{ route('clients.show', $client->id) }}" class="waves-effect waves-light" data-toggle="tooltip" data-placement="left" title="Visualizar">
+                                                <i style="font-size: 18px" class="fa fa-eye m-0 text-blue"></i>
+                                            </a>
+                                            <a href="{{ route('clients.edit', $client->id) }}"  class="waves-effect waves-light ml-3" data-toggle="tooltip" data-placement="left" title="Editar">
+                                                <i style="font-size: 20px" class="fa fa-edit m-0 text-black"></i>
                                             </a>
                                             <form id="client-delete-{{ $client->id }}" class="ml-3" method="POST" action="{{ route('clients.destroy', $client->id) }}">
                                                 @csrf
