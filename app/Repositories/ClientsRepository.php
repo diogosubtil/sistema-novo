@@ -23,6 +23,12 @@ interface ClientsRepository
     //EXCLUIR
     public function delete(Client $clients);
 
+    //LOG
+    public function logs(Request $request);
+
+    //TRANSFERE
+    public function transfer(Request $request);
+
     //MIGRAR
     public function migration();
 }

@@ -89,7 +89,7 @@ class ClientsController extends Controller
     //FUNÇÃO PARA EXCLUIR USUARIO
     public function destroy(Client $client)
     {
-        //ATIVA USUARIO VIA REPOSITORY
+        //DELETA USUARIO VIA REPOSITORY
         $this->repository->delete($client);
 
         //ALERT
@@ -99,10 +99,32 @@ class ClientsController extends Controller
         return to_route('clients.index');
     }
 
+    //FUNÇÃO PARA LOGS
+    public function transfer(Request $request)
+    {
+        //VALIDAÇÃO
+        $request->validate([
+           'unidade_id' => ['required']
+        ],[
+            'unidade_id.required' => 'A unidade para transferência precisa ser selecionada'
+        ]);
+
+        //LOG VIA REPOSITORY
+        $this->repository->logs($request);
+
+        //TRANSFERE VIA REPOSITORY
+        $this->repository->transfer($request);
+
+        //ALERT
+        Alert::success('Concluido', 'Cliente transferido com sucesso!');
+
+        return to_route('clients.show', $request->client_id);
+    }
+
     //FUNÇÃO PARA MIGRAR
     public function migrate()
     {
-        //OBTEM VIA REPOSITORY
+        //MIGRA VIA REPOSITORY
         $this->repository->migration();
     }
 

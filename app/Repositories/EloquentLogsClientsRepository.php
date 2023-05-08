@@ -28,12 +28,12 @@ class EloquentLogsClientsRepository implements LogsClientsRepository
     {
         //INICIA A TRANSAÇÃO
         DB::beginTransaction();
-
-        $client = Client::where('id', $request->client)->first();
+        $client = Client::where('id', $request->client_id)->first();
 
         //OBTEM OS DADOS DO REQUEST E FAZ O CADASTRO
         $data = $request->except('_token');
-        $data['info'] = 'O usuário <strong>' . Auth::user()->name . '</strong> transferiu o cliente <strong>' . $client->nome . '</strong> da unidade <strong>' . Helper::getUnidadeTitle($client->unidade) . '</strong> para a unidade <strong>' . Helper::getUnidadeTitle($request->unidade) . '</strong>';
+        $data['user_id'] = Auth::user()->id;
+        $data['info'] = 'O usuário <strong>' . Auth::user()->name . '</strong> transferiu o cliente <strong>' . $client->nome . '</strong> da unidade <strong>' . Helper::getUnidadeTitle($client->unidade_id) . '</strong> para a unidade <strong>' . Helper::getUnidadeTitle($request->unidade_id) . '</strong>';
 
         $log = LogClient::create($data);
 

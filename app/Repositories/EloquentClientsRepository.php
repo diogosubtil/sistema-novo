@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Http\Requests\ClientsFormRequest;
 use App\Models\Client;
+use App\Models\LogClient;
 use App\Models\Upload;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,7 +14,7 @@ use Illuminate\Support\Facades\Session;
 class EloquentClientsRepository implements ClientsRepository
 {
     //CONSTRUTOR COM REPOSITORY INJETADO
-    public function __construct(private UploadsRepository $uploadsRepository, private RegistersRepository $repository)
+    public function __construct(private UploadsRepository $uploadsRepository, private RegistersRepository $repository, private LogsClientsRepository $logsClientsRepository)
     {
     }
 
@@ -137,6 +138,9 @@ class EloquentClientsRepository implements ClientsRepository
         //OBTEM OS DADOS
         $data['client'] = Client::where('id', $client->id)->first();
 
+        //OBTEM OS LOGS
+        $data['logs'] = LogClient::where('client_id', $client->id)->get();
+
         //OBTEM A FOTO DO CLIENTE
         $photo = Upload::query()
             ->where('type', '=','2')
@@ -161,6 +165,35 @@ class EloquentClientsRepository implements ClientsRepository
         DB::beginTransaction();
 
         $client->delete();
+
+        //ENVIA A TRASAÇÃO (COMMIT)
+        DB::commit();
+
+    }
+
+    //FUNÇÃO PARA LOGS
+    public function logs(Request $request)
+    {
+        //INICIA A TRANSAÇÃO
+        DB::beginTransaction();
+
+        $this->logsClientsRepository->add($request);
+
+        //ENVIA A TRASAÇÃO (COMMIT)
+        DB::commit();
+
+    }
+
+    //FUNÇÃO PARA LOGS
+    public function transfer(Request $request)
+    {
+        //INICIA A TRANSAÇÃO
+        DB::beginTransaction();
+
+        $client = Client::where('id', $request->client_id)->first();
+        $client->unidade_id = $request->unidade_id;
+        $client->transferido = 's';
+        $client->save();
 
         //ENVIA A TRASAÇÃO (COMMIT)
         DB::commit();

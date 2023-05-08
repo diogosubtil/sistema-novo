@@ -117,6 +117,7 @@ Route::middleware('auth')->group(function () {
 
     //CLIENTS
     Route::resource('/clients', ClientsController::class);
+    Route::post('/clients/logs',[ClientsController::class, 'transfer'])->name('clients.transfer');
     //CLIENTS LOGS
     Route::resource('/logsclients', LogsClientsController::class);
 

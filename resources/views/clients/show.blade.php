@@ -39,47 +39,71 @@
                     </div>
                 </div>
             </div>
+            @php if($client->transferido === 's') { @endphp
+            <div class="col-xl-4 col-md-12 col-12">
+                <div class="card card-light">
+                    <div class="card-body">
+                        <div class="card-title mb-3"><strong style="font-size: 18px">Histórico do Cliente:</strong></div>
+                        <div style="overflow:hidden;overflow-y: auto;max-height: 12.5vh;min-height: 12.5vh" class="p-2">
+                            @foreach ($logs as $log)
+                                <p>- <?php echo $log->info ?> no dia {{ date('d/m/Y', strtotime($log->dataCadastro)) }}</p>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @php } @endphp
             <div class="col-xl-12 col-12">
                 <div class="card card-light">
                     <div class="card-body">
                         @if(Helper::requireFuncao('1,2,3,4'))
+
+                            <!-- MODAL DE TRANSFERENCIA -->
                             <div class="md-modal md-effect-2" id="modal-2">
                                 <div class="md-content">
                                     <h3 class="bg-primary">Transferência de unidade</h3>
                                     <div>
-                                        <ul>
-                                            <li>Você gostaria de transferir o cliente da unidade</li>
-                                            <li>{{ Helper::getUnidadeTitle($client->unidade_id) }}</li>
+                                        <form id="transferir-unidade" action="{{ route('clients.transfer') }}" method="POST">
+                                            @csrf
+                                            <p>Você gostaria de transferir o cliente da unidade: <strong>{{ Helper::getUnidadeTitle($client->unidade_id) }}</strong></p>
                                             <br>
-                                            <li>Para qual unidade?</li>
-                                            <li>
-                                                <select name="unidade_id" class="form-control col-11">
-                                                    <option value="">Selecione</option>
-                                                    @foreach(Helper::getUnidades() as $unidade)
-                                                        <option value="{{$unidade}}">{{ Helper::getUnidadeTitle($unidade) }}</option>
+                                            <p>Para qual unidade?</p>
+                                                @if ($errors->get('unidade_id'))
+                                                    <script>$('#transfer-button').click()</script>
+                                                    @foreach ((array) $errors->get('unidade_id') as $message)
+                                                        <p class="text-danger">{{ $message }}</p>
                                                     @endforeach
-                                                </select>
-                                            </li>
-                                        </ul>
-                                        <div class="d-flex">
-                                            <button type="button" id="submit" class="text-sm pl-4 pr-4 b-radius-5 btn btn-primary">Transferir</button>
-                                            <button type="button" class="text-sm pl-4 pr-4 btn btn-round b-radius-5 waves-effect md-close">Cancelar</button>
-                                        </div>
-
+                                                @endif
+                                            <select name="unidade_id" class="form-control col-12">
+                                                <option value="">Selecione</option>
+                                                @foreach(Helper::getUnidades() as $unidade)
+                                                    <option value="{{$unidade}}">{{ Helper::getUnidadeTitle($unidade) }}</option>
+                                                @endforeach
+                                            </select>
+                                            <input name="client_id" hidden value="{{ $client->id }}">
+                                            <div class="d-flex mt-3">
+                                                <div>
+                                                    <button type="submit" id="submit" class="text-sm pl-4 pr-4 b-radius-5 btn btn-primary">Transferir</button>
+                                                </div>
+                                                <div class="ml-1">
+                                                    <button type="button" class="text-sm pl-4 pr-4 btn btn-round b-radius-5 waves-effect md-close">Cancelar</button>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
-
                                 </div>
                             </div>
-                            <!--animation modal  Dialogs ends -->
                             <div class="md-overlay"></div>
+                            <!-- MODAL DE TRANSFERENCIA -->
+
                             <div class="row m-2">
                                 <a href="{{ route('clients.edit', $client->id) }}">
                                     <button type="button" class="m-1 text-sm pl-4 pr-4 btn btn-primary b-radius-5">Editar</button>
                                 </a>
 
-                                <button type="button" class="m-1 text-sm pl-4 pr-4 btn btn-success b-radius-5" onclick="adicionarNota()">Adicionar Nota</button>
+                                <button type="button" class="m-1 text-sm pl-4 pr-4 btn btn-success b-radius-5">Adicionar Nota</button>
 
-                                <button type="button" class="m-1 text-sm pl-4 pr-4 btn btn-secondary b-radius-5 waves-effect md-trigger" data-modal="modal-2">Transferir</button>
+                                <button id="transfer-button" type="button" class="m-1 text-sm pl-4 pr-4 btn btn-secondary b-radius-5 waves-effect md-trigger" data-modal="modal-2">Transferir</button>
 
                                 <button type="button" class="m-1 text-sm pl-4 pr-4 btn btn-light b-radius-5">Enviar Arquivos</button>
 
@@ -96,16 +120,6 @@
                     </div>
                 </div>
             </div>
-            @php if($client->transferido === 's') { @endphp
-                <div class="col-xl-4 col-md-12 col-12">
-                    <strong>Histórico do Cliente:</strong>
-                    <div style="overflow:hidden;overflow-y: auto;max-height: 15vh;">
-                            <?php foreach ($logs as $log) { ?>
-                        <p>- <?php echo $log->info ?> no dia {{ date('d/m/Y', strtotime($log->dataCadastro)) }}</p>
-                        <?php } ?>
-                    </div>
-                </div>
-            @php } @endphp
             <div class="col-12">
                 <div class="card card-light">
                     <div class="card-body">
@@ -213,12 +227,17 @@
         </div>
     @endslot
     @slot('scripts')
-            <script>
-                let form{{ $client->id }} = document.getElementById("client-delete-{{ $client->id }}")
-                form{{ $client->id }}.addEventListener("submit", function(event){
-                    event.preventDefault()
-                    formDelet(this)
-                });
-            </script>
+        <script>
+            let form{{ $client->id }} = document.getElementById("client-delete-{{ $client->id }}")
+            form{{ $client->id }}.addEventListener("submit", function(event){
+                event.preventDefault()
+                formDelet(this)
+            });
+
+            //VERIFICA O ERRO E ABRE O MODAL
+            @if ($errors->get('unidade_id'))
+                $('#transfer-button').click()
+            @endif
+        </script>
     @endslot
 </x-layout>
