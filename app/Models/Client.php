@@ -93,4 +93,10 @@ class Client extends Model
     {
         return $this->belongsTo(Unidade::class);
     }
+
+    //FUNÇAO DE RELACIONAMENTOS
+    public function logs()
+    {
+        return $this->hasMany(LogClient::class);
+    }
 }

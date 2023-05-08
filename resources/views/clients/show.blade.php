@@ -44,8 +44,7 @@
                     <strong>Histórico do Cliente:</strong>
                     <div style="overflow:hidden;overflow-y: auto;max-height: 15vh;">
                             <?php foreach ($logs as $log) { ?>
-                        <p>- <?php echo $log->info ?> no dia <?php $dataCadastro = date_create($log->dataCadastro);
-                                                                 echo date_format($dataCadastro, 'd/m/Y'); ?></p>
+                        <p>- <?php echo $log->info ?> no dia {{ date('d/m/Y', strtotime($log->dataCadastro)) }}</p>
                         <?php } ?>
                     </div>
                 </div>

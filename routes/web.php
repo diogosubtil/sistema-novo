@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ClientsController;
+use App\Http\Controllers\LogsClientsController;
 use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\RegistersController;
 use App\Http\Controllers\SettingsController;
@@ -62,6 +63,7 @@ Route::middleware('auth')->group(function () {
     //MIGRAÇÃO
     Route::get('/migrate/unidades', [UnidadesController::class, 'migrate'])->name('unidades.migrate');
     Route::get('/migrate/clients', [ClientsController::class, 'migrate'])->name('clients.migrate');
+    Route::get('/migrate/clients-logs', [LogsClientsController::class, 'migrate'])->name('clients-logs.migrate');
     Route::get('/migrate/users', [UsersController::class, 'migrate'])->name('users.migrate');
 
     //PROFILE
@@ -115,6 +117,8 @@ Route::middleware('auth')->group(function () {
 
     //CLIENTS
     Route::resource('/clients', ClientsController::class);
+    //CLIENTS LOGS
+    Route::resource('/logsclients', LogsClientsController::class);
 
 });
 

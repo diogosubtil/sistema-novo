@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Http\Requests\ClientsFormRequest;
 use App\Models\Client;
+use App\Models\Upload;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -136,7 +137,17 @@ class EloquentClientsRepository implements ClientsRepository
         //OBTEM OS DADOS
         $data['client'] = Client::where('id', $client->id)->first();
 
-        $data['client']->sexo === 'f' ? $data['photo'] = asset('/files/avatars/avatar-mulher.jpg') : $data['photo'] = asset('/files/avatars/avatar-homem.jpg');
+        //OBTEM A FOTO DO CLIENTE
+        $photo = Upload::query()
+            ->where('type', '=','2')
+            ->where('type_id', '=', $client->id)
+            ->orderByDesc('id')
+            ->first();
+        //VERIFICA SE EXISTE UPLOAD DE FOTO
+        $photo ? $data['photo'] = $photo->url :
+            ($data['client']->sexo === 'f' ?
+                $data['photo'] = asset('/files/avatars/avatar-mulher.jpg') :
+                $data['photo'] = asset('/files/avatars/avatar-homem.jpg'));
 
         //RETORNA OS DADOS
         return $data;
