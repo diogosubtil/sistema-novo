@@ -126,7 +126,7 @@ class EloquentNotesRepository implements NotesRepository
 
         }
 
-        echo 'Total' . $total . '<br>';
+        echo 'Total: ' . $total . '<br>';
         echo 'Atualizados: ' . $att . '<br>';
         echo 'Cadastrados: ' . $add . '<br>';
 

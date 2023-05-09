@@ -318,7 +318,7 @@ class EloquentClientsRepository implements ClientsRepository
             echo 'Unidade: ' . $un . ' 100%<br>';
         }
         echo '<br><br>';
-        echo 'Total' . $total . '<br>';
+        echo 'Total: ' . $total . '<br>';
         echo 'Atualizados: ' . $att . '<br>';
         echo 'Cadastrados: ' . $add . '<br>';
         echo 'Unidades: ' . $un . '<br>';

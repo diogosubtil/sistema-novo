@@ -229,7 +229,7 @@ class EloquentUsersRepository implements UsersRepository
 
         }
 
-        echo 'Total' . $total . '<br>';
+        echo 'Total: ' . $total . '<br>';
         echo 'Atualizados: ' . $att . '<br>';
         echo 'Cadastrados: ' . $add . '<br>';
 
