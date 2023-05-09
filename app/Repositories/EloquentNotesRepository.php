@@ -97,9 +97,7 @@ class EloquentNotesRepository implements NotesRepository
                 $get->type = $api['tipo'] == 'Congelamento de Contrato' ? 'contract' : 'scheduling';
                 $get->startDate = $api['dataInicio'];
                 $get->endDate = $api['dataTermino'];
-                $api['tipoAgendamento'] == 'próximo' ?  $get->typeScheduling = 'next' : '';
-                $api['tipoAgendamento'] == 'fixo' ?  $get->typeScheduling = 'fixed' : '';
-                $api['tipoAgendamento'] == 'específico' ?  $get->typeScheduling = 'specific' : '';
+                $get->typeScheduling = $api['tipoAgendamento'] == 'próximo' ? 'next' : ($api['tipoAgendamento'] == 'fixo' ? 'fixed' : 'specific');
                 $get->text = $api['texto'];
                 $get->created_at = $api['dataCadastro'];
                 $get->deleted_at = $api['ativo'] == 'n' ? date('Y-m-d H:i:s') : null;
@@ -109,10 +107,6 @@ class EloquentNotesRepository implements NotesRepository
 
             } else {
 
-                $api['tipoAgendamento'] == 'próximo' ?  $tipoAgendamento = 'next' : '';
-                $api['tipoAgendamento'] == 'fixo' ?  $tipoAgendamento = 'fixed' : '';
-                $api['tipoAgendamento'] == 'específico' ?  $tipoAgendamento = 'specific' : '';
-
                 Note::create([
                     'id' => $api['id'],
                     'client_id' => $api['cliente'],
@@ -120,7 +114,7 @@ class EloquentNotesRepository implements NotesRepository
                     'type' => $api['tipo'] == 'Congelamento de Contrato' ? 'contract' : 'scheduling',
                     'startDate' => $api['dataInicio'],
                     'endDate' => $api['dataTermino'],
-                    'typeScheduling' => $tipoAgendamento,
+                    'typeScheduling' =>  $api['tipoAgendamento'] == 'próximo' ? 'next' : ($api['tipoAgendamento'] == 'fixo' ? 'fixed' : 'specific'),
                     'text' => $api['texto'],
                     'created_at' => $api['dataCadastro'],
                     'deleted_at' => $api['ativo'] == 'n' ? date('Y-m-d H:i:s') : null
