@@ -109,6 +109,10 @@ class EloquentNotesRepository implements NotesRepository
 
             } else {
 
+                $api['tipoAgendamento'] == 'próximo' ?  $tipoAgendamento = 'next' : '';
+                $api['tipoAgendamento'] == 'fixo' ?  $tipoAgendamento = 'fixed' : '';
+                $api['tipoAgendamento'] == 'específico' ?  $tipoAgendamento = 'specific' : '';
+
                 Note::create([
                     'id' => $api['id'],
                     'client_id' => $api['cliente'],
