@@ -17,16 +17,17 @@ class EloquentUploadsRepository implements UploadsRepository
         DB::beginTransaction();
 
         foreach ($files as $key => $file){
+            count($files) == 1? $number = '' : $number = '-' . $key;
             //MOVE O ARQUIVO PARA O LOCAL
             $path = '/files/uploads/' . $type_id . '/';
             $extension = $file->extension();
-            $file->move(public_path('files/uploads/' . $type_id), $name_file . '-' . $key . '.' . $extension);
+            $file->move(public_path('files/uploads/' . $type_id), $name_file . $number . '.' . $extension);
 
             //OBTEM OS DADOS E FAZ O CADASTRO
             $data['type'] = $type;
             $data['type_id'] = $type_id;
-            $data['url'] = $path . $name_file . '-' . $key . '.' . $extension;
-            $data['name'] = $name_file . '-' . $key . '.' . $extension;
+            $data['url'] = $path . $name_file . $number . '.' . $extension;
+            $data['name'] = $name_file . $number;
             $data['extension'] = $extension;
             $data['user'] = Auth::user()->id;
             $upload = Upload::create($data);
@@ -36,5 +37,17 @@ class EloquentUploadsRepository implements UploadsRepository
         DB::commit();
 
         return $upload;
+    }
+
+    //FUNÇÃO PARA EXCLUIR USUARIO
+    public function delete(Upload $upload)
+    {
+        //INICIA A TRANSAÇÃO
+        DB::beginTransaction();
+
+        $upload->delete();
+
+        //ENVIA A TRASAÇÃO (COMMIT)
+        DB::commit();
     }
 }

@@ -30,7 +30,8 @@ class ClientsFormRequest extends FormRequest
             'sexo' => ['required', 'string','max:255'],
             'estado_civil' => ['required', 'string','max:255'],
             'dataNascimento' => ['required', 'string','max:255'],
-            'cpf' => ['required', 'unique:clients', 'string','max:255']
+            'cpf' => ['required', 'unique:clients', 'string','max:255'],
+            'senha' => $this->request->get('senha') != null ? ['min:8'] : ['']
         ];
     }
 
@@ -42,7 +43,8 @@ class ClientsFormRequest extends FormRequest
             'estado_civil.required' => 'O campo estado civil é obrigatório',
             'dataNascimento.required' => 'O campo data de nascimento é obrigatório',
             'cpf.required' => 'O campo cpf é obrigatório',
-            'cpf.unique' => 'Este CPF já está sendo utilizado.'
+            'cpf.unique' => 'Este CPF já está sendo utilizado.',
+            'senha.min' => 'A senha deve conter no minimo 8 caracteres.'
         ];
     }
 }

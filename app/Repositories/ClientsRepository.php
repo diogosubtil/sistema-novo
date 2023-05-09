@@ -30,6 +30,12 @@ interface ClientsRepository
     //TRANSFERE
     public function transfer(TransferFormRequest $request);
 
+    //UPLOAD
+    public function upload(Request $request);
+
+    //PASSWORD
+    public function password(Request $request);
+
     //MIGRAR
     public function migration();
 }

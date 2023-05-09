@@ -72,7 +72,7 @@ class ClientsController extends Controller
         Alert::success('Concluido', 'Cliente editado com sucesso!');
 
         //RETORNA A VIEW
-        return to_route('clients.index');
+        return to_route('clients.show', $client->id);
     }
 
     //FUNÇÃO PARA EXIBIR A VIEW (SHOW)
@@ -113,6 +113,29 @@ class ClientsController extends Controller
         Alert::success('Concluido', 'Cliente transferido com sucesso!');
 
         return to_route('clients.index');
+    }
+
+    //FUNÇÃO PARA UPLOADS
+    public function uploads(Request $request)
+    {
+        //UPLOAD VIA REPOSITORY
+        $this->repository->upload($request);
+
+        //ALERT
+        Alert::success('Concluido', 'Arquivo enviado com sucesso!');
+
+        //RETORNA A VIEW
+        return to_route('clients.show', $request->client_id);
+    }
+
+    //FUNÇÃO PARA SENHAS
+    public function password(Request $request)
+    {
+        //PASSWORD VIA REPOSITORY
+        $this->repository->password($request);
+
+        //RETORNA A VIEW
+        return to_route('clients.show', $request->client_id);
     }
 
     //FUNÇÃO PARA MIGRAR

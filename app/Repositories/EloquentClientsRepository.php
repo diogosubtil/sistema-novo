@@ -9,8 +9,11 @@ use App\Models\LogClient;
 use App\Models\Upload;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class EloquentClientsRepository implements ClientsRepository
 {
@@ -49,12 +52,12 @@ class EloquentClientsRepository implements ClientsRepository
 
         $data = $request->except('_token');
         $data['unidade_id'] = Session::get('unidade');
+        $data['senha'] = Hash::make($data['senha']);
         $client = Client::create($data);
 
         //UPLOAD DOS ARQUIVOS
         if ($request->foto){
             $this->uploadsRepository->add(2,$client->id,$request->foto, $client->id);
-
         }
 
         //ENVIA A TRASAÇÃO (COMMIT)
@@ -75,6 +78,15 @@ class EloquentClientsRepository implements ClientsRepository
             ]);
         }
 
+        //VALIDAÇÃO DO SENHA
+        if ($request->senha != null){
+            $request->validate([
+                'senha' => ['min:8'],
+            ],[
+                'senha.min' => 'A senha deve conter no minimo 8 caracteres.'
+            ]);
+        }
+
         //VALIDAÇÕES
         $request->validate([
             'nome' => ['required', 'string','max:255'],
@@ -91,9 +103,9 @@ class EloquentClientsRepository implements ClientsRepository
 
         //INICIA A TRANSAÇÃO
         DB::beginTransaction();
-
         //OBTEM OS DADOS DO REQUEST E FAZ O CADASTRO
         $data = $request->except('_token');
+        $data['senha'] == null ? $data['senha'] = $client->senha : $data['senha'] = Hash::make($request->senha);
         $data['unidade_id'] = Session::get('unidade');
         $data['diabetes'] = $request->diabetes ?? null;
         $data['cardiaco'] = $request->cardiaco ?? null;
@@ -154,6 +166,12 @@ class EloquentClientsRepository implements ClientsRepository
                 $data['photo'] = asset('/files/avatars/avatar-mulher.jpg') :
                 $data['photo'] = asset('/files/avatars/avatar-homem.jpg'));
 
+
+        $data['uploads'] = Upload::query()
+            ->where('type','=', '1')
+            ->where('type_id', '=', $client->id)
+            ->get();
+
         //RETORNA OS DADOS
         return $data;
     }
@@ -198,6 +216,52 @@ class EloquentClientsRepository implements ClientsRepository
 
         //ENVIA A TRASAÇÃO (COMMIT)
         DB::commit();
+
+    }
+
+    //FUNÇÃO PARA UPLOADS
+    public function upload(Request $request)
+    {
+        //VALIDAÇÃO
+        $request->validate([
+           'nomeupload' => ['required'],
+           'archives' => ['required']
+        ],[
+            'nomeupload.required' => 'O nome do arquivo é obrigatório',
+            'archives.required' => 'O arquivo é obrigatório'
+        ]);
+
+        //UPLOAD VIA REPOSITORY
+        $this->uploadsRepository->add(1,$request->client_id,$request->archives, $request->nomeupload);
+    }
+
+    //FUNÇÃO PARA UPLOADS
+    public function password(Request $request)
+    {
+        $data = $request->except('_token');
+        //VALIDAÇÃO
+        $request->validate([
+            'password' => ['required','min:8'],
+            'confirm-password' => ['required']
+        ],[
+            'password.required' => 'A Nova senha é obrigatório',
+            'password.min' => 'A senha deve conter no minimo 8 caracteres.',
+            'confirm-password.required' => 'Confirmar senha é obrigatório',
+        ]);
+
+        if ($data['password'] != $data['confirm-password']) {
+            session()->flash('confirmpass', 'As senhas não conferem');
+            return redirect()->back();
+        }
+
+        //ALERT
+        Alert::success('Concluido', 'Senha alterada com sucesso!');
+
+        $client = Client::where('id', $request->client_id)->first();
+        $client->senha = Hash::make($data['password']);
+        $client->save();
+
+        return true;
 
     }
 

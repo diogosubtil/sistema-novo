@@ -10,6 +10,7 @@ use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SupportsAnswersController;
 use App\Http\Controllers\SupportsController;
 use App\Http\Controllers\UnidadesController;
+use App\Http\Controllers\UploadsController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -119,12 +120,18 @@ Route::middleware('auth')->group(function () {
 
     //CLIENTS
     Route::resource('/clients', ClientsController::class);
-    Route::post('/clients/logs',[ClientsController::class, 'transfer'])->name('clients.transfer');
+    Route::post('/clients/transfer',[ClientsController::class, 'transfer'])->name('clients.transfer');
+    Route::post('/clients/uploads',[ClientsController::class, 'uploads'])->name('clients.uploads');
+    Route::post('/clients/password',[ClientsController::class, 'password'])->name('clients.password');
+
     //CLIENTS LOGS
     Route::resource('/logsclients', LogsClientsController::class);
 
     //NOTES
     Route::resource('/notes', NotesController::class);
+
+    //UPLOADS
+    Route::resource('/uploads', UploadsController::class);
 
 });
 

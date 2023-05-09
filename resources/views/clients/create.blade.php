@@ -253,7 +253,7 @@
                                             </span>
                                         </div>
                                         <!-- Senha -->
-                                        <div class="col-xl-2 col-md-6 col-12 mt-3">
+                                        <div class="col-xl-3 col-md-6 col-12 mt-3">
                                             <label for="senha" class="col-form-label">Senha</label>
                                             <input id="senha" name="senha" type="password" class="form-control" value="{{ old('senha') }}" placeholder="senha">
                                             <span class="form-bar">

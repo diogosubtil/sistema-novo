@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('extension');
             $table->string('user');
-            $table->enum('ativo', ['s','n'])->default('s');
             $table->timestamps();
             $table->softDeletes();
         });

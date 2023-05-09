@@ -205,6 +205,90 @@
                             </div>
                             <!-- MODAL DE NOTA -->
 
+                            <!-- MODAL DE UPLOAD -->
+                            <div class="md-modal md-effect-2" id="upload">
+                                <div class="md-content">
+                                    <h3 class="bg-primary">Envio de arquivos</h3>
+                                    <div>
+                                        <form id="upload-clients" action="{{ route('clients.uploads') }}" method="POST" enctype="multipart/form-data">
+                                            @csrf
+
+                                            <label for="nomeupload" class="col-form-label">Nome</label>
+                                            <input type="text" class="form-control" id="nomeupload" value="{{ old('nomeupload') }}" name="nomeupload">
+                                            @if ($errors->get('nomeupload'))
+                                                @foreach ((array) $errors->get('nomeupload') as $message)
+                                                    <p class="text-danger">{{ $message }}</p>
+                                                @endforeach
+                                            @endif
+
+                                            <label for="files" class="col-form-label">Arquivos</label>
+                                            <div class="input-group input-group-button">
+                                                <span class="input-group-addon btn btn-primary" id="basic-addon9">
+                                                    <span onclick="$('#files').click()">Buscar</span>
+                                                </span>
+                                                <input onclick="$('#files').click()" value="Nenhum arquivo selecionado" class="form-control botaoArquivo" type="text" id="filesName"/>
+                                                <input hidden onchange="$('#filesName').val(this.name)" class="form-control" type="file" id="files" name="archives[]"/>
+                                            </div>
+                                            @if ($errors->get('archives'))
+                                                @foreach ((array) $errors->get('archives') as $message)
+                                                    <p class="text-danger">{{ $message }}</p>
+                                                @endforeach
+                                            @endif
+
+                                            <input name="client_id" hidden value="{{ $client->id }}">
+                                            <div class="d-flex mt-3">
+                                                <div>
+                                                    <button type="submit" id="submit" class="text-sm pl-4 pr-4 b-radius-5 btn btn-primary">Enviar</button>
+                                                </div>
+                                                <div class="ml-1">
+                                                    <button type="button" class="text-sm pl-4 pr-4 btn btn-round b-radius-5 waves-effect md-close">Cancelar</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- MODAL DE UPLOAD -->
+
+                            <!-- MODAL DE ALTERAÇÃO DE SENHA -->
+                            <div class="md-modal md-effect-2" id="senha">
+                                <div class="md-content">
+                                    <h3 class="bg-primary">Alteração de senha</h3>
+                                    <div>
+                                        <form id="senha-clients" action="{{ route('clients.password') }}" method="POST" enctype="multipart/form-data">
+                                            @csrf
+                                            <label for="password" class="col-form-label">Nova senha</label>
+                                            <input type="password" class="form-control" id="password" value="{{ old('nomeupload') }}" name="password">
+                                            @if ($errors->get('password'))
+                                                @foreach ((array) $errors->get('password') as $message)
+                                                    <p class="text-danger">{{ $message }}</p>
+                                                @endforeach
+                                            @endif
+                                            <label for="confirm-password" class="col-form-label">Confirmar senha</label>
+                                            <input type="password" class="form-control" id="confirm-password" value="{{ old('nomeupload') }}" name="confirm-password">
+                                            @if ($errors->get('confirm-password'))
+                                                @foreach ((array) $errors->get('confirm-password') as $message)
+                                                    <p class="text-danger">{{ $message }}</p>
+                                                @endforeach
+                                            @endif
+                                            @if (session()->has('confirmpass'))
+                                                  <p class="text-danger">{{ session('confirmpass') }}</p>
+                                            @endif
+                                            <input name="client_id" hidden value="{{ $client->id }}">
+                                            <div class="d-flex mt-3">
+                                                <div>
+                                                    <button type="submit" id="submit" class="text-sm pl-4 pr-4 b-radius-5 btn btn-primary">Enviar</button>
+                                                </div>
+                                                <div class="ml-1">
+                                                    <button type="button" class="text-sm pl-4 pr-4 btn btn-round b-radius-5 waves-effect md-close">Cancelar</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- MODAL DE ALTERAÇÃO DE SENHA -->
+
                             <!-- MODAL OVERLAY -->
                             <div class="md-overlay"></div>
                             <!-- MODAL OVERLAY -->
@@ -218,9 +302,9 @@
 
                                 <button id="transfer-button" type="button" class="m-1 text-sm pl-4 pr-4 btn btn-secondary b-radius-5 waves-effect md-trigger" data-modal="transferencia">Transferir</button>
 
-                                <button type="button" class="m-1 text-sm pl-4 pr-4 btn btn-light b-radius-5">Enviar Arquivos</button>
+                                <button id="upload-button" type="button" class="m-1 text-sm pl-4 pr-4 btn btn-light b-radius-5 waves-effect md-trigger"  data-modal="upload">Enviar Arquivos</button>
 
-                                <button type="button" class="m-1 text-sm pl-4 pr-4 btn btn-warning b-radius-5">Alterar Senha</button>
+                                <button id="senha-button" type="button" class="m-1 text-sm pl-4 pr-4 btn btn-warning b-radius-5 waves-effect md-trigger" data-modal="senha">Alterar Senha</button>
 
                                 <form id="client-delete-{{ $client->id }}" method="POST" action="{{ route('clients.destroy', $client->id) }}">
                                     @csrf
@@ -400,6 +484,51 @@
                     </div>
                 </div>
             </div>
+
+            <!-- UPLOADS -->
+            @if($uploads->count() > 0)
+                <div class="col-12">
+                    <div class="card card-light">
+                        <div class="card-body">
+                            <div class="card-title mb-3"><strong style="font-size: 18px">Arquivos: </strong></div>
+                            <div class="table-responsive">
+                                <table class="table table-hover table-borderless">
+                                    <thead>
+                                    <tr>
+                                        <th class="col-4">Nome</th>
+                                        <th class="col-4">Tipo</th>
+                                        <th class="col-2"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach ($uploads as $upload)
+                                        <tr>
+                                            <td>{{ $upload->name }}</td>
+                                            <td>{{ $upload->extension }}</td>
+                                            <td class="d-flex">
+                                                <a download="" href="{{ $upload->url }}"  class="waves-effect waves-light ml-3" data-toggle="tooltip" data-placement="left" title="Baixar aquivo">
+                                                    <i style="font-size: 20px" class="fa fa-download m-0 text-success"></i>
+                                                </a>
+                                                <form id="uploads-delete-{{ $upload->id }}" class="ml-3" method="POST" action="{{ route('uploads.destroy', $upload->id) }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button style="background: none;color: inherit;border: none;padding: 0;font: inherit;cursor: pointer;outline: inherit;" type="submit"  class="waves-effect waves-light" data-toggle="tooltip" data-placement="left" title="Excluir">
+                                                        <i style="font-size: 18px" class="fa fa-trash m-0 text-danger"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+            <!-- UPLOADS -->
+
+
         </div>
     @endslot
     @slot('scripts')
@@ -413,6 +542,14 @@
                 });
             @endforeach
 
+            @foreach ($uploads as $upload)
+            let form{{ $upload->id }} = document.getElementById("uploads-delete-{{ $upload->id }}")
+            form{{ $upload->id }}.addEventListener("submit", function(event){
+                event.preventDefault()
+                formDelet(this)
+            });
+            @endforeach
+
             let form{{ $client->id }} = document.getElementById("client-delete-{{ $client->id }}")
             form{{ $client->id }}.addEventListener("submit", function(event){
                 event.preventDefault()
@@ -422,6 +559,16 @@
             //VERIFICA O ERRO E ABRE O MODAL
             @if ($errors->get('unidade_id'))
                 $('#transfer-button').click()
+            @endif
+
+            //VERIFICA O ERRO E ABRE O MODAL
+            @if ($errors->get('nomeupload') || $errors->get('archives'))
+                $('#upload-button').click()
+            @endif
+
+            //VERIFICA O ERRO E ABRE O MODAL
+            @if ($errors->get('password') || $errors->get('confirm-password') || session()->has('confirmpass'))
+                $('#senha-button').click()
             @endif
 
             //VERIFICA O ERRO E ABRE O MODAL
