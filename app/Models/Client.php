@@ -4,13 +4,15 @@ namespace App\Models;
 
 use App\ModelFilters\ClientsFilter;
 use eloquentFilter\QueryFilter\ModelFilters\Filterable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Panoscape\History\HasHistories;
 
 class Client extends Model
 {
-    use HasFactory, ClientsFilter, Filterable, SoftDeletes;
+    use HasFactory, ClientsFilter, Filterable, SoftDeletes, HasHistories;
 
     //TABELA QUE A MODEL FAZ REFERENCIA NO BANCO DE DADOS
     protected $table = 'clients';
@@ -98,5 +100,17 @@ class Client extends Model
     public function logs()
     {
         return $this->hasMany(LogClient::class);
+    }
+
+    //FUNÇAO DE RELACIONAMENTOS
+    public function notes()
+    {
+        return $this->hasMany(Note::class);
+    }
+
+    //FUNÇÃO HISTORICO
+    public function getModelLabel()
+    {
+        return $this->display_name;
     }
 }

@@ -6,17 +6,21 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class LogClient extends Model
+class Note extends Model
 {
     use HasFactory, SoftDeletes;
 
     //TABELA QUE A MODEL FAZ REFERENCIA NO BANCO DE DADOS
-    protected $table = 'clients_log';
+    protected $table = 'notes';
 
     protected $fillable = [
-      'client_id',
-      'user_id',
-      'info',
+        'client_id',
+        'scheduling',
+        'type',
+        'startDate',
+        'endDate',
+        'typeScheduling',
+        'text',
     ];
 
     //SOFTDELETES

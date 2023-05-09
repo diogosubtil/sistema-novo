@@ -21,16 +21,17 @@
                                             Sexo: <strong>{{ $client->sexo == 'f' ? 'Feminino' : 'Masculino' }}</strong><br>
                                             Estado Civil: <strong>{{ $client->estado_civil }}</strong><br>
                                             Data de Nascimento: <strong>{{ date('d/m/Y', strtotime($client->dataNascimento)) }}</strong><br>
-                                            CPF: <strong>{{ $client->cpf }}</strong><br>
                                             Email: <strong>{{ $client->email }}</strong><br>
+                                            Whatsapp: <strong>{{ $client->whatsapp }}</strong><br>
                                         </span>
                                     </div>
                                     <div class="col-xl-6">
                                         <span>
+                                            CPF: <strong>{{ $client->cpf }}</strong><br>
                                             RG: <strong>{{ $client->rg }}</strong><br>
-                                            Whatsapp: <strong>{{ $client->whatsapp }}</strong><br>
                                             CEP: <strong>{{ $client->cep }}</strong><br>
-                                            Endereço: <strong>{{ $client->endereco }}, {{ $client->numero }} - {{ $client->bairro }} -  {{ $client->cidade }}</strong>
+                                            Endereço: <strong>{{ $client->endereco }}, {{ $client->numero }} - {{ $client->bairro }} -  {{ $client->cidade }}</strong><br>
+                                            Data de Cadastro: <strong>{{ date('d/m/Y', strtotime($client->created_at)) }}</strong><br>
                                         </span>
                                     </div>
                                 </div>
@@ -59,7 +60,7 @@
                         @if(Helper::requireFuncao('1,2,3,4'))
 
                             <!-- MODAL DE TRANSFERENCIA -->
-                            <div class="md-modal md-effect-2" id="modal-2">
+                            <div class="md-modal md-effect-2" id="transferencia">
                                 <div class="md-content">
                                     <h3 class="bg-primary">Transferência de unidade</h3>
                                     <div>
@@ -68,18 +69,17 @@
                                             <p>Você gostaria de transferir o cliente da unidade: <strong>{{ Helper::getUnidadeTitle($client->unidade_id) }}</strong></p>
                                             <br>
                                             <p>Para qual unidade?</p>
-                                                @if ($errors->get('unidade_id'))
-                                                    <script>$('#transfer-button').click()</script>
-                                                    @foreach ((array) $errors->get('unidade_id') as $message)
-                                                        <p class="text-danger">{{ $message }}</p>
-                                                    @endforeach
-                                                @endif
                                             <select name="unidade_id" class="form-control col-12">
                                                 <option value="">Selecione</option>
                                                 @foreach(Helper::getUnidades() as $unidade)
                                                     <option value="{{$unidade}}">{{ Helper::getUnidadeTitle($unidade) }}</option>
                                                 @endforeach
                                             </select>
+                                            @if ($errors->get('unidade_id'))
+                                                @foreach ((array) $errors->get('unidade_id') as $message)
+                                                    <p class="text-danger">{{ $message }}</p>
+                                                @endforeach
+                                            @endif
                                             <input name="client_id" hidden value="{{ $client->id }}">
                                             <div class="d-flex mt-3">
                                                 <div>
@@ -93,17 +93,130 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="md-overlay"></div>
                             <!-- MODAL DE TRANSFERENCIA -->
 
-                            <div class="row m-2">
+                            <!-- MODAL DE NOTA -->
+                            <div class="md-modal md-effect-2" id="nota">
+                                <div class="md-content">
+                                    <h3 class="bg-primary">Nota</h3>
+                                    <div>
+                                        <form id="adicionar-nota" action="{{ route('notes.store') }}" method="POST">
+                                            @csrf
+                                            <input name="client_id" hidden value="{{ $client->id }}">
+                                            <div class="row">
+                                                <div class="form-group col-12">
+                                                    <label for="tipo">Tipo</label>
+                                                    <select id="tipo" name="type" class="form-control" >
+                                                        <option disabled selected value="">Selecione</option>
+                                                        <option value="scheduling">Informação do Agendamento</option>
+                                                        <option value="contract">Congelamento de Contrato</option>
+                                                    </select>
+                                                    @if ($errors->get('type'))
+                                                        @foreach ((array) $errors->get('type') as $message)
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                        @endforeach
+                                                    @endif
+                                                </div>
+                                            </div>
+
+                                            <div class="row" id="informacao-agendamento">
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="tipoAgendamento">Tipo de agendamento</label>
+                                                        <select id="tipoAgendamento" name="typeScheduling" class="form-control">
+                                                            <option disabled selected value="">Selecione</option>
+                                                            <option value="next">Próximo</option>
+                                                            <option value="fixed">Fixo</option>
+                                                            <option value="specific">Específico</option>
+                                                        </select>
+                                                        @if ($errors->get('typeScheduling'))
+                                                            @foreach ((array) $errors->get('typeScheduling') as $message)
+                                                                <p class="text-danger">{{ $message }}</p>
+                                                            @endforeach
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12" id="tipo-especifico" style="display: none">
+                                                    <div class="form-group">
+                                                        <label for="agendamento">Agendamento</label>
+                                                        <select id="agendamento" name="scheduling" class="form-control select2">
+                                                            <option disabled selected value="">Selecione</option>
+{{--                                                                <?php foreach ($obAgendamentos as $obAgendamento) { ?>--}}
+{{--                                                            <option value="<?php echo $obAgendamento->id; ?>"><?php echo formatDataTime($obAgendamento->inicio) ?></option>--}}
+{{--                                                            <?php } ?>--}}
+                                                        </select>
+                                                        @if ($errors->get('scheduling'))
+                                                            @foreach ((array) $errors->get('scheduling') as $message)
+                                                                <p class="text-danger">{{ $message }}</p>
+                                                            @endforeach
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row" id="informacao-congelamento" style="display: none">
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="dataInicio">Data de início</label>
+                                                        <input type="date" class="form-control" id="dataInicio" value="{{ old('startDate') }}" name="startDate">
+                                                        @if ($errors->get('startDate'))
+                                                            @foreach ((array) $errors->get('startDate') as $message)
+                                                                <p class="text-danger">{{ $message }}</p>
+                                                            @endforeach
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="dataTermino">Data de término</label>
+                                                        <input type="date" class="form-control" id="dataTermino" value="{{ old('endDate') }}" name="endDate">
+                                                        @if ($errors->get('endDate'))
+                                                            @foreach ((array) $errors->get('endDate') as $message)
+                                                                <p class="text-danger">{{ $message }}</p>
+                                                            @endforeach
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="form-group col-12">
+                                                    <label for="texto">Texto</label>
+                                                    <textarea  class="form-control" id="texto" name="text" placeholder="Insira o texto..." rows="4" style="resize: none">{{ old('text') }}</textarea>
+                                                    @if ($errors->get('text'))
+                                                        @foreach ((array) $errors->get('text') as $message)
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                        @endforeach
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="d-flex mt-3">
+                                                <div>
+                                                    <button type="submit" id="submit" class="text-sm pl-4 pr-4 b-radius-5 btn btn-primary">Adicionar</button>
+                                                </div>
+                                                <div class="ml-1">
+                                                    <button type="button" class="text-sm pl-4 pr-4 btn btn-round b-radius-5 waves-effect md-close">Cancelar</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- MODAL DE NOTA -->
+
+                            <!-- MODAL OVERLAY -->
+                            <div class="md-overlay"></div>
+                            <!-- MODAL OVERLAY -->
+
+                            <div class="row m-1">
                                 <a href="{{ route('clients.edit', $client->id) }}">
                                     <button type="button" class="m-1 text-sm pl-4 pr-4 btn btn-primary b-radius-5">Editar</button>
                                 </a>
 
-                                <button type="button" class="m-1 text-sm pl-4 pr-4 btn btn-success b-radius-5">Adicionar Nota</button>
+                                <button id="notes-button" type="button" class="m-1 text-sm pl-4 pr-4 btn btn-success b-radius-5 waves-effect md-trigger" data-modal="nota">Adicionar Nota</button>
 
-                                <button id="transfer-button" type="button" class="m-1 text-sm pl-4 pr-4 btn btn-secondary b-radius-5 waves-effect md-trigger" data-modal="modal-2">Transferir</button>
+                                <button id="transfer-button" type="button" class="m-1 text-sm pl-4 pr-4 btn btn-secondary b-radius-5 waves-effect md-trigger" data-modal="transferencia">Transferir</button>
 
                                 <button type="button" class="m-1 text-sm pl-4 pr-4 btn btn-light b-radius-5">Enviar Arquivos</button>
 
@@ -120,6 +233,68 @@
                     </div>
                 </div>
             </div>
+
+            <!-- NOTAS -->
+            @if($client->notes->count() > 0)
+                <div class="col-12">
+                    <div class="card card-light">
+                        <div class="card-body">
+                            <div class="card-title mb-3"><strong style="font-size: 18px">Notas:</strong></div>
+                            @foreach($client->notes as $note)
+
+                                @if($note->type == 'contract')
+                                    <div class="card bg-danger">
+                                        <div class="col-12">
+                                            <div class="card-header">
+                                                <form id="notes-delete-{{ $note->id }}" class="ml-3" method="POST" action="{{ route('notes.destroy', $note->id) }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button style="background: none;color: inherit;border: none;padding: 0;font: inherit;cursor: pointer;outline: inherit;" type="submit"  class="waves-effect waves-light float-right" data-toggle="tooltip" data-placement="left" title="Excluir">
+                                                        <i style="font-size: 18px" class="fa fa-trash m-0 text-white"></i>
+                                                    </button>
+                                                </form>
+                                                Congelamento de Contrato
+                                            </div>
+                                            <div class="card-body">
+                                                {{ $note->text }}
+                                            </div>
+                                            <div class="card-footer bg-danger">
+                                                Data: {{ date('d/m/Y', strtotime($note->dataInicio)) }} até {{date('d/m/Y', strtotime($note->dataTermino)) }}
+                                                <span class="float-right  m-3">Criado em: {{ date('d/m/Y H:i', strtotime($note->created_at)) }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+
+                                @if($note->type == 'scheduling' && $note->typeScheduling == 'fixed')
+                                    <div class="card bg-warning">
+                                        <div class="col-12">
+                                            <div class="card-header">
+                                                <form id="notes-delete-{{ $note->id }}" class="ml-3" method="POST" action="{{ route('notes.destroy', $note->id) }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button style="background: none;color: inherit;border: none;padding: 0;font: inherit;cursor: pointer;outline: inherit;" type="submit"  class="waves-effect waves-light float-right" data-toggle="tooltip" data-placement="left" title="Excluir">
+                                                        <i style="font-size: 18px" class="fa fa-trash m-0 text-white"></i>
+                                                    </button>
+                                                </form>
+                                                Fixo
+                                            </div>
+                                            <div class="card-body">
+                                                    {{ $note->text }}
+                                                <span class="float-right m-3">Criado em: {{ date('d/m/Y H:i', strtotime($note->created_at)) }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+
+                            @endforeach
+
+                        </div>
+                    </div>
+                </div>
+            @endif
+            <!-- NOTAS -->
+
             <div class="col-12">
                 <div class="card card-light">
                     <div class="card-body">
@@ -184,6 +359,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-12">
                 <div class="card card-light">
                     <div class="card-body">
@@ -228,6 +404,15 @@
     @endslot
     @slot('scripts')
         <script>
+
+            @foreach ($client->notes as $note)
+                let form{{ $note->id }} = document.getElementById("notes-delete-{{ $note->id }}")
+                form{{ $note->id }}.addEventListener("submit", function(event){
+                    event.preventDefault()
+                    formDelet(this)
+                });
+            @endforeach
+
             let form{{ $client->id }} = document.getElementById("client-delete-{{ $client->id }}")
             form{{ $client->id }}.addEventListener("submit", function(event){
                 event.preventDefault()
@@ -238,6 +423,49 @@
             @if ($errors->get('unidade_id'))
                 $('#transfer-button').click()
             @endif
+
+            //VERIFICA O ERRO E ABRE O MODAL
+            @if ($errors->get('text') || $errors->get('startDate') || $errors->get('endDate') || $errors->get('scheduling') || $errors->get('typeScheduling') || $errors->get('type'))
+                $('#notes-button').click()
+                setTimeout(function (){
+                    @if(old('type') == 'contract')
+                    $('#tipo').val('contract').trigger('change')
+                    @endif
+
+                    @if(old('type') == 'scheduling')
+                    $('#tipo').val('scheduling').trigger('change')
+                    @endif
+
+                    @if(old('typeScheduling') == 'specific')
+                    $('#tipoAgendamento').val('specific').trigger('change')
+                    @endif
+                    @if(old('typeScheduling') == 'fixed')
+                    $('#tipoAgendamento').val('fixed').trigger('change')
+                    @endif
+                    @if(old('typeScheduling') == 'next')
+                    $('#tipoAgendamento').val('next').trigger('change')
+                    @endif
+
+                },200)
+            @endif
+
+            $('#tipo').on('change', function() {
+                if ($(this).val() === 'scheduling') {
+                    $('#informacao-agendamento').show();
+                    $('#informacao-congelamento').hide();
+                } else {
+                    $('#informacao-agendamento').hide();
+                    $('#informacao-congelamento').show();
+                }
+            });
+
+            $('#tipoAgendamento').on('change', function() {
+                if ($(this).val() === 'specific') {
+                    $('#tipo-especifico').show();
+                } else {
+                    $('#tipo-especifico').hide();
+                }
+            });
         </script>
     @endslot
 </x-layout>

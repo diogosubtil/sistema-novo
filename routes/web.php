@@ -3,6 +3,7 @@
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\LogsClientsController;
+use App\Http\Controllers\NotesController;
 use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\RegistersController;
 use App\Http\Controllers\SettingsController;
@@ -65,6 +66,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/migrate/clients', [ClientsController::class, 'migrate'])->name('clients.migrate');
     Route::get('/migrate/clients-logs', [LogsClientsController::class, 'migrate'])->name('clients-logs.migrate');
     Route::get('/migrate/users', [UsersController::class, 'migrate'])->name('users.migrate');
+    Route::get('/migrate/notes', [NotesController::class, 'migrate'])->name('notes.migrate');
 
     //PROFILE
     Route::get('verify-email', [EmailVerificationPromptController::class, '__invoke'])->name('verification.notice');
@@ -120,6 +122,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/clients/logs',[ClientsController::class, 'transfer'])->name('clients.transfer');
     //CLIENTS LOGS
     Route::resource('/logsclients', LogsClientsController::class);
+
+    //NOTES
+    Route::resource('/notes', NotesController::class);
 
 });
 

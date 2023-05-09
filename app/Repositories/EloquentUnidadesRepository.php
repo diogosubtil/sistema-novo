@@ -129,28 +129,28 @@ class EloquentUnidadesRepository implements UnidadesRepository
         //ADD OS DADOS
         foreach ($api->json() as $unidade) {
 
-            //OBTEM USUARIO PARA VERIFICAÇÃO DE UPDADE OU CADASTRO
-            $getUnidade = Unidade::where('id', $unidade['id'])->withTrashed()->first();
+            //OBTEM PARA VERIFICAÇÃO
+            $get = Unidade::where('id', $unidade['id'])->withTrashed()->first();
 
-            if ($getUnidade) {
+            if ($get) {
 
-                $getUnidade->cnpj = $unidade['cnpj'];
-                $getUnidade->cep = $unidade['cep'];
-                $getUnidade->bairro = $unidade['bairro'];
-                $getUnidade->cidade = $unidade['cidade'];
-                $getUnidade->estado = $unidade['estado'];
-                $getUnidade->whatsapp = $unidade['whatsapp'];
-                $getUnidade->dataAbertura = $unidade['dataAbertura'];
-                $getUnidade->meta = $unidade['meta'];
-                $getUnidade->gerente = $unidade['gerente'];
-                $getUnidade->endereco = $unidade['endereco'];
-                $getUnidade->numero = $unidade['numero'];
-                $getUnidade->timezone = $unidade['timezone'];
-                $getUnidade->assinatura = $unidade['assinatura'];
-                $getUnidade->ativo = $unidade['ativo'];
-                $getUnidade->created_at = $unidade['dataCadastro'];
-                $getUnidade->updated_at = $unidade['dataAtualizacao'];
-                $getUnidade->save();
+                $get->cnpj = $unidade['cnpj'];
+                $get->cep = $unidade['cep'];
+                $get->bairro = $unidade['bairro'];
+                $get->cidade = $unidade['cidade'];
+                $get->estado = $unidade['estado'];
+                $get->whatsapp = $unidade['whatsapp'];
+                $get->dataAbertura = $unidade['dataAbertura'];
+                $get->meta = $unidade['meta'];
+                $get->gerente = $unidade['gerente'];
+                $get->endereco = $unidade['endereco'];
+                $get->numero = $unidade['numero'];
+                $get->timezone = $unidade['timezone'];
+                $get->assinatura = $unidade['assinatura'];
+                $get->ativo = $unidade['ativo'];
+                $get->created_at = $unidade['dataCadastro'];
+                $get->updated_at = $unidade['dataAtualizacao'];
+                $get->save();
 
                 $att++;
             } else {
@@ -180,7 +180,7 @@ class EloquentUnidadesRepository implements UnidadesRepository
         }
 
 
-        echo 'Total de undiades: ' . $total . '<br>';
+        echo 'Total: ' . $total . '<br>';
         echo 'Atualizadas: ' . $att . '<br>';
         echo 'Cadastradas: ' . $add . '<br>';
     }

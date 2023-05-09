@@ -6,6 +6,7 @@ use App\Models\LogClient;
 use App\Repositories\ClientsRepository;
 use App\Repositories\EloquentClientsRepository;
 use App\Repositories\EloquentLogsClientsRepository;
+use App\Repositories\EloquentNotesRepository;
 use App\Repositories\EloquentNotificationsRepository;
 use App\Repositories\EloquentRegistersRepository;
 use App\Repositories\EloquentSettingsRepository;
@@ -15,6 +16,7 @@ use App\Repositories\EloquentUnidadesRepository;
 use App\Repositories\EloquentUploadsRepository;
 use App\Repositories\EloquentUsersRepository;
 use App\Repositories\LogsClientsRepository;
+use App\Repositories\NotesRepository;
 use App\Repositories\NotificationsRepository;
 use App\Repositories\RegistersRepository;
 use App\Repositories\SettingsRepository;
@@ -39,7 +41,8 @@ class RepositoriesProviders extends ServiceProvider
         UploadsRepository::class            => EloquentUploadsRepository::class,
         NotificationsRepository::class      => EloquentNotificationsRepository::class,
         ClientsRepository::class            => EloquentClientsRepository::class,
-        LogsClientsRepository::class        => EloquentLogsClientsRepository::class
+        LogsClientsRepository::class        => EloquentLogsClientsRepository::class,
+        NotesRepository::class              => EloquentNotesRepository::class
     ];
 
     /**

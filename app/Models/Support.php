@@ -10,7 +10,7 @@ use Panoscape\History\HasHistories;
 
 class Support extends Model
 {
-    use HasFactory, Filterable, SoftDeletes, HasHistories;
+    use HasFactory, Filterable, SoftDeletes;
 
     //TABELA QUE A MODEL FAZ REFERENCIA NO BANCO DE DADOS
     protected $table = 'supports';

@@ -58,18 +58,18 @@ class EloquentLogsClientsRepository implements LogsClientsRepository
         //ADD OS DADOS
         foreach ($api->json() as $log) {
 
-            //OBTEM USUARIO PARA VERIFICAÇÃO DE UPDADE OU CADASTRO
-            $getLog = LogClient::where('id', $log['id'])->withTrashed()->first();
+            //OBTEM PARA VERIFICAÇÃO
+            $get = LogClient::where('id', $log['id'])->withTrashed()->first();
 
-            if ($getLog) {
+            if ($get) {
 
-                $getLog->id = $log['id'];
-                $getLog->client_id = $log['cliente'];
-                $getLog->user_id = $log['usuario'];
-                $getLog->info = $log['info'];
-                $getLog->created_at = $log['dataCadastro'];
-                $getLog->updated_at = $log['dataAtualizacao'];
-                $getLog->save();
+                $get->id = $log['id'];
+                $get->client_id = $log['cliente'];
+                $get->user_id = $log['usuario'];
+                $get->info = $log['info'];
+                $get->created_at = $log['dataCadastro'];
+                $get->updated_at = $log['dataAtualizacao'];
+                $get->save();
 
                 $att++;
 
@@ -90,7 +90,7 @@ class EloquentLogsClientsRepository implements LogsClientsRepository
 
         }
 
-        echo 'Total de Logs: ' . $total . '<br>';
+        echo 'Total: ' . $total . '<br>';
         echo 'Atualizados: ' . $att . '<br>';
         echo 'Cadastrados: ' . $add . '<br>';
 

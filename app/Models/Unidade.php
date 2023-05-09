@@ -9,7 +9,7 @@ use Panoscape\History\HasHistories;
 
 class Unidade extends Model
 {
-    use HasFactory, SoftDeletes, HasHistories;
+    use HasFactory, SoftDeletes;
 
     //TABELA QUE A MODEL FAZ REFERENCIA NO BANCO DE DADOS
     protected $table = 'unidades';

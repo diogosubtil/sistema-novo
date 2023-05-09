@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Http\Requests\ClientsFormRequest;
+use App\Http\Requests\TransferFormRequest;
 use App\Models\Client;
 use App\Models\LogClient;
 use App\Models\Upload;
@@ -185,7 +186,7 @@ class EloquentClientsRepository implements ClientsRepository
     }
 
     //FUNÇÃO PARA LOGS
-    public function transfer(Request $request)
+    public function transfer(TransferFormRequest $request)
     {
         //INICIA A TRANSAÇÃO
         DB::beginTransaction();
@@ -220,10 +221,10 @@ class EloquentClientsRepository implements ClientsRepository
 
             foreach ($unidade as $user) {
 
-                //OBTEM USUARIO PARA VERIFICAÇÃO DE UPDADE OU CADASTRO
-                $getClient = Client::where('id', $user['id'])->withTrashed()->first();
+                //OBTEM PARA VERIFICAÇÃO
+                $get = Client::where('id', $user['id'])->withTrashed()->first();
 
-                if ($getClient) {
+                if ($get) {
 
                     $user['created_at'] = $user['dataCadastro'];
                     $user['updated_at'] = $user['dataAtualizacao'];
@@ -231,8 +232,8 @@ class EloquentClientsRepository implements ClientsRepository
                     $user['deleted_at'] = $user['ativo'] == 'n' ? date('Y-m-d H:i:s') : null;
                     $user['cpf'] = preg_replace('/[^0-9]/', '', $user['cpf']);
                     unset($user['unidade'],$user['info'],$user['dataCadastro'],$user['dataAtualizacao']);
-                    $getClient->fill($user);
-                    $getClient->save();
+                    $get->fill($user);
+                    $get->save();
                     $att++;
 
                 } else {
@@ -317,7 +318,7 @@ class EloquentClientsRepository implements ClientsRepository
             echo 'Unidade: ' . $un . ' 100%<br>';
         }
         echo '<br><br>';
-        echo 'Total de Clientes: ' . $total . '<br>';
+        echo 'Total' . $total . '<br>';
         echo 'Atualizados: ' . $att . '<br>';
         echo 'Cadastrados: ' . $add . '<br>';
         echo 'Unidades: ' . $un . '<br>';

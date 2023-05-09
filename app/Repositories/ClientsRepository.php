@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Http\Requests\ClientsFormRequest;
+use App\Http\Requests\TransferFormRequest;
 use App\Models\Client;
 use Illuminate\Http\Request;
 
@@ -27,7 +28,7 @@ interface ClientsRepository
     public function logs(Request $request);
 
     //TRANSFERE
-    public function transfer(Request $request);
+    public function transfer(TransferFormRequest $request);
 
     //MIGRAR
     public function migration();

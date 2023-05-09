@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ClientsFormRequest;
+use App\Http\Requests\TransferFormRequest;
 use App\Http\Requests\UsersFormRequest;
 use App\Models\Client;
 use App\Models\Unidade;
@@ -100,15 +101,8 @@ class ClientsController extends Controller
     }
 
     //FUNÇÃO PARA LOGS
-    public function transfer(Request $request)
+    public function transfer(TransferFormRequest $request)
     {
-        //VALIDAÇÃO
-        $request->validate([
-           'unidade_id' => ['required']
-        ],[
-            'unidade_id.required' => 'A unidade para transferência precisa ser selecionada'
-        ]);
-
         //LOG VIA REPOSITORY
         $this->repository->logs($request);
 
@@ -118,7 +112,7 @@ class ClientsController extends Controller
         //ALERT
         Alert::success('Concluido', 'Cliente transferido com sucesso!');
 
-        return to_route('clients.show', $request->client_id);
+        return to_route('clients.index');
     }
 
     //FUNÇÃO PARA MIGRAR

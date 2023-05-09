@@ -188,22 +188,22 @@ class EloquentUsersRepository implements UsersRepository
         //ADD OS DADOS
         foreach ($api->json() as $user) {
 
-            //OBTEM USUARIO PARA VERIFICAÇÃO DE UPDADE OU CADASTRO
-            $getUser = User::where('id', $user['id'])->withTrashed()->first();
+            //OBTEM PARA VERIFICAÇÃO
+            $get = User::where('id', $user['id'])->withTrashed()->first();
 
-            if ($getUser) {
+            if ($get) {
 
-                $getUser->name = $user['nome'];
-                $getUser->email = $user['email'];
-                $getUser->password = $user['senha'];
-                $getUser->telefone = $user['telefone'];
-                $getUser->funcao = $user['funcao'];
-                $getUser->unidade_id = $user['unidade'];
-                $getUser->treinamento = $user['treinamento'];
-                $getUser->ativo = $user['ativo'];
-                $getUser->created_at = $user['dataCadastro'];
-                $getUser->updated_at = $user['dataAtualizacao'];
-                $getUser->save();
+                $get->name = $user['nome'];
+                $get->email = $user['email'];
+                $get->password = $user['senha'];
+                $get->telefone = $user['telefone'];
+                $get->funcao = $user['funcao'];
+                $get->unidade_id = $user['unidade'];
+                $get->treinamento = $user['treinamento'];
+                $get->ativo = $user['ativo'];
+                $get->created_at = $user['dataCadastro'];
+                $get->updated_at = $user['dataAtualizacao'];
+                $get->save();
 
                 $att++;
 
@@ -229,7 +229,7 @@ class EloquentUsersRepository implements UsersRepository
 
         }
 
-        echo 'Total de usuarios: ' . $total . '<br>';
+        echo 'Total' . $total . '<br>';
         echo 'Atualizados: ' . $att . '<br>';
         echo 'Cadastrados: ' . $add . '<br>';
 
