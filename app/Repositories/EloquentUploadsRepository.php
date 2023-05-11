@@ -77,7 +77,7 @@ class EloquentUploadsRepository implements UploadsRepository
 
 
                 $get->type = $upload['tipo'];
-                $get->type_id = $upload['tipo'] == 4 ? $upload['venda'] : $upload['cliente'];
+                $get->type_id = $upload['tipo'] == 4 ? ($upload['venda'] ?? 0) : $upload['cliente'];
                 $get->url = $upload['url'];
                 $get->name = $upload['nome'];
                 $get->extension = $getExtension[1];
@@ -93,7 +93,7 @@ class EloquentUploadsRepository implements UploadsRepository
                 Upload::create([
                     'id' => $upload['id'],
                     'type' => $upload['tipo'],
-                    'type_id' => $upload['tipo'] == 4 ? $upload['venda'] : $upload['cliente'],
+                    'type_id' => $upload['tipo'] == 4 ? ($upload['venda'] ?? 0) : $upload['cliente'],
                     'url' => $upload['url'],
                     'name' => $upload['nome'],
                     'extension' => $getExtension[1],
