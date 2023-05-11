@@ -71,7 +71,7 @@ class EloquentUploadsRepository implements UploadsRepository
 
             //OBTEM PARA VERIFICAÇÃO
             $get = Upload::where('id', $upload['id'])->withTrashed()->first();
-            $getExtension = explode('.', $upload['nome']);
+            $getExtension = explode('.', $upload['url']);
 
             if ($get) {
 
