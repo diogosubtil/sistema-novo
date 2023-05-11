@@ -7,7 +7,7 @@
             <div class="col-lg-12 col-12">
                 <div class="p-2 card">
                     <div class="col-12">
-                        <form method="POST" action="{{ route('unidades.update', $unidade->id) }}">
+                        <form method="POST" data-loading="true" action="{{ route('unidades.update', $unidade->id) }}">
                             @csrf
                             @method('PUT')
                             <!-- Name -->

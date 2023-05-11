@@ -11,7 +11,7 @@
                         <h5>Filtros</h5>
                     </div>
                     <div class="card-block">
-                        <form method="GET" class="row" action=" {{ route('registers.index') }}">
+                        <form data-loading="true" method="GET" class="row" action=" {{ route('registers.index') }}">
                             <div class="col-xl-3 col-md-6 col-12">
                                 <label for="funcao">Usuarios</label>
                                 <div class="input-group">

@@ -1,6 +1,7 @@
 <x-layout>
     @slot('stylesheet')
         <link href="{{ asset('/files/bower_components/summernote/summernote.min.css') }}" rel="stylesheet">
+
     @endslot
     @slot('slot')
         <div class="row justify-content-center">
@@ -64,7 +65,7 @@
                                 <div class="md-content">
                                     <h3 class="bg-primary">Transferência de unidade</h3>
                                     <div>
-                                        <form id="transferir-unidade" action="{{ route('clients.transfer') }}" method="POST">
+                                        <form id="transferir-unidade" action="{{ route('clients.transfer') }}" data-loading="true"  method="POST">
                                             @csrf
                                             <p>Você gostaria de transferir o cliente da unidade: <strong>{{ Helper::getUnidadeTitle($client->unidade_id) }}</strong></p>
                                             <br>
@@ -100,7 +101,7 @@
                                 <div class="md-content">
                                     <h3 class="bg-primary">Nota</h3>
                                     <div>
-                                        <form id="adicionar-nota" action="{{ route('notes.store') }}" method="POST">
+                                        <form id="adicionar-nota" action="{{ route('notes.store') }}" data-loading="true"  method="POST">
                                             @csrf
                                             <input name="client_id" hidden value="{{ $client->id }}">
                                             <div class="row">
@@ -210,7 +211,7 @@
                                 <div class="md-content">
                                     <h3 class="bg-primary">Envio de arquivos</h3>
                                     <div>
-                                        <form id="upload-clients" action="{{ route('clients.uploads') }}" method="POST" enctype="multipart/form-data">
+                                        <form id="upload-clients" action="{{ route('clients.uploads') }}" data-loading="true" method="POST" enctype="multipart/form-data">
                                             @csrf
 
                                             <label for="nomeupload" class="col-form-label">Nome</label>
@@ -220,6 +221,7 @@
                                                     <p class="text-danger">{{ $message }}</p>
                                                 @endforeach
                                             @endif
+                                            <p style="display: none" id="error-nameupload" class="text-danger"></p>
 
                                             <label for="files" class="col-form-label">Arquivos</label>
                                             <div class="input-group input-group-button">
@@ -234,17 +236,22 @@
                                                     <p class="text-danger">{{ $message }}</p>
                                                 @endforeach
                                             @endif
+                                            <p style="display: none" id="error-files" class="text-danger"></p>
 
                                             <input name="client_id" hidden value="{{ $client->id }}">
                                             <div class="d-flex mt-3">
                                                 <div>
-                                                    <button type="submit" id="submit" class="text-sm pl-4 pr-4 b-radius-5 btn btn-primary">Enviar</button>
+                                                    <button type="submit" id="upload-submit" class="text-sm pl-4 pr-4 b-radius-5 btn btn-primary">Enviar</button>
                                                 </div>
                                                 <div class="ml-1">
                                                     <button type="button" class="text-sm pl-4 pr-4 btn btn-round b-radius-5 waves-effect md-close">Cancelar</button>
                                                 </div>
                                             </div>
                                         </form>
+                                    </div>
+                                </div>
+                                <div style="display: none" class="progress text-center">
+                                    <div style="height: 1rem!important;" class="progress-bar" id="progress-bar" role="progressbar"  aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
                                     </div>
                                 </div>
                             </div>
@@ -255,7 +262,7 @@
                                 <div class="md-content">
                                     <h3 class="bg-primary">Alteração de senha</h3>
                                     <div>
-                                        <form id="senha-clients" action="{{ route('clients.password') }}" method="POST" enctype="multipart/form-data">
+                                        <form id="senha-clients" action="{{ route('clients.password') }}" data-loading="true" method="POST" enctype="multipart/form-data">
                                             @csrf
                                             <label for="password" class="col-form-label">Nova senha</label>
                                             <input type="password" class="form-control" id="password" value="{{ old('nomeupload') }}" name="password">
@@ -532,6 +539,41 @@
         </div>
     @endslot
     @slot('scripts')
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
+        <script>
+            var progress = $('.progress');
+            $('#upload-clients').ajaxForm({
+                beforeSend: function () {
+                    $('#nomeupload').val() == '' || $('#files').val() == '' ? progress.hide() : progress.show()
+                    document.getElementById("progress-bar").style.width = '0%';
+                    document.getElementById("progress-bar").setAttribute("aria-valuenow", '0');
+                },
+                uploadProgress: function (event, position, total, percentComplete) {
+                    if ($('#nomeupload').val() == '' || $('#files').val() == '') {
+                        progress.hide()
+                        $('#nomeupload').val() == '' ? $('#error-nameupload').show().html('O nome do arquivo é obrigatório')  : $('#error-nameupload').hide();
+                        $('#files').val() == '' ? $('#error-files').show().html('O arquivo é obrigatório') : $('#error-files').hide();
+                        $('button').removeAttr('disabled');
+                        $('#upload-submit').html('Enviar');
+                        $('#upload-submit').css({ 'font-size': '0.8em' });
+                    } else {
+                        $('#error-nameupload').hide();
+                        $('#error-files').hide();
+                        progress.show()
+                        var percentVal = percentComplete + '%';
+                        const Val = percentComplete;
+                        document.getElementById("progress-bar").innerText = percentComplete + '%'
+                        document.getElementById("progress-bar").setAttribute('style', 'height:1rem !important; width: ' + percentVal);
+                        document.getElementById("progress-bar").setAttribute("aria-valuenow", Val);
+                    }
+                },
+                complete: function (xhr, data) {
+                    if (data === 'success') {
+                        window.location.href = '{{ route('clients.uploadsOk', $client->id) }}';
+                    }
+                }
+            });
+        </script>
         <script>
 
             @foreach ($client->notes as $note)

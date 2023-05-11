@@ -123,6 +123,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/clients', ClientsController::class);
     Route::post('/clients/transfer',[ClientsController::class, 'transfer'])->name('clients.transfer');
     Route::post('/clients/uploads',[ClientsController::class, 'uploads'])->name('clients.uploads');
+    Route::get('/clients/uploadsOk/{id}',[ClientsController::class, 'uploadsOk'])->name('clients.uploadsOk');
     Route::post('/clients/password',[ClientsController::class, 'password'])->name('clients.password');
 
     //CLIENTS LOGS

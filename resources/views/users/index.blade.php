@@ -77,7 +77,7 @@
                         <h5>Filtros</h5>
                     </div>
                     <div class="card-block">
-                        <form method="GET" class="row" action=" {{ route('users.index') }}">
+                        <form method="GET" class="row" data-loading="true" action=" {{ route('users.index') }}">
                             <div class="col-sm-4 col-12">
                                 <label for="name" class="col-form-label">Nome</label>
                                 <div class="input-group">

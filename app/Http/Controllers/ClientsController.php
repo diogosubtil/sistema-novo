@@ -128,6 +128,16 @@ class ClientsController extends Controller
         return to_route('clients.show', $request->client_id);
     }
 
+    //FUNÇÃO PARA UPLOADS
+    public function uploadsOk(Request $request)
+    {
+        //ALERT
+        Alert::success('Concluido', 'Arquivo enviado com sucesso!');
+
+        //RETORNA A VIEW
+        return to_route('clients.show', $request->id);
+    }
+
     //FUNÇÃO PARA SENHAS
     public function password(Request $request)
     {

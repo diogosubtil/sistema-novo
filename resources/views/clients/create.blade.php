@@ -8,7 +8,7 @@
             <div class="col-12">
                 <div class="p-2 card">
                     <div class="col-12">
-                        <form method="POST" action="{{ route('clients.store') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('clients.store') }}" data-loading="true" enctype="multipart/form-data">
                             @csrf
                             <!-- Name -->
                             <div class="row">

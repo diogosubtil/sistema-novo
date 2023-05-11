@@ -54,7 +54,7 @@
                         <h5>Filtros</h5>
                     </div>
                     <div class="card-block">
-                        <form method="GET" class="row" action=" {{ route('clients.index') }}">
+                        <form method="GET" class="row" data-loading="true" action=" {{ route('clients.index') }}">
                             <div class="col-sm-4 col-12">
                                 <label for="nome" class="col-form-label">Nome</label>
                                 <div class="input-group">

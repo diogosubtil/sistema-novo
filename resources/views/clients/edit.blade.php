@@ -8,7 +8,7 @@
             <div class="col-12">
                 <div class="p-2 card">
                     <div class="col-12">
-                        <form method="POST" action="{{ route('clients.update', $client->id) }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('clients.update', $client->id) }}" data-loading="true" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <!-- Name -->

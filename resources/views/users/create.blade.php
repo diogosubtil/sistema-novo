@@ -8,7 +8,7 @@
             <div class="col-12">
                 <div class="p-2 card">
                     <div class="col-12">
-                        <form method="POST" action="{{ route('users.store') }}">
+                        <form method="POST" data-loading="true" action="{{ route('users.store') }}">
                             @csrf
                             <!-- Name -->
                             <div class="row">

@@ -12,7 +12,7 @@
                                     <h6 class="text-primary"><p><b>@if($support->status == 4) Esse Ticket ja foi concluido! @else Seu ticket foi resolvido? @endif</b></p></h6>
                                     <!-- VERIFICA SE O TICKET JA FOI FINALIZADO -->
                                     @if($support->status != 4)
-                                    <form method="POST" action="{{ route('supports.update', $support->id) }}">
+                                    <form data-loading="true" method="POST" action="{{ route('supports.update', $support->id) }}">
                                         @csrf
                                         @method('PUT')
                                         <input hidden name="status" value="4">
@@ -31,7 +31,7 @@
                         @if($support->status != 4)
                         <div class="col-xl-12 col-md-12 col-12">
                             <div class="card table-card p-3">
-                                <form id="answer-support" method="POST" class="row" action="{{ route('supportsanswers.storeuser') }}" enctype="multipart/form-data">
+                                <form data-loading="true" id="answer-support" method="POST" class="row" action="{{ route('supportsanswers.storeuser') }}" enctype="multipart/form-data">
                                     @csrf
                                     <input hidden type="number" class="form-control" name="support_id" id="support_id" value="{{ $support->id }}">
                                     <input hidden type="number" class="form-control" name="user" id="user" value="{{ Auth::user()->id }}">

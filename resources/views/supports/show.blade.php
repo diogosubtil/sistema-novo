@@ -12,7 +12,7 @@
                             <div class="card table-card">
                                 <div class="card-header">
                                     <h6 class="text-primary"><p><b>O Ticket foi resolvido?</b></p></h6>
-                                    <form action="{{ route('supports.update', $support->id) }}" method="post">
+                                    <form data-loading="true" action="{{ route('supports.update', $support->id) }}" method="post">
                                         @csrf
                                         @method('PUT')
                                         <input hidden name="status" value="4">
@@ -27,7 +27,7 @@
                         </div>
                         <div class="col-xl-12 col-md-12 col-12">
                             <div class="card table-card p-3">
-                                <form id="answer-support" method="POST" class="row" action=" {{ route('supportsanswers.store') }}" enctype="multipart/form-data">
+                                <form data-loading="true" id="answer-support" method="POST" class="row" action=" {{ route('supportsanswers.store') }}" enctype="multipart/form-data">
                                     @csrf
                                     <input hidden type="number" class="form-control" name="support_id" id="support_id" value="{{ $support->id }}">
                                     <input hidden type="number" class="form-control" name="user" id="user" value="{{ Auth::user()->id }}">

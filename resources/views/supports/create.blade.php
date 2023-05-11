@@ -78,7 +78,7 @@
                             </div>
                         </div>
                         <div class="col-12">
-                            <form id="create-support" method="POST" class="row" action=" {{ route('supports.store') }}" enctype="multipart/form-data">
+                            <form data-loading="true" id="create-support" method="POST" class="row" action=" {{ route('supports.store') }}" enctype="multipart/form-data">
                                 @csrf
                                 <input hidden type="number" class="form-control" name="user" id="user" value="{{ Auth::user()->id }}">
                                 <input hidden type="number" class="form-control" name="unidade_id" id="unidade_id" value="{{ Session::get('unidade') }}">
