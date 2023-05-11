@@ -13,4 +13,7 @@ interface UploadsRepository
     //EXCLUIR
     public function delete(Upload $upload);
 
+    //MIGRAR
+    public function migration();
+
 }

@@ -68,6 +68,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/migrate/clients-logs', [LogsClientsController::class, 'migrate'])->name('clients-logs.migrate');
     Route::get('/migrate/users', [UsersController::class, 'migrate'])->name('users.migrate');
     Route::get('/migrate/notes', [NotesController::class, 'migrate'])->name('notes.migrate');
+    Route::get('/migrate/uploads', [UploadsController::class, 'migrate'])->name('uploads.migrate');
 
     //PROFILE
     Route::get('verify-email', [EmailVerificationPromptController::class, '__invoke'])->name('verification.notice');

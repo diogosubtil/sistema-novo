@@ -25,4 +25,12 @@ class UploadsController extends Controller
         //RETORNA A VIEW
         return redirect()->back();
     }
+
+    //FUNÇÃO PARA MIGRAR
+    public function migrate()
+    {
+        //OBTEM VIA REPOSITORY
+        $this->repository->migration();
+
+    }
 }
