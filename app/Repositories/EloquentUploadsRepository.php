@@ -71,14 +71,16 @@ class EloquentUploadsRepository implements UploadsRepository
 
             //OBTEM PARA VERIFICAÇÃO
             $get = Upload::where('id', $upload['id'])->withTrashed()->first();
+            $getExtension = explode('.', $upload['nome']);
 
             if ($get) {
+
 
                 $get->type = $upload['tipo'];
                 $get->type_id = $upload['tipo'] == 4 ? $upload['venda'] : $upload['cliente'];
                 $get->url = $upload['url'];
                 $get->name = $upload['nome'];
-                $get->extension = $upload['extension'];
+                $get->extension = $getExtension[1];
                 $get->user = $upload['usuario'];
                 $get->created_at = $upload['dataCadastro'];
                 $get->deleted_at = $upload['ativo'] == 'n' ? date('Y-m-d H:i:s') : null;
@@ -94,7 +96,7 @@ class EloquentUploadsRepository implements UploadsRepository
                     'type_id' => $upload['tipo'] == 4 ? $upload['venda'] : $upload['cliente'],
                     'url' => $upload['url'],
                     'name' => $upload['nome'],
-                    'extension' => $upload['extension'],
+                    'extension' => $getExtension[1],
                     'user' => $upload['usuario'],
                     'created_at' => $upload['dataCadastro'],
                     'deleted_at' => $upload['ativo'] == 'n' ? date('Y-m-d H:i:s') : null
