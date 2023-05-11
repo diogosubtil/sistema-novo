@@ -50,8 +50,8 @@ class WebSocketServer extends Command
             new Server('0.0.0.0:8050', $loop),
             $loop,
             array(
-                'local_cert'        => '/home/diogosubtil/ssl.cert', // path to your cert
-                'local_pk'          => '/home/diogosubtil/ssl.key', // path to your server private key
+                'local_cert'        => '/home/espacoicelaser/sistemanovo.espacoicelaser.com/ssl.cert', // path to your cert
+                'local_pk'          => '/home/espacoicelaser/sistemanovo.espacoicelaser.com/ssl.key', // path to your server private key
                 'allow_self_signed' => TRUE, // Allow self signed certs (should be false in production)
                 'verify_peer' => FALSE
             )

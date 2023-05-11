@@ -535,33 +535,56 @@
 <script type="text/javascript" src="{{ asset('/files/assets/js/classie.js') }}"></script>
 <script>
     //WebSocket
-    var connectionWeb = new WebSocket('wss://' + window.location.hostname + ':8050');
+    let connectionWeb
+    websocket()
+    function websocket() {
+        connectionWeb = new WebSocket('wss://' + window.location.hostname + ':8050');
 
-    connectionWeb.onopen = function(e) {
-        console.log("Connection established!");
-    };
+        connectionWeb.onopen = function(e) {
+            console.log("Conectado!");
+        };
 
-    connectionWeb.onmessage = function(e) {
+        connectionWeb.onclose = function(){
+            console.log("Desconectado!!");
 
-        //OBTEM OS DADOS
-        let data = JSON.parse(e.data)
+            {{--//FUNÇÃO PARA ABRIR O WEBSOCKET SE DESCONECTADO--}}
+            {{--$.ajax({--}}
+            {{--    url: '{{ route('websocket') }}',--}}
+            {{--    beforeSend: function() {--}}
+            {{--        console.log('Reconectando ao servidor Websocket...')--}}
+            {{--    },error: function (data) {--}}
+            {{--        console.log('Erro ao reconectar ao servidor websocket: ' + JSON.stringify(data))--}}
+            {{--    }--}}
+            {{--})--}}
 
-        //VERIFICAÇÃO PARA SUPORTE CRIADO
-        if(data.msg === 'support-create') {
-            @if(Auth::user()->funcao == 1)
-
-            //NOTIFICA OS ADMINS
-            notifySupport('Novo Ticket de suporte ', '/supports/' + data.support);
-
-            //ATUALIZA O NUMERO DE NOTIFICAÇÕES
-            newsNotify();
-
-            @endif
+            {{--// connection closed, discard old websocket and create a new one in 5s--}}
+            {{--conn = null--}}
+            {{--setTimeout(function () {--}}
+            {{--    websocket()--}}
+            {{--}, 5000)--}}
         }
 
-        //VERIFICAÇÃO PARA SUPORTE RESPONDIDO PELO USUARIO
-        if(data.msg === 'support-answer') {
-            @if(Auth::user()->funcao == 1)
+        connectionWeb.onmessage = function(e) {
+
+            //OBTEM OS DADOS
+            let data = JSON.parse(e.data)
+
+            //VERIFICAÇÃO PARA SUPORTE CRIADO
+            if(data.msg === 'support-create') {
+                @if(Auth::user()->funcao == 1)
+
+                //NOTIFICA OS ADMINS
+                notifySupport('Novo Ticket de suporte ', '/supports/' + data.support);
+
+                //ATUALIZA O NUMERO DE NOTIFICAÇÕES
+                newsNotify();
+
+                @endif
+            }
+
+            //VERIFICAÇÃO PARA SUPORTE RESPONDIDO PELO USUARIO
+            if(data.msg === 'support-answer') {
+                @if(Auth::user()->funcao == 1)
 
                 //NOTIFICA OS ADMINS
                 notifySupport('#' + data.support + ' Ticket de suporte respondido', '/supports/' + data.support);
@@ -569,23 +592,22 @@
                 //ATUALIZA O NUMERO DE NOTIFICAÇÕES
                 newsNotify();
 
-            @endif
-        }
+                @endif
+            }
 
-        //VERIFICAÇÃO PARA SUPORTE RESPONDIDO PELO ADMIN
-        if(data.msg === 'support-answer-{{ Auth::user()->id }}') {
+            //VERIFICAÇÃO PARA SUPORTE RESPONDIDO PELO ADMIN
+            if(data.msg === 'support-answer-{{ Auth::user()->id }}') {
 
-            //NOTIFICA O USUARIO
-            notifySupport('#' + data.support + ' Ticket de suporte respondido', '/supports/ticket/' + data.support);
+                //NOTIFICA O USUARIO
+                notifySupport('#' + data.support + ' Ticket de suporte respondido', '/supports/ticket/' + data.support);
 
-            //ATUALIZA O NUMERO DE NOTIFICAÇÕES
-            newsNotify();
+                //ATUALIZA O NUMERO DE NOTIFICAÇÕES
+                newsNotify();
 
-        }
-    };
+            }
+        };
+    }
     //WebSocket
-
-
 </script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->

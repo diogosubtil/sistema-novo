@@ -13,6 +13,7 @@ use App\Http\Controllers\UnidadesController;
 use App\Http\Controllers\UploadsController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
@@ -136,4 +137,12 @@ Route::middleware('auth')->group(function () {
     Route::resource('/uploads', UploadsController::class);
 
 });
+
+//ROTAS DE COMANDOS NO PHP
+Route::get('migration', function () {
+    Artisan::call('migrate');
+});
+Route::get('websocket', function () {
+    Artisan::call('websocket:init');
+})->name('websocket');
 
