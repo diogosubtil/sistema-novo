@@ -81,7 +81,7 @@ class EloquentUploadsRepository implements UploadsRepository
                 $get->url = $upload['url'];
                 $get->name = $upload['nome'];
                 $get->extension = $getExtension[1] ?? 'Não encontrado';
-                $get->user = $upload['usuario'];
+                $get->user = $upload['usuario'] ?? 999999;
                 $get->created_at = $upload['dataCadastro'];
                 $get->deleted_at = $upload['ativo'] == 'n' ? date('Y-m-d H:i:s') : null;
                 $get->save();
@@ -97,7 +97,7 @@ class EloquentUploadsRepository implements UploadsRepository
                     'url' => $upload['url'],
                     'name' => $upload['nome'],
                     'extension' => $getExtension[1] ?? 'Não encontrado',
-                    'user' => $upload['usuario'],
+                    'user' => $upload['usuario'] ?? 999999,
                     'created_at' => $upload['dataCadastro'],
                     'deleted_at' => $upload['ativo'] == 'n' ? date('Y-m-d H:i:s') : null
                 ]);
