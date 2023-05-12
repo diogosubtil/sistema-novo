@@ -149,7 +149,7 @@
                         let info = { msg: 'support-create', support: data.id }
 
                         //NOTIFICA OS ADMINISTRADORES
-                        connectionWeb.send(JSON.stringify(info));
+                        conn.send(JSON.stringify(info));
 
                     },
                     error: function(data){

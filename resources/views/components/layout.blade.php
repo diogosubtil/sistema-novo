@@ -535,36 +535,36 @@
 <script type="text/javascript" src="{{ asset('/files/assets/js/classie.js') }}"></script>
 <script>
     //WebSocket
-    let connectionWeb
+    let conn
     websocket()
     function websocket() {
-        connectionWeb = new WebSocket('wss://' + window.location.hostname + ':8050');
+        conn = new WebSocket('wss://' + window.location.hostname + ':8060');
 
-        connectionWeb.onopen = function(e) {
+        conn.onopen = function(e) {
             console.log("Conectado!");
         };
 
-        connectionWeb.onclose = function(){
+        conn.onclose = function(){
             console.log("Desconectado!!");
 
-            {{--//FUNÇÃO PARA ABRIR O WEBSOCKET SE DESCONECTADO--}}
-            {{--$.ajax({--}}
-            {{--    url: '{{ route('websocket') }}',--}}
-            {{--    beforeSend: function() {--}}
-            {{--        console.log('Reconectando ao servidor Websocket...')--}}
-            {{--    },error: function (data) {--}}
-            {{--        console.log('Erro ao reconectar ao servidor websocket: ' + JSON.stringify(data))--}}
-            {{--    }--}}
-            {{--})--}}
+            //FUNÇÃO PARA ABRIR O WEBSOCKET SE DESCONECTADO
+            $.ajax({
+                url: '{{ route('websocket') }}',
+                beforeSend: function() {
+                    console.log('Reconectando ao servidor Websocket...')
+                },error: function (data) {
+                    console.log('Erro ao reconectar ao servidor websocket: ' + JSON.stringify(data))
+                }
+            })
 
-            {{--// connection closed, discard old websocket and create a new one in 5s--}}
-            {{--conn = null--}}
-            {{--setTimeout(function () {--}}
-            {{--    websocket()--}}
-            {{--}, 5000)--}}
+            // connection closed, discard old websocket and create a new one in 5s
+            conn = null
+            setTimeout(function () {
+                websocket()
+            }, 5000)
         }
 
-        connectionWeb.onmessage = function(e) {
+        conn.onmessage = function(e) {
 
             //OBTEM OS DADOS
             let data = JSON.parse(e.data)

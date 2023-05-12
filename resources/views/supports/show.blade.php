@@ -168,7 +168,7 @@
                         let info = { msg: 'support-answer-{{ $support->user }}', support: {{ $support->id }} }
 
                         //NOTIFICA O USUARIO DO TICKET
-                        connectionWeb.send(JSON.stringify(info));
+                        conn.send(JSON.stringify(info));
 
                     },
                     error: function(data){

@@ -508,7 +508,7 @@
             <script>
                 var btn_env = document.getElementById('testeMenssage');
                 btn_env.addEventListener('click', function(e){
-                    connectionWeb.send('support');
+                    conn.send('support');
                 });
             </script>
     @endslot
