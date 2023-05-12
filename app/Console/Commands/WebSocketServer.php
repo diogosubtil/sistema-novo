@@ -47,7 +47,7 @@ class WebSocketServer extends Command
 
         $loop   = Factory::create();
         $webSock = new SecureServer(
-            new Server('0.0.0.0:8050', $loop),
+            new Server('0.0.0.0:8060', $loop),
             $loop,
             array(
                 'local_cert'        => '/home/espacoicelaser/sistemanovo.espacoicelaser.com/ssl.cert', // path to your cert
