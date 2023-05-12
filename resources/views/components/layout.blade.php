@@ -538,7 +538,7 @@
     let conn
     websocket()
     function websocket() {
-        conn = new WebSocket('wss://' + window.location.hostname + ':8060');
+        conn = new WebSocket('ws://98.142.104.34:8050');
 
         conn.onopen = function(e) {
             console.log("Conectado!");
